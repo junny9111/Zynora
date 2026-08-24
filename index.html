@@ -26,9 +26,6 @@
       padding: 0 18px;
       background: #111116;
       border-bottom: 1px solid #292933;
-      position: sticky;
-      top: 0;
-      z-index: 10;
     }
 
     .logo {
@@ -53,8 +50,7 @@
     .hero {
       min-height: 600px;
       padding: 150px 38px 60px;
-      background:
-        linear-gradient(90deg, #241044, #100b18 60%, #09090d);
+      background: linear-gradient(90deg, #241044, #100b18 60%, #09090d);
     }
 
     .badge {
@@ -206,6 +202,7 @@
 
 </header>
 
+
 <main>
 
   <div class="hero">
@@ -225,6 +222,7 @@
 
   </div>
 
+
   <section>
 
     <h2>Explore</h2>
@@ -240,6 +238,7 @@
     </div>
 
   </section>
+
 
   <section>
 
@@ -258,6 +257,7 @@
         </div>
       </div>
 
+
       <div class="show">
         <div class="poster">
           Forbidden Love
@@ -269,6 +269,7 @@
         </div>
       </div>
 
+
       <div class="show">
         <div class="poster">
           Hidden Truth
@@ -279,6 +280,7 @@
           <p>Suspense • Drama</p>
         </div>
       </div>
+
 
       <div class="show">
         <div class="poster">
@@ -297,6 +299,7 @@
 
 </main>
 
+
 <nav class="bottom-nav">
 
   <a href="index.html" class="nav-item active">
@@ -314,29 +317,36 @@
     Library
   </a>
 
-  <a href="#" class="nav-item">
+  <a href="login.html" class="nav-item">
     <span class="nav-icon">●</span>
-    Profile
+    Account
   </a>
 
 </nav>
 
+
 <script>
 
-  const searchBox = document.getElementById("searchBox");
+  const searchBox =
+    document.getElementById("searchBox");
 
   searchBox.addEventListener("input", function() {
 
-    const value = this.value.toLowerCase();
+    const value =
+      this.value.toLowerCase();
 
-    const shows = document.querySelectorAll(".show");
+    const shows =
+      document.querySelectorAll(".show");
 
     shows.forEach(function(show) {
 
-      const title = show.innerText.toLowerCase();
+      const title =
+        show.innerText.toLowerCase();
 
       show.style.display =
-        title.includes(value) ? "" : "none";
+        title.includes(value)
+          ? ""
+          : "none";
 
     });
 
