@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zynora</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #09090d;
+      color: white;
+      min-height: 100vh;
+    }
+
+    header {
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 18px;
+      background: #101017;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid #22222b;
+    }
+
+    .logo {
+      font-size: 25px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    .logo span {
+      color: #9b5cff;
+    }
+
+    .search {
+      background: #1b1b24;
+      border: 1px solid #30303a;
+      color: white;
+      border-radius: 20px;
+      padding: 9px 14px;
+      width: 145px;
+      outline: none;
+    }
+
+    .hero {
+      min-height: 390px;
+      padding: 80px 22px 35px;
+      display: flex;
+      align-items: flex-end;
+      background:
+        linear-gradient(to top, #09090d 3%, transparent 70%),
+        linear-gradient(135deg, #27104b, #101017 60%);
+    }
+
+    .hero-content {
+      max-width: 600px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #9b5cff;
+      padding: 6px 11px;
+      border-radius: 15px;
+      font-size: 12px;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: 36px;
+      margin-bottom: 12px;
+    }
+
+    .hero p {
+      color: #c8c8d0;
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+
+    button {
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .watch-btn {
+      background: white;
+      color: black;
+      padding: 13px 22px;
+      border-radius: 8px;
+      font-size: 15px;
+    }
+
+    main {
+      padding: 20px;
+      padding-bottom: 90px;
+    }
+
+    .section-title {
+      font-size: 21px;
+      margin: 22px 0 14px;
+    }
+
+    .categories {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 5px;
+    }
+
+    .category {
+      background: #191922;
+      border: 1px solid #2d2d38;
+      color: #ddd;
+      padding: 9px 16px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    .category.active {
+      background: #9b5cff;
+      color: white;
+      border-color: #9b5cff;
+    }
+
+    .stories {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .story {
+      background: #15151d;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #252530;
+    }
+
+    .poster {
+      height: 190px;
+      display: flex;
+      align-items: flex-end;
+      padding: 12px;
+      background: linear-gradient(145deg, #52248a, #15151d);
+    }
+
+    .poster.two {
+      background: linear-gradient(145deg, #8a2459, #17151d);
+    }
+
+    .poster.three {
+      background: linear-gradient(145deg, #185b70, #11151d);
+    }
+
+    .poster.four {
+      background: linear-gradient(145deg, #75521c, #15151d);
+    }
+
+    .poster-title {
+      font-size:
