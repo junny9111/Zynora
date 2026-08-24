@@ -26,16 +26,15 @@
       justify-content: space-between;
       padding: 0 18px;
       background: #101017;
+      border-bottom: 1px solid #22222b;
       position: sticky;
       top: 0;
       z-index: 10;
-      border-bottom: 1px solid #22222b;
     }
 
     .logo {
       font-size: 25px;
       font-weight: 800;
-      letter-spacing: 1px;
     }
 
     .logo span {
@@ -43,12 +42,12 @@
     }
 
     .search {
-      background: #1b1b24;
-      border: 1px solid #30303a;
-      color: white;
-      border-radius: 20px;
-      padding: 9px 14px;
       width: 145px;
+      padding: 9px 14px;
+      border-radius: 20px;
+      border: 1px solid #30303a;
+      background: #1b1b24;
+      color: white;
       outline: none;
     }
 
@@ -167,4 +166,211 @@
     }
 
     .poster-title {
-      font-size:
+      font-size: 17px;
+      font-weight: bold;
+    }
+
+    .story-info {
+      padding: 12px;
+    }
+
+    .story-info p {
+      color: #9999a5;
+      font-size: 12px;
+      margin-top: 5px;
+    }
+
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 65px;
+      background: #111117;
+      border-top: 1px solid #292933;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      z-index: 20;
+    }
+
+    .nav-item {
+      color: #888894;
+      text-align: center;
+      font-size: 11px;
+      background: transparent;
+    }
+
+    .nav-item.active {
+      color: #9b5cff;
+    }
+
+    .nav-icon {
+      display: block;
+      font-size: 21px;
+      margin-bottom: 3px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    @media (min-width: 700px) {
+      .stories {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .hero {
+        min-height: 500px;
+        padding-left: 60px;
+      }
+
+      main {
+        padding-left: 60px;
+        padding-right: 60px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">Zyn<span>ora</span></div>
+
+    <input
+      id="searchInput"
+      class="search"
+      type="search"
+      placeholder="Search..."
+    >
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+
+      <div class="badge">ZYNORA ORIGINAL</div>
+
+      <h1>The Billionaire's Secret</h1>
+
+      <p>
+        Discover addictive short dramas, romance,
+        suspense and original series made for Zynora.
+      </p>
+
+      <button class="watch-btn" onclick="startWatching()">
+        ▶ Watch Now
+      </button>
+
+    </div>
+  </section>
+
+  <main>
+
+    <h2 class="section-title">Explore</h2>
+
+    <div class="categories">
+
+      <button class="category active">For You</button>
+
+      <button class="category">Romance</button>
+
+      <button class="category">Drama</button>
+
+      <button class="category">Action</button>
+
+      <button class="category">Mystery</button>
+
+      <button class="category">Comedy</button>
+
+    </div>
+
+    <h2 class="section-title">Popular Stories</h2>
+
+    <div class="stories">
+
+      <div class="story" data-title="The Billionaire's Secret">
+        <div class="poster">
+          <div class="poster-title">
+            The Billionaire's Secret
+          </div>
+        </div>
+
+        <div class="story-info">
+          <strong>Episode 1</strong>
+          <p>Romance • Drama</p>
+        </div>
+      </div>
+
+      <div class="story" data-title="Love After Betrayal">
+        <div class="poster two">
+          <div class="poster-title">
+            Love After Betrayal
+          </div>
+        </div>
+
+        <div class="story-info">
+          <strong>Episode 1</strong>
+          <p>Romance • Drama</p>
+        </div>
+      </div>
+
+      <div class="story" data-title="The Hidden Heir">
+        <div class="poster three">
+          <div class="poster-title">
+            The Hidden Heir
+          </div>
+        </div>
+
+        <div class="story-info">
+          <strong>Episode 1</strong>
+          <p>Mystery • Drama</p>
+        </div>
+      </div>
+
+      <div class="story" data-title="Dangerous Promise">
+        <div class="poster four">
+          <div class="poster-title">
+            Dangerous Promise
+          </div>
+        </div>
+
+        <div class="story-info">
+          <strong>Episode 1</strong>
+          <p>Action • Romance</p>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <nav class="bottom-nav">
+
+    <button class="nav-item active">
+      <span class="nav-icon">⌂</span>
+      Home
+    </button>
+
+    <button class="nav-item">
+      <span class="nav-icon">◉</span>
+      Discover
+    </button>
+
+    <button class="nav-item">
+      <span class="nav-icon">▣</span>
+      Library
+    </button>
+
+    <button class="nav-item">
+      <span class="nav-icon">●</span>
+      Profile
+    </button>
+
+  </nav>
+
+  <!-- Zynora JavaScript -->
+  <script src="app.js"></script>
+
+</body>
+</html>
