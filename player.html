@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zynora - Watch</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #09090d;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    header {
+      height: 70px;
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      background: #111116;
+      border-bottom: 1px solid #292933;
+    }
+
+    .logo {
+      font-size: 30px;
+      font-weight: 800;
+    }
+
+    .logo span {
+      color: #9b4dff;
+    }
+
+    .back {
+      margin-left: auto;
+      background: #1d1d25;
+      color: white;
+      border: 1px solid #363640;
+      border-radius: 25px;
+      padding: 10px 18px;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    main {
+      max-width: 1000px;
+      margin: auto;
+      padding: 25px 18px 50px;
+    }
+
+    .player {
+      width: 100%;
+      background: #000;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(0,0,0,.45);
+    }
+
+    video {
+      display: block;
+      width: 100%;
+      max-height: 70vh;
+      background: #000;
+    }
+
+    h1 {
+      font-size: 30px;
+      margin: 25px 0 8px;
+    }
+
+    .original {
+      display: inline-block;
+      background: #9b4dff;
+      padding: 7px 13px;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 13px;
+    }
+
+    p {
+      color: #bcbcc5;
+      line-height: 1.6;
+      font-size: 16px;
+    }
+
+    .episode {
+      margin-top: 25px;
+      padding: 18px;
+      background: #15151c;
+      border: 1px solid #292933;
+      border-radius: 15px;
+    }
+
+    .episode h2 {
+      margin-top: 0;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">Zyn<span>ora</span></div>
+
+    <button class="back" onclick="history.back()">
+      ← Back
+    </button>
+  </header>
+
+  <main>
+
+    <div class="player">
+      <video controls playsinline poster="">
+        <source
+          src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
+          type="video/mp4">
+        Your browser does not support video playback.
+      </video>
+    </div>
+
+    <section>
+      <span class="original">ZYNORA ORIGINAL</span>
+
+      <h1>The Billionaire's Secret</h1>
+
+      <p>
+        Episode 1 • The beginning of a dangerous secret.
+      </p>
+
+      <div class="episode">
+        <h2>Episode 1</h2>
+        <p>
+          Watch the first episode of The Billionaire's Secret
+          exclusively on Zynora.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+</body>
+</html>
