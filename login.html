@@ -13,8 +13,7 @@
     body {
       margin: 0;
       min-height: 100vh;
-      background:
-        radial-gradient(circle at top, #29104b, #09090d 55%);
+      background: radial-gradient(circle at top, #29104b, #09090d 55%);
       color: white;
       font-family: Arial, sans-serif;
       display: flex;
@@ -26,7 +25,7 @@
     .container {
       width: 100%;
       max-width: 420px;
-      background: rgba(17, 17, 22, 0.95);
+      background: #111116;
       border: 1px solid #292933;
       border-radius: 22px;
       padding: 35px 25px;
@@ -37,7 +36,6 @@
       text-align: center;
       font-size: 38px;
       font-weight: 800;
-      margin-bottom: 8px;
     }
 
     .logo span {
@@ -78,7 +76,6 @@
       display: block;
       margin: 15px 0 7px;
       font-size: 14px;
-      color: #d5d5dc;
     }
 
     input {
@@ -124,174 +121,276 @@
       color: #c9c7d0;
       font-size: 14px;
       min-height: 20px;
+      line-height: 1.4;
     }
   </style>
 </head>
 
 <body>
 
-  <div class="container">
+<div class="container">
 
-    <div class="logo">
-      Zyn<span>ora</span>
-    </div>
+  <div class="logo">
+    Zyn<span>ora</span>
+  </div>
 
-    <p class="subtitle">
-      Your world of short dramas.
-    </p>
+  <p class="subtitle">
+    Your world of short dramas.
+  </p>
 
-    <div class="tabs">
+  <div class="tabs">
 
-      <button
-        id="loginTab"
-        class="tab active"
-        onclick="showLogin()">
-        Login
-      </button>
+    <button
+      id="loginTab"
+      class="tab active"
+      onclick="showLogin()">
+      Login
+    </button>
 
-      <button
-        id="signupTab"
-        class="tab"
-        onclick="showSignup()">
-        Sign Up
-      </button>
-
-    </div>
-
-
-    <form id="authForm">
-
-      <div id="nameField" style="display:none;">
-
-        <label for="name">
-          Name
-        </label>
-
-        <input
-          id="name"
-          type="text"
-          placeholder="Your name"
-        >
-
-      </div>
-
-
-      <label for="email">
-        Email
-      </label>
-
-      <input
-        id="email"
-        type="email"
-        placeholder="you@example.com"
-        required
-      >
-
-
-      <label for="password">
-        Password
-      </label>
-
-      <input
-        id="password"
-        type="password"
-        placeholder="Enter your password"
-        required
-      >
-
-
-      <button
-        class="submit"
-        type="submit">
-        Login
-      </button>
-
-    </form>
-
-
-    <div id="message"></div>
-
-
-    <a href="index.html" class="back">
-      ← Continue without an account
-    </a>
+    <button
+      id="signupTab"
+      class="tab"
+      onclick="showSignup()">
+      Sign Up
+    </button>
 
   </div>
 
+  <form id="authForm">
 
-  <script>
+    <div id="nameField" style="display:none;">
 
-    let mode = "login";
+      <label for="name">Name</label>
 
-    const loginTab =
-      document.getElementById("loginTab");
+      <input
+        id="name"
+        type="text"
+        placeholder="Your name"
+      >
 
-    const signupTab =
-      document.getElementById("signupTab");
+    </div>
 
-    const nameField =
-      document.getElementById("nameField");
+    <label for="email">Email</label>
 
-    const submitButton =
-      document.querySelector(".submit");
+    <input
+      id="email"
+      type="email"
+      placeholder="you@example.com"
+      required
+    >
 
-    const message =
-      document.getElementById("message");
+    <label for="password">Password</label>
 
+    <input
+      id="password"
+      type="password"
+      placeholder="Enter your password"
+      minlength="6"
+      required
+    >
 
-    function showLogin() {
+    <button
+      class="submit"
+      type="submit">
+      Login
+    </button>
 
-      mode = "login";
+  </form>
 
-      loginTab.classList.add("active");
-      signupTab.classList.remove("active");
+  <div id="message"></div>
 
-      nameField.style.display = "none";
+  <a href="index.html" class="back">
+    ← Continue without an account
+  </a>
 
-      submitButton.textContent = "Login";
-
-      message.textContent = "";
-
-    }
-
-
-    function showSignup() {
-
-      mode = "signup";
-
-      signupTab.classList.add("active");
-      loginTab.classList.remove("active");
-
-      nameField.style.display = "block";
-
-      submitButton.textContent = "Create Account";
-
-      message.textContent = "";
-
-    }
+</div>
 
 
-    document
-      .getElementById("authForm")
-      .addEventListener("submit", function(event) {
+<script type="module">
+
+  /* =====================================
+     ZYNORA SUPABASE CONNECTION
+     ===================================== */
+
+  const SUPABASE_URL =
+    "https://ozshekxpuvganemaajms.supabase.co";
+
+  const SUPABASE_KEY =
+    "sb_publishable__GsW9RahFD_XDWJTFzh9eQ_dNBZfa32";
+
+
+  /* =====================================
+     LOAD SUPABASE
+     ===================================== */
+
+  import {
+    createClient
+  } from
+  "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+
+
+  const supabase =
+    createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    );
+
+
+  let mode = "login";
+
+
+  const loginTab =
+    document.getElementById("loginTab");
+
+  const signupTab =
+    document.getElementById("signupTab");
+
+  const nameField =
+    document.getElementById("nameField");
+
+  const submitButton =
+    document.querySelector(".submit");
+
+  const message =
+    document.getElementById("message");
+
+
+  /* =====================================
+     LOGIN MODE
+     ===================================== */
+
+  function showLogin() {
+
+    mode = "login";
+
+    loginTab.classList.add("active");
+    signupTab.classList.remove("active");
+
+    nameField.style.display = "none";
+
+    submitButton.textContent = "Login";
+
+    message.textContent = "";
+
+  }
+
+
+  /* =====================================
+     SIGN UP MODE
+     ===================================== */
+
+  function showSignup() {
+
+    mode = "signup";
+
+    signupTab.classList.add("active");
+    loginTab.classList.remove("active");
+
+    nameField.style.display = "block";
+
+    submitButton.textContent = "Create Account";
+
+    message.textContent = "";
+
+  }
+
+
+  window.showLogin = showLogin;
+  window.showSignup = showSignup;
+
+
+  /* =====================================
+     AUTHENTICATION
+     ===================================== */
+
+  document
+    .getElementById("authForm")
+    .addEventListener(
+      "submit",
+      async function(event) {
 
         event.preventDefault();
 
-        if (mode === "login") {
+        message.textContent = "Please wait...";
 
-          message.textContent =
-            "Login system will be connected to Supabase next.";
+        const email =
+          document
+            .getElementById("email")
+            .value
+            .trim();
 
-        } else {
+        const password =
+          document
+            .getElementById("password")
+            .value;
 
-          message.textContent =
-            "Account creation will be connected to Supabase next.";
+
+        try {
+
+          /* SIGN UP */
+
+          if (mode === "signup") {
+
+            const {
+              data,
+              error
+            } = await supabase.auth.signUp({
+              email: email,
+              password: password
+            });
+
+            if (error) {
+              throw error;
+            }
+
+            message.textContent =
+              "Account created! Check your email to verify your account.";
+
+          }
+
+
+          /* LOGIN */
+
+          else {
+
+            const {
+              data,
+              error
+            } = await supabase.auth.signInWithPassword({
+              email: email,
+              password: password
+            });
+
+            if (error) {
+              throw error;
+            }
+
+            message.textContent =
+              "Login successful!";
+
+            setTimeout(function() {
+
+              window.location.href =
+                "index.html";
+
+            }, 1000);
+
+          }
 
         }
 
-      });
+        catch (error) {
 
-  </script>
+          message.textContent =
+            error.message ||
+            "Something went wrong.";
+
+        }
+
+      }
+    );
+
+</script>
 
 </body>
 </html>
