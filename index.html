@@ -19,11 +19,11 @@
     }
 
     header {
-      height: 85px;
+      height: 75px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 25px;
+      padding: 0 18px;
       background: #111116;
       border-bottom: 1px solid #292933;
       position: sticky;
@@ -32,7 +32,7 @@
     }
 
     .logo {
-      font-size: 32px;
+      font-size: 30px;
       font-weight: 800;
     }
 
@@ -41,85 +41,75 @@
     }
 
     .search {
-      width: 280px;
-      padding: 14px 20px;
-      border-radius: 30px;
+      width: 145px;
+      padding: 11px 15px;
+      border-radius: 25px;
       border: 1px solid #34343e;
       background: #1b1b22;
       color: white;
-      font-size: 16px;
       outline: none;
     }
 
     .hero {
-      min-height: 620px;
-      padding: 155px 40px 80px;
+      min-height: 600px;
+      padding: 150px 38px 60px;
       background:
-        linear-gradient(90deg, #241044 0%, #100b18 55%, #09090d 100%);
+        linear-gradient(90deg, #241044, #100b18 60%, #09090d);
     }
 
     .badge {
       display: inline-block;
       background: #9b4dff;
-      padding: 12px 20px;
-      border-radius: 25px;
+      padding: 9px 15px;
+      border-radius: 20px;
       font-weight: bold;
-      font-size: 16px;
+      font-size: 13px;
     }
 
     .hero h1 {
-      max-width: 650px;
-      font-size: 64px;
+      font-size: 48px;
       line-height: 1.05;
-      margin: 30px 0 20px;
+      margin: 25px 0 15px;
     }
 
     .hero p {
-      max-width: 650px;
       color: #c9c7d0;
-      font-size: 22px;
       line-height: 1.5;
+      font-size: 18px;
+      max-width: 550px;
     }
 
     .watch-button {
       display: inline-block;
-      margin-top: 25px;
-      padding: 18px 30px;
-      border-radius: 15px;
+      margin-top: 20px;
+      padding: 15px 24px;
+      border-radius: 12px;
       background: white;
       color: #09090d;
       text-decoration: none;
-      font-size: 19px;
       font-weight: bold;
     }
 
-    .watch-button:hover {
-      transform: scale(1.03);
-    }
-
     section {
-      padding: 35px 40px;
+      padding: 25px 38px;
     }
 
     section h2 {
-      font-size: 32px;
+      font-size: 25px;
     }
 
     .categories {
       display: flex;
-      gap: 15px;
+      gap: 10px;
       overflow-x: auto;
-      padding-bottom: 10px;
     }
 
     .category {
       flex: 0 0 auto;
-      padding: 15px 25px;
-      border-radius: 30px;
+      padding: 11px 18px;
+      border-radius: 22px;
       background: #1b1b22;
       border: 1px solid #34343e;
-      color: white;
-      font-size: 17px;
     }
 
     .category.active {
@@ -129,40 +119,41 @@
 
     .shows {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
     }
 
     .show {
       background: #15151c;
-      border-radius: 15px;
+      border-radius: 14px;
       overflow: hidden;
       border: 1px solid #292933;
     }
 
     .poster {
-      height: 230px;
-      background: linear-gradient(135deg, #7b2cff, #17101f);
+      height: 190px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 25px;
-      font-weight: bold;
       text-align: center;
-      padding: 15px;
+      padding: 12px;
+      font-weight: bold;
+      background: linear-gradient(135deg, #7b2cff, #17101f);
     }
 
     .show-info {
-      padding: 15px;
+      padding: 12px;
     }
 
     .show-info h3 {
-      margin: 0 0 8px;
+      margin: 0 0 6px;
+      font-size: 16px;
     }
 
     .show-info p {
       margin: 0;
       color: #9999a5;
+      font-size: 13px;
     }
 
     .bottom-nav {
@@ -183,7 +174,7 @@
       color: #9999a5;
       text-decoration: none;
       text-align: center;
-      font-size: 14px;
+      font-size: 12px;
     }
 
     .nav-item.active {
@@ -192,231 +183,174 @@
 
     .nav-icon {
       display: block;
-      font-size: 24px;
+      font-size: 23px;
       margin-bottom: 4px;
-    }
-
-    @media (max-width: 600px) {
-
-      header {
-        height: 75px;
-        padding: 0 18px;
-      }
-
-      .logo {
-        font-size: 30px;
-      }
-
-      .search {
-        width: 145px;
-        padding: 11px 15px;
-      }
-
-      .hero {
-        min-height: 620px;
-        padding: 155px 40px 60px;
-      }
-
-      .hero h1 {
-        font-size: 48px;
-      }
-
-      .hero p {
-        font-size: 19px;
-      }
-
-      section {
-        padding: 25px 38px;
-      }
     }
   </style>
 </head>
 
 <body>
 
-  <header>
-    <div class="logo">
-      Zyn<span>ora</span>
+<header>
+
+  <div class="logo">
+    Zyn<span>ora</span>
+  </div>
+
+  <input
+    class="search"
+    id="searchBox"
+    type="search"
+    placeholder="Search..."
+  >
+
+</header>
+
+
+<main>
+
+  <div class="hero">
+
+    <span class="badge">ZYNORA ORIGINAL</span>
+
+    <h1>The Billionaire's Secret</h1>
+
+    <p>
+      Discover addictive short dramas, romance,
+      suspense and original series made for Zynora.
+    </p>
+
+    <a href="player.html" class="watch-button">
+      ▶ Watch Now
+    </a>
+
+  </div>
+
+
+  <section>
+
+    <h2>Explore</h2>
+
+    <div class="categories">
+
+      <div class="category active">For You</div>
+      <div class="category">Romance</div>
+      <div class="category">Drama</div>
+      <div class="category">Action</div>
+      <div class="category">Suspense</div>
+
     </div>
 
-    <input
-      class="search"
-      type="search"
-      placeholder="Search..."
-      id="searchBox"
-    >
-  </header>
+  </section>
 
 
-  <main>
+  <section>
 
-    <div class="hero">
+    <h2>Trending on Zynora</h2>
 
-      <span class="badge">ZYNORA ORIGINAL</span>
+    <div class="shows">
 
-      <h1>The Billionaire's Secret</h1>
+      <div class="show">
+        <div class="poster">
+          The Billionaire's Secret
+        </div>
 
-      <p>
-        Discover addictive short dramas, romance,
-        suspense and original series made for Zynora.
-      </p>
+        <div class="show-info">
+          <h3>The Billionaire's Secret</h3>
+          <p>Drama • Romance</p>
+        </div>
+      </div>
 
-      <a href="player.html" class="watch-button">
-        ▶ Watch Now
-      </a>
+
+      <div class="show">
+        <div class="poster">
+          Forbidden Love
+        </div>
+
+        <div class="show-info">
+          <h3>Forbidden Love</h3>
+          <p>Romance • Drama</p>
+        </div>
+      </div>
+
+
+      <div class="show">
+        <div class="poster">
+          Hidden Truth
+        </div>
+
+        <div class="show-info">
+          <h3>Hidden Truth</h3>
+          <p>Suspense • Drama</p>
+        </div>
+      </div>
+
+
+      <div class="show">
+        <div class="poster">
+          Dangerous Deal
+        </div>
+
+        <div class="show-info">
+          <h3>Dangerous Deal</h3>
+          <p>Action • Suspense</p>
+        </div>
+      </div>
 
     </div>
 
+  </section>
 
-    <section>
-
-      <h2>Explore</h2>
-
-      <div class="categories">
-
-        <div class="category active">
-          For You
-        </div>
-
-        <div class="category">
-          Romance
-        </div>
-
-        <div class="category">
-          Drama
-        </div>
-
-        <div class="category">
-          Action
-        </div>
-
-        <div class="category">
-          Suspense
-        </div>
-
-      </div>
-
-    </section>
+</main>
 
 
-    <section>
+<nav class="bottom-nav">
 
-      <h2>Trending on Zynora</h2>
+  <a href="index.html" class="nav-item active">
+    <span class="nav-icon">⌂</span>
+    Home
+  </a>
 
-      <div class="shows">
+  <a href="discover.html" class="nav-item">
+    <span class="nav-icon">◉</span>
+    Discover
+  </a>
 
-        <div class="show">
+  <a href="#" class="nav-item">
+    <span class="nav-icon">▣</span>
+    Library
+  </a>
 
-          <div class="poster">
-            The Billionaire's Secret
-          </div>
+  <a href="#" class="nav-item">
+    <span class="nav-icon">●</span>
+    Profile
+  </a>
 
-          <div class="show-info">
-            <h3>The Billionaire's Secret</h3>
-            <p>Drama • Romance</p>
-          </div>
-
-        </div>
-
-
-        <div class="show">
-
-          <div class="poster">
-            Forbidden Love
-          </div>
-
-          <div class="show-info">
-            <h3>Forbidden Love</h3>
-            <p>Romance • Drama</p>
-          </div>
-
-        </div>
+</nav>
 
 
-        <div class="show">
+<script>
 
-          <div class="poster">
-            Hidden Truth
-          </div>
+  const searchBox = document.getElementById("searchBox");
 
-          <div class="show-info">
-            <h3>Hidden Truth</h3>
-            <p>Suspense • Drama</p>
-          </div>
+  searchBox.addEventListener("input", function() {
 
-        </div>
+    const value = this.value.toLowerCase();
 
+    const shows = document.querySelectorAll(".show");
 
-        <div class="show">
+    shows.forEach(function(show) {
 
-          <div class="poster">
-            Dangerous Deal
-          </div>
+      const title = show.innerText.toLowerCase();
 
-          <div class="show-info">
-            <h3>Dangerous Deal</h3>
-            <p>Action • Suspense</p>
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-  </main>
-
-
-  <nav class="bottom-nav">
-
-    <a href="index.html" class="nav-item active">
-      <span class="nav-icon">⌂</span>
-      Home
-    </a>
-
-    <a href="#discover" class="nav-item">
-      <span class="nav-icon">◉</span>
-      Discover
-    </a>
-
-    <a href="#library" class="nav-item">
-      <span class="nav-icon">▣</span>
-      Library
-    </a>
-
-    <a href="#profile" class="nav-item">
-      <span class="nav-icon">●</span>
-      Profile
-    </a>
-
-  </nav>
-
-
-  <script>
-
-    const searchBox = document.getElementById("searchBox");
-
-    searchBox.addEventListener("input", function() {
-
-      const search = this.value.toLowerCase();
-
-      const shows = document.querySelectorAll(".show");
-
-      shows.forEach(function(show) {
-
-        const title = show.innerText.toLowerCase();
-
-        if (title.includes(search)) {
-          show.style.display = "";
-        } else {
-          show.style.display = "none";
-        }
-
-      });
+      show.style.display =
+        title.includes(value) ? "" : "none";
 
     });
 
-  </script>
+  });
+
+</script>
 
 </body>
 </html>
