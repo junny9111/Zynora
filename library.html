@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zynora - My Library</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #09090d;
+      color: white;
+      font-family: Arial, sans-serif;
+      padding-bottom: 90px;
+    }
+
+    header {
+      height: 75px;
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      background: #111116;
+      border-bottom: 1px solid #292933;
+    }
+
+    .logo {
+      font-size: 30px;
+      font-weight: 800;
+    }
+
+    .logo span {
+      color: #9b4dff;
+    }
+
+    main {
+      padding: 30px 20px;
+    }
+
+    h1 {
+      font-size: 34px;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      color: #9999a5;
+      margin-bottom: 30px;
+    }
+
+    .empty {
+      text-align: center;
+      padding: 80px 20px;
+      background: #15151c;
+      border: 1px solid #292933;
+      border-radius: 18px;
+    }
+
+    .empty-icon {
+      font-size: 55px;
+      margin-bottom: 15px;
+    }
+
+    .empty h2 {
+      margin-bottom: 10px;
+    }
+
+    .empty p {
+      color: #9999a5;
+      line-height: 1.5;
+    }
+
+    .browse {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 14px 22px;
+      background: #9b4dff;
+      color: white;
+      text-decoration: none;
+      border-radius: 12px;
+      font-weight: bold;
+    }
+
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 78px;
+      background: #111116;
+      border-top: 1px solid #292933;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      z-index: 20;
+    }
+
+    .nav-item {
+      color: #9999a5;
+      text-decoration: none;
+      text-align: center;
+      font-size: 12px;
+    }
+
+    .nav-item.active {
+      color: #9b4dff;
+    }
+
+    .nav-icon {
+      display: block;
+      font-size: 23px;
+      margin-bottom: 4px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">
+    Zyn<span>ora</span>
+  </div>
+</header>
+
+<main>
+
+  <h1>My Library</h1>
+
+  <p class="subtitle">
+    Your saved shows and watchlist.
+  </p>
+
+  <div class="empty">
+
+    <div class="empty-icon">▣</div>
+
+    <h2>Your library is empty</h2>
+
+    <p>
+      Save your favorite Zynora stories here
+      so you can easily find them later.
+    </p>
+
+    <a href="discover.html" class="browse">
+      Browse Shows
+    </a>
+
+  </div>
+
+</main>
+
+<nav class="bottom-nav">
+
+  <a href="index.html" class="nav-item">
+    <span class="nav-icon">⌂</span>
+    Home
+  </a>
+
+  <a href="discover.html" class="nav-item">
+    <span class="nav-icon">◉</span>
+    Discover
+  </a>
+
+  <a href="library.html" class="nav-item active">
+    <span class="nav-icon">▣</span>
+    Library
+  </a>
+
+  <a href="#" class="nav-item">
+    <span class="nav-icon">●</span>
+    Profile
+  </a>
+
+</nav>
+
+</body>
+</html>
