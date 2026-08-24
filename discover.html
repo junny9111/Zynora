@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zynora - Discover</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #09090d;
+      color: white;
+      font-family: Arial, sans-serif;
+      padding-bottom: 90px;
+    }
+
+    header {
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 25px;
+      background: #111116;
+      border-bottom: 1px solid #292933;
+    }
+
+    .logo {
+      font-size: 30px;
+      font-weight: 800;
+    }
+
+    .logo span {
+      color: #9b4dff;
+    }
+
+    .search {
+      width: 230px;
+      padding: 13px 18px;
+      border-radius: 25px;
+      border: 1px solid #34343e;
+      background: #1b1b22;
+      color: white;
+      outline: none;
+    }
+
+    main {
+      padding: 30px 25px;
+    }
+
+    h1 {
+      font-size: 38px;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      color: #aaaab5;
+      margin-bottom: 30px;
+    }
+
+    .categories {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      margin-bottom: 35px;
+    }
+
+    .category {
+      flex: 0 0 auto;
+      padding: 13px 22px;
+      border-radius: 25px;
+      background: #1b1b22;
+      border: 1px solid #34343e;
+    }
+
+    .category.active {
+      background: #9b4dff;
+      border-color: #9b4dff;
+    }
+
+    .shows {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 18px;
+    }
+
+    .show {
+      background: #15151c;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid #292933;
+    }
+
+    .poster {
+      height: 220px;
+      background: linear-gradient(135deg, #8b3dff, #181020);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 15px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .info {
+      padding: 14px;
+    }
+
+    .info h3 {
+      margin: 0 0 7px;
+      font-size: 17px;
+    }
+
+    .info p {
+      margin: 0;
+      color: #9999a5;
+      font-size: 14px;
+    }
+
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 78px;
+      background: #111116;
+      border-top: 1px solid #292933;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    .nav-item {
+      color: #9999a5;
+      text-decoration: none;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .nav-item.active {
+      color: #9b4dff;
+    }
+
+    .nav-icon {
+      display: block;
+      font-size: 24px;
+      margin-bottom: 4px;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        padding: 0 18px;
+      }
+
+      .search {
+        width: 145px;
+      }
+
+      main {
+        padding: 25px 20px;
+      }
+
+      h1 {
+        font-size: 32px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+
+  <div class="logo">
+    Zyn<span>ora</span>
+  </div>
+
+  <input
+    class="search"
+    id="search"
+    type="search"
+    placeholder="Search..."
+  >
+
+</header>
+
+
+<main>
+
+  <h1>Discover</h1>
+
+  <p class="subtitle">
+    Find your next addictive short drama.
+  </p>
+
+
+  <div class="categories">
+
+    <div class="category active">For You</div>
+    <div class="category">Romance</div>
+    <div class="category">Drama</div>
+    <div class="category">Action</div>
+    <div class="category">Suspense</div>
+
+  </div>
+
+
+  <div class="shows" id="shows">
+
+    <div class="show">
+      <div class="poster">The Billionaire's Secret</div>
+      <div class="info">
+        <h3>The Billionaire's Secret</h3>
+        <p>Drama • Romance</p>
+      </div>
+    </div>
+
+    <div class="show">
+      <div class="poster">Forbidden Love</div>
+      <div class="info">
+        <h3>Forbidden Love</h3>
+        <p>Romance • Drama</p>
+      </div>
+    </div>
+
+    <div class="show">
+      <div class="poster">Hidden Truth</div>
+      <div class="info">
+        <h3>Hidden Truth</h3>
+        <p>Suspense • Drama</p>
+      </div>
+    </div>
+
+    <div class="show">
+      <div class="poster">Dangerous Deal</div>
+      <div class="info">
+        <h3>Dangerous Deal</h3>
+        <p>Action • Suspense</p>
+      </div>
+    </div>
+
+    <div class="show">
+      <div class="poster">Secret Billionaire</div>
+      <div class="info">
+        <h3>Secret Billionaire</h3>
+        <p>Drama • Romance</p>
+      </div>
+    </div>
+
+    <div class="show">
+      <div class="poster">The Last Promise</div>
+      <div class="info">
+        <h3>The Last Promise</h3>
+        <p>Romance • Drama</p>
+      </div>
+    </div>
+
+  </div>
+
+</main>
+
+
+<nav class="bottom-nav">
+
+  <a href="index.html" class="nav-item">
+    <span class="nav-icon">⌂</span>
+    Home
+  </a>
+
+  <a href="discover.html" class="nav-item active">
+    <span class="nav-icon">◉</span>
+    Discover
+  </a>
+
+  <a href="#" class="nav-item">
+    <span class="nav-icon">▣</span>
+    Library
+  </a>
+
+  <a href="#" class="nav-item">
+    <span class="nav-icon">●</span>
+    Profile
+  </a>
+
+</nav>
+
+
+<script>
+
+  const search = document.getElementById("search");
+  const shows = document.querySelectorAll(".show");
+
+  search.addEventListener("input", function() {
+
+    const value = this.value.toLowerCase();
+
+    shows.forEach(function(show) {
+
+      const title = show.innerText.toLowerCase();
+
+      show.style.display =
+        title.includes(value) ? "" : "none";
+
+    });
+
+  });
+
+</script>
+
+</body>
+</html>
