@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,246 +10,260 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap"
+rel="stylesheet">
 
 <style>
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
 }
 
-body {
-    background:
-        radial-gradient(circle at 50% 15%, rgba(145,55,255,.13), transparent 30%),
-        #08070c;
-    color: white;
-    font-family: "Playfair Display", Georgia, serif;
-    padding-bottom: 100px;
+body{
+min-height:100vh;
+background:
+radial-gradient(circle at 50% 8%,rgba(145,55,255,.18),transparent 34%),
+#08070c;
+color:white;
+font-family:"Playfair Display",Georgia,serif;
+padding-bottom:105px;
 }
 
-header {
-    height: 95px;
-    background: #111016;
-    border-bottom: 1px solid rgba(173,77,255,.25);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 22px;
+header{
+height:95px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 22px;
+background:#111016;
+border-bottom:1px solid rgba(173,77,255,.25);
 }
 
-.logo {
-    font-family: "Cinzel", serif;
-    font-size: 37px;
-    font-weight: 700;
-    letter-spacing: -2px;
-    background: linear-gradient(90deg,#fff,#d19aff,#8e38ff);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+.logo{
+font-family:"Cinzel",serif;
+font-size:37px;
+font-weight:700;
+letter-spacing:-2px;
+background:linear-gradient(90deg,#fff,#d19aff,#8e38ff);
+-webkit-background-clip:text;
+background-clip:text;
+color:transparent;
 }
 
-.search {
-    width: 155px;
-    padding: 13px 17px;
-    border-radius: 30px;
-    border: 1px solid rgba(173,77,255,.25);
-    background: #1a1920;
-    color: white;
-    outline: none;
-    font-family: "Playfair Display", serif;
+.search{
+width:155px;
+padding:13px 17px;
+border-radius:30px;
+border:1px solid rgba(173,77,255,.25);
+background:#1a1920;
+color:white;
+font-family:"Playfair Display",serif;
+outline:none;
 }
 
-.search::placeholder {
-    color: #85818c;
+main{
+padding:28px 20px;
+max-width:700px;
+margin:auto;
 }
 
-.page {
-    padding: 25px 20px;
+h1{
+font-family:"Cinzel",serif;
+font-size:31px;
 }
 
-.title {
-    font-family: "Cinzel", serif;
-    font-size: 32px;
-    margin-bottom: 7px;
-}
-
-.subtitle {
-    color: #96919e;
-    font-style: italic;
-    margin-bottom: 25px;
+.subtitle{
+margin:7px 0 24px;
+color:#9994a2;
+font-style:italic;
 }
 
 /* GENRES */
 
-.genre-row {
-    display: flex;
-    gap: 10px;
-    overflow-x: auto;
-    padding-bottom: 15px;
+.genres{
+display:flex;
+gap:9px;
+overflow-x:auto;
+padding-bottom:15px;
 }
 
-.genre-row::-webkit-scrollbar {
-    display: none;
+.genres::-webkit-scrollbar{
+display:none;
 }
 
-.genre {
-    flex: 0 0 auto;
-    padding: 12px 19px;
-    border-radius: 25px;
-    background: #17161d;
-    border: 1px solid #302c38;
-    font-family: "Cinzel", serif;
-    color: #c9c4d0;
+.genre{
+flex:0 0 auto;
+padding:11px 18px;
+border-radius:22px;
+background:#17161d;
+border:1px solid #302c38;
+color:#aaa5b1;
+font-family:"Cinzel",serif;
+font-size:11px;
 }
 
-.genre.active {
-    background: linear-gradient(135deg,#a84fff,#7521e4);
-    border-color: transparent;
-    color: white;
+.genre.active{
+background:linear-gradient(135deg,#a84fff,#7521e4);
+color:white;
+border-color:transparent;
 }
 
 /* SECTION */
 
-.section {
-    margin-top: 25px;
+.section{
+margin-top:25px;
 }
 
-.section-title {
-    font-family: "Cinzel", serif;
-    font-size: 23px;
-    margin-bottom: 16px;
-}
-
-.section-title span {
-    float: right;
-    color: #b66aff;
-    font-family: "Playfair Display", serif;
-    font-size: 14px;
-    margin-top: 5px;
+.section-title{
+font-family:"Cinzel",serif;
+font-size:21px;
+margin-bottom:16px;
 }
 
 /* GRID */
 
-.drama-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
+.grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:16px;
 }
 
-.drama {
-    min-width: 0;
+.drama{
+background:#121117;
+border:1px solid rgba(173,77,255,.15);
+border-radius:19px;
+overflow:hidden;
 }
 
-.poster {
-    height: 235px;
-    border-radius: 18px;
-    padding: 13px;
-    display: flex;
-    align-items: flex-end;
-    border: 1px solid rgba(173,77,255,.2);
-    box-shadow: 0 8px 25px rgba(0,0,0,.3);
+.poster{
+height:230px;
+padding:14px;
+display:flex;
+align-items:flex-end;
+position:relative;
 }
 
-.p1 {
-    background: linear-gradient(145deg,#a84fff,#261034,#08070c);
+.p1{
+background:linear-gradient(145deg,#a84fff,#261034,#08070c);
 }
 
-.p2 {
-    background: linear-gradient(145deg,#5b258c,#171022,#08070c);
+.p2{
+background:linear-gradient(145deg,#5b258c,#171022,#08070c);
 }
 
-.p3 {
-    background: linear-gradient(145deg,#87305e,#28101f,#08070c);
+.p3{
+background:linear-gradient(145deg,#87305e,#28101f,#08070c);
 }
 
-.p4 {
-    background: linear-gradient(145deg,#35459c,#10142b,#08070c);
+.p4{
+background:linear-gradient(145deg,#35459c,#10142b,#08070c);
 }
 
-.p5 {
-    background: linear-gradient(145deg,#9c6330,#26160d,#08070c);
+.poster-title{
+font-family:"Cinzel",serif;
+font-size:15px;
+line-height:1.25;
+text-shadow:0 2px 12px #000;
 }
 
-.p6 {
-    background: linear-gradient(145deg,#315f75,#0c1a22,#08070c);
+.card-body{
+padding:13px;
 }
 
-.poster-title {
-    font-family: "Cinzel", serif;
-    font-size: 16px;
-    line-height: 1.3;
-    text-shadow: 0 2px 12px #000;
+.name{
+font-size:16px;
+margin-bottom:5px;
 }
 
-.name {
-    font-size: 16px;
-    margin-top: 9px;
+.info{
+color:#8e8996;
+font-size:12px;
 }
 
-.info {
-    color: #8e8996;
-    font-size: 13px;
-    margin-top: 4px;
+.actions{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px;
+margin-top:12px;
 }
 
-/* COINS */
-
-.unlock {
-    display: inline-block;
-    margin-top: 7px;
-    color: #ffd95c;
-    font-size: 12px;
-    font-family: "Cinzel", serif;
+.action{
+border:none;
+border-radius:12px;
+padding:10px 8px;
+font-family:"Cinzel",serif;
+font-size:9px;
+font-weight:600;
+cursor:pointer;
 }
 
-/* BOTTOM NAV */
-
-.bottom-nav {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 92px;
-    background: rgba(17,16,22,.98);
-    border-top: 1px solid rgba(173,77,255,.2);
-    display: grid;
-    grid-template-columns: repeat(4,1fr);
-    z-index: 20;
+.watch{
+background:linear-gradient(135deg,#a84fff,#7521e4);
+color:white;
 }
 
-.nav-item {
-    text-decoration: none;
-    color: #777582;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 7px;
-    font-family: "Cinzel", serif;
-    font-size: 12px;
+.save{
+background:#1b1821;
+color:#cda6ef;
+border:1px solid rgba(173,77,255,.25);
 }
 
-.nav-icon {
-    font-size: 25px;
+.save.saved{
+background:#2b1737;
+color:#ffb7ff;
 }
 
-.nav-item.active {
-    color: #a94dff;
-    text-shadow: 0 0 15px rgba(169,77,255,.5);
+/* MESSAGE */
+
+#message{
+position:fixed;
+left:20px;
+right:20px;
+bottom:105px;
+padding:15px;
+border-radius:15px;
+background:#21182b;
+border:1px solid rgba(173,77,255,.35);
+text-align:center;
+display:none;
+z-index:100;
 }
 
-@media(max-width:600px) {
+/* NAV */
 
-    .poster {
-        height: 220px;
-    }
+.bottom-nav{
+position:fixed;
+left:0;
+right:0;
+bottom:0;
+height:90px;
+background:#111016;
+display:grid;
+grid-template-columns:repeat(5,1fr);
+border-top:1px solid rgba(173,77,255,.2);
+z-index:50;
+}
 
-    .title {
-        font-size: 29px;
-    }
+.nav-item{
+text-decoration:none;
+color:#777582;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+gap:5px;
+font-family:"Cinzel",serif;
+font-size:9px;
+}
 
+.nav-icon{
+font-size:21px;
+}
+
+.nav-item.active{
+color:#a94dff;
 }
 
 </style>
@@ -258,60 +273,68 @@ header {
 
 <header>
 
-<div class="logo">Zynora</div>
+<div class="logo">
+Zynora
+</div>
 
 <input
-class="search"
 id="searchBox"
+class="search"
 type="search"
 placeholder="Search..."
-oninput="searchDramas()"
 >
 
 </header>
 
 
-<main class="page">
+<main>
 
-<h1 class="title">Discover</h1>
+<h1>
+Discover
+</h1>
 
 <p class="subtitle">
-Find your next obsession.
+Find your next addictive short drama.
 </p>
 
 
-<!-- GENRES -->
-
-<div class="genre-row">
+<div class="genres">
 
 <div class="genre active">For You</div>
 <div class="genre">Romance</div>
 <div class="genre">Drama</div>
 <div class="genre">Action</div>
 <div class="genre">Suspense</div>
-<div class="genre">Billionaire</div>
 
 </div>
 
 
-<!-- TRENDING -->
-
-<div class="section">
+<section class="section">
 
 <div class="section-title">
-🔥 Trending
-<span>See All</span>
+Trending Now
 </div>
 
-<div class="drama-grid">
 
-<div class="drama">
+<div class="grid">
+
+
+<!-- DRAMA 1 -->
+
+<div
+class="drama"
+data-title="The Billionaire's Secret"
+data-id="billionaire-secret">
 
 <div class="poster p1">
+
 <div class="poster-title">
 The Billionaire's Secret
 </div>
+
 </div>
+
+<div class="card-body">
 
 <div class="name">
 The Billionaire's Secret
@@ -321,16 +344,48 @@ The Billionaire's Secret
 Drama • 18 Episodes
 </div>
 
+<div class="actions">
+
+<button
+class="action watch"
+onclick="watchDrama('billionaire-secret','The Billionaire\\'s Secret')">
+
+▶ Watch
+
+</button>
+
+<button
+class="action save"
+data-drama-id="billionaire-secret"
+onclick="saveDrama('billionaire-secret','The Billionaire\\'s Secret',this)">
+
+♡ Save
+
+</button>
+
+</div>
+
+</div>
+
 </div>
 
 
-<div class="drama">
+<!-- DRAMA 2 -->
+
+<div
+class="drama"
+data-title="Love After Lies"
+data-id="love-after-lies">
 
 <div class="poster p2">
+
 <div class="poster-title">
 Love After Lies
 </div>
+
 </div>
+
+<div class="card-body">
 
 <div class="name">
 Love After Lies
@@ -340,16 +395,48 @@ Love After Lies
 Romance • 20 Episodes
 </div>
 
+<div class="actions">
+
+<button
+class="action watch"
+onclick="watchDrama('love-after-lies','Love After Lies')">
+
+▶ Watch
+
+</button>
+
+<button
+class="action save"
+data-drama-id="love-after-lies"
+onclick="saveDrama('love-after-lies','Love After Lies',this)">
+
+♡ Save
+
+</button>
+
+</div>
+
+</div>
+
 </div>
 
 
-<div class="drama">
+<!-- DRAMA 3 -->
+
+<div
+class="drama"
+data-title="Forbidden Promise"
+data-id="forbidden-promise">
 
 <div class="poster p3">
+
 <div class="poster-title">
 Forbidden Promise
 </div>
+
 </div>
+
+<div class="card-body">
 
 <div class="name">
 Forbidden Promise
@@ -359,16 +446,48 @@ Forbidden Promise
 Romance • 24 Episodes
 </div>
 
+<div class="actions">
+
+<button
+class="action watch"
+onclick="watchDrama('forbidden-promise','Forbidden Promise')">
+
+▶ Watch
+
+</button>
+
+<button
+class="action save"
+data-drama-id="forbidden-promise"
+onclick="saveDrama('forbidden-promise','Forbidden Promise',this)">
+
+♡ Save
+
+</button>
+
+</div>
+
+</div>
+
 </div>
 
 
-<div class="drama">
+<!-- DRAMA 4 -->
+
+<div
+class="drama"
+data-title="Hidden Heir"
+data-id="hidden-heir">
 
 <div class="poster p4">
+
 <div class="poster-title">
 Hidden Heir
 </div>
+
 </div>
+
+<div class="card-body">
 
 <div class="name">
 Hidden Heir
@@ -378,87 +497,325 @@ Hidden Heir
 Drama • 16 Episodes
 </div>
 
-</div>
+<div class="actions">
 
-</div>
+<button
+class="action watch"
+onclick="watchDrama('hidden-heir','Hidden Heir')">
 
-</div>
+▶ Watch
 
+</button>
 
-<!-- NEW RELEASES -->
+<button
+class="action save"
+data-drama-id="hidden-heir"
+onclick="saveDrama('hidden-heir','Hidden Heir',this)">
 
-<div class="section">
+♡ Save
 
-<div class="section-title">
-✨ New Releases
-</div>
-
-<div class="drama-grid">
-
-<div class="drama">
-
-<div class="poster p5">
-<div class="poster-title">
-The Secret Contract
-</div>
-</div>
-
-<div class="name">
-The Secret Contract
-</div>
-
-<div class="info">
-New • Episode 4
-</div>
-
-<div class="unlock">
-🪙 Episode 5 locked
-</div>
-
-</div>
-
-
-<div class="drama">
-
-<div class="poster p6">
-<div class="poster-title">
-Royal Deception
-</div>
-</div>
-
-<div class="name">
-Royal Deception
-</div>
-
-<div class="info">
-New • Episode 3
-</div>
-
-<div class="unlock">
-🪙 Episode 4 locked
-</div>
+</button>
 
 </div>
 
 </div>
 
 </div>
+
+
+</div>
+
+</section>
 
 </main>
 
 
-<!-- NAVIGATION -->
+<div id="message"></div>
+
 
 <nav class="bottom-nav">
 
-<a class="nav-item" href="index.html">
-<div class="nav-icon">⌂</div>
-<div>Home</div>
+<a href="index.html" class="nav-item">
+<span class="nav-icon">⌂</span>
+Home
 </a>
 
-<a class="nav-item active" href="discover.html">
-<div class="nav-icon">◉</div>
-<div>Discover</div>
+<a href="discover.html" class="nav-item active">
+<span class="nav-icon">◉</span>
+Discover
 </a>
 
-<a class="nav-item" href
+<a href="rewards.html" class="nav-item">
+<span class="nav-icon">🎁</span>
+Rewards
+</a>
+
+<a href="library.html" class="nav-item">
+<span class="nav-icon">▣</span>
+Library
+</a>
+
+<a href="profile.html" class="nav-item">
+<span class="nav-icon">●</span>
+Profile
+</a>
+
+</nav>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+const client = supabase.createClient(
+"https://ozshekxpuvganemaajms.supabase.co",
+"sb_publishable__GsW9RahFD_XDWJTFzh9eQ_dNBZfa32"
+);
+
+let user = null;
+
+
+/* START */
+
+async function start(){
+
+const result =
+await client.auth.getUser();
+
+user =
+result.data.user;
+
+if(user){
+
+await loadSavedState();
+
+}
+
+}
+
+
+/* SAVE DRAMA */
+
+async function saveDrama(
+dramaId,
+title,
+button
+){
+
+if(!user){
+
+showMessage(
+"Please log in to save dramas."
+);
+
+return;
+
+}
+
+const check =
+await client
+.from("saved_dramas")
+.select("id")
+.eq("user_id",user.id)
+.eq("drama_id",dramaId)
+.maybeSingle();
+
+
+if(check.data){
+
+const remove =
+await client
+.from("saved_dramas")
+.delete()
+.eq("user_id",user.id)
+.eq("drama_id",dramaId);
+
+if(remove.error){
+
+showMessage(
+remove.error.message
+);
+
+return;
+
+}
+
+button.classList.remove("saved");
+
+button.textContent =
+"♡ Save";
+
+showMessage(
+"Removed from Library."
+);
+
+return;
+
+}
+
+
+const result =
+await client
+.from("saved_dramas")
+.insert({
+
+user_id:user.id,
+
+drama_id:dramaId,
+
+drama_title:title
+
+});
+
+
+if(result.error){
+
+showMessage(
+result.error.message
+);
+
+return;
+
+}
+
+
+button.classList.add("saved");
+
+button.textContent =
+"♥ Saved";
+
+showMessage(
+"Saved to your Library."
+);
+
+}
+
+
+/* LOAD SAVED STATE */
+
+async function loadSavedState(){
+
+const result =
+await client
+.from("saved_dramas")
+.select("drama_id")
+.eq("user_id",user.id);
+
+
+if(result.error){
+return;
+}
+
+
+result.data.forEach(function(item){
+
+const button =
+document.querySelector(
+'[data-drama-id="' +
+item.drama_id +
+'"]'
+);
+
+if(button){
+
+button.classList.add("saved");
+
+button.textContent =
+"♥ Saved";
+
+}
+
+});
+
+}
+
+
+/* WATCH DRAMA */
+
+function watchDrama(
+dramaId,
+title
+){
+
+localStorage.setItem(
+"zynoraCurrentDramaId",
+dramaId
+);
+
+localStorage.setItem(
+"zynoraCurrentDramaTitle",
+title
+);
+
+window.location.href =
+"player.html";
+
+}
+
+
+/* SEARCH */
+
+document
+.getElementById("searchBox")
+.addEventListener(
+"input",
+function(){
+
+const value =
+this.value.toLowerCase();
+
+document
+.querySelectorAll(".drama")
+.forEach(function(drama){
+
+const title =
+drama.dataset.title.toLowerCase();
+
+drama.style.display =
+title.includes(value)
+? ""
+: "none";
+
+});
+
+}
+);
+
+
+/* MESSAGE */
+
+function showMessage(text){
+
+const box =
+document.getElementById(
+"message"
+);
+
+box.textContent =
+text;
+
+box.style.display =
+"block";
+
+clearTimeout(
+window.zynoraTimer
+);
+
+window.zynoraTimer =
+setTimeout(function(){
+
+box.style.display =
+"none";
+
+},2500);
+
+}
+
+
+start();
+
+</script>
+
+</body>
+
+</html>
