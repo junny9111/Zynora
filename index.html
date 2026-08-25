@@ -1,553 +1,450 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Zynora</title>
+<title>Zynora</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<style>
+* {
+  box-sizing: border-box;
+}
 
-  <link
-    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
-    rel="stylesheet"
+body {
+  margin: 0;
+  background: #09090d;
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+}
+
+header {
+  height: 72px;
+  background: #111116;
+  border-bottom: 1px solid #292933;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 20px;
+}
+
+.logo {
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+.logo span {
+  color: #a855f7;
+}
+
+.search {
+  width: 45%;
+  max-width: 280px;
+
+  background: #1a1a21;
+  border: 1px solid #30303a;
+  border-radius: 30px;
+
+  padding: 13px 18px;
+
+  color: #aaa;
+  font-size: 15px;
+}
+
+.hero {
+  min-height: 570px;
+
+  padding: 110px 42px 60px;
+
+  background:
+    radial-gradient(
+      circle at 20% 25%,
+      #35105f 0%,
+      #160c27 35%,
+      #09090d 70%
+    );
+}
+
+.badge {
+  display: inline-block;
+
+  padding: 12px 20px;
+
+  border-radius: 30px;
+
+  background: linear-gradient(
+    90deg,
+    #a855f7,
+    #8b5cf6
+  );
+
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.hero h1 {
+  max-width: 600px;
+
+  font-size: 55px;
+  line-height: 1.05;
+
+  margin: 28px 0 20px;
+}
+
+.hero p {
+  max-width: 600px;
+
+  color: #b7b7c2;
+
+  font-size: 19px;
+  line-height: 1.6;
+}
+
+.watch {
+  display: inline-block;
+
+  margin-top: 25px;
+
+  padding: 17px 30px;
+
+  border-radius: 12px;
+
+  background: white;
+  color: #09090d;
+
+  text-decoration: none;
+
+  font-size: 17px;
+  font-weight: bold;
+}
+
+section {
+  padding: 35px 38px 110px;
+}
+
+section h2 {
+  font-size: 30px;
+  margin-bottom: 22px;
+}
+
+.categories {
+  display: flex;
+  gap: 12px;
+
+  overflow-x: auto;
+
+  padding-bottom: 10px;
+}
+
+.category {
+  flex-shrink: 0;
+
+  padding: 14px 24px;
+
+  border-radius: 30px;
+
+  background: #18181f;
+  border: 1px solid #30303a;
+
+  color: white;
+
+  cursor: pointer;
+
+  font-size: 15px;
+}
+
+.category.active {
+  background: #a855f7;
+  border-color: #a855f7;
+}
+
+.message {
+  margin-top: 35px;
+
+  padding: 30px;
+
+  border-radius: 18px;
+
+  background: #13131a;
+  border: 1px solid #292933;
+
+  color: #aaa;
+
+  text-align: center;
+}
+
+.bottom {
+  position: fixed;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  height: 78px;
+
+  background: #111116;
+
+  border-top: 1px solid #292933;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  z-index: 100;
+}
+
+.bottom a {
+  color: #777783;
+
+  text-decoration: none;
+
+  text-align: center;
+
+  font-size: 12px;
+}
+
+.bottom a.active {
+  color: #a855f7;
+}
+
+.icon {
+  display: block;
+
+  font-size: 23px;
+
+  margin-bottom: 5px;
+}
+
+@media (max-width: 600px) {
+
+  .hero {
+    padding: 80px 42px 50px;
+  }
+
+  .hero h1 {
+    font-size: 46px;
+  }
+
+  .hero p {
+    font-size: 17px;
+  }
+
+  .search {
+    width: 43%;
+  }
+
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+  <div class="logo">
+    Zyn<span>ora</span>
+  </div>
+
+  <input
+    class="search"
+    type="search"
+    placeholder="Search..."
+    id="searchBox"
   >
 
-  <style>
+</header>
 
-    :root {
-      --bg: #07070b;
-      --surface: #111118;
-      --surface-2: #17171f;
-      --text: #ffffff;
-      --muted: #92929e;
-      --purple: #a855f7;
-      --purple-dark: #6d28d9;
-      --border: rgba(255,255,255,.09);
-    }
 
-    * {
-      box-sizing: border-box;
-    }
+<div class="hero">
 
-    html {
-      scroll-behavior: smooth;
-    }
+  <div class="badge">
+    ZYNORA ORIGINAL
+  </div>
 
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family: "DM Sans", sans-serif;
-      padding-bottom: 88px;
-    }
+  <h1>
+    The Billionaire's Secret
+  </h1>
 
-    a {
-      color: inherit;
-    }
+  <p>
+    Discover addictive short dramas, romance,
+    suspense and original series made for Zynora.
+  </p>
 
-    /* ==============================
-       TOP BAR
-    ============================== */
+  <a href="#" class="watch" onclick="watchNow()">
+    ▶ Watch Now
+  </a>
 
-    .topbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
+</div>
 
-      height: 72px;
 
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+<section>
 
-      padding: 0 20px;
+  <h2>
+    Explore
+  </h2>
 
-      z-index: 100;
+  <div class="categories">
 
-      background:
-        linear-gradient(
-          180deg,
-          rgba(7,7,11,.98),
-          rgba(7,7,11,.55)
+    <button
+      class="category active"
+      onclick="selectCategory(this, 'For You')">
+      For You
+    </button>
+
+    <button
+      class="category"
+      onclick="selectCategory(this, 'Romance')">
+      Romance
+    </button>
+
+    <button
+      class="category"
+      onclick="selectCategory(this, 'Drama')">
+      Drama
+    </button>
+
+    <button
+      class="category"
+      onclick="selectCategory(this, 'Action')">
+      Action
+    </button>
+
+    <button
+      class="category"
+      onclick="selectCategory(this, 'Suspense')">
+      Suspense
+    </button>
+
+  </div>
+
+
+  <div class="message" id="categoryMessage">
+
+    Showing stories recommended for you.
+
+  </div>
+
+</section>
+
+
+<nav class="bottom">
+
+  <a href="index.html" class="active">
+
+    <span class="icon">⌂</span>
+
+    Home
+
+  </a>
+
+
+  <a href="#" onclick="discover()">
+
+    <span class="icon">◉</span>
+
+    Discover
+
+  </a>
+
+
+  <a href="#" onclick="library()">
+
+    <span class="icon">□</span>
+
+    Library
+
+  </a>
+
+
+  <a href="profile.html">
+
+    <span class="icon">●</span>
+
+    Profile
+
+  </a>
+
+</nav>
+
+
+<script>
+
+function watchNow() {
+
+  alert(
+    "Zynora player is coming next."
+  );
+
+}
+
+
+function selectCategory(button, category) {
+
+  document
+    .querySelectorAll(".category")
+    .forEach(function(item) {
+
+      item.classList.remove("active");
+
+    });
+
+  button.classList.add("active");
+
+  document.getElementById(
+    "categoryMessage"
+  ).innerText =
+    "Showing " + category +
+    " stories on Zynora.";
+
+}
+
+
+function discover() {
+
+  alert(
+    "Discover will be built next."
+  );
+
+}
+
+
+function library() {
+
+  alert(
+    "Your Zynora Library will be built next."
+  );
+
+}
+
+
+document
+  .getElementById("searchBox")
+  .addEventListener("keypress", function(event) {
+
+    if (event.key === "Enter") {
+
+      let value = this.value.trim();
+
+      if (value === "") {
+
+        alert("Type something to search.");
+
+      } else {
+
+        alert(
+          "Searching Zynora for: " + value
         );
 
-      backdrop-filter: blur(16px);
+      }
+
     }
 
-    .brand {
-      font-family: "Manrope", sans-serif;
-      font-size: 30px;
-      font-weight: 800;
-      letter-spacing: -1.8px;
-    }
+  });
 
-    .brand span {
-      color: var(--purple);
-    }
+</script>
 
-    .top-actions {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .search-button,
-    .account-button {
-      width: 40px;
-      height: 40px;
-
-      border: 1px solid var(--border);
-      border-radius: 50%;
-
-      background: rgba(255,255,255,.06);
-
-      color: white;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      text-decoration: none;
-
-      font-size: 18px;
-    }
-
-    /* ==============================
-       HERO
-    ============================== */
-
-    .hero {
-      min-height: 680px;
-
-      position: relative;
-
-      display: flex;
-      align-items: flex-end;
-
-      padding: 0 22px 52px;
-
-      overflow: hidden;
-
-      background:
-        radial-gradient(
-          circle at 70% 20%,
-          rgba(168,85,247,.34),
-          transparent 34%
-        ),
-        linear-gradient(
-          180deg,
-          #211035 0%,
-          #120b19 38%,
-          #07070b 100%
-        );
-    }
-
-    .hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-
-      background:
-        linear-gradient(
-          90deg,
-          rgba(7,7,11,.2),
-          rgba(7,7,11,.05)
-        );
-    }
-
-    .hero::after {
-      content: "";
-
-      position: absolute;
-      left: -20%;
-      right: -20%;
-      bottom: -180px;
-
-      height: 350px;
-
-      background: var(--purple);
-
-      opacity: .12;
-
-      filter: blur(100px);
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 2;
-
-      width: 100%;
-      max-width: 650px;
-    }
-
-    .original {
-      display: inline-flex;
-
-      align-items: center;
-
-      gap: 7px;
-
-      padding: 7px 11px;
-
-      border-radius: 7px;
-
-      background: rgba(168,85,247,.18);
-
-      border: 1px solid rgba(168,85,247,.35);
-
-      color: #d9b5ff;
-
-      font-size: 10px;
-
-      font-weight: 700;
-
-      letter-spacing: 1.4px;
-    }
-
-    .hero h1 {
-      font-family: "Manrope", sans-serif;
-
-      font-size: clamp(46px, 13vw, 78px);
-
-      line-height: .94;
-
-      letter-spacing: -4px;
-
-      margin: 18px 0 16px;
-
-      max-width: 620px;
-    }
-
-    .hero-description {
-      max-width: 500px;
-
-      color: #c0bec8;
-
-      font-size: 15px;
-
-      line-height: 1.6;
-
-      margin: 0;
-    }
-
-    .hero-meta {
-      display: flex;
-      gap: 12px;
-
-      margin-top: 16px;
-
-      color: #aaa8b2;
-
-      font-size: 12px;
-    }
-
-    .hero-buttons {
-      display: flex;
-      gap: 10px;
-
-      margin-top: 24px;
-    }
-
-    .watch {
-      display: inline-flex;
-
-      align-items: center;
-      justify-content: center;
-
-      gap: 9px;
-
-      padding: 14px 22px;
-
-      border-radius: 10px;
-
-      background: white;
-
-      color: #09090d;
-
-      text-decoration: none;
-
-      font-family: "Manrope", sans-serif;
-
-      font-weight: 800;
-
-      font-size: 14px;
-    }
-
-    .info {
-      display: inline-flex;
-
-      align-items: center;
-      justify-content: center;
-
-      gap: 8px;
-
-      padding: 14px 19px;
-
-      border-radius: 10px;
-
-      background: rgba(255,255,255,.09);
-
-      border: 1px solid var(--border);
-
-      color: white;
-
-      font-weight: 700;
-
-      font-size: 14px;
-    }
-
-    /* ==============================
-       CONTENT
-    ============================== */
-
-    .content {
-      position: relative;
-
-      margin-top: -1px;
-
-      z-index: 5;
-    }
-
-    .section {
-      padding: 24px 20px 4px;
-    }
-
-    .section-title {
-      display: flex;
-
-      align-items: center;
-      justify-content: space-between;
-
-      margin-bottom: 15px;
-    }
-
-    .section-title h2 {
-      margin: 0;
-
-      font-family: "Manrope", sans-serif;
-
-      font-size: 21px;
-
-      letter-spacing: -.7px;
-    }
-
-    .see-all {
-      color: var(--purple);
-
-      font-size: 12px;
-
-      text-decoration: none;
-
-      font-weight: 700;
-    }
-
-    /* ==============================
-       CATEGORY CHIPS
-    ============================== */
-
-    .chips {
-      display: flex;
-
-      gap: 9px;
-
-      overflow-x: auto;
-
-      scrollbar-width: none;
-
-      padding-bottom: 3px;
-    }
-
-    .chips::-webkit-scrollbar {
-      display: none;
-    }
-
-    .chip {
-      flex: 0 0 auto;
-
-      padding: 9px 15px;
-
-      border-radius: 100px;
-
-      background: var(--surface);
-
-      border: 1px solid var(--border);
-
-      color: #aaa8b2;
-
-      font-size: 12px;
-
-      font-weight: 600;
-    }
-
-    .chip.active {
-      background: var(--purple);
-
-      border-color: var(--purple);
-
-      color: white;
-    }
-
-    /* ==============================
-       SHOW ROW
-    ============================== */
-
-    .show-row {
-      display: flex;
-
-      gap: 13px;
-
-      overflow-x: auto;
-
-      scrollbar-width: none;
-
-      padding-bottom: 8px;
-    }
-
-    .show-row::-webkit-scrollbar {
-      display: none;
-    }
-
-    .show-card {
-      flex: 0 0 145px;
-
-      text-decoration: none;
-    }
-
-    .poster {
-      height: 205px;
-
-      position: relative;
-
-      overflow: hidden;
-
-      border-radius: 12px;
-
-      display: flex;
-
-      align-items: flex-end;
-
-      padding: 13px;
-
-      background:
-        linear-gradient(
-          180deg,
-          transparent 25%,
-          rgba(0,0,0,.9)
-        ),
-        linear-gradient(
-          145deg,
-          #a855f7,
-          #22102e
-        );
-
-      border: 1px solid var(--border);
-
-      transition: transform .2s ease;
-    }
-
-    .show-card:hover .poster {
-      transform: translateY(-4px);
-    }
-
-    .poster.two {
-      background:
-        linear-gradient(
-          180deg,
-          transparent 25%,
-          rgba(0,0,0,.9)
-        ),
-        linear-gradient(
-          145deg,
-          #d946ef,
-          #241026
-        );
-    }
-
-    .poster.three {
-      background:
-        linear-gradient(
-          180deg,
-          transparent 25%,
-          rgba(0,0,0,.9)
-        ),
-        linear-gradient(
-          145deg,
-          #7c3aed,
-          #10152b
-        );
-    }
-
-    .poster.four {
-      background:
-        linear-gradient(
-          180deg,
-          transparent 25%,
-          rgba(0,0,0,.9)
-        ),
-        linear-gradient(
-          145deg,
-          #db2777,
-          #20101d
-        );
-    }
-
-    .poster-title {
-      position: relative;
-      z-index: 2;
-
-      font-family: "Manrope", sans-serif;
-
-      font-size: 17px;
-
-      line-height: 1.05;
-
-      font-weight: 800;
-
-      letter-spacing: -.5px;
-    }
-
-    .play-small {
-      position: absolute;
-
-      top: 10px;
-      right: 10px;
-
-      width: 30px;
-      height: 30px;
-
-      border-radius: 50%;
-
-      background: rgba(0,0,0,.45);
-
-      border: 1px solid rgba(255,255,255,.2);
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      font-size: 11px;
-    }
-
-    .card-title {
-      margin: 9px 2px 0;
-
-      font-family: "Manrope", sans-serif;
-
-      font-size: 13px;
-
-      font-weight: 700;
-
-      white-space: nowrap;
-
-      overflow: hidden;
-
-      text-overflow: ellipsis;
-    }
-
-    .card-subtitle {
-      margin: 4px 2px 0;
-
-      color: var(--
+</body>
+</html>
