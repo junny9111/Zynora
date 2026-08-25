@@ -12,6 +12,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet">
 
 <style>
+
 *{
 box-sizing:border-box;
 margin:0;
@@ -87,20 +88,37 @@ margin-top:7px;
 font-style:italic;
 }
 
-.coin-bar{
+.wallet-row{
 margin-top:20px;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+}
+
+.wallet-box{
 padding:14px 16px;
 border-radius:18px;
 background:rgba(130,45,220,.15);
 border:1px solid rgba(173,77,255,.25);
-display:flex;
-justify-content:space-between;
-align-items:center;
 }
 
-.coin-balance{
-color:#ffd75c;
+.wallet-label{
+font-size:11px;
+color:#9a95a2;
+}
+
+.wallet-value{
+margin-top:5px;
 font-family:"Cinzel",serif;
+font-size:17px;
+}
+
+.coins{
+color:#ffd75c;
+}
+
+.ads{
+color:#d29cff;
 }
 
 .section-title{
@@ -120,21 +138,24 @@ background:#15141b;
 border:1px solid rgba(255,255,255,.07);
 border-radius:18px;
 padding:16px;
+}
+
+.episode-top{
 display:flex;
 align-items:center;
 gap:14px;
 }
 
 .ep-number{
-width:50px;
-height:50px;
+width:52px;
+height:52px;
 border-radius:15px;
 background:rgba(150,60,240,.18);
 display:flex;
 align-items:center;
 justify-content:center;
 font-family:"Cinzel",serif;
-font-size:14px;
+font-size:13px;
 }
 
 .ep-info{
@@ -152,20 +173,38 @@ font-size:12px;
 margin-top:5px;
 }
 
-.ep-action{
-border:0;
-border-radius:12px;
-padding:10px 12px;
-background:linear-gradient(135deg,#a84fff,#7521e4);
-color:white;
-font-family:"Cinzel",serif;
-font-size:10px;
+.action-row{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px;
+margin-top:14px;
 }
 
-.ep-action.locked{
+.action{
+border:0;
+border-radius:12px;
+padding:11px 8px;
+font-family:"Cinzel",serif;
+font-size:9px;
+font-weight:600;
+}
+
+.watch-btn{
+background:linear-gradient(135deg,#a84fff,#7521e4);
+color:white;
+grid-column:1 / -1;
+}
+
+.coin-btn{
 background:#241b2e;
 color:#ffd75c;
-border:1px solid rgba(173,77,255,.25);
+border:1px solid rgba(255,215,92,.2);
+}
+
+.ad-btn{
+background:#21172c;
+color:#d39cff;
+border:1px solid rgba(173,77,255,.3);
 }
 
 #message{
@@ -207,37 +246,92 @@ font-size:9px;
 .nav-icon{
 font-size:21px;
 }
+
 </style>
 </head>
 
 <body>
 
 <header>
+
 <a href="discover.html" class="back">‹</a>
-<div class="logo">Zynora</div>
+
+<div class="logo">
+Zynora
+</div>
+
 </header>
 
 <main>
 
 <div class="player">
-<video id="videoPlayer" controls playsinline>
-<source id="videoSource" src="" type="video/mp4">
+
+<video
+id="videoPlayer"
+controls
+playsinline>
+
+<source
+id="videoSource"
+src=""
+type="video/mp4">
+
 </video>
+
 </div>
 
-<h1 class="title" id="dramaTitle">
+<h1
+class="title"
+id="dramaTitle">
+
 The Billionaire's Secret
+
 </h1>
 
-<div class="meta" id="episodeMeta">
+<div
+class="meta"
+id="episodeMeta">
+
 Select an episode below
+
 </div>
 
-<div class="coin-bar">
-<div>Zynora Coins</div>
-<div class="coin-balance">
-🪙 <span id="coinBalance">0</span>
+<div class="wallet-row">
+
+<div class="wallet-box">
+
+<div class="wallet-label">
+ZYNORA COINS
 </div>
+
+<div class="wallet-value coins">
+
+🪙
+<span id="coinBalance">
+0
+</span>
+
+</div>
+
+</div>
+
+<div class="wallet-box">
+
+<div class="wallet-label">
+AD UNLOCKS LEFT TODAY
+</div>
+
+<div class="wallet-value ads">
+
+📺
+<span id="adRemaining">
+20
+</span>
+
+</div>
+
+</div>
+
 </div>
 
 <div id="message"></div>
@@ -246,8 +340,12 @@ Select an episode below
 Episodes
 </h2>
 
-<div id="episodeList" class="episode-list">
+<div
+id="episodeList"
+class="episode-list">
+
 Loading episodes...
+
 </div>
 
 </main>
@@ -285,7 +383,8 @@ Profile
 
 <script>
 
-const client = supabase.createClient(
+const client =
+supabase.createClient(
 "https://ozshekxpuvganemaajms.supabase.co",
 "sb_publishable__GsW9RahFD_XDWJTFzh9eQ_dNBZfa32"
 );
@@ -295,61 +394,627 @@ let episodes = [];
 let unlockedIds = new Set();
 
 const dramaId =
-localStorage.getItem("zynoraCurrentDramaId")
+localStorage.getItem(
+"zynoraCurrentDramaId"
+)
 || "billionaire-secret";
 
 const dramaTitle =
-localStorage.getItem("zynoraCurrentDramaTitle")
+localStorage.getItem(
+"zynoraCurrentDramaTitle"
+)
 || "The Billionaire's Secret";
 
-document.getElementById("dramaTitle").textContent = dramaTitle;
+document
+.getElementById("dramaTitle")
+.textContent =
+dramaTitle;
+
+
+/* START */
 
 async function start(){
 
-const auth = await client.auth.getUser();
-user = auth.data.user;
+const auth =
+await client.auth.getUser();
+
+user =
+auth.data.user;
 
 await loadEpisodes();
 
 if(user){
+
 await loadCoins();
+
 await loadUnlocked();
+
+await loadRemainingAds();
+
 }
 
 renderEpisodes();
 
 }
 
+
+/* EPISODES */
+
 async function loadEpisodes(){
 
-const result = await client
+const result =
+await client
 .from("episodes")
 .select("*")
-.eq("drama_id",dramaId)
-.order("episode_number",{ascending:true});
+.eq(
+"drama_id",
+dramaId
+)
+.order(
+"episode_number",
+{ascending:true}
+);
 
 if(result.error){
-showMessage(result.error.message);
+
+showMessage(
+result.error.message
+);
+
 return;
-}
-
-episodes = result.data || [];
 
 }
+
+episodes =
+result.data || [];
+
+}
+
+
+/* COINS */
 
 async function loadCoins(){
 
-const result = await client
+const result =
+await client
 .from("coin_wallets")
 .select("balance")
-.eq("user_id",user.id)
+.eq(
+"user_id",
+user.id
+)
 .maybeSingle();
 
 if(result.data){
-document.getElementById("coinBalance").textContent =
+
+document
+.getElementById("coinBalance")
+.textContent =
 result.data.balance;
-}
 
 }
 
-async function
+}
+
+
+/* UNLOCKED */
+
+async function loadUnlocked(){
+
+const result =
+await client
+.from("unlocked_episodes")
+.select("episode_id")
+.eq(
+"user_id",
+user.id
+);
+
+if(result.data){
+
+result.data
+.forEach(function(item){
+
+unlockedIds.add(
+item.episode_id
+);
+
+});
+
+}
+
+}
+
+
+/* ADS REMAINING */
+
+async function loadRemainingAds(){
+
+const result =
+await client.rpc(
+"get_remaining_ad_unlocks"
+);
+
+if(result.error){
+
+showMessage(
+result.error.message
+);
+
+return;
+
+}
+
+document
+.getElementById("adRemaining")
+.textContent =
+result.data;
+
+}
+
+
+/* RENDER */
+
+function renderEpisodes(){
+
+const list =
+document.getElementById(
+"episodeList"
+);
+
+list.innerHTML = "";
+
+if(!episodes.length){
+
+list.textContent =
+"No episodes found.";
+
+return;
+
+}
+
+episodes.forEach(function(ep){
+
+const container =
+document.createElement("div");
+
+container.className =
+"episode";
+
+
+const top =
+document.createElement("div");
+
+top.className =
+"episode-top";
+
+
+const number =
+document.createElement("div");
+
+number.className =
+"ep-number";
+
+number.textContent =
+"EP " +
+ep.episode_number;
+
+
+const info =
+document.createElement("div");
+
+info.className =
+"ep-info";
+
+
+const title =
+document.createElement("div");
+
+title.className =
+"ep-title";
+
+title.textContent =
+ep.episode_title ||
+("Episode " + ep.episode_number);
+
+
+const cost =
+document.createElement("div");
+
+cost.className =
+"ep-cost";
+
+
+const isUnlocked =
+ep.is_free ||
+ep.coin_cost === 0 ||
+unlockedIds.has(ep.id);
+
+
+cost.textContent =
+isUnlocked
+? "Unlocked"
+: "Locked • 🪙 " +
+ep.coin_cost +
+" or 1 rewarded ad";
+
+
+info.appendChild(title);
+
+info.appendChild(cost);
+
+top.appendChild(number);
+
+top.appendChild(info);
+
+container.appendChild(top);
+
+
+const actions =
+document.createElement("div");
+
+actions.className =
+"action-row";
+
+
+if(isUnlocked){
+
+const watch =
+document.createElement("button");
+
+watch.className =
+"action watch-btn";
+
+watch.textContent =
+"▶ Watch Episode";
+
+watch.onclick =
+function(){
+
+playEpisode(ep);
+
+};
+
+actions.appendChild(
+watch
+);
+
+}
+
+else{
+
+const coin =
+document.createElement("button");
+
+coin.className =
+"action coin-btn";
+
+coin.textContent =
+"🪙 " +
+ep.coin_cost +
+" Coins";
+
+coin.onclick =
+function(){
+
+unlockWithCoins(
+ep,
+coin
+);
+
+};
+
+
+const ad =
+document.createElement("button");
+
+ad.className =
+"action ad-btn";
+
+ad.textContent =
+"📺 Watch Ad";
+
+ad.onclick =
+function(){
+
+unlockWithAd(
+ep,
+ad
+);
+
+};
+
+
+actions.appendChild(
+coin
+);
+
+actions.appendChild(
+ad
+);
+
+}
+
+
+container.appendChild(
+actions
+);
+
+list.appendChild(
+container
+);
+
+});
+
+}
+
+
+/* COIN UNLOCK */
+
+async function unlockWithCoins(
+ep,
+button
+){
+
+if(!user){
+
+showMessage(
+"Please log in first."
+);
+
+return;
+
+}
+
+button.disabled = true;
+
+button.textContent =
+"Processing...";
+
+
+const result =
+await client.rpc(
+"unlock_episode",
+{
+p_episode_id:
+ep.id
+}
+);
+
+
+if(result.error){
+
+showMessage(
+result.error.message
+);
+
+button.disabled =
+false;
+
+button.textContent =
+"🪙 " +
+ep.coin_cost +
+" Coins";
+
+return;
+
+}
+
+
+unlockedIds.add(
+ep.id
+);
+
+
+document
+.getElementById("coinBalance")
+.textContent =
+result.data;
+
+
+showMessage(
+"Episode " +
+ep.episode_number +
+" unlocked with coins."
+);
+
+
+renderEpisodes();
+
+}
+
+
+/* AD UNLOCK */
+
+async function unlockWithAd(
+ep,
+button
+){
+
+if(!user){
+
+showMessage(
+"Please log in first."
+);
+
+return;
+
+}
+
+
+/*
+IMPORTANT:
+
+A real ad provider still needs
+to be connected here.
+
+For now we DO NOT pretend an ad
+was watched.
+
+The secure database function
+will only be called after the
+real rewarded-ad completion event.
+*/
+
+showMessage(
+"Rewarded ad provider is not connected yet. No episode was unlocked."
+);
+
+}
+
+
+/* AFTER A REAL AD COMPLETES */
+
+async function confirmRewardedAd(
+episodeId,
+provider,
+eventId
+){
+
+const result =
+await client.rpc(
+"unlock_episode_with_ad",
+{
+
+p_episode_id:
+episodeId,
+
+p_ad_provider:
+provider,
+
+p_ad_event_id:
+eventId
+
+}
+);
+
+
+if(result.error){
+
+showMessage(
+result.error.message
+);
+
+return;
+
+}
+
+
+unlockedIds.add(
+episodeId
+);
+
+
+document
+.getElementById("adRemaining")
+.textContent =
+result.data;
+
+
+showMessage(
+"Episode unlocked with rewarded ad."
+);
+
+
+renderEpisodes();
+
+}
+
+
+/* PLAY */
+
+async function playEpisode(ep){
+
+const source =
+document.getElementById(
+"videoSource"
+);
+
+source.src =
+ep.video_url || "";
+
+
+const player =
+document.getElementById(
+"videoPlayer"
+);
+
+
+player.load();
+
+player.play();
+
+
+document
+.getElementById("episodeMeta")
+.textContent =
+"Episode " +
+ep.episode_number +
+" • " +
+(ep.episode_title || "");
+
+
+if(user){
+
+await client
+.from("watch_history")
+.insert({
+
+user_id:
+user.id,
+
+drama_id:
+ep.drama_id,
+
+drama_title:
+ep.drama_title,
+
+episode_number:
+ep.episode_number
+
+});
+
+}
+
+}
+
+
+/* MESSAGE */
+
+function showMessage(text){
+
+const box =
+document.getElementById(
+"message"
+);
+
+box.textContent =
+text;
+
+box.style.display =
+"block";
+
+clearTimeout(
+window.zynoraPlayerTimer
+);
+
+window.zynoraPlayerTimer =
+setTimeout(
+function(){
+
+box.style.display =
+"none";
+
+},
+3200
+);
+
+}
+
+
+start();
+
+</script>
+
+</body>
+</html>
