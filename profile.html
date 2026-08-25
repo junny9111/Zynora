@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Zynora Profile</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: #09090d;
+      color: white;
+      font-family: Arial, sans-serif;
+      padding-bottom: 90px;
+    }
+
+    .header {
+      height: 70px;
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      border-bottom: 1px solid #292933;
+      background: #111116;
+    }
+
+    .back {
+      color: white;
+      text-decoration: none;
+      font-size: 24px;
+      margin-right: 18px;
+    }
+
+    .logo {
+      font-size: 27px;
+      font-weight: 800;
+    }
+
+    .logo span {
+      color: #a855f7;
+    }
+
+    .profile {
+      padding: 35px 20px;
+      text-align: center;
+    }
+
+    .avatar {
+      width: 90px;
+      height: 90px;
+      margin: 0 auto 18px;
+
+      border-radius: 50%;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background: linear-gradient(
+        135deg,
+        #a855f7,
+        #6d28d9
+      );
+
+      font-size: 38px;
+      font-weight: bold;
+    }
+
+    #userEmail {
+      color: #9999a5;
+      margin-top: 6px;
+      word-break: break-word;
+    }
+
+    .card {
+      margin-top: 30px;
+      background: #15151c;
+      border: 1px solid #292933;
+      border-radius: 16px;
+      overflow: hidden;
+      text-align: left;
+    }
+
+    .item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      padding: 18px;
+
+      border-bottom: 1px solid #292933;
+
+      color: white;
+      text-decoration: none;
+    }
+
+    .item:last-child {
+      border-bottom: none;
+    }
+
+    .item-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .icon {
+      width: 38px;
+      height: 38px;
+
+      border-radius: 10px;
+
+      background: #21172c;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      color: #a855f7;
+    }
+
+    .arrow {
+      color: #777783;
+    }
+
+    .logout {
+      width: 100%;
+      margin-top: 25px;
+
+      padding: 15px;
+
+      border: 1px solid #43202b;
+      border-radius: 12px;
+
+      background: #211116;
+
+      color: #ff6b81;
+
+      font-weight: bold;
+      font-size: 15px;
+    }
+
+    .message {
+      margin-top: 15px;
+      color: #9999a5;
+      font-size: 13px;
+    }
+
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+
+      height: 78px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+
+      background: #111116;
+      border-top: 1px solid #292933;
+    }
+
+    .nav-item {
+      color: #777783;
+      text-decoration: none;
+      text-align: center;
+      font-size: 11px;
+    }
+
+    .nav-item.active {
+      color: #a855f7;
+    }
+
+    .nav-icon {
+      display: block;
+      font-size: 22px;
+      margin-bottom: 4px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="header">
+
+    <a href="index.html" class="back">
+      ←
+    </a>
+
+    <div class="logo">
+      Zyn<span>ora</span>
+    </div>
+
+  </header>
+
+
+  <main class="profile">
+
+    <div class="avatar">
+      Z
+    </div>
+
+    <h1 id="userName">
+      Zynora User
+    </h1>
+
+    <div id="userEmail">
+      Loading account...
+    </div>
+
+
+    <div class="card">
+
+      <a href="library.html" class="item">
+
+        <div class="item-left">
+
+          <div class="icon">
+            ♡
+          </div>
+
+          <div>
+            My List
+          </div>
+
+        </div>
+
+        <div class="arrow">
+          ›
+        </div>
+
+      </a>
+
+
+      <a href="#" class="item">
+
+        <div class="item-left">
+
+          <div class="icon">
+            ⚙
+          </div>
+
+          <div>
+            Settings
+          </div>
+
+        </div>
+
+        <div class="arrow">
+          ›
+        </div>
+
+      </a>
+
+
+      <a href="#" class="item">
+
+        <div class="item-left">
+
+          <div class="icon">
+            ?
+          </div>
+
+          <div>
+            Help & Support
+          </div>
+
+        </div>
+
+        <div class="arrow">
+          ›
+        </div>
+
+      </a>
+
+    </div>
+
+
+    <button
+      id="logoutButton"
+      class="logout">
+
+      Log Out
+
+    </button>
+
+    <div
+      id="message"
+      class="message">
+    </div>
+
+  </main>
+
+
+  <nav class="bottom-nav">
+
+    <a href="index.html" class="nav-item">
+
+      <span class="nav-icon">
+        ⌂
+      </span>
+
+      Home
+
+    </a>
+
+
+    <a href="discover.html" class="nav-item">
+
+      <span class="nav-icon">
+        ◉
+      </span>
+
+      Discover
+
+    </a>
+
+
+    <a href="library.html" class="nav-item">
+
+      <span class="nav-icon">
+        ♡
+      </span>
+
+      My List
+
+    </a>
+
+
+    <a href="profile.html" class="nav-item active">
+
+      <span class="nav-icon">
+        ●
+      </span>
+
+      Profile
+
+    </a>
+
+  </nav>
+
+
+  <script type="module">
+
+    import {
+      createClient
+    } from
+    "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+
+
+    const SUPABASE_URL =
+      "https://ozshekxpuvganemaajms.supabase.co";
+
+
+    const SUPABASE_KEY =
+      "sb_publishable__GsW9RahFD_XDWJTFzh9eQ_dNBZfa32";
+
+
+    const supabase =
+      createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+      );
+
+
+    async function loadProfile() {
+
+      const {
+        data: {
+          user
+        }
+      } = await supabase.auth.getUser();
+
+
+      if (!user) {
+
+        window.location.href =
+          "login.html";
+
+        return;
+
+      }
+
+
+      document.getElementById(
+        "userEmail"
+      ).textContent =
+        user.email || "";
+
+
+      const firstLetter =
+        (user.email || "Z")
+          .charAt(0)
+          .toUpperCase();
+
+
+      document.querySelector(
+        ".avatar"
+      ).textContent =
+        firstLetter;
+
+    }
+
+
+    document
+      .getElementById("logoutButton")
+      .addEventListener(
+        "click",
+        async function() {
+
+          const {
+            error
+          } = await supabase.auth.signOut();
+
+
+          if (error) {
+
+            document.getElementById(
+              "message"
+            ).textContent =
+              error.message;
+
+            return;
+
+          }
+
+
+          window.location.href =
+            "login.html";
+
+        }
+      );
+
+
+    loadProfile();
+
+  </script>
+
+</body>
+</html>
