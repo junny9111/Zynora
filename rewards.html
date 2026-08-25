@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Zynora Rewards</title>
+
+<link rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap"
+rel="stylesheet">
+
+<style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+
+    min-height: 100vh;
+
+    background:
+        radial-gradient(
+            circle at 50% 5%,
+            rgba(145,55,255,.22),
+            transparent 35%
+        ),
+        #08070c;
+
+    color: white;
+
+    font-family:
+        "Playfair Display",
+        Georgia,
+        serif;
+
+    padding-bottom: 110px;
+
+}
+
+
+/* HEADER */
+
+header {
+
+    height: 95px;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 0 22px;
+
+    background: #111016;
+
+    border-bottom:
+        1px solid
+        rgba(173,77,255,.25);
+
+}
+
+.logo {
+
+    font-family: "Cinzel", serif;
+
+    font-size: 38px;
+
+    font-weight: 700;
+
+    letter-spacing: -2px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #fff,
+            #d19aff,
+            #8e38ff
+        );
+
+    -webkit-background-clip: text;
+
+    background-clip: text;
+
+    color: transparent;
+
+}
+
+
+/* MAIN */
+
+main {
+
+    padding: 28px 20px;
+
+    max-width: 600px;
+
+    margin: auto;
+
+}
+
+.title {
+
+    font-family:
+        "Cinzel",
+        serif;
+
+    font-size: 34px;
+
+    margin-bottom: 7px;
+
+}
+
+.subtitle {
+
+    color: #9994a2;
+
+    font-style: italic;
+
+    margin-bottom: 25px;
+
+}
+
+
+/* COIN BALANCE */
+
+.wallet {
+
+    padding: 25px;
+
+    border-radius: 25px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #6e20bd,
+            #301052
+        );
+
+    border:
+        1px solid
+        rgba(205,145,255,.45);
+
+    box-shadow:
+        0 0 40px
+        rgba(130,40,220,.28);
+
+    margin-bottom: 30px;
+
+}
+
+.wallet-label {
+
+    color: #ddd0e9;
+
+    font-size: 14px;
+
+}
+
+.balance {
+
+    font-family:
+        "Cinzel",
+        serif;
+
+    font-size: 42px;
+
+    margin-top: 8px;
+
+}
+
+.coin {
+
+    color: #ffd75c;
+
+}
+
+
+/* REWARD */
+
+.section-title {
+
+    font-family:
+        "Cinzel",
+        serif;
+
+    font-size: 20px;
+
+    margin-bottom: 15px;
+
+}
+
+.reward {
+
+    background: #15141b;
+
+    border:
+        1px solid
+        rgba(255,255,255,.07);
+
+    border-radius: 21px;
+
+    padding: 19px;
+
+    margin-bottom: 13px;
+
+}
+
+.reward-top {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+}
+
+.reward-icon {
+
+    width: 48px;
+
+    height: 48px;
+
+    border-radius: 15px;
+
+    background:
+        rgba(150,60,240,.18);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 24px;
+
+}
+
+.reward-info {
+
+    flex: 1;
+
+}
+
+.reward-name {
+
+    font-family:
+        "Cinzel",
+        serif;
+
+    font-size: 16px;
+
+}
+
+.reward-description {
+
+    color: #97929f;
+
+    font-size: 13px;
+
+    margin-top: 4px;
+
+}
+
+.reward-button {
+
+    margin-top: 15px;
+
+    width: 100%;
+
+    padding: 13px;
+
+    border: none;
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #a84fff,
+            #7521e4
+        );
+
+    color: white;
+
+    font-family:
+        "Cinzel",
+        serif;
+
+    font-weight: 600;
+
+    font-size: 14px;
+
+}
+
+.reward-button:disabled {
+
+    background: #292631;
+
+    color: #77737f;
+
+}
+
+
+/* HISTORY */
+
+.history {
+
+    margin-top: 30px;
+
+}
+
+.history-item {
+
+    padding: 14px 0;
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.06);
+
+    display: flex;
+
+    justify-content: space-between;
+
+}
+
+.history-name {
+
+    color: #c7c2ce;
+
+    font-size: 14px;
+
+}
+
+.history-amount {
+
+    color: #ffd75c;
+
+    font-family:
+        "Cinzel",
+        serif;
+
+}
+
+
+/* NAV */
+
+.bottom-nav {
+
+    position: fixed;
+
+    left: 0;
+
+    right: 0;
+
+    bottom: 0;
+
+    height: 92px;
+
+    background:
+        rgba(17,16,22,.98);
+
+    border-top:
+        1px solid
+        rgba(173,77,255,.2);
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(5,1fr);
+
+    z-index: 50;
+
+}
+
+.nav-item {
+
+    text-decoration: none;
+
+    color: #777582;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 6px;
+
+    font-family:
+        "Cinzel",
+        serif;
+
+    font-size: 10px;
+
+}
+
+.nav-icon {
+
+    font-size: 22px;
+
+}
+
+.nav-item.active {
+
+    color: #a94dff;
+
+    text-shadow:
+        0 0 15px
+        rgba(169,77,255,.5);
+
+}
+
+
+/* MESSAGE */
+
+.message {
+
+    position: fixed;
+
+    left: 20px;
+
+    right: 20px;
+
+    bottom: 105px;
+
+    padding: 16px;
+
+    border-radius: 16px;
+
+    background: #21182b;
+
+    border:
+        1px solid
+        rgba(173,77,255,.35);
+
+    text-align: center;
+
+    display: none;
+
+    z-index: 100;
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<div class="logo">
+Zynora
+</div>
+
+</header>
+
+
+<main>
+
+
+<h1 class="title">
+Rewards
+</h1>
+
+<p class="subtitle">
+Earn coins and unlock more Zynora stories.
+</p>
+
+
+<!-- WALLET -->
+
+<div class="wallet">
+
+<div class="wallet-label">
+YOUR ZYNORA COINS
+</div>
+
+<div class="balance">
+
+<span class="coin">🪙</span>
+
+<span id="balance">
+0
+</span>
+
+</div>
+
+</div>
+
+
+<h2 class="section-title">
+Available Rewards
+</h2>
+
+
+<!-- DAILY -->
+
+<div class="reward">
+
+<div class="reward-top">
+
+<div class="reward-icon">
+🎁
+</div>
+
+<div class="reward-info">
+
+<div class="reward-name">
+Daily Check-In
+</div>
+
+<div class="reward-description">
+Open Zynora and claim your daily reward.
+</div>
+
+</div>
+
+</div>
+
+<button
+class="reward-button"
+id="dailyButton"
+onclick="claimReward('daily')">
+
+Claim 20 Coins
+
+</button>
+
+</div>
+
+
+<!-- WATCH -->
+
+<div class="reward">
+
+<div class="reward-top">
+
+<div class="reward-icon">
+📺
+</div>
+
+<div class="reward-info">
+
+<div class="reward-name">
+Watch & Earn
+</div>
+
+<div class="reward-description">
+Complete an eligible rewarded activity.
+</div>
+
+</div>
+
+</div>
+
+<button
+class="reward-button"
+onclick="claimReward('watch')">
+
+Earn 30 Coins
+
+</button>
+
+</div>
+
+
+<!-- WELCOME -->
+
+<div class="reward">
+
+<div class="reward-top">
+
+<div class="reward-icon">
+✨
+</div>
+
+<div class="reward-info">
+
+<div class="reward-name">
+Welcome Reward
+</div>
+
+<div class="reward-description">
+Your first Zynora reward.
+</div>
+
+</div>
+
+</div>
+
+<button
+class="reward-button"
+onclick="claimReward('welcome')">
+
+Claim 100 Coins
+
+</button>
+
+</div>
+
+
+<!-- HISTORY -->
+
+<div class="history">
+
+<h2 class="section-title">
+Coin History
+</h2>
+
+<div id="historyList">
+
+<p class="reward-description">
+Your coin activity will appear here.
+</p>
+
+</div>
+
+</div>
+
+
+</main>
+
+
+<div
+id="message"
+class="message">
+</div>
+
+
+<!-- FIVE BUTTON NAVIGATION -->
+
+<nav class="bottom-nav">
+
+
+<a
+href="index.html"
+class="nav-item">
+
+<span class="nav-icon">
+⌂
+</span>
+
+Home
+
+</a>
+
+
+<a
+href="discover.html"
+class="nav-item">
+
+<span class="nav-icon">
+◉
+</span>
+
+Discover
+
+</a>
+
+
+<a
+href="rewards.html"
+class="nav-item active">
+
+<span class="nav-icon">
+🎁
+</span>
+
+Rewards
+
+</a>
+
+
+<a
+href="library.html"
+class="nav-item">
+
+<span class="nav-icon">
+▣
+</span>
+
+Library
+
+</a>
+
+
+<a
+href="profile.html"
+class="nav-item">
+
+<span class="nav-icon">
+●
+</span>
+
+Profile
+
+</a>
+
+
+</nav>
+
+
+<script>
+
+/*
+   ZYNORA SUPABASE CONNECTION
+*/
+
+const SUPABASE_URL =
+"https://ozshekxpuvganemaajms.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable__GsW9RahFD_XDWJTFzh9eQ_dNBZfa32";
+
+
+let currentUser = null;
+
+
+/* LOAD SUPABASE */
+
+async function loadSupabase() {
+
+    if (
+        typeof window.supabase ===
+        "undefined"
+    ) {
+
+        const script =
+        document.createElement("script");
+
+        script.src =
+        "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2";
+
+        script.onload =
+        initialize;
+
+        document.head.appendChild(script);
+
+    } else {
+
+        initialize();
+
+    }
+
+}
+
+
+/* INITIALIZE */
+
+async function initialize() {
+
+    window.sb =
+        window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_KEY
+        );
+
+
+    const result =
+        await sb.auth.getUser();
+
+
+    currentUser =
+        result.data.user;
+
+
+    if (!currentUser) {
+
+        showMessage(
+            "Please log in to use Zynora Rewards."
+        );
+
+        return;
+
+    }
+
+
+    await loadBalance();
+
+    await loadHistory();
+
+}
+
+
+/* BALANCE */
+
+async function loadBalance() {
+
+    const result =
+        await sb
+        .from("coin_wallets")
+        .select("balance")
+        .eq(
+            "user_id",
+            currentUser.id
+        )
+        .maybeSingle();
+
+
+    if (
+        result.error
+        ||
+        !result.data
+    ) {
+
+        document
+        .getElementById("balance")
+        .textContent = "0";
+
+        return;
+
+    }
+
+
+    document
+    .getElementById("balance")
+    .textContent =
+    result.data.balance;
+
+}
+
+
+/* CLAIM */
+
+async function claimReward(type) {
+
+    if (!currentUser) {
+
+        showMessage(
+            "Please log in first."
+        );
+
+        return;
+
+    }
+
+
+    let amount = 0;
+
+    let description = "";
+
+
+    if (type === "daily") {
+
+        amount = 20;
+
+        description =
+        "Daily Check-In";
+
+    }
+
+
+    if (type === "watch") {
+
+        amount = 30;
+
+        description =
+        "Watch & Earn";
+
+    }
+
+
+    if (type === "welcome") {
+
+        amount = 100;
+
+        description =
+        "Welcome Reward";
+
+    }
+
+
+    try {
+
+        const { data, error } =
+        await sb.rpc(
+            "add_coins",
+            {
+                p_user_id:
+                currentUser.id,
+
+                p_amount:
+                amount,
+
+                p_type:
+                "reward",
+
+                p_description:
+                description
+            }
+        );
+
+
+        if (error) {
+
+            showMessage(
+                error.message
+            );
+
+            return;
+
+        }
+
+
+        document
+        .getElementById("balance")
+        .textContent =
+        data;
+
+
+        showMessage(
+            "+" +
+            amount +
+            " coins added!"
+        );
+
+
+        await loadHistory();
+
+
+    } catch (error) {
+
+        showMessage(
+            "Unable to claim reward."
+        );
+
+    }
+
+}
+
+
+/* HISTORY */
+
+async function loadHistory() {
+
+    const result =
+    await sb
+    .from("coin_transactions")
+    .select(
+        "amount, description, created_at"
+    )
+    .eq(
+        "user_id",
+        currentUser.id
+    )
+    .order(
+        "created_at",
+        {
+            ascending: false
+        }
+    )
+    .limit(10);
+
+
+    const list =
+    document.getElementById(
+        "historyList"
+    );
+
+
+    if (
+        result.error ||
+        !result.data ||
+        result.data.length === 0
+    ) {
+
+        list.innerHTML =
+        '<p class="reward-description">' +
+        'No coin activity yet.' +
+        '</p>';
+
+        return;
+
+    }
+
+
+    list.innerHTML = "";
+
+
+    result.data.forEach(item => {
+
+        const row =
+        document.createElement("div");
+
+        row.className =
+        "history-item";
+
+
+        const name =
+        document.createElement("div");
+
+        name.className =
+        "history-name";
+
+        name.textContent =
+        item.description ||
+        "Coin transaction";
+
+
+        const amount =
+        document.createElement("div");
+
+        amount.className =
+        "history-amount";
+
+        amount.textContent =
+        (item.amount > 0 ? "+" : "") +
+        item.amount;
+
+
+        row.appendChild(name);
+
+        row.appendChild(amount);
+
+        list.appendChild(row);
+
+    });
+
+}
+
+
+/* MESSAGE */
+
+function showMessage(text) {
+
+    const box =
+    document.getElementById(
+        "message"
+    );
+
+    box.textContent = text;
+
+    box.style.display =
+    "block";
+
+
+    setTimeout(
+        () => {
+
+            box.style.display =
+            "none";
+
+        },
+        3000
+    );
+
+}
+
+
+loadSupabase();
+
+</script>
+
+
+</body>
+
+</html>
