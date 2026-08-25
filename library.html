@@ -14,7 +14,8 @@ content="width=device-width, initial-scale=1.0">
 href="https://fonts.googleapis.com">
 
 <link rel="preconnect"
-href="https://fonts.gstatic.com" crossorigin>
+href="https://fonts.gstatic.com"
+crossorigin>
 
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap"
 rel="stylesheet">
@@ -29,10 +30,11 @@ rel="stylesheet">
 
 body {
     min-height: 100vh;
+
     background:
         radial-gradient(
-            circle at 50% 10%,
-            rgba(145,55,255,.14),
+            circle at 50% 8%,
+            rgba(145,55,255,.18),
             transparent 32%
         ),
         #08070c;
@@ -44,37 +46,35 @@ body {
         Georgia,
         serif;
 
-    padding-bottom: 100px;
+    padding-bottom: 105px;
 }
 
 
 /* HEADER */
 
 header {
-
     height: 95px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 22px;
 
     background: #111016;
 
     border-bottom:
         1px solid
         rgba(173,77,255,.25);
-
-    display: flex;
-
-    align-items: center;
-
-    padding: 0 22px;
-
 }
 
-.logo {
 
+.logo {
     font-family:
         "Cinzel",
         serif;
 
-    font-size: 38px;
+    font-size: 37px;
 
     font-weight: 700;
 
@@ -92,198 +92,162 @@ header {
     background-clip: text;
 
     color: transparent;
-
-    text-shadow:
-        0 0 25px
-        rgba(155,70,255,.35);
-
 }
 
 
-/* MAIN */
+.coin-top {
+    padding: 10px 14px;
 
-main {
-
-    padding:
-        30px 20px;
-
-}
-
-h1 {
-
-    font-family:
-        "Cinzel",
-        serif;
-
-    font-size: 32px;
-
-    margin-bottom: 8px;
-
-}
-
-.subtitle {
-
-    color: #96919e;
-
-    font-style: italic;
-
-    font-size: 16px;
-
-    margin-bottom: 28px;
-
-}
-
-
-/* COIN AREA */
-
-.coin-box {
+    border-radius: 18px;
 
     background:
-        linear-gradient(
-            135deg,
-            rgba(117,35,200,.25),
-            rgba(40,25,70,.5)
-        );
+        rgba(130,45,220,.16);
 
     border:
         1px solid
         rgba(173,77,255,.25);
 
-    border-radius: 20px;
-
-    padding: 17px 20px;
-
-    display: flex;
-
-    justify-content:
-        space-between;
-
-    align-items: center;
-
-    margin-bottom: 30px;
-
-}
-
-.coin-title {
-
-    font-family:
-        "Cinzel",
-        serif;
-
-    font-size: 14px;
-
-    color: #bdb7c5;
-
-}
-
-.coin-number {
-
-    color: #ffd95c;
-
-    font-family:
-        "Cinzel",
-        serif;
-
-    font-size: 21px;
-
-}
-
-
-/* TABS */
-
-.tabs {
-
-    display: flex;
-
-    gap: 10px;
-
-    margin-bottom: 25px;
-
-}
-
-.tab {
-
-    padding:
-        11px 18px;
-
-    border-radius: 25px;
-
-    background: #17161d;
-
-    border:
-        1px solid
-        #302c38;
-
-    color: #aaa5b1;
+    color: #ffd75c;
 
     font-family:
         "Cinzel",
         serif;
 
     font-size: 13px;
-
-}
-
-.tab.active {
-
-    background:
-        linear-gradient(
-            135deg,
-            #a84fff,
-            #7521e4
-        );
-
-    border-color:
-        transparent;
-
-    color: white;
-
 }
 
 
-/* EMPTY LIBRARY */
+/* MAIN */
 
-.empty {
+main {
+    max-width: 650px;
 
-    margin-top: 20px;
+    margin: auto;
+
+    padding: 28px 20px;
+}
+
+
+.title {
+    font-family:
+        "Cinzel",
+        serif;
+
+    font-size: 31px;
+}
+
+
+.subtitle {
+    margin-top: 7px;
+
+    color: #9994a2;
+
+    font-style: italic;
+
+    margin-bottom: 25px;
+}
+
+
+/* TABS */
+
+.tabs {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap: 8px;
+
+    padding: 5px;
 
     background: #121117;
 
+    border-radius: 18px;
+
     border:
         1px solid
-        rgba(173,77,255,.20);
+        rgba(255,255,255,.07);
 
-    border-radius: 25px;
-
-    padding:
-        45px 25px;
-
-    text-align: center;
-
-    box-shadow:
-        0 15px 45px
-        rgba(0,0,0,.25);
-
+    margin-bottom: 26px;
 }
 
+
+.tab {
+    padding: 12px 6px;
+
+    border: none;
+
+    border-radius: 14px;
+
+    background: transparent;
+
+    color: #777582;
+
+    font-family:
+        "Cinzel",
+        serif;
+
+    font-size: 11px;
+}
+
+
+.tab.active {
+    background:
+        linear-gradient(
+            135deg,
+            #a84fff,
+            #7521e4
+        );
+
+    color: white;
+}
+
+
+/* PANELS */
+
+.panel {
+    display: none;
+}
+
+
+.panel.active {
+    display: block;
+}
+
+
+/* EMPTY STATE */
+
+.empty {
+    background:
+        linear-gradient(
+            145deg,
+            #15141b,
+            #101016
+        );
+
+    border:
+        1px solid
+        rgba(173,77,255,.18);
+
+    border-radius: 24px;
+
+    padding: 48px 24px;
+
+    text-align: center;
+}
+
+
 .empty-icon {
-
     width: 82px;
-
     height: 82px;
 
-    margin:
-        0 auto 22px;
-
-    border-radius: 50%;
+    margin: 0 auto 20px;
 
     display: flex;
-
     align-items: center;
-
     justify-content: center;
 
-    font-size: 34px;
+    border-radius: 50%;
 
     background:
         linear-gradient(
@@ -292,49 +256,46 @@ h1 {
             #7521e4
         );
 
-    box-shadow:
-        0 0 35px
-        rgba(140,50,255,.35);
+    font-size: 33px;
 
+    box-shadow:
+        0 0 30px
+        rgba(145,50,255,.35);
 }
 
-.empty h2 {
 
+.empty h2 {
     font-family:
         "Cinzel",
         serif;
 
-    font-size: 22px;
+    font-size: 20px;
 
-    margin-bottom: 12px;
-
+    margin-bottom: 11px;
 }
 
+
 .empty p {
+    color: #9994a2;
 
-    color: #96919e;
+    line-height: 1.6;
 
-    line-height: 1.7;
-
-    font-size: 15px;
+    font-size: 14px;
 
     max-width: 320px;
 
-    margin:
-        0 auto 25px;
-
+    margin: auto;
 }
 
-.browse {
 
+.browse {
     display: inline-block;
 
-    text-decoration: none;
+    margin-top: 23px;
 
-    padding:
-        14px 24px;
+    padding: 14px 22px;
 
-    border-radius: 16px;
+    border-radius: 15px;
 
     background:
         linear-gradient(
@@ -345,52 +306,133 @@ h1 {
 
     color: white;
 
+    text-decoration: none;
+
     font-family:
         "Cinzel",
         serif;
 
-    font-weight: 600;
-
-    box-shadow:
-        0 8px 25px
-        rgba(120,35,220,.25);
-
+    font-size: 13px;
 }
 
 
-/* BOTTOM NAV */
+/* EPISODE CARD */
+
+.episode-card {
+    display: flex;
+
+    gap: 14px;
+
+    padding: 15px;
+
+    margin-bottom: 13px;
+
+    border-radius: 19px;
+
+    background: #15141b;
+
+    border:
+        1px solid
+        rgba(255,255,255,.07);
+}
+
+
+.poster {
+    width: 80px;
+    height: 105px;
+
+    flex: 0 0 80px;
+
+    border-radius: 13px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #a84fff,
+            #24102f
+        );
+}
+
+
+.episode-content {
+    flex: 1;
+}
+
+
+.episode-title {
+    font-family:
+        "Cinzel",
+        serif;
+
+    font-size: 14px;
+
+    margin-bottom: 7px;
+}
+
+
+.episode-info {
+    color: #918c98;
+
+    font-size: 12px;
+}
+
+
+.watch-btn {
+    display: inline-block;
+
+    margin-top: 12px;
+
+    padding: 9px 15px;
+
+    border-radius: 12px;
+
+    background:
+        rgba(155,60,245,.18);
+
+    border:
+        1px solid
+        rgba(173,77,255,.35);
+
+    color: #d3a4ff;
+
+    text-decoration: none;
+
+    font-family:
+        "Cinzel",
+        serif;
+
+    font-size: 10px;
+}
+
+
+/* NAV */
 
 .bottom-nav {
-
     position: fixed;
 
+    left: 0;
+    right: 0;
     bottom: 0;
 
-    left: 0;
-
-    right: 0;
-
-    height: 92px;
+    height: 90px;
 
     background:
         rgba(17,16,22,.98);
 
     border-top:
         1px solid
-        rgba(173,77,255,.20);
+        rgba(173,77,255,.2);
 
-    display:
-        grid;
+    display: grid;
 
     grid-template-columns:
-        repeat(4,1fr);
+        repeat(5,1fr);
 
     z-index: 50;
-
 }
 
-.nav-item {
 
+.nav-item {
     text-decoration: none;
 
     color: #777582;
@@ -400,44 +442,29 @@ h1 {
     flex-direction: column;
 
     align-items: center;
-
     justify-content: center;
 
-    gap: 7px;
+    gap: 5px;
 
     font-family:
         "Cinzel",
         serif;
 
-    font-size: 12px;
-
+    font-size: 9px;
 }
+
 
 .nav-icon {
-
-    font-size: 25px;
-
+    font-size: 21px;
 }
 
-.nav-item.active {
 
+.nav-item.active {
     color: #a94dff;
 
     text-shadow:
         0 0 15px
         rgba(169,77,255,.5);
-
-}
-
-
-/* MOBILE */
-
-@media(max-width:600px) {
-
-    h1 {
-        font-size: 29px;
-    }
-
 }
 
 </style>
@@ -454,144 +481,105 @@ h1 {
 Zynora
 </div>
 
+<div class="coin-top">
+🪙 <span id="coinDisplay">0</span>
+</div>
+
 </header>
 
 
 <main>
 
-<h1>
+<h1 class="title">
 My Library
 </h1>
 
 <p class="subtitle">
-Your saved shows and watchlist.
+Your saved dramas, history and unlocked episodes.
 </p>
 
 
-<!-- COINS -->
-
-<div class="coin-box">
-
-<div class="coin-title">
-Your Zynora Coins
-</div>
-
-<div class="coin-number">
-🪙 100
-</div>
-
-</div>
-
-
-<!-- LIBRARY TABS -->
+<!-- TABS -->
 
 <div class="tabs">
 
-<div class="tab active">
+<button
+class="tab active"
+onclick="openTab('saved', this)">
+
 Saved
-</div>
 
-<div class="tab">
+</button>
+
+
+<button
+class="tab"
+onclick="openTab('history', this)">
+
 History
+
+</button>
+
+
+<button
+class="tab"
+onclick="openTab('unlocked', this)">
+
+Unlocked
+
+</button>
+
 </div>
 
-<div class="tab">
-Downloads
-</div>
 
-</div>
+<!-- SAVED -->
 
-
-<!-- EMPTY LIBRARY -->
+<section
+id="saved"
+class="panel active">
 
 <div class="empty">
 
 <div class="empty-icon">
-▣
+♡
 </div>
 
 <h2>
-Your library is empty
+No saved dramas yet
 </h2>
 
 <p>
-Save your favorite Zynora stories here
-so you can easily find them later.
+Tap the save button on a Zynora drama and it will appear here.
 </p>
 
 <a
 href="discover.html"
 class="browse">
 
-Browse Shows
+Discover Dramas
 
 </a>
 
 </div>
 
-</main>
+</section>
 
 
-<!-- BOTTOM NAV -->
+<!-- HISTORY -->
 
-<nav class="bottom-nav">
+<section
+id="history"
+class="panel">
 
+<div class="episode-card">
 
-<a
-href="index.html"
-class="nav-item">
+<div class="poster"></div>
 
-<span class="nav-icon">
-⌂
-</span>
+<div class="episode-content">
 
-Home
+<div class="episode-title">
+The Billionaire's Secret
+</div>
 
-</a>
-
-
-<a
-href="discover.html"
-class="nav-item">
-
-<span class="nav-icon">
-◉
-</span>
-
-Discover
-
-</a>
-
-
-<a
-href="library.html"
-class="nav-item active">
-
-<span class="nav-icon">
-▣
-</span>
-
-Library
-
-</a>
-
-
-<a
-href="profile.html"
-class="nav-item">
-
-<span class="nav-icon">
-●
-</span>
-
-Profile
-
-</a>
-
-
-</nav>
-
-
-</body>
-
-</html>
+<div class="episode-info">
+Episode
