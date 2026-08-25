@@ -29,7 +29,6 @@ rel="stylesheet">
 }
 
 body {
-
     min-height: 100vh;
 
     background:
@@ -48,18 +47,15 @@ body {
         serif;
 
     padding-bottom: 110px;
-
 }
 
 
 /* HEADER */
 
 header {
-
     height: 95px;
 
     display: flex;
-
     align-items: center;
 
     padding: 0 22px;
@@ -69,11 +65,9 @@ header {
     border-bottom:
         1px solid
         rgba(173,77,255,.25);
-
 }
 
 .logo {
-
     font-family: "Cinzel", serif;
 
     font-size: 38px;
@@ -91,28 +85,23 @@ header {
         );
 
     -webkit-background-clip: text;
-
     background-clip: text;
 
     color: transparent;
-
 }
 
 
 /* MAIN */
 
 main {
-
     padding: 28px 20px;
 
     max-width: 600px;
 
     margin: auto;
-
 }
 
 .title {
-
     font-family:
         "Cinzel",
         serif;
@@ -120,24 +109,20 @@ main {
     font-size: 34px;
 
     margin-bottom: 7px;
-
 }
 
 .subtitle {
-
     color: #9994a2;
 
     font-style: italic;
 
     margin-bottom: 25px;
-
 }
 
 
-/* COIN BALANCE */
+/* WALLET */
 
 .wallet {
-
     padding: 25px;
 
     border-radius: 25px;
@@ -158,19 +143,15 @@ main {
         rgba(130,40,220,.28);
 
     margin-bottom: 30px;
-
 }
 
 .wallet-label {
-
     color: #ddd0e9;
 
     font-size: 14px;
-
 }
 
 .balance {
-
     font-family:
         "Cinzel",
         serif;
@@ -178,20 +159,16 @@ main {
     font-size: 42px;
 
     margin-top: 8px;
-
 }
 
 .coin {
-
     color: #ffd75c;
-
 }
 
 
-/* REWARD */
+/* REWARDS */
 
 .section-title {
-
     font-family:
         "Cinzel",
         serif;
@@ -199,11 +176,9 @@ main {
     font-size: 20px;
 
     margin-bottom: 15px;
-
 }
 
 .reward {
-
     background: #15141b;
 
     border:
@@ -215,21 +190,17 @@ main {
     padding: 19px;
 
     margin-bottom: 13px;
-
 }
 
 .reward-top {
-
     display: flex;
 
     align-items: center;
 
     gap: 14px;
-
 }
 
 .reward-icon {
-
     width: 48px;
 
     height: 48px;
@@ -246,37 +217,29 @@ main {
     justify-content: center;
 
     font-size: 24px;
-
 }
 
 .reward-info {
-
     flex: 1;
-
 }
 
 .reward-name {
-
     font-family:
         "Cinzel",
         serif;
 
     font-size: 16px;
-
 }
 
 .reward-description {
-
     color: #97929f;
 
     font-size: 13px;
 
     margin-top: 4px;
-
 }
 
 .reward-button {
-
     margin-top: 15px;
 
     width: 100%;
@@ -303,28 +266,22 @@ main {
     font-weight: 600;
 
     font-size: 14px;
-
 }
 
 .reward-button:disabled {
-
     background: #292631;
 
     color: #77737f;
-
 }
 
 
 /* HISTORY */
 
 .history {
-
     margin-top: 30px;
-
 }
 
 .history-item {
-
     padding: 14px 0;
 
     border-bottom:
@@ -334,107 +291,29 @@ main {
     display: flex;
 
     justify-content: space-between;
-
 }
 
 .history-name {
-
     color: #c7c2ce;
 
     font-size: 14px;
-
 }
 
 .history-amount {
-
     color: #ffd75c;
 
     font-family:
         "Cinzel",
         serif;
-
-}
-
-
-/* NAV */
-
-.bottom-nav {
-
-    position: fixed;
-
-    left: 0;
-
-    right: 0;
-
-    bottom: 0;
-
-    height: 92px;
-
-    background:
-        rgba(17,16,22,.98);
-
-    border-top:
-        1px solid
-        rgba(173,77,255,.2);
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(5,1fr);
-
-    z-index: 50;
-
-}
-
-.nav-item {
-
-    text-decoration: none;
-
-    color: #777582;
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 6px;
-
-    font-family:
-        "Cinzel",
-        serif;
-
-    font-size: 10px;
-
-}
-
-.nav-icon {
-
-    font-size: 22px;
-
-}
-
-.nav-item.active {
-
-    color: #a94dff;
-
-    text-shadow:
-        0 0 15px
-        rgba(169,77,255,.5);
-
 }
 
 
 /* MESSAGE */
 
 .message {
-
     position: fixed;
 
     left: 20px;
-
     right: 20px;
 
     bottom: 105px;
@@ -454,7 +333,67 @@ main {
     display: none;
 
     z-index: 100;
+}
 
+
+/* NAV */
+
+.bottom-nav {
+    position: fixed;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    height: 92px;
+
+    background:
+        rgba(17,16,22,.98);
+
+    border-top:
+        1px solid
+        rgba(173,77,255,.2);
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(5,1fr);
+
+    z-index: 50;
+}
+
+.nav-item {
+    text-decoration: none;
+
+    color: #777582;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 6px;
+
+    font-family:
+        "Cinzel",
+        serif;
+
+    font-size: 10px;
+}
+
+.nav-icon {
+    font-size: 22px;
+}
+
+.nav-item.active {
+    color: #a94dff;
+
+    text-shadow:
+        0 0 15px
+        rgba(169,77,255,.5);
 }
 
 </style>
@@ -496,7 +435,9 @@ YOUR ZYNORA COINS
 
 <div class="balance">
 
-<span class="coin">🪙</span>
+<span class="coin">
+🪙
+</span>
 
 <span id="balance">
 0
@@ -529,7 +470,7 @@ Daily Check-In
 </div>
 
 <div class="reward-description">
-Open Zynora and claim your daily reward.
+Claim once every day.
 </div>
 
 </div>
@@ -542,41 +483,6 @@ id="dailyButton"
 onclick="claimReward('daily')">
 
 Claim 20 Coins
-
-</button>
-
-</div>
-
-
-<!-- WATCH -->
-
-<div class="reward">
-
-<div class="reward-top">
-
-<div class="reward-icon">
-📺
-</div>
-
-<div class="reward-info">
-
-<div class="reward-name">
-Watch & Earn
-</div>
-
-<div class="reward-description">
-Complete an eligible rewarded activity.
-</div>
-
-</div>
-
-</div>
-
-<button
-class="reward-button"
-onclick="claimReward('watch')">
-
-Earn 30 Coins
 
 </button>
 
@@ -600,7 +506,7 @@ Welcome Reward
 </div>
 
 <div class="reward-description">
-Your first Zynora reward.
+Claim once for joining Zynora.
 </div>
 
 </div>
@@ -609,9 +515,45 @@ Your first Zynora reward.
 
 <button
 class="reward-button"
+id="welcomeButton"
 onclick="claimReward('welcome')">
 
 Claim 100 Coins
+
+</button>
+
+</div>
+
+
+<!-- WATCH & EARN -->
+
+<div class="reward">
+
+<div class="reward-top">
+
+<div class="reward-icon">
+📺
+</div>
+
+<div class="reward-info">
+
+<div class="reward-name">
+Watch & Earn
+</div>
+
+<div class="reward-description">
+Earn coins after completing a verified rewarded ad.
+</div>
+
+</div>
+
+</div>
+
+<button
+class="reward-button"
+onclick="watchReward()">
+
+Watch Ad • Earn 30 Coins
 
 </button>
 
@@ -629,13 +571,12 @@ Coin History
 <div id="historyList">
 
 <p class="reward-description">
-Your coin activity will appear here.
+Loading your coin activity...
 </p>
 
 </div>
 
 </div>
-
 
 </main>
 
@@ -646,7 +587,7 @@ class="message">
 </div>
 
 
-<!-- FIVE BUTTON NAVIGATION -->
+<!-- NAVIGATION -->
 
 <nav class="bottom-nav">
 
@@ -719,80 +660,72 @@ Profile
 </nav>
 
 
-<script>
+<script type="module">
 
-/*
-   ZYNORA SUPABASE CONNECTION
-*/
+import {
+    createClient
+}
+from
+"https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+
 
 const SUPABASE_URL =
 "https://ozshekxpuvganemaajms.supabase.co";
+
 
 const SUPABASE_KEY =
 "sb_publishable__GsW9RahFD_XDWJTFzh9eQ_dNBZfa32";
 
 
+const supabase =
+createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
+
 let currentUser = null;
 
 
-/* LOAD SUPABASE */
+/* =========================
+   START
+========================= */
 
-async function loadSupabase() {
+async function start() {
+
+    const {
+        data,
+        error
+    } =
+    await supabase.auth.getUser();
+
 
     if (
-        typeof window.supabase ===
-        "undefined"
+        error ||
+        !data.user
     ) {
 
-        const script =
-        document.createElement("script");
-
-        script.src =
-        "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2";
-
-        script.onload =
-        initialize;
-
-        document.head.appendChild(script);
-
-    } else {
-
-        initialize();
-
-    }
-
-}
-
-
-/* INITIALIZE */
-
-async function initialize() {
-
-    window.sb =
-        window.supabase.createClient(
-            SUPABASE_URL,
-            SUPABASE_KEY
-        );
-
-
-    const result =
-        await sb.auth.getUser();
-
-
-    currentUser =
-        result.data.user;
-
-
-    if (!currentUser) {
-
         showMessage(
-            "Please log in to use Zynora Rewards."
+            "Please log in to use Rewards."
         );
+
+        setTimeout(function() {
+
+            window.location.href =
+            "login.html";
+
+        }, 1800);
 
         return;
 
     }
 
+
+    currentUser =
+    data.user;
+
+
+    await ensureWallet();
 
     await loadBalance();
 
@@ -801,12 +734,17 @@ async function initialize() {
 }
 
 
-/* BALANCE */
+/* =========================
+   CREATE WALLET FOR OLD USERS
+========================= */
 
-async function loadBalance() {
+async function ensureWallet() {
 
-    const result =
-        await sb
+    const {
+        data,
+        error
+    } =
+    await supabase
         .from("coin_wallets")
         .select("balance")
         .eq(
@@ -816,15 +754,48 @@ async function loadBalance() {
         .maybeSingle();
 
 
-    if (
-        result.error
-        ||
-        !result.data
-    ) {
+    if (data) {
+        return;
+    }
 
-        document
-        .getElementById("balance")
-        .textContent = "0";
+
+    /*
+       Old accounts existed before our
+       wallet trigger was created.
+
+       claim_reward automatically creates
+       the wallet when the first valid
+       reward is claimed.
+    */
+
+}
+
+
+/* =========================
+   LOAD BALANCE
+========================= */
+
+async function loadBalance() {
+
+    const {
+        data,
+        error
+    } =
+    await supabase
+        .from("coin_wallets")
+        .select("balance")
+        .eq(
+            "user_id",
+            currentUser.id
+        )
+        .maybeSingle();
+
+
+    if (error) {
+
+        showMessage(
+            "Unable to load coin balance."
+        );
 
         return;
 
@@ -832,16 +803,22 @@ async function loadBalance() {
 
 
     document
-    .getElementById("balance")
-    .textContent =
-    result.data.balance;
+        .getElementById("balance")
+        .textContent =
+        data
+            ? data.balance
+            : 0;
 
 }
 
 
-/* CLAIM */
+/* =========================
+   CLAIM SECURE REWARD
+========================= */
 
-async function claimReward(type) {
+window.claimReward =
+async function(type) {
+
 
     if (!currentUser) {
 
@@ -854,121 +831,137 @@ async function claimReward(type) {
     }
 
 
-    let amount = 0;
+    const button =
+    type === "daily"
+        ? document.getElementById(
+            "dailyButton"
+        )
+        : document.getElementById(
+            "welcomeButton"
+        );
 
-    let description = "";
+
+    button.disabled = true;
+
+    button.textContent =
+    "Please wait...";
 
 
-    if (type === "daily") {
+    const {
+        data,
+        error
+    } =
+    await supabase.rpc(
+        "claim_reward",
+        {
+            p_reward_type:
+            type
+        }
+    );
 
-        amount = 20;
 
-        description =
-        "Daily Check-In";
+    if (error) {
+
+        showMessage(
+            error.message
+        );
+
+
+        button.disabled = false;
+
+
+        if (type === "daily") {
+
+            button.textContent =
+            "Claim 20 Coins";
+
+        } else {
+
+            button.textContent =
+            "Claim 100 Coins";
+
+        }
+
+
+        return;
 
     }
 
 
-    if (type === "watch") {
+    document
+        .getElementById("balance")
+        .textContent =
+        data;
 
-        amount = 30;
 
-        description =
-        "Watch & Earn";
+    if (type === "daily") {
+
+        button.textContent =
+        "Daily Reward Claimed";
 
     }
 
 
     if (type === "welcome") {
 
-        amount = 100;
-
-        description =
-        "Welcome Reward";
+        button.textContent =
+        "Welcome Reward Claimed";
 
     }
 
 
-    try {
-
-        const { data, error } =
-        await sb.rpc(
-            "add_coins",
-            {
-                p_user_id:
-                currentUser.id,
-
-                p_amount:
-                amount,
-
-                p_type:
-                "reward",
-
-                p_description:
-                description
-            }
-        );
+    showMessage(
+        "Coins added successfully! 🪙"
+    );
 
 
-        if (error) {
+    await loadHistory();
 
-            showMessage(
-                error.message
-            );
-
-            return;
-
-        }
+};
 
 
-        document
-        .getElementById("balance")
-        .textContent =
-        data;
+/* =========================
+   WATCH AD
+========================= */
+
+window.watchReward =
+function() {
+
+    showMessage(
+        "Rewarded ads are not connected yet. No coins were added."
+    );
+
+};
 
 
-        showMessage(
-            "+" +
-            amount +
-            " coins added!"
-        );
-
-
-        await loadHistory();
-
-
-    } catch (error) {
-
-        showMessage(
-            "Unable to claim reward."
-        );
-
-    }
-
-}
-
-
-/* HISTORY */
+/* =========================
+   HISTORY
+========================= */
 
 async function loadHistory() {
 
-    const result =
-    await sb
-    .from("coin_transactions")
-    .select(
-        "amount, description, created_at"
-    )
-    .eq(
-        "user_id",
-        currentUser.id
-    )
-    .order(
-        "created_at",
-        {
-            ascending: false
-        }
-    )
-    .limit(10);
+    const {
+        data,
+        error
+    } =
+    await supabase
+        .from(
+            "coin_transactions"
+        )
+        .select(
+            "amount, description, created_at"
+        )
+        .eq(
+            "user_id",
+            currentUser.id
+        )
+        .order(
+            "created_at",
+            {
+                ascending: false
+            }
+        )
+        .limit(15);
 
 
     const list =
@@ -977,10 +970,21 @@ async function loadHistory() {
     );
 
 
+    if (error) {
+
+        list.innerHTML =
+        '<p class="reward-description">' +
+        'Unable to load coin history.' +
+        '</p>';
+
+        return;
+
+    }
+
+
     if (
-        result.error ||
-        !result.data ||
-        result.data.length === 0
+        !data ||
+        data.length === 0
     ) {
 
         list.innerHTML =
@@ -996,35 +1000,49 @@ async function loadHistory() {
     list.innerHTML = "";
 
 
-    result.data.forEach(item => {
+    data.forEach(function(item) {
 
         const row =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
         row.className =
         "history-item";
 
 
         const name =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
         name.className =
         "history-name";
 
         name.textContent =
         item.description ||
-        "Coin transaction";
+        "Coin activity";
 
 
         const amount =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
         amount.className =
         "history-amount";
 
+
         amount.textContent =
-        (item.amount > 0 ? "+" : "") +
-        item.amount;
+        (
+            item.amount > 0
+                ? "+"
+                : ""
+        )
+        +
+        item.amount
+        +
+        " 🪙";
 
 
         row.appendChild(name);
@@ -1038,7 +1056,9 @@ async function loadHistory() {
 }
 
 
-/* MESSAGE */
+/* =========================
+   MESSAGE
+========================= */
 
 function showMessage(text) {
 
@@ -1047,26 +1067,35 @@ function showMessage(text) {
         "message"
     );
 
-    box.textContent = text;
+
+    box.textContent =
+    text;
+
 
     box.style.display =
     "block";
 
 
+    clearTimeout(
+        window.zynoraMessageTimer
+    );
+
+
+    window.zynoraMessageTimer =
     setTimeout(
-        () => {
+        function() {
 
             box.style.display =
             "none";
 
         },
-        3000
+        3500
     );
 
 }
 
 
-loadSupabase();
+start();
 
 </script>
 
