@@ -1,179 +1,597 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Zynora - My Library</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+<meta charset="UTF-8">
 
-    body {
-      margin: 0;
-      background: #09090d;
-      color: white;
-      font-family: Arial, sans-serif;
-      padding-bottom: 90px;
-    }
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-    header {
-      height: 75px;
-      display: flex;
-      align-items: center;
-      padding: 0 20px;
-      background: #111116;
-      border-bottom: 1px solid #292933;
-    }
+<title>Zynora Library</title>
 
-    .logo {
-      font-size: 30px;
-      font-weight: 800;
-    }
+<link rel="preconnect"
+href="https://fonts.googleapis.com">
 
-    .logo span {
-      color: #9b4dff;
-    }
+<link rel="preconnect"
+href="https://fonts.gstatic.com" crossorigin>
 
-    main {
-      padding: 30px 20px;
-    }
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap"
+rel="stylesheet">
+
+<style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    background:
+        radial-gradient(
+            circle at 50% 10%,
+            rgba(145,55,255,.14),
+            transparent 32%
+        ),
+        #08070c;
+
+    color: white;
+
+    font-family:
+        "Playfair Display",
+        Georgia,
+        serif;
+
+    padding-bottom: 100px;
+}
+
+
+/* HEADER */
+
+header {
+
+    height: 95px;
+
+    background: #111016;
+
+    border-bottom:
+        1px solid
+        rgba(173,77,255,.25);
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 0 22px;
+
+}
+
+.logo {
+
+    font-family:
+        "Cinzel",
+        serif;
+
+    font-size: 38px;
+
+    font-weight: 700;
+
+    letter-spacing: -2px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ffffff,
+            #d19aff,
+            #8e38ff
+        );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    color: transparent;
+
+    text-shadow:
+        0 0 25px
+        rgba(155,70,255,.35);
+
+}
+
+
+/* MAIN */
+
+main {
+
+    padding:
+        30px 20px;
+
+}
+
+h1 {
+
+    font-family:
+        "Cinzel",
+        serif;
+
+    font-size: 32px;
+
+    margin-bottom: 8px;
+
+}
+
+.subtitle {
+
+    color: #96919e;
+
+    font-style: italic;
+
+    font-size: 16px;
+
+    margin-bottom: 28px;
+
+}
+
+
+/* COIN AREA */
+
+.coin-box {
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(117,35,200,.25),
+            rgba(40,25,70,.5)
+        );
+
+    border:
+        1px solid
+        rgba(173,77,255,.25);
+
+    border-radius: 20px;
+
+    padding: 17px 20px;
+
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    align-items: center;
+
+    margin-bottom: 30px;
+
+}
+
+.coin-title {
+
+    font-family:
+        "Cinzel",
+        serif;
+
+    font-size: 14px;
+
+    color: #bdb7c5;
+
+}
+
+.coin-number {
+
+    color: #ffd95c;
+
+    font-family:
+        "Cinzel",
+        serif;
+
+    font-size: 21px;
+
+}
+
+
+/* TABS */
+
+.tabs {
+
+    display: flex;
+
+    gap: 10px;
+
+    margin-bottom: 25px;
+
+}
+
+.tab {
+
+    padding:
+        11px 18px;
+
+    border-radius: 25px;
+
+    background: #17161d;
+
+    border:
+        1px solid
+        #302c38;
+
+    color: #aaa5b1;
+
+    font-family:
+        "Cinzel",
+        serif;
+
+    font-size: 13px;
+
+}
+
+.tab.active {
+
+    background:
+        linear-gradient(
+            135deg,
+            #a84fff,
+            #7521e4
+        );
+
+    border-color:
+        transparent;
+
+    color: white;
+
+}
+
+
+/* EMPTY LIBRARY */
+
+.empty {
+
+    margin-top: 20px;
+
+    background: #121117;
+
+    border:
+        1px solid
+        rgba(173,77,255,.20);
+
+    border-radius: 25px;
+
+    padding:
+        45px 25px;
+
+    text-align: center;
+
+    box-shadow:
+        0 15px 45px
+        rgba(0,0,0,.25);
+
+}
+
+.empty-icon {
+
+    width: 82px;
+
+    height: 82px;
+
+    margin:
+        0 auto 22px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 34px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #a84fff,
+            #7521e4
+        );
+
+    box-shadow:
+        0 0 35px
+        rgba(140,50,255,.35);
+
+}
+
+.empty h2 {
+
+    font-family:
+        "Cinzel",
+        serif;
+
+    font-size: 22px;
+
+    margin-bottom: 12px;
+
+}
+
+.empty p {
+
+    color: #96919e;
+
+    line-height: 1.7;
+
+    font-size: 15px;
+
+    max-width: 320px;
+
+    margin:
+        0 auto 25px;
+
+}
+
+.browse {
+
+    display: inline-block;
+
+    text-decoration: none;
+
+    padding:
+        14px 24px;
+
+    border-radius: 16px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #a84fff,
+            #7521e4
+        );
+
+    color: white;
+
+    font-family:
+        "Cinzel",
+        serif;
+
+    font-weight: 600;
+
+    box-shadow:
+        0 8px 25px
+        rgba(120,35,220,.25);
+
+}
+
+
+/* BOTTOM NAV */
+
+.bottom-nav {
+
+    position: fixed;
+
+    bottom: 0;
+
+    left: 0;
+
+    right: 0;
+
+    height: 92px;
+
+    background:
+        rgba(17,16,22,.98);
+
+    border-top:
+        1px solid
+        rgba(173,77,255,.20);
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    z-index: 50;
+
+}
+
+.nav-item {
+
+    text-decoration: none;
+
+    color: #777582;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 7px;
+
+    font-family:
+        "Cinzel",
+        serif;
+
+    font-size: 12px;
+
+}
+
+.nav-icon {
+
+    font-size: 25px;
+
+}
+
+.nav-item.active {
+
+    color: #a94dff;
+
+    text-shadow:
+        0 0 15px
+        rgba(169,77,255,.5);
+
+}
+
+
+/* MOBILE */
+
+@media(max-width:600px) {
 
     h1 {
-      font-size: 34px;
-      margin-bottom: 8px;
+        font-size: 29px;
     }
 
-    .subtitle {
-      color: #9999a5;
-      margin-bottom: 30px;
-    }
+}
 
-    .empty {
-      text-align: center;
-      padding: 80px 20px;
-      background: #15151c;
-      border: 1px solid #292933;
-      border-radius: 18px;
-    }
+</style>
 
-    .empty-icon {
-      font-size: 55px;
-      margin-bottom: 15px;
-    }
-
-    .empty h2 {
-      margin-bottom: 10px;
-    }
-
-    .empty p {
-      color: #9999a5;
-      line-height: 1.5;
-    }
-
-    .browse {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 14px 22px;
-      background: #9b4dff;
-      color: white;
-      text-decoration: none;
-      border-radius: 12px;
-      font-weight: bold;
-    }
-
-    .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 78px;
-      background: #111116;
-      border-top: 1px solid #292933;
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      z-index: 20;
-    }
-
-    .nav-item {
-      color: #9999a5;
-      text-decoration: none;
-      text-align: center;
-      font-size: 12px;
-    }
-
-    .nav-item.active {
-      color: #9b4dff;
-    }
-
-    .nav-icon {
-      display: block;
-      font-size: 23px;
-      margin-bottom: 4px;
-    }
-  </style>
 </head>
+
 
 <body>
 
+
 <header>
-  <div class="logo">
-    Zyn<span>ora</span>
-  </div>
+
+<div class="logo">
+Zynora
+</div>
+
 </header>
+
 
 <main>
 
-  <h1>My Library</h1>
+<h1>
+My Library
+</h1>
 
-  <p class="subtitle">
-    Your saved shows and watchlist.
-  </p>
+<p class="subtitle">
+Your saved shows and watchlist.
+</p>
 
-  <div class="empty">
 
-    <div class="empty-icon">▣</div>
+<!-- COINS -->
 
-    <h2>Your library is empty</h2>
+<div class="coin-box">
 
-    <p>
-      Save your favorite Zynora stories here
-      so you can easily find them later.
-    </p>
+<div class="coin-title">
+Your Zynora Coins
+</div>
 
-    <a href="discover.html" class="browse">
-      Browse Shows
-    </a>
+<div class="coin-number">
+🪙 100
+</div>
 
-  </div>
+</div>
+
+
+<!-- LIBRARY TABS -->
+
+<div class="tabs">
+
+<div class="tab active">
+Saved
+</div>
+
+<div class="tab">
+History
+</div>
+
+<div class="tab">
+Downloads
+</div>
+
+</div>
+
+
+<!-- EMPTY LIBRARY -->
+
+<div class="empty">
+
+<div class="empty-icon">
+▣
+</div>
+
+<h2>
+Your library is empty
+</h2>
+
+<p>
+Save your favorite Zynora stories here
+so you can easily find them later.
+</p>
+
+<a
+href="discover.html"
+class="browse">
+
+Browse Shows
+
+</a>
+
+</div>
 
 </main>
 
+
+<!-- BOTTOM NAV -->
+
 <nav class="bottom-nav">
 
-  <a href="index.html" class="nav-item">
-    <span class="nav-icon">⌂</span>
-    Home
-  </a>
 
-  <a href="discover.html" class="nav-item">
-    <span class="nav-icon">◉</span>
-    Discover
-  </a>
+<a
+href="index.html"
+class="nav-item">
 
-  <a href="library.html" class="nav-item active">
-    <span class="nav-icon">▣</span>
-    Library
-  </a>
+<span class="nav-icon">
+⌂
+</span>
 
-  <a href="#" class="nav-item">
-    <span class="nav-icon">●</span>
-    Profile
-  </a>
+Home
+
+</a>
+
+
+<a
+href="discover.html"
+class="nav-item">
+
+<span class="nav-icon">
+◉
+</span>
+
+Discover
+
+</a>
+
+
+<a
+href="library.html"
+class="nav-item active">
+
+<span class="nav-icon">
+▣
+</span>
+
+Library
+
+</a>
+
+
+<a
+href="profile.html"
+class="nav-item">
+
+<span class="nav-icon">
+●
+</span>
+
+Profile
+
+</a>
+
 
 </nav>
 
+
 </body>
+
 </html>
