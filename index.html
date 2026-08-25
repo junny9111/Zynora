@@ -1,191 +1,428 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Zynora</title>
 
+  <!-- Stylish fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
   <style>
+
     * {
       box-sizing: border-box;
     }
 
     body {
       margin: 0;
-      background: #09090d;
+      background: #08080c;
       color: white;
-      font-family: Arial, sans-serif;
+      font-family: "Inter", sans-serif;
       padding-bottom: 90px;
     }
 
+    /* =========================
+       HEADER
+    ========================= */
+
     header {
       height: 75px;
+
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 18px;
-      background: #111116;
-      border-bottom: 1px solid #292933;
+
+      padding: 0 20px;
+
+      background: rgba(12, 12, 18, 0.96);
+
+      border-bottom: 1px solid #24242e;
+
+      position: sticky;
+      top: 0;
+
+      z-index: 100;
+
+      backdrop-filter: blur(15px);
     }
 
     .logo {
-      font-size: 30px;
+      font-family: "Outfit", sans-serif;
+
+      font-size: 31px;
+
       font-weight: 800;
+
+      letter-spacing: -1.5px;
     }
 
     .logo span {
-      color: #9b4dff;
+      color: #a855f7;
     }
 
     .search {
-      width: 145px;
+      width: 150px;
+
       padding: 11px 15px;
+
       border-radius: 25px;
-      border: 1px solid #34343e;
-      background: #1b1b22;
+
+      border: 1px solid #343440;
+
+      background: #181820;
+
       color: white;
+
+      font-family: "Inter", sans-serif;
+
       outline: none;
     }
 
+    .search::placeholder {
+      color: #777783;
+    }
+
+
+    /* =========================
+       HERO
+    ========================= */
+
     .hero {
+
       min-height: 600px;
-      padding: 150px 38px 60px;
-      background: linear-gradient(90deg, #241044, #100b18 60%, #09090d);
+
+      padding: 145px 35px 60px;
+
+      display: flex;
+
+      flex-direction: column;
+
+      justify-content: flex-end;
+
+      background:
+        linear-gradient(
+          180deg,
+          transparent 20%,
+          rgba(8,8,12,0.95) 90%
+        ),
+        linear-gradient(
+          90deg,
+          #29104b,
+          #120c1c 60%,
+          #08080c
+        );
     }
 
     .badge {
-      display: inline-block;
-      background: #9b4dff;
-      padding: 9px 15px;
+
+      width: fit-content;
+
+      padding: 8px 14px;
+
       border-radius: 20px;
-      font-weight: bold;
-      font-size: 13px;
+
+      background: #a855f7;
+
+      font-size: 11px;
+
+      font-weight: 700;
+
+      letter-spacing: 1px;
     }
 
     .hero h1 {
-      font-size: 48px;
-      line-height: 1.05;
-      margin: 25px 0 15px;
+
+      font-family: "Outfit", sans-serif;
+
+      font-size: clamp(42px, 10vw, 64px);
+
+      line-height: 0.98;
+
+      letter-spacing: -2px;
+
+      max-width: 650px;
+
+      margin: 20px 0 15px;
     }
 
     .hero p {
+
       color: #c9c7d0;
-      line-height: 1.5;
-      font-size: 18px;
-      max-width: 550px;
+
+      line-height: 1.6;
+
+      font-size: 16px;
+
+      max-width: 540px;
+
+      margin: 0;
     }
 
     .watch-button {
-      display: inline-block;
-      margin-top: 20px;
+
+      width: fit-content;
+
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 8px;
+
+      margin-top: 24px;
+
       padding: 15px 24px;
+
       border-radius: 12px;
+
       background: white;
-      color: #09090d;
+
+      color: #08080c;
+
       text-decoration: none;
-      font-weight: bold;
+
+      font-family: "Outfit", sans-serif;
+
+      font-weight: 700;
+
+      transition: transform .2s;
     }
 
+    .watch-button:hover {
+      transform: translateY(-2px);
+    }
+
+
+    /* =========================
+       SECTIONS
+    ========================= */
+
     section {
-      padding: 25px 38px;
+      padding: 28px 20px;
     }
 
     section h2 {
+
+      font-family: "Outfit", sans-serif;
+
       font-size: 25px;
+
+      letter-spacing: -0.5px;
+
+      margin: 0 0 18px;
     }
 
+
+    /* =========================
+       CATEGORIES
+    ========================= */
+
     .categories {
+
       display: flex;
+
       gap: 10px;
+
       overflow-x: auto;
+
+      scrollbar-width: none;
+    }
+
+    .categories::-webkit-scrollbar {
+      display: none;
     }
 
     .category {
+
       flex: 0 0 auto;
-      padding: 11px 18px;
+
+      padding: 10px 17px;
+
       border-radius: 22px;
-      background: #1b1b22;
-      border: 1px solid #34343e;
+
+      background: #17171f;
+
+      border: 1px solid #30303b;
+
+      color: #b8b7c1;
+
+      font-size: 13px;
+
+      font-weight: 600;
     }
 
     .category.active {
-      background: #9b4dff;
-      border-color: #9b4dff;
+
+      background: #a855f7;
+
+      border-color: #a855f7;
+
+      color: white;
     }
 
+
+    /* =========================
+       SHOW CARDS
+    ========================= */
+
     .shows {
+
       display: grid;
+
       grid-template-columns: repeat(2, 1fr);
+
       gap: 14px;
     }
 
     .show {
-      background: #15151c;
-      border-radius: 14px;
+
+      background: #14141b;
+
+      border-radius: 15px;
+
       overflow: hidden;
-      border: 1px solid #292933;
+
+      border: 1px solid #282832;
+
+      transition: transform .2s;
+    }
+
+    .show:hover {
+      transform: translateY(-3px);
     }
 
     .poster {
+
       height: 190px;
+
       display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 12px;
-      font-weight: bold;
-      background: linear-gradient(135deg, #7b2cff, #17101f);
+
+      align-items: flex-end;
+
+      padding: 15px;
+
+      font-family: "Outfit", sans-serif;
+
+      font-size: 19px;
+
+      font-weight: 700;
+
+      line-height: 1.1;
+
+      background:
+        linear-gradient(
+          180deg,
+          transparent,
+          rgba(0,0,0,.8)
+        ),
+        linear-gradient(
+          135deg,
+          #8b3dff,
+          #17101f
+        );
     }
 
     .show-info {
-      padding: 12px;
+      padding: 13px;
     }
 
     .show-info h3 {
-      margin: 0 0 6px;
+
+      font-family: "Outfit", sans-serif;
+
+      margin: 0 0 5px;
+
       font-size: 16px;
+
+      font-weight: 600;
     }
 
     .show-info p {
+
       margin: 0;
-      color: #9999a5;
-      font-size: 13px;
-    }
 
-    .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 78px;
-      background: #111116;
-      border-top: 1px solid #292933;
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      z-index: 20;
-    }
+      color: #858592;
 
-    .nav-item {
-      color: #9999a5;
-      text-decoration: none;
-      text-align: center;
       font-size: 12px;
     }
 
+
+    /* =========================
+       BOTTOM NAV
+    ========================= */
+
+    .bottom-nav {
+
+      position: fixed;
+
+      bottom: 0;
+
+      left: 0;
+
+      right: 0;
+
+      height: 78px;
+
+      background: rgba(14,14,19,.97);
+
+      border-top: 1px solid #292933;
+
+      display: flex;
+
+      justify-content: space-around;
+
+      align-items: center;
+
+      z-index: 200;
+
+      backdrop-filter: blur(15px);
+    }
+
+    .nav-item {
+
+      color: #777783;
+
+      text-decoration: none;
+
+      text-align: center;
+
+      font-size: 11px;
+
+      font-weight: 600;
+    }
+
     .nav-item.active {
-      color: #9b4dff;
+      color: #a855f7;
     }
 
     .nav-icon {
+
       display: block;
-      font-size: 23px;
+
+      font-size: 22px;
+
       margin-bottom: 4px;
     }
+
   </style>
+
 </head>
 
+
 <body>
+
+
+<!-- =========================
+     HEADER
+========================= -->
 
 <header>
 
@@ -203,95 +440,177 @@
 </header>
 
 
+
+<!-- =========================
+     MAIN
+========================= -->
+
 <main>
+
+
+  <!-- HERO -->
 
   <div class="hero">
 
-    <span class="badge">ZYNORA ORIGINAL</span>
+    <span class="badge">
+      ZYNORA ORIGINAL
+    </span>
 
-    <h1>The Billionaire's Secret</h1>
+    <h1>
+      The Billionaire's Secret
+    </h1>
 
     <p>
-      Discover addictive short dramas, romance,
-      suspense and original series made for Zynora.
+      Discover addictive short dramas,
+      romance, suspense and original
+      stories made for Zynora.
     </p>
 
-    <a href="player.html" class="watch-button">
+    <a
+      href="player.html"
+      class="watch-button">
+
       ▶ Watch Now
+
     </a>
 
   </div>
 
 
+
+  <!-- EXPLORE -->
+
   <section>
 
-    <h2>Explore</h2>
+    <h2>
+      Explore
+    </h2>
 
     <div class="categories">
 
-      <div class="category active">For You</div>
-      <div class="category">Romance</div>
-      <div class="category">Drama</div>
-      <div class="category">Action</div>
-      <div class="category">Suspense</div>
+      <div class="category active">
+        For You
+      </div>
+
+      <div class="category">
+        Romance
+      </div>
+
+      <div class="category">
+        Drama
+      </div>
+
+      <div class="category">
+        Action
+      </div>
+
+      <div class="category">
+        Suspense
+      </div>
 
     </div>
 
   </section>
 
 
+
+  <!-- TRENDING -->
+
   <section>
 
-    <h2>Trending on Zynora</h2>
+    <h2>
+      Trending on Zynora
+    </h2>
 
     <div class="shows">
 
+
       <div class="show">
+
         <div class="poster">
           The Billionaire's Secret
         </div>
 
         <div class="show-info">
-          <h3>The Billionaire's Secret</h3>
-          <p>Drama • Romance</p>
+
+          <h3>
+            The Billionaire's Secret
+          </h3>
+
+          <p>
+            Drama • Romance
+          </p>
+
         </div>
+
       </div>
 
 
+
       <div class="show">
+
         <div class="poster">
           Forbidden Love
         </div>
 
         <div class="show-info">
-          <h3>Forbidden Love</h3>
-          <p>Romance • Drama</p>
+
+          <h3>
+            Forbidden Love
+          </h3>
+
+          <p>
+            Romance • Drama
+          </p>
+
         </div>
+
       </div>
 
 
+
       <div class="show">
+
         <div class="poster">
           Hidden Truth
         </div>
 
         <div class="show-info">
-          <h3>Hidden Truth</h3>
-          <p>Suspense • Drama</p>
+
+          <h3>
+            Hidden Truth
+          </h3>
+
+          <p>
+            Suspense • Drama
+          </p>
+
         </div>
+
       </div>
 
 
+
       <div class="show">
+
         <div class="poster">
           Dangerous Deal
         </div>
 
         <div class="show-info">
-          <h3>Dangerous Deal</h3>
-          <p>Action • Suspense</p>
+
+          <h3>
+            Dangerous Deal
+          </h3>
+
+          <p>
+            Action • Suspense
+          </p>
+
         </div>
+
       </div>
+
 
     </div>
 
@@ -300,29 +619,66 @@
 </main>
 
 
+
+<!-- =========================
+     NAVIGATION
+========================= -->
+
 <nav class="bottom-nav">
 
-  <a href="index.html" class="nav-item active">
-    <span class="nav-icon">⌂</span>
+  <a
+    href="index.html"
+    class="nav-item active">
+
+    <span class="nav-icon">
+      ⌂
+    </span>
+
     Home
+
   </a>
 
-  <a href="discover.html" class="nav-item">
-    <span class="nav-icon">◉</span>
+
+  <a
+    href="discover.html"
+    class="nav-item">
+
+    <span class="nav-icon">
+      ◉
+    </span>
+
     Discover
+
   </a>
 
-  <a href="library.html" class="nav-item">
-    <span class="nav-icon">▣</span>
+
+  <a
+    href="library.html"
+    class="nav-item">
+
+    <span class="nav-icon">
+      ▣
+    </span>
+
     Library
+
   </a>
 
-  <a href="login.html" class="nav-item">
-    <span class="nav-icon">●</span>
+
+  <a
+    href="login.html"
+    class="nav-item">
+
+    <span class="nav-icon">
+      ●
+    </span>
+
     Account
+
   </a>
 
 </nav>
+
 
 
 <script>
@@ -330,29 +686,39 @@
   const searchBox =
     document.getElementById("searchBox");
 
-  searchBox.addEventListener("input", function() {
 
-    const value =
-      this.value.toLowerCase();
+  searchBox.addEventListener(
+    "input",
+    function() {
 
-    const shows =
-      document.querySelectorAll(".show");
+      const value =
+        this.value.toLowerCase();
 
-    shows.forEach(function(show) {
 
-      const title =
-        show.innerText.toLowerCase();
+      const shows =
+        document.querySelectorAll(".show");
 
-      show.style.display =
-        title.includes(value)
-          ? ""
-          : "none";
 
-    });
+      shows.forEach(
+        function(show) {
 
-  });
+          const title =
+            show.innerText.toLowerCase();
+
+
+          show.style.display =
+            title.includes(value)
+              ? ""
+              : "none";
+
+        }
+      );
+
+    }
+  );
 
 </script>
+
 
 </body>
 </html>
