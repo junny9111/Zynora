@@ -13,360 +13,331 @@
 
 <style>
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
 }
 
-body {
-    background:
-        radial-gradient(circle at 50% 25%, rgba(145,55,255,.14), transparent 32%),
-        #08070c;
-    color: white;
-    font-family: "Playfair Display", Georgia, serif;
-    padding-bottom: 95px;
+body{
+min-height:100vh;
+background:
+radial-gradient(circle at 50% 16%,rgba(145,55,255,.16),transparent 34%),
+#08070c;
+color:white;
+font-family:"Playfair Display",Georgia,serif;
+padding-bottom:105px;
 }
 
 /* HEADER */
 
-header {
-    height: 95px;
-    background: #111016;
-    border-bottom: 1px solid rgba(173,77,255,.25);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 22px;
-    position: sticky;
-    top: 0;
-    z-index: 20;
+header{
+height:95px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 22px;
+background:#111016;
+border-bottom:1px solid rgba(173,77,255,.25);
+position:sticky;
+top:0;
+z-index:30;
 }
 
-.logo {
-    font-family: "Cinzel", serif;
-    font-size: 37px;
-    font-weight: 700;
-    letter-spacing: -2px;
-    background: linear-gradient(90deg,#fff,#d19aff,#8e38ff);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    text-shadow: 0 0 25px rgba(155,70,255,.35);
+.logo{
+font-family:"Cinzel",serif;
+font-size:38px;
+font-weight:700;
+letter-spacing:-2px;
+background:linear-gradient(90deg,#ffffff,#d19aff,#8e38ff);
+-webkit-background-clip:text;
+background-clip:text;
+color:transparent;
+text-shadow:0 0 25px rgba(155,70,255,.35);
 }
 
-.search {
-    width: 150px;
-    background: #1a1920;
-    border: 1px solid rgba(173,77,255,.2);
-    border-radius: 30px;
-    padding: 13px 18px;
-    color: #aaa;
-    font-family: "Playfair Display",serif;
+.search{
+width:155px;
+padding:13px 17px;
+border-radius:30px;
+border:1px solid rgba(173,77,255,.25);
+background:#1a1920;
+color:white;
+font-family:"Playfair Display",serif;
+outline:none;
 }
 
-/* COIN BAR */
-
-.coin-bar {
-    margin: 18px 20px 0;
-    padding: 14px 18px;
-    border-radius: 18px;
-    background: linear-gradient(
-        135deg,
-        rgba(117,35,200,.25),
-        rgba(40,25,70,.5)
-    );
-    border: 1px solid rgba(173,77,255,.25);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.coins {
-    font-family: "Cinzel",serif;
-    font-size: 16px;
-}
-
-.coin {
-    color: #ffd95c;
-    font-size: 21px;
-}
-
-.reward {
-    color: #c88aff;
-    font-size: 14px;
+.search::placeholder{
+color:#85818c;
 }
 
 /* HERO */
 
-.hero {
-    margin: 20px;
-    min-height: 520px;
-    border-radius: 28px;
-    overflow: hidden;
-    position: relative;
-    background:
-        linear-gradient(
-            90deg,
-            rgba(12,8,20,.98) 0%,
-            rgba(35,12,60,.78) 45%,
-            rgba(10,7,15,.35) 100%
-        );
-    border: 1px solid rgba(173,77,255,.25);
-    box-shadow: 0 0 50px rgba(120,35,220,.12);
+.hero{
+margin:20px;
+min-height:500px;
+border-radius:28px;
+position:relative;
+overflow:hidden;
+background:
+radial-gradient(circle at 76% 25%,rgba(150,60,245,.28),transparent 25%),
+linear-gradient(135deg,#291140,#120b1d 60%,#08070c);
+border:1px solid rgba(173,77,255,.25);
+box-shadow:0 0 50px rgba(120,35,220,.14);
 }
 
-.hero-content {
-    position: absolute;
-    left: 28px;
-    right: 28px;
-    bottom: 35px;
+.hero-content{
+position:absolute;
+left:28px;
+right:28px;
+bottom:36px;
 }
 
-.badge {
-    display: inline-block;
-    padding: 11px 18px;
-    border-radius: 25px;
-    background: linear-gradient(135deg,#a84fff,#7521e4);
-    font-family: "Cinzel",serif;
-    font-size: 13px;
-    font-weight: 700;
-    margin-bottom: 20px;
+.badge{
+display:inline-block;
+padding:10px 17px;
+border-radius:25px;
+background:linear-gradient(135deg,#a84fff,#7521e4);
+font-family:"Cinzel",serif;
+font-size:12px;
+font-weight:700;
+margin-bottom:20px;
 }
 
-.hero h1 {
-    font-family: "Cinzel",serif;
-    font-size: 43px;
-    line-height: 1.15;
-    margin-bottom: 15px;
+.hero h1{
+font-family:"Cinzel",serif;
+font-size:42px;
+line-height:1.12;
+margin-bottom:15px;
 }
 
-.hero p {
-    color: #c5c0cc;
-    font-size: 18px;
-    line-height: 1.7;
-    max-width: 370px;
+.hero p{
+max-width:390px;
+color:#c4bfcb;
+font-size:17px;
+line-height:1.65;
 }
 
-.watch {
-    margin-top: 25px;
-    padding: 16px 25px;
-    border: none;
-    border-radius: 17px;
-    background: white;
-    color: #111;
-    font-family: "Cinzel",serif;
-    font-weight: 700;
-    font-size: 16px;
+.watch{
+margin-top:24px;
+padding:15px 24px;
+border:none;
+border-radius:16px;
+background:white;
+color:#111;
+font-family:"Cinzel",serif;
+font-size:14px;
+font-weight:700;
+cursor:pointer;
 }
 
 /* SECTIONS */
 
-section {
-    padding: 10px 20px 20px;
+section{
+padding:10px 20px 22px;
 }
 
-.section-title {
-    font-family: "Cinzel",serif;
-    font-size: 25px;
-    margin-bottom: 17px;
+.section-title{
+font-family:"Cinzel",serif;
+font-size:23px;
+margin-bottom:16px;
 }
 
-.section-title span {
-    float: right;
-    font-family: "Playfair Display",serif;
-    font-size: 14px;
-    color: #b66aff;
-    margin-top: 7px;
+.section-title a{
+float:right;
+font-family:"Playfair Display",serif;
+font-size:14px;
+color:#b66aff;
+text-decoration:none;
+margin-top:5px;
 }
 
-/* CATEGORY */
+/* CATEGORIES */
 
-.categories {
-    display: flex;
-    gap: 10px;
-    overflow-x: auto;
-    padding-bottom: 12px;
+.categories{
+display:flex;
+gap:10px;
+overflow-x:auto;
+padding-bottom:10px;
 }
 
-.categories::-webkit-scrollbar {
-    display: none;
+.categories::-webkit-scrollbar{
+display:none;
 }
 
-.category {
-    flex: 0 0 auto;
-    padding: 12px 20px;
-    border-radius: 25px;
-    background: #18171e;
-    border: 1px solid #302c38;
-    font-family: "Cinzel",serif;
-    color: #d0ccd6;
+.category{
+flex:0 0 auto;
+padding:11px 18px;
+border-radius:24px;
+background:#17161d;
+border:1px solid #302c38;
+color:#c9c4d0;
+font-family:"Cinzel",serif;
+font-size:11px;
 }
 
-.category.active {
-    background: linear-gradient(135deg,#a84fff,#7521e4);
-    color: white;
-    border-color: transparent;
+.category.active{
+background:linear-gradient(135deg,#a84fff,#7521e4);
+border-color:transparent;
+color:white;
 }
 
-/* DRAMA CARDS */
+/* DRAMAS */
 
-.drama-row {
-    display: flex;
-    gap: 15px;
-    overflow-x: auto;
-    padding-bottom: 15px;
+.drama-row{
+display:flex;
+gap:15px;
+overflow-x:auto;
+padding-bottom:12px;
 }
 
-.drama-row::-webkit-scrollbar {
-    display: none;
+.drama-row::-webkit-scrollbar{
+display:none;
 }
 
-.drama {
-    flex: 0 0 155px;
+.drama{
+flex:0 0 155px;
+cursor:pointer;
 }
 
-.poster {
-    height: 215px;
-    border-radius: 18px;
-    background:
-        linear-gradient(
-            145deg,
-            #9b3fff,
-            #251037 60%,
-            #09070c
-        );
-    border: 1px solid rgba(173,77,255,.25);
-    display: flex;
-    align-items: flex-end;
-    padding: 13px;
-    overflow: hidden;
-    box-shadow: 0 8px 25px rgba(0,0,0,.3);
+.poster{
+height:215px;
+border-radius:18px;
+display:flex;
+align-items:flex-end;
+padding:13px;
+border:1px solid rgba(173,77,255,.2);
+box-shadow:0 8px 25px rgba(0,0,0,.3);
 }
 
-.poster.second {
-    background: linear-gradient(145deg,#53208d,#171022,#08070c);
+.p1{
+background:linear-gradient(145deg,#a84fff,#261034,#08070c);
 }
 
-.poster.third {
-    background: linear-gradient(145deg,#7b285d,#25101d,#08070c);
+.p2{
+background:linear-gradient(145deg,#5b258c,#171022,#08070c);
 }
 
-.poster.fourth {
-    background: linear-gradient(145deg,#303b91,#101328,#08070c);
+.p3{
+background:linear-gradient(145deg,#87305e,#28101f,#08070c);
 }
 
-.poster-title {
-    font-family: "Cinzel",serif;
-    font-size: 17px;
-    text-shadow: 0 2px 10px #000;
+.p4{
+background:linear-gradient(145deg,#35459c,#10142b,#08070c);
 }
 
-.drama-name {
-    font-family: "Playfair Display",serif;
-    font-size: 16px;
-    margin-top: 9px;
+.poster-title{
+font-family:"Cinzel",serif;
+font-size:16px;
+line-height:1.25;
+text-shadow:0 2px 12px #000;
 }
 
-.episode {
-    color: #9994a2;
-    font-size: 13px;
-    margin-top: 4px;
+.drama-name{
+font-size:16px;
+margin-top:9px;
 }
 
-/* CONTINUE */
-
-.continue-card {
-    background: #15141b;
-    border: 1px solid rgba(173,77,255,.18);
-    border-radius: 18px;
-    padding: 16px;
-    display: flex;
-    gap: 15px;
-    align-items: center;
+.drama-info{
+color:#8e8996;
+font-size:12px;
+margin-top:4px;
 }
 
-.continue-poster {
-    width: 75px;
-    height: 100px;
-    border-radius: 12px;
-    background: linear-gradient(145deg,#a94cff,#21102f);
+/* CONTINUE WATCHING */
+
+.continue-card{
+display:flex;
+gap:15px;
+padding:15px;
+background:#15141b;
+border:1px solid rgba(173,77,255,.17);
+border-radius:20px;
+align-items:center;
 }
 
-.continue-info {
-    flex: 1;
+.continue-poster{
+width:80px;
+height:105px;
+border-radius:14px;
+background:linear-gradient(145deg,#a84fff,#24102f);
+flex:0 0 80px;
 }
 
-.continue-info h3 {
-    font-family: "Cinzel",serif;
-    font-size: 16px;
-    margin-bottom: 8px;
+.continue-info{
+flex:1;
 }
 
-.progress {
-    height: 5px;
-    background: #302d35;
-    border-radius: 5px;
-    overflow: hidden;
+.continue-info h3{
+font-family:"Cinzel",serif;
+font-size:14px;
+margin-bottom:8px;
 }
 
-.progress div {
-    width: 62%;
-    height: 100%;
-    background: linear-gradient(90deg,#a84fff,#7521e4);
+.progress{
+height:5px;
+border-radius:5px;
+background:#302d35;
+overflow:hidden;
 }
 
-.continue-info small {
-    display: block;
-    margin-top: 8px;
-    color: #9994a2;
+.progress div{
+height:100%;
+width:62%;
+background:linear-gradient(90deg,#a84fff,#7521e4);
 }
 
-/* NAVIGATION */
-
-.bottom-nav {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 92px;
-    background: rgba(17,16,22,.98);
-    border-top: 1px solid rgba(173,77,255,.2);
-    display: grid;
-    grid-template-columns: repeat(4,1fr);
-    z-index: 30;
+.continue-info small{
+display:block;
+margin-top:8px;
+color:#9994a2;
 }
 
-.nav-item {
-    text-decoration: none;
-    color: #777582;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 7px;
-    font-family: "Cinzel",serif;
-    font-size: 12px;
+/* FIVE BUTTON NAV */
+
+.bottom-nav{
+position:fixed;
+left:0;
+right:0;
+bottom:0;
+height:90px;
+background:#111016;
+display:grid;
+grid-template-columns:repeat(5,1fr);
+border-top:1px solid rgba(173,77,255,.2);
+z-index:50;
 }
 
-.nav-icon {
-    font-size: 25px;
+.nav-item{
+text-decoration:none;
+color:#777582;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+gap:5px;
+font-family:"Cinzel",serif;
+font-size:9px;
 }
 
-.nav-item.active {
-    color: #a94dff;
-    text-shadow: 0 0 15px rgba(169,77,255,.5);
+.nav-icon{
+font-size:21px;
 }
 
-@media(max-width:600px) {
+.nav-item.active{
+color:#a94dff;
+text-shadow:0 0 15px rgba(169,77,255,.5);
+}
 
-    .hero {
-        min-height: 500px;
-    }
+@media(max-width:600px){
 
-    .hero h1 {
-        font-size: 40px;
-    }
+.hero h1{
+font-size:39px;
+}
+
+.hero{
+min-height:480px;
+}
 
 }
 
@@ -377,9 +348,12 @@ section {
 
 <header>
 
-<div class="logo">Zynora</div>
+<div class="logo">
+Zynora
+</div>
 
 <input
+id="searchBox"
 class="search"
 type="search"
 placeholder="Search..."
@@ -387,24 +361,7 @@ placeholder="Search..."
 
 </header>
 
-
-<!-- COINS -->
-
-<div class="coin-bar">
-
-<div class="coins">
-<span class="coin">🪙</span>
-<span id="coinBalance">100</span> Coins
-</div>
-
-<div class="reward">
-🎁 Daily Reward
-</div>
-
-</div>
-
-
-<!-- FEATURED -->
+<!-- FEATURED STORY -->
 
 <div class="hero">
 
@@ -423,14 +380,20 @@ A powerful billionaire. A hidden identity.
 One dangerous secret that could change everything.
 </p>
 
-<button class="watch" onclick="watchDrama()">
+<button
+class="watch"
+onclick="watchDrama(
+'billionaire-secret',
+'The Billionaire\\'s Secret'
+)">
+
 ▶ Watch Now
+
 </button>
 
 </div>
 
 </div>
-
 
 <!-- EXPLORE -->
 
@@ -442,16 +405,29 @@ Explore
 
 <div class="categories">
 
-<div class="category active">For You</div>
-<div class="category">Romance</div>
-<div class="category">Drama</div>
-<div class="category">Action</div>
-<div class="category">Suspense</div>
+<div class="category active">
+For You
+</div>
+
+<div class="category">
+Romance
+</div>
+
+<div class="category">
+Drama
+</div>
+
+<div class="category">
+Action
+</div>
+
+<div class="category">
+Suspense
+</div>
 
 </div>
 
 </section>
-
 
 <!-- TRENDING -->
 
@@ -459,14 +435,24 @@ Explore
 
 <div class="section-title">
 Trending Now
-<span>See All</span>
+
+<a href="discover.html">
+See All
+</a>
+
 </div>
 
 <div class="drama-row">
 
-<div class="drama">
+<div
+class="drama"
+data-title="The Billionaire's Secret"
+onclick="watchDrama(
+'billionaire-secret',
+'The Billionaire\\'s Secret'
+)">
 
-<div class="poster">
+<div class="poster p1">
 
 <div class="poster-title">
 The Billionaire's Secret
@@ -478,16 +464,21 @@ The Billionaire's Secret
 The Billionaire's Secret
 </div>
 
-<div class="episode">
-Episode 12
+<div class="drama-info">
+18 Episodes
 </div>
 
 </div>
 
+<div
+class="drama"
+data-title="Love After Lies"
+onclick="watchDrama(
+'love-after-lies',
+'Love After Lies'
+)">
 
-<div class="drama">
-
-<div class="poster second">
+<div class="poster p2">
 
 <div class="poster-title">
 Love After Lies
@@ -499,16 +490,21 @@ Love After Lies
 Love After Lies
 </div>
 
-<div class="episode">
-Episode 8
+<div class="drama-info">
+20 Episodes
 </div>
 
 </div>
 
+<div
+class="drama"
+data-title="Forbidden Promise"
+onclick="watchDrama(
+'forbidden-promise',
+'Forbidden Promise'
+)">
 
-<div class="drama">
-
-<div class="poster third">
+<div class="poster p3">
 
 <div class="poster-title">
 Forbidden Promise
@@ -520,16 +516,21 @@ Forbidden Promise
 Forbidden Promise
 </div>
 
-<div class="episode">
-Episode 15
+<div class="drama-info">
+24 Episodes
 </div>
 
 </div>
 
+<div
+class="drama"
+data-title="Hidden Heir"
+onclick="watchDrama(
+'hidden-heir',
+'Hidden Heir'
+)">
 
-<div class="drama">
-
-<div class="poster fourth">
+<div class="poster p4">
 
 <div class="poster-title">
 Hidden Heir
@@ -541,8 +542,8 @@ Hidden Heir
 Hidden Heir
 </div>
 
-<div class="episode">
-Episode 6
+<div class="drama-info">
+16 Episodes
 </div>
 
 </div>
@@ -550,7 +551,6 @@ Episode 6
 </div>
 
 </section>
-
 
 <!-- CONTINUE WATCHING -->
 
@@ -575,7 +575,7 @@ The Billionaire's Secret
 </div>
 
 <small>
-Episode 12 • 62% watched
+Episode 1 • Continue watching
 </small>
 
 </div>
@@ -584,54 +584,124 @@ Episode 12 • 62% watched
 
 </section>
 
-
-<!-- NAVIGATION -->
+<!-- FIVE BUTTON NAVIGATION -->
 
 <nav class="bottom-nav">
 
-<a class="nav-item active" href="index.html">
+<a
+href="index.html"
+class="nav-item active">
 
-<div class="nav-icon">⌂</div>
-<div>Home</div>
+<span class="nav-icon">
+⌂
+</span>
 
-</a>
-
-
-<a class="nav-item" href="discover.html">
-
-<div class="nav-icon">◉</div>
-<div>Discover</div>
+Home
 
 </a>
 
+<a
+href="discover.html"
+class="nav-item">
 
-<a class="nav-item" href="library.html">
+<span class="nav-icon">
+◉
+</span>
 
-<div class="nav-icon">□</div>
-<div>Library</div>
+Discover
 
 </a>
 
+<a
+href="rewards.html"
+class="nav-item">
 
-<a class="nav-item" href="profile.html">
+<span class="nav-icon">
+🎁
+</span>
 
-<div class="nav-icon">●</div>
-<div>Profile</div>
+Rewards
+
+</a>
+
+<a
+href="library.html"
+class="nav-item">
+
+<span class="nav-icon">
+▣
+</span>
+
+Library
+
+</a>
+
+<a
+href="profile.html"
+class="nav-item">
+
+<span class="nav-icon">
+●
+</span>
+
+Profile
 
 </a>
 
 </nav>
 
-
 <script>
 
-function watchDrama() {
+function watchDrama(
+dramaId,
+title
+){
 
-alert(
-"🎬 The Billionaire's Secret\n\nEpisode 1 is ready to watch!"
+localStorage.setItem(
+"zynoraCurrentDramaId",
+dramaId
 );
 
+localStorage.setItem(
+"zynoraCurrentDramaTitle",
+title
+);
+
+window.location.href =
+"player.html";
+
 }
+
+
+/* SEARCH HOME DRAMAS */
+
+document
+.getElementById("searchBox")
+.addEventListener(
+"input",
+function(){
+
+const value =
+this.value
+.toLowerCase();
+
+document
+.querySelectorAll(".drama")
+.forEach(function(drama){
+
+const title =
+drama.dataset.title
+.toLowerCase();
+
+drama.style.display =
+title.includes(value)
+? ""
+: "none";
+
+});
+
+}
+);
 
 </script>
 
