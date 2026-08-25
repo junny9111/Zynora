@@ -13,117 +13,222 @@
 
 body {
   margin: 0;
+  min-height: 100vh;
   background: #09090d;
   color: white;
   font-family: Arial, sans-serif;
-  min-height: 100vh;
 }
 
+/* HEADER */
+
 header {
-  height: 72px;
+  height: 74px;
   background: #111116;
   border-bottom: 1px solid #292933;
+
   display: flex;
   align-items: center;
+
   padding: 0 20px;
 }
+
+/* BACK BUTTON */
 
 .back {
   color: white;
   text-decoration: none;
-  font-size: 34px;
+  font-size: 38px;
+  line-height: 1;
+
   margin-right: 18px;
 }
 
-.logo {
-  font-size: 29px;
-  font-weight: 800;
+/* STYLISH ZYNORA LOGO */
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 31px;
+  font-weight: 900;
+
+  letter-spacing: -1.5px;
+  line-height: 1;
 }
 
-.logo span {
-  color: #a855f7;
+.brand-z {
+  font-size: 40px;
+  font-style: italic;
+
+  background: linear-gradient(
+    135deg,
+    #ffffff 10%,
+    #d8b4fe 45%,
+    #9333ea 100%
+  );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+
+  text-shadow:
+    0 0 12px rgba(168,85,247,.35),
+    0 0 25px rgba(168,85,247,.18);
 }
+
+.brand-text {
+  background: linear-gradient(
+    135deg,
+    #ffffff 0%,
+    #d8b4fe 45%,
+    #9333ea 100%
+  );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+}
+
+/* MAIN */
 
 main {
-  padding: 45px 20px 120px;
+  padding: 48px 20px 125px;
   text-align: center;
 }
 
+/* PROFILE AVATAR */
+
 .avatar {
-  width: 95px;
-  height: 95px;
-  margin: auto auto 20px;
+  width: 105px;
+  height: 105px;
+
+  margin: 0 auto 20px;
+
   border-radius: 50%;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  background: linear-gradient(135deg,#a855f7,#7c3aed);
+  background:
+    linear-gradient(
+      135deg,
+      #c084fc,
+      #9333ea,
+      #6d28d9
+    );
 
-  font-size: 40px;
+  border: 3px solid rgba(255,255,255,.15);
+
+  box-shadow:
+    0 0 25px rgba(168,85,247,.35);
+
+  font-family: Georgia, serif;
+  font-size: 43px;
   font-weight: bold;
 }
 
+/* TITLE */
+
 h1 {
   margin: 0;
-  font-size: 29px;
+
+  font-size: 30px;
+  font-weight: 800;
 }
 
 .subtitle {
+  margin-top: 9px;
+
   color: #9999a5;
-  margin-top: 8px;
+
+  font-size: 15px;
 }
 
+/* MENU */
+
 .menu {
+  width: 100%;
   max-width: 520px;
+
   margin: 35px auto 0;
 }
 
 .menu button {
   width: 100%;
+
   padding: 19px;
+
   margin-bottom: 12px;
 
-  background: #15151c;
+  background:
+    linear-gradient(
+      135deg,
+      #17171f,
+      #121219
+    );
+
   border: 1px solid #292933;
-  border-radius: 14px;
+
+  border-radius: 15px;
 
   color: white;
+
   text-align: left;
 
   font-size: 16px;
+
+  cursor: pointer;
+
+  transition: .2s;
+}
+
+.menu button:hover {
+  border-color: #a855f7;
+  transform: translateY(-1px);
 }
 
 .menu button:active {
   transform: scale(.98);
 }
 
+/* LOG OUT */
+
 .logout {
-  max-width: 520px;
   width: 100%;
+  max-width: 520px;
+
   margin-top: 15px;
+
   padding: 17px;
 
   background: #211116;
+
   color: #ff6680;
 
   border: 1px solid #4b202d;
-  border-radius: 14px;
+
+  border-radius: 15px;
 
   font-size: 16px;
   font-weight: bold;
+
+  cursor: pointer;
 }
 
-/* POPUP */
+/* POPUP BACKGROUND */
 
 .overlay {
   display: none;
 
   position: fixed;
+
   inset: 0;
 
-  background: rgba(0,0,0,.75);
+  background: rgba(0,0,0,.78);
 
   z-index: 500;
 
@@ -133,77 +238,108 @@ h1 {
   padding: 20px;
 }
 
+/* POPUP */
+
 .popup {
   width: 100%;
   max-width: 480px;
 
   background: #15151c;
-  border: 1px solid #30303a;
-  border-radius: 20px;
 
-  padding: 25px;
+  border: 1px solid #33333f;
 
-  box-shadow: 0 20px 60px rgba(0,0,0,.5);
+  border-radius: 22px;
+
+  padding: 26px;
+
+  box-shadow:
+    0 25px 80px rgba(0,0,0,.6);
 }
 
 .popup h2 {
   margin-top: 0;
+
+  font-size: 25px;
 }
 
 .popup p {
   color: #aaaab5;
+
   line-height: 1.6;
 }
 
 .popup label {
   display: block;
+
   margin-top: 18px;
   margin-bottom: 7px;
-  color: #ccc;
+
+  color: #d0d0d8;
 }
 
 .popup input,
 .popup select {
   width: 100%;
+
   padding: 14px;
 
   border-radius: 10px;
+
   border: 1px solid #35353f;
 
   background: #0d0d12;
-  color: white;
-}
 
-.close {
-  width: 100%;
-  margin-top: 22px;
-
-  padding: 14px;
-
-  border: 0;
-  border-radius: 12px;
-
-  background: #a855f7;
   color: white;
 
-  font-weight: bold;
   font-size: 15px;
 }
 
-/* BOTTOM NAV */
+/* POPUP BUTTON */
+
+.close {
+  width: 100%;
+
+  margin-top: 22px;
+
+  padding: 15px;
+
+  border: 0;
+
+  border-radius: 12px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #a855f7,
+      #7c3aed
+    );
+
+  color: white;
+
+  font-weight: bold;
+
+  font-size: 15px;
+
+  cursor: pointer;
+}
+
+/* BOTTOM NAVIGATION */
 
 .bottom {
   position: fixed;
-  bottom: 0;
+
   left: 0;
   right: 0;
+  bottom: 0;
 
   height: 78px;
 
   background: #111116;
+
   border-top: 1px solid #292933;
 
   display: flex;
+
   justify-content: space-around;
   align-items: center;
 
@@ -212,8 +348,11 @@ h1 {
 
 .bottom a {
   color: #777783;
+
   text-decoration: none;
+
   text-align: center;
+
   font-size: 12px;
 }
 
@@ -223,246 +362,408 @@ h1 {
 
 .icon {
   display: block;
+
   font-size: 23px;
+
   margin-bottom: 4px;
 }
 </style>
 </head>
 
+
 <body>
+
+
+<!-- HEADER -->
 
 <header>
 
-<a href="index.html" class="back">‹</a>
+  <a href="index.html" class="back">
+    ‹
+  </a>
 
-<div class="logo">
-Zyn<span>ora</span>
-</div>
+  <div class="brand-logo">
+
+    <span class="brand-z">Z</span>
+    <span class="brand-text">ynora</span>
+
+  </div>
 
 </header>
 
 
+
+<!-- PROFILE -->
+
 <main>
 
-<div class="avatar">
-Z
-</div>
-
-<h1>My Profile</h1>
-
-<div class="subtitle">
-Welcome to Zynora
-</div>
+  <div class="avatar">
+    Z
+  </div>
 
 
-<div class="menu">
-
-<button onclick="openSettings()">
-⚙ &nbsp; Settings
-</button>
-
-<button onclick="openHelp()">
-? &nbsp; Help & Support
-</button>
-
-<button onclick="openAccount()">
-👤 &nbsp; Account
-</button>
-
-</div>
+  <h1>
+    My Profile
+  </h1>
 
 
-<button class="logout" onclick="logout()">
-Log Out
-</button>
+  <div class="subtitle">
+    Welcome to Zynora
+  </div>
+
+
+
+  <div class="menu">
+
+    <button onclick="openSettings()">
+      ⚙ &nbsp; Settings
+    </button>
+
+
+    <button onclick="openHelp()">
+      ? &nbsp; Help & Support
+    </button>
+
+
+    <button onclick="openAccount()">
+      👤 &nbsp; Account
+    </button>
+
+  </div>
+
+
+
+  <button
+    class="logout"
+    onclick="logout()">
+
+    Log Out
+
+  </button>
 
 </main>
 
 
-<!-- SETTINGS POPUP -->
 
-<div class="overlay" id="settings">
+<!-- SETTINGS -->
 
-<div class="popup">
+<div
+  class="overlay"
+  id="settings">
 
-<h2>⚙ Settings</h2>
+  <div class="popup">
 
-<p>
-Customize your Zynora experience.
-</p>
+    <h2>
+      ⚙ Settings
+    </h2>
 
-<label>Theme</label>
-
-<select>
-<option>Dark</option>
-<option>Light</option>
-</select>
-
-<label>Video Quality</label>
-
-<select>
-<option>Auto</option>
-<option>High</option>
-<option>Medium</option>
-<option>Data Saver</option>
-</select>
-
-<label>Autoplay</label>
-
-<select>
-<option>On</option>
-<option>Off</option>
-</select>
-
-<button class="close" onclick="closePopup('settings')">
-Save Settings
-</button>
-
-</div>
-
-</div>
+    <p>
+      Customize your Zynora experience.
+    </p>
 
 
-<!-- HELP POPUP -->
+    <label>
+      Theme
+    </label>
 
-<div class="overlay" id="help">
+    <select>
+      <option>Dark</option>
+      <option>Light</option>
+    </select>
 
-<div class="popup">
 
-<h2>❓ Help & Support</h2>
+    <label>
+      Video Quality
+    </label>
 
-<p>
-Welcome to Zynora Support.
-</p>
+    <select>
+      <option>Auto</option>
+      <option>High</option>
+      <option>Medium</option>
+      <option>Data Saver</option>
+    </select>
 
-<p>
-If you're having trouble with your account,
-videos, payments, or the Zynora app,
-you'll be able to contact our support team here.
-</p>
 
-<p>
-<strong>Account:</strong> Manage your Zynora account.
-</p>
+    <label>
+      Autoplay
+    </label>
 
-<p>
-<strong>Videos:</strong> Get help with playback and streaming.
-</p>
+    <select>
+      <option>On</option>
+      <option>Off</option>
+    </select>
 
-<p>
-<strong>Payments:</strong> Get assistance with subscriptions.
-</p>
 
-<button class="close" onclick="closePopup('help')">
-Close
-</button>
+    <button
+      class="close"
+      onclick="closePopup('settings')">
 
-</div>
+      Save Settings
+
+    </button>
+
+  </div>
 
 </div>
 
 
-<!-- ACCOUNT POPUP -->
 
-<div class="overlay" id="account">
+<!-- HELP -->
 
-<div class="popup">
+<div
+  class="overlay"
+  id="help">
 
-<h2>👤 Account</h2>
+  <div class="popup">
 
-<p>
-Your Zynora account
-</p>
+    <h2>
+      ❓ Help & Support
+    </h2>
 
-<p>
-<strong>Status:</strong> Logged in
-</p>
 
-<p>
-Your account information will be connected
-to your Zynora/Supabase account next.
-</p>
+    <p>
+      Welcome to Zynora Support.
+    </p>
 
-<button class="close" onclick="closePopup('account')">
-Close
-</button>
+
+    <p>
+      If you're having trouble with your
+      account, videos, payments, or streaming,
+      you'll be able to contact Zynora Support
+      here.
+    </p>
+
+
+    <p>
+      <strong>Account</strong><br>
+      Manage your Zynora account.
+    </p>
+
+
+    <p>
+      <strong>Videos</strong><br>
+      Get help with playback and streaming.
+    </p>
+
+
+    <p>
+      <strong>Payments</strong><br>
+      Get assistance with subscriptions.
+    </p>
+
+
+    <button
+      class="close"
+      onclick="closePopup('help')">
+
+      Close
+
+    </button>
+
+  </div>
 
 </div>
 
+
+
+<!-- ACCOUNT -->
+
+<div
+  class="overlay"
+  id="account">
+
+  <div class="popup">
+
+    <h2>
+      👤 Account
+    </h2>
+
+
+    <p>
+      Your Zynora account
+    </p>
+
+
+    <p>
+      <strong>Status:</strong>
+      Logged in
+    </p>
+
+
+    <p>
+      Your account information will be
+      connected to your Zynora/Supabase
+      account.
+    </p>
+
+
+    <button
+      class="close"
+      onclick="closePopup('account')">
+
+      Close
+
+    </button>
+
+  </div>
+
 </div>
 
+
+
+<!-- BOTTOM NAVIGATION -->
 
 <nav class="bottom">
 
-<a href="index.html">
-<span class="icon">⌂</span>
-Home
-</a>
 
-<a href="#" onclick="comingSoon(); return false;">
-<span class="icon">◉</span>
-Discover
-</a>
+  <a href="index.html">
 
-<a href="#" onclick="comingSoon(); return false;">
-<span class="icon">□</span>
-Library
-</a>
+    <span class="icon">
+      ⌂
+    </span>
 
-<a href="profile.html" class="active">
-<span class="icon">●</span>
-Profile
-</a>
+    Home
+
+  </a>
+
+
+
+  <a
+    href="#"
+    onclick="comingSoon(); return false;">
+
+    <span class="icon">
+      ◉
+    </span>
+
+    Discover
+
+  </a>
+
+
+
+  <a
+    href="#"
+    onclick="comingSoon(); return false;">
+
+    <span class="icon">
+      □
+    </span>
+
+    Library
+
+  </a>
+
+
+
+  <a
+    href="profile.html"
+    class="active">
+
+    <span class="icon">
+      ●
+    </span>
+
+    Profile
+
+  </a>
+
 
 </nav>
 
 
+
 <script>
 
+/* SETTINGS */
+
 function openSettings() {
-  document.getElementById("settings").style.display = "flex";
+
+  document
+    .getElementById("settings")
+    .style.display = "flex";
+
 }
+
+
+/* HELP */
 
 function openHelp() {
-  document.getElementById("help").style.display = "flex";
+
+  document
+    .getElementById("help")
+    .style.display = "flex";
+
 }
+
+
+/* ACCOUNT */
 
 function openAccount() {
-  document.getElementById("account").style.display = "flex";
+
+  document
+    .getElementById("account")
+    .style.display = "flex";
+
 }
 
+
+/* CLOSE POPUP */
+
 function closePopup(id) {
-  document.getElementById(id).style.display = "none";
+
+  document
+    .getElementById(id)
+    .style.display = "none";
+
 }
+
+
+/* LOGOUT */
 
 function logout() {
 
-  alert("Logout will be connected to your Zynora account next.");
+  alert(
+    "Zynora logout will be connected to your account next."
+  );
 
 }
+
+
+/* COMING SOON */
 
 function comingSoon() {
 
-  alert("This Zynora section is coming next.");
+  alert(
+    "This Zynora section is coming next."
+  );
 
 }
 
 
-/* Close popup when tapping outside */
+/* CLOSE WHEN TAPPING OUTSIDE */
 
-document.querySelectorAll(".overlay").forEach(function(overlay) {
+document
+  .querySelectorAll(".overlay")
+  .forEach(function(overlay) {
 
-  overlay.addEventListener("click", function(event) {
+    overlay.addEventListener(
+      "click",
+      function(event) {
 
-    if (event.target === overlay) {
-      overlay.style.display = "none";
-    }
+        if (event.target === overlay) {
+
+          overlay.style.display = "none";
+
+        }
+
+      }
+    );
 
   });
 
-});
-
 </script>
+
 
 </body>
 </html>
