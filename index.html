@@ -1,41 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Zynora</title>
 
-  <!-- Stylish fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
     rel="stylesheet"
   >
 
   <style>
 
+    :root {
+      --bg: #07070b;
+      --surface: #111118;
+      --surface-2: #17171f;
+      --text: #ffffff;
+      --muted: #92929e;
+      --purple: #a855f7;
+      --purple-dark: #6d28d9;
+      --border: rgba(255,255,255,.09);
+    }
+
     * {
       box-sizing: border-box;
     }
 
-    body {
-      margin: 0;
-      background: #08080c;
-      color: white;
-      font-family: "Inter", sans-serif;
-      padding-bottom: 90px;
+    html {
+      scroll-behavior: smooth;
     }
 
-    /* =========================
-       HEADER
-    ========================= */
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "DM Sans", sans-serif;
+      padding-bottom: 88px;
+    }
 
-    header {
-      height: 75px;
+    a {
+      color: inherit;
+    }
+
+    /* ==============================
+       TOP BAR
+    ============================== */
+
+    .topbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+
+      height: 72px;
 
       display: flex;
       align-items: center;
@@ -43,682 +65,489 @@
 
       padding: 0 20px;
 
-      background: rgba(12, 12, 18, 0.96);
-
-      border-bottom: 1px solid #24242e;
-
-      position: sticky;
-      top: 0;
-
       z-index: 100;
-
-      backdrop-filter: blur(15px);
-    }
-
-    .logo {
-      font-family: "Outfit", sans-serif;
-
-      font-size: 31px;
-
-      font-weight: 800;
-
-      letter-spacing: -1.5px;
-    }
-
-    .logo span {
-      color: #a855f7;
-    }
-
-    .search {
-      width: 150px;
-
-      padding: 11px 15px;
-
-      border-radius: 25px;
-
-      border: 1px solid #343440;
-
-      background: #181820;
-
-      color: white;
-
-      font-family: "Inter", sans-serif;
-
-      outline: none;
-    }
-
-    .search::placeholder {
-      color: #777783;
-    }
-
-
-    /* =========================
-       HERO
-    ========================= */
-
-    .hero {
-
-      min-height: 600px;
-
-      padding: 145px 35px 60px;
-
-      display: flex;
-
-      flex-direction: column;
-
-      justify-content: flex-end;
 
       background:
         linear-gradient(
           180deg,
-          transparent 20%,
-          rgba(8,8,12,0.95) 90%
+          rgba(7,7,11,.98),
+          rgba(7,7,11,.55)
+        );
+
+      backdrop-filter: blur(16px);
+    }
+
+    .brand {
+      font-family: "Manrope", sans-serif;
+      font-size: 30px;
+      font-weight: 800;
+      letter-spacing: -1.8px;
+    }
+
+    .brand span {
+      color: var(--purple);
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .search-button,
+    .account-button {
+      width: 40px;
+      height: 40px;
+
+      border: 1px solid var(--border);
+      border-radius: 50%;
+
+      background: rgba(255,255,255,.06);
+
+      color: white;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      text-decoration: none;
+
+      font-size: 18px;
+    }
+
+    /* ==============================
+       HERO
+    ============================== */
+
+    .hero {
+      min-height: 680px;
+
+      position: relative;
+
+      display: flex;
+      align-items: flex-end;
+
+      padding: 0 22px 52px;
+
+      overflow: hidden;
+
+      background:
+        radial-gradient(
+          circle at 70% 20%,
+          rgba(168,85,247,.34),
+          transparent 34%
         ),
         linear-gradient(
-          90deg,
-          #29104b,
-          #120c1c 60%,
-          #08080c
+          180deg,
+          #211035 0%,
+          #120b19 38%,
+          #07070b 100%
         );
     }
 
-    .badge {
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
 
-      width: fit-content;
-
-      padding: 8px 14px;
-
-      border-radius: 20px;
-
-      background: #a855f7;
-
-      font-size: 11px;
-
-      font-weight: 700;
-
-      letter-spacing: 1px;
+      background:
+        linear-gradient(
+          90deg,
+          rgba(7,7,11,.2),
+          rgba(7,7,11,.05)
+        );
     }
 
-    .hero h1 {
+    .hero::after {
+      content: "";
 
-      font-family: "Outfit", sans-serif;
+      position: absolute;
+      left: -20%;
+      right: -20%;
+      bottom: -180px;
 
-      font-size: clamp(42px, 10vw, 64px);
+      height: 350px;
 
-      line-height: 0.98;
+      background: var(--purple);
 
-      letter-spacing: -2px;
+      opacity: .12;
 
+      filter: blur(100px);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+
+      width: 100%;
       max-width: 650px;
-
-      margin: 20px 0 15px;
     }
 
-    .hero p {
-
-      color: #c9c7d0;
-
-      line-height: 1.6;
-
-      font-size: 16px;
-
-      max-width: 540px;
-
-      margin: 0;
-    }
-
-    .watch-button {
-
-      width: fit-content;
-
+    .original {
       display: inline-flex;
 
       align-items: center;
 
-      gap: 8px;
+      gap: 7px;
 
-      margin-top: 24px;
+      padding: 7px 11px;
 
-      padding: 15px 24px;
+      border-radius: 7px;
 
-      border-radius: 12px;
+      background: rgba(168,85,247,.18);
 
-      background: white;
+      border: 1px solid rgba(168,85,247,.35);
 
-      color: #08080c;
+      color: #d9b5ff;
 
-      text-decoration: none;
-
-      font-family: "Outfit", sans-serif;
+      font-size: 10px;
 
       font-weight: 700;
 
-      transition: transform .2s;
+      letter-spacing: 1.4px;
     }
 
-    .watch-button:hover {
-      transform: translateY(-2px);
+    .hero h1 {
+      font-family: "Manrope", sans-serif;
+
+      font-size: clamp(46px, 13vw, 78px);
+
+      line-height: .94;
+
+      letter-spacing: -4px;
+
+      margin: 18px 0 16px;
+
+      max-width: 620px;
     }
 
+    .hero-description {
+      max-width: 500px;
 
-    /* =========================
-       SECTIONS
-    ========================= */
+      color: #c0bec8;
 
-    section {
-      padding: 28px 20px;
+      font-size: 15px;
+
+      line-height: 1.6;
+
+      margin: 0;
     }
 
-    section h2 {
+    .hero-meta {
+      display: flex;
+      gap: 12px;
 
-      font-family: "Outfit", sans-serif;
+      margin-top: 16px;
 
-      font-size: 25px;
+      color: #aaa8b2;
 
-      letter-spacing: -0.5px;
-
-      margin: 0 0 18px;
+      font-size: 12px;
     }
 
+    .hero-buttons {
+      display: flex;
+      gap: 10px;
 
-    /* =========================
-       CATEGORIES
-    ========================= */
+      margin-top: 24px;
+    }
 
-    .categories {
+    .watch {
+      display: inline-flex;
 
+      align-items: center;
+      justify-content: center;
+
+      gap: 9px;
+
+      padding: 14px 22px;
+
+      border-radius: 10px;
+
+      background: white;
+
+      color: #09090d;
+
+      text-decoration: none;
+
+      font-family: "Manrope", sans-serif;
+
+      font-weight: 800;
+
+      font-size: 14px;
+    }
+
+    .info {
+      display: inline-flex;
+
+      align-items: center;
+      justify-content: center;
+
+      gap: 8px;
+
+      padding: 14px 19px;
+
+      border-radius: 10px;
+
+      background: rgba(255,255,255,.09);
+
+      border: 1px solid var(--border);
+
+      color: white;
+
+      font-weight: 700;
+
+      font-size: 14px;
+    }
+
+    /* ==============================
+       CONTENT
+    ============================== */
+
+    .content {
+      position: relative;
+
+      margin-top: -1px;
+
+      z-index: 5;
+    }
+
+    .section {
+      padding: 24px 20px 4px;
+    }
+
+    .section-title {
       display: flex;
 
-      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+
+      margin-bottom: 15px;
+    }
+
+    .section-title h2 {
+      margin: 0;
+
+      font-family: "Manrope", sans-serif;
+
+      font-size: 21px;
+
+      letter-spacing: -.7px;
+    }
+
+    .see-all {
+      color: var(--purple);
+
+      font-size: 12px;
+
+      text-decoration: none;
+
+      font-weight: 700;
+    }
+
+    /* ==============================
+       CATEGORY CHIPS
+    ============================== */
+
+    .chips {
+      display: flex;
+
+      gap: 9px;
 
       overflow-x: auto;
 
       scrollbar-width: none;
+
+      padding-bottom: 3px;
     }
 
-    .categories::-webkit-scrollbar {
+    .chips::-webkit-scrollbar {
       display: none;
     }
 
-    .category {
-
+    .chip {
       flex: 0 0 auto;
 
-      padding: 10px 17px;
+      padding: 9px 15px;
 
-      border-radius: 22px;
+      border-radius: 100px;
 
-      background: #17171f;
+      background: var(--surface);
 
-      border: 1px solid #30303b;
+      border: 1px solid var(--border);
 
-      color: #b8b7c1;
+      color: #aaa8b2;
 
-      font-size: 13px;
+      font-size: 12px;
 
       font-weight: 600;
     }
 
-    .category.active {
+    .chip.active {
+      background: var(--purple);
 
-      background: #a855f7;
-
-      border-color: #a855f7;
+      border-color: var(--purple);
 
       color: white;
     }
 
+    /* ==============================
+       SHOW ROW
+    ============================== */
 
-    /* =========================
-       SHOW CARDS
-    ========================= */
+    .show-row {
+      display: flex;
 
-    .shows {
+      gap: 13px;
 
-      display: grid;
+      overflow-x: auto;
 
-      grid-template-columns: repeat(2, 1fr);
+      scrollbar-width: none;
 
-      gap: 14px;
+      padding-bottom: 8px;
     }
 
-    .show {
-
-      background: #14141b;
-
-      border-radius: 15px;
-
-      overflow: hidden;
-
-      border: 1px solid #282832;
-
-      transition: transform .2s;
+    .show-row::-webkit-scrollbar {
+      display: none;
     }
 
-    .show:hover {
-      transform: translateY(-3px);
+    .show-card {
+      flex: 0 0 145px;
+
+      text-decoration: none;
     }
 
     .poster {
+      height: 205px;
 
-      height: 190px;
+      position: relative;
+
+      overflow: hidden;
+
+      border-radius: 12px;
 
       display: flex;
 
       align-items: flex-end;
 
-      padding: 15px;
-
-      font-family: "Outfit", sans-serif;
-
-      font-size: 19px;
-
-      font-weight: 700;
-
-      line-height: 1.1;
+      padding: 13px;
 
       background:
         linear-gradient(
           180deg,
-          transparent,
-          rgba(0,0,0,.8)
+          transparent 25%,
+          rgba(0,0,0,.9)
         ),
         linear-gradient(
-          135deg,
-          #8b3dff,
-          #17101f
+          145deg,
+          #a855f7,
+          #22102e
+        );
+
+      border: 1px solid var(--border);
+
+      transition: transform .2s ease;
+    }
+
+    .show-card:hover .poster {
+      transform: translateY(-4px);
+    }
+
+    .poster.two {
+      background:
+        linear-gradient(
+          180deg,
+          transparent 25%,
+          rgba(0,0,0,.9)
+        ),
+        linear-gradient(
+          145deg,
+          #d946ef,
+          #241026
         );
     }
 
-    .show-info {
-      padding: 13px;
+    .poster.three {
+      background:
+        linear-gradient(
+          180deg,
+          transparent 25%,
+          rgba(0,0,0,.9)
+        ),
+        linear-gradient(
+          145deg,
+          #7c3aed,
+          #10152b
+        );
     }
 
-    .show-info h3 {
-
-      font-family: "Outfit", sans-serif;
-
-      margin: 0 0 5px;
-
-      font-size: 16px;
-
-      font-weight: 600;
+    .poster.four {
+      background:
+        linear-gradient(
+          180deg,
+          transparent 25%,
+          rgba(0,0,0,.9)
+        ),
+        linear-gradient(
+          145deg,
+          #db2777,
+          #20101d
+        );
     }
 
-    .show-info p {
+    .poster-title {
+      position: relative;
+      z-index: 2;
 
-      margin: 0;
+      font-family: "Manrope", sans-serif;
 
-      color: #858592;
+      font-size: 17px;
 
-      font-size: 12px;
+      line-height: 1.05;
+
+      font-weight: 800;
+
+      letter-spacing: -.5px;
     }
 
+    .play-small {
+      position: absolute;
 
-    /* =========================
-       BOTTOM NAV
-    ========================= */
+      top: 10px;
+      right: 10px;
 
-    .bottom-nav {
+      width: 30px;
+      height: 30px;
 
-      position: fixed;
+      border-radius: 50%;
 
-      bottom: 0;
+      background: rgba(0,0,0,.45);
 
-      left: 0;
-
-      right: 0;
-
-      height: 78px;
-
-      background: rgba(14,14,19,.97);
-
-      border-top: 1px solid #292933;
+      border: 1px solid rgba(255,255,255,.2);
 
       display: flex;
-
-      justify-content: space-around;
-
       align-items: center;
-
-      z-index: 200;
-
-      backdrop-filter: blur(15px);
-    }
-
-    .nav-item {
-
-      color: #777783;
-
-      text-decoration: none;
-
-      text-align: center;
+      justify-content: center;
 
       font-size: 11px;
-
-      font-weight: 600;
     }
 
-    .nav-item.active {
-      color: #a855f7;
+    .card-title {
+      margin: 9px 2px 0;
+
+      font-family: "Manrope", sans-serif;
+
+      font-size: 13px;
+
+      font-weight: 700;
+
+      white-space: nowrap;
+
+      overflow: hidden;
+
+      text-overflow: ellipsis;
     }
 
-    .nav-icon {
+    .card-subtitle {
+      margin: 4px 2px 0;
 
-      display: block;
-
-      font-size: 22px;
-
-      margin-bottom: 4px;
-    }
-
-  </style>
-
-</head>
-
-
-<body>
-
-
-<!-- =========================
-     HEADER
-========================= -->
-
-<header>
-
-  <div class="logo">
-    Zyn<span>ora</span>
-  </div>
-
-  <input
-    class="search"
-    id="searchBox"
-    type="search"
-    placeholder="Search..."
-  >
-
-</header>
-
-
-
-<!-- =========================
-     MAIN
-========================= -->
-
-<main>
-
-
-  <!-- HERO -->
-
-  <div class="hero">
-
-    <span class="badge">
-      ZYNORA ORIGINAL
-    </span>
-
-    <h1>
-      The Billionaire's Secret
-    </h1>
-
-    <p>
-      Discover addictive short dramas,
-      romance, suspense and original
-      stories made for Zynora.
-    </p>
-
-    <a
-      href="player.html"
-      class="watch-button">
-
-      ▶ Watch Now
-
-    </a>
-
-  </div>
-
-
-
-  <!-- EXPLORE -->
-
-  <section>
-
-    <h2>
-      Explore
-    </h2>
-
-    <div class="categories">
-
-      <div class="category active">
-        For You
-      </div>
-
-      <div class="category">
-        Romance
-      </div>
-
-      <div class="category">
-        Drama
-      </div>
-
-      <div class="category">
-        Action
-      </div>
-
-      <div class="category">
-        Suspense
-      </div>
-
-    </div>
-
-  </section>
-
-
-
-  <!-- TRENDING -->
-
-  <section>
-
-    <h2>
-      Trending on Zynora
-    </h2>
-
-    <div class="shows">
-
-
-      <div class="show">
-
-        <div class="poster">
-          The Billionaire's Secret
-        </div>
-
-        <div class="show-info">
-
-          <h3>
-            The Billionaire's Secret
-          </h3>
-
-          <p>
-            Drama • Romance
-          </p>
-
-        </div>
-
-      </div>
-
-
-
-      <div class="show">
-
-        <div class="poster">
-          Forbidden Love
-        </div>
-
-        <div class="show-info">
-
-          <h3>
-            Forbidden Love
-          </h3>
-
-          <p>
-            Romance • Drama
-          </p>
-
-        </div>
-
-      </div>
-
-
-
-      <div class="show">
-
-        <div class="poster">
-          Hidden Truth
-        </div>
-
-        <div class="show-info">
-
-          <h3>
-            Hidden Truth
-          </h3>
-
-          <p>
-            Suspense • Drama
-          </p>
-
-        </div>
-
-      </div>
-
-
-
-      <div class="show">
-
-        <div class="poster">
-          Dangerous Deal
-        </div>
-
-        <div class="show-info">
-
-          <h3>
-            Dangerous Deal
-          </h3>
-
-          <p>
-            Action • Suspense
-          </p>
-
-        </div>
-
-      </div>
-
-
-    </div>
-
-  </section>
-
-</main>
-
-
-
-<!-- =========================
-     NAVIGATION
-========================= -->
-
-<nav class="bottom-nav">
-
-  <a
-    href="index.html"
-    class="nav-item active">
-
-    <span class="nav-icon">
-      ⌂
-    </span>
-
-    Home
-
-  </a>
-
-
-  <a
-    href="discover.html"
-    class="nav-item">
-
-    <span class="nav-icon">
-      ◉
-    </span>
-
-    Discover
-
-  </a>
-
-
-  <a
-    href="library.html"
-    class="nav-item">
-
-    <span class="nav-icon">
-      ▣
-    </span>
-
-    Library
-
-  </a>
-
-
-  <a
-    href="login.html"
-    class="nav-item">
-
-    <span class="nav-icon">
-      ●
-    </span>
-
-    Account
-
-  </a>
-
-</nav>
-
-
-
-<script>
-
-  const searchBox =
-    document.getElementById("searchBox");
-
-
-  searchBox.addEventListener(
-    "input",
-    function() {
-
-      const value =
-        this.value.toLowerCase();
-
-
-      const shows =
-        document.querySelectorAll(".show");
-
-
-      shows.forEach(
-        function(show) {
-
-          const title =
-            show.innerText.toLowerCase();
-
-
-          show.style.display =
-            title.includes(value)
-              ? ""
-              : "none";
-
-        }
-      );
-
-    }
-  );
-
-</script>
-
-
-</body>
-</html>
+      color: var(--
