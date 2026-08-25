@@ -1,15 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
 <title>Zynora Profile</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect"
+href="https://fonts.googleapis.com">
 
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet">
+<link rel="preconnect"
+href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap"
+rel="stylesheet">
 
 <style>
 
@@ -20,434 +28,1039 @@
 }
 
 body {
-    background:
-        radial-gradient(circle at 50% 25%, rgba(145, 55, 255, 0.12), transparent 30%),
-        #08070c;
-    color: white;
-    font-family: "Playfair Display", Georgia, serif;
+
     min-height: 100vh;
-    padding-bottom: 95px;
+
+    background:
+        radial-gradient(
+            circle at 50% 12%,
+            rgba(145,55,255,.18),
+            transparent 32%
+        ),
+        #08070c;
+
+    color: white;
+
+    font-family:
+        "Playfair Display",
+        Georgia,
+        serif;
+
+    padding-bottom: 110px;
+
 }
+
+
+/* HEADER */
 
 header {
-    height: 140px;
-    background: #111016;
-    border-bottom: 1px solid rgba(173,77,255,.25);
-    display: flex;
-    align-items: center;
-    padding: 0 28px;
-    gap: 20px;
-}
 
-.back {
-    color: white;
-    text-decoration: none;
-    font-family: "Cinzel", serif;
-    font-size: 42px;
+    height: 95px;
+
+    background: #111016;
+
+    border-bottom:
+        1px solid
+        rgba(173,77,255,.25);
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 0 22px;
+
 }
 
 .logo {
-    font-family: "Cinzel", serif;
-    font-size: 48px;
+
+    font-family:
+        "Cinzel",
+        serif;
+
+    font-size: 38px;
+
     font-weight: 700;
+
     letter-spacing: -2px;
-    background: linear-gradient(90deg, #ffffff, #d19aff, #8e38ff);
+
+    background:
+        linear-gradient(
+            90deg,
+            #ffffff,
+            #d19aff,
+            #8e38ff
+        );
+
     -webkit-background-clip: text;
     background-clip: text;
+
     color: transparent;
-    text-shadow: 0 0 25px rgba(155,70,255,.35);
+
+    text-shadow:
+        0 0 25px
+        rgba(155,70,255,.35);
+
 }
+
+
+/* MAIN */
+
+main {
+
+    padding:
+        25px 20px;
+
+}
+
+
+/* ACCOUNT TOP */
+
+.account-card {
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(117,35,200,.25),
+            rgba(40,25,70,.45)
+        );
+
+    border:
+        1px solid
+        rgba(173,77,255,.25);
+
+    border-radius: 20px;
+
+    padding: 17px 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 30px;
+
+}
+
+.account-left {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+}
+
+.account-icon {
+
+    width: 43px;
+
+    height: 43px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #a84fff,
+            #7521e4
+        );
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 22px;
+
+}
+
+.account-title {
+
+    font-family:
+        "Cinzel",
+        serif;
+
+    font-size: 16px;
+
+}
+
+.account-status {
+
+    color: #9994a2;
+
+    font-size: 12px;
+
+    margin-top: 3px;
+
+}
+
+.account-arrow {
+
+    color: #a94dff;
+
+    font-size: 22px;
+
+}
+
+
+/* PROFILE */
 
 .profile {
+
     text-align: center;
-    padding: 55px 25px 30px;
+
 }
 
-.avatar-wrap {
-    width: 190px;
-    height: 190px;
-    margin: 0 auto 28px;
-    border-radius: 50%;
-    padding: 5px;
-    background: linear-gradient(135deg, #c87aff, #6d16e8);
-    box-shadow:
-        0 0 20px rgba(155,65,255,.7),
-        0 0 60px rgba(110,30,230,.35);
+.avatar-wrapper {
+
+    position: relative;
+
+    width: 130px;
+
+    height: 130px;
+
+    margin:
+        0 auto 20px;
+
 }
 
 .avatar {
-    width: 100%;
-    height: 100%;
+
+    width: 130px;
+
+    height: 130px;
+
     border-radius: 50%;
-    background: linear-gradient(135deg,#aa48ff,#6615d8);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-}
 
-.avatar img {
-    width: 100%;
-    height: 100%;
     object-fit: cover;
-    display: none;
+
+    background:
+        linear-gradient(
+            135deg,
+            #a84fff,
+            #7521e4
+        );
+
+    border:
+        3px solid
+        rgba(190,120,255,.8);
+
+    box-shadow:
+        0 0 35px
+        rgba(140,50,255,.45);
+
 }
 
-.avatar-letter {
-    font-family: "Cinzel", serif;
-    font-size: 75px;
+.default-letter {
+
+    position: absolute;
+
+    inset: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-family:
+        "Cinzel",
+        serif;
+
+    font-size: 60px;
+
     font-weight: 700;
+
+    pointer-events: none;
+
 }
 
-h1 {
-    font-family: "Cinzel", serif;
-    font-size: 42px;
-    margin-bottom: 8px;
+.profile h1 {
+
+    font-family:
+        "Cinzel",
+        serif;
+
+    font-size: 34px;
+
+    margin-bottom: 7px;
+
 }
 
-.subtitle {
-    color: #aaa6b5;
-    font-size: 21px;
+.welcome {
+
+    color: #9994a2;
+
     font-style: italic;
+
+    font-size: 17px;
+
 }
+
+
+/* EDIT BUTTON */
 
 .edit-btn {
-    margin-top: 24px;
-    border: 1px solid rgba(188,106,255,.55);
-    background: linear-gradient(135deg,#a84fff,#7020e5);
+
+    margin-top: 20px;
+
+    padding:
+        13px 24px;
+
+    border: 1px solid
+        rgba(173,77,255,.5);
+
+    border-radius: 18px;
+
+    background:
+        rgba(130,45,220,.18);
+
     color: white;
-    border-radius: 30px;
-    padding: 14px 28px;
-    font-family: "Cinzel", serif;
-    font-size: 16px;
-    cursor: pointer;
-    box-shadow: 0 0 25px rgba(150,50,255,.25);
+
+    font-family:
+        "Cinzel",
+        serif;
+
+    font-weight: 600;
+
+    font-size: 14px;
+
 }
+
+
+/* COINS */
+
+.coin-card {
+
+    margin-top: 30px;
+
+    padding: 18px;
+
+    border-radius: 20px;
+
+    background: #121117;
+
+    border:
+        1px solid
+        rgba(173,77,255,.2);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+}
+
+.coin-label {
+
+    color: #aaa5b1;
+
+    font-size: 14px;
+
+}
+
+.coin-number {
+
+    color: #ffd95c;
+
+    font-family:
+        "Cinzel",
+        serif;
+
+    font-size: 21px;
+
+}
+
+
+/* MENU */
 
 .menu {
-    padding: 15px 25px;
+
+    margin-top: 25px;
+
 }
 
-.card {
+.menu-title {
+
+    font-family:
+        "Cinzel",
+        serif;
+
+    font-size: 19px;
+
+    margin-bottom: 12px;
+
+}
+
+.menu-item {
+
     width: 100%;
-    background: linear-gradient(145deg,#15141b,#111016);
-    border: 1px solid rgba(173,77,255,.18);
-    border-radius: 22px;
-    padding: 22px;
-    margin-bottom: 16px;
+
+    border: 1px solid
+        rgba(255,255,255,.07);
+
+    background: #15141b;
+
     color: white;
+
+    border-radius: 20px;
+
+    padding:
+        20px 18px;
+
+    margin-bottom: 12px;
+
     display: flex;
+
     align-items: center;
-    gap: 18px;
-    font-family: "Playfair Display", serif;
-    font-size: 22px;
-    cursor: pointer;
-    transition: .2s;
+
+    gap: 15px;
+
+    text-align: left;
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: 17px;
+
 }
 
-.card:active {
-    transform: scale(.98);
-    background: #1c1824;
-}
+.menu-icon {
 
-.icon {
     width: 38px;
+
+    font-size: 22px;
+
     text-align: center;
-    font-size: 25px;
+
 }
+
+.menu-arrow {
+
+    margin-left: auto;
+
+    color: #777582;
+
+}
+
+
+/* SETTINGS */
 
 .settings {
-    margin-top: 30px;
+
+    margin-top: 28px;
+
+    padding: 20px;
+
+    border-radius: 22px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(30,28,38,.95),
+            rgba(16,14,22,.95)
+        );
+
+    border:
+        1px solid
+        rgba(173,77,255,.2);
+
 }
 
-.logout {
-    color: #ff7f9a;
-    border-color: rgba(255,70,110,.2);
+.settings h2 {
+
+    font-family:
+        "Cinzel",
+        serif;
+
+    font-size: 19px;
+
+    margin-bottom: 12px;
+
 }
+
+.setting-row {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 13px 0;
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.06);
+
+}
+
+.setting-row:last-child {
+
+    border-bottom: none;
+
+}
+
+.setting-name {
+
+    color: #d0ccd6;
+
+}
+
+.toggle {
+
+    width: 46px;
+
+    height: 25px;
+
+    border-radius: 20px;
+
+    background: #302c38;
+
+    position: relative;
+
+}
+
+.toggle::after {
+
+    content: "";
+
+    width: 19px;
+
+    height: 19px;
+
+    border-radius: 50%;
+
+    background: #9994a2;
+
+    position: absolute;
+
+    top: 3px;
+
+    left: 3px;
+
+}
+
+
+/* EDIT POPUP */
+
+.overlay {
+
+    display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        rgba(0,0,0,.75);
+
+    z-index: 100;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+
+}
+
+.overlay.show {
+
+    display: flex;
+
+}
+
+.popup {
+
+    width: 100%;
+
+    max-width: 400px;
+
+    background: #15141b;
+
+    border:
+        1px solid
+        rgba(173,77,255,.4);
+
+    border-radius: 25px;
+
+    padding: 25px;
+
+    box-shadow:
+        0 0 50px
+        rgba(100,30,180,.3);
+
+}
+
+.popup h2 {
+
+    font-family:
+        "Cinzel",
+        serif;
+
+    font-size: 24px;
+
+    margin-bottom: 20px;
+
+}
+
+.popup label {
+
+    display: block;
+
+    color: #aaa5b1;
+
+    margin-bottom: 8px;
+
+}
+
+.popup input[type="text"] {
+
+    width: 100%;
+
+    padding: 14px;
+
+    border-radius: 14px;
+
+    border:
+        1px solid
+        #393440;
+
+    background: #0d0c11;
+
+    color: white;
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: 16px;
+
+    outline: none;
+
+    margin-bottom: 18px;
+
+}
+
+.photo-label {
+
+    display: block;
+
+    padding: 14px;
+
+    text-align: center;
+
+    border-radius: 15px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #a84fff,
+            #7521e4
+        );
+
+    font-family:
+        "Cinzel",
+        serif;
+
+    margin-bottom: 20px;
+
+}
+
+#photoInput {
+
+    display: none;
+
+}
+
+.popup-buttons {
+
+    display: flex;
+
+    gap: 10px;
+
+}
+
+.popup-buttons button {
+
+    flex: 1;
+
+    padding: 14px;
+
+    border-radius: 15px;
+
+    font-family:
+        "Cinzel",
+        serif;
+
+    font-weight: 600;
+
+}
+
+.cancel {
+
+    background: #24212a;
+
+    color: white;
+
+    border: 1px solid #393440;
+
+}
+
+.save {
+
+    background:
+        linear-gradient(
+            135deg,
+            #a84fff,
+            #7521e4
+        );
+
+    color: white;
+
+    border: none;
+
+}
+
+
+/* NAVIGATION */
 
 .bottom-nav {
+
     position: fixed;
+
     bottom: 0;
+
     left: 0;
+
     right: 0;
+
     height: 92px;
-    background: rgba(17,16,22,.98);
-    border-top: 1px solid rgba(173,77,255,.2);
+
+    background:
+        rgba(17,16,22,.98);
+
+    border-top:
+        1px solid
+        rgba(173,77,255,.2);
+
     display: grid;
-    grid-template-columns: repeat(4,1fr);
-    z-index: 10;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    z-index: 50;
+
 }
 
 .nav-item {
+
     text-decoration: none;
+
     color: #777582;
+
     display: flex;
+
     flex-direction: column;
+
     align-items: center;
+
     justify-content: center;
+
     gap: 7px;
-    font-family: "Cinzel", serif;
-    font-size: 13px;
+
+    font-family:
+        "Cinzel",
+        serif;
+
+    font-size: 12px;
+
 }
 
 .nav-icon {
+
     font-size: 25px;
+
 }
 
 .nav-item.active {
+
     color: #a94dff;
-    text-shadow: 0 0 15px rgba(169,77,255,.5);
-}
 
-/* EDIT WINDOW */
+    text-shadow:
+        0 0 15px
+        rgba(169,77,255,.5);
 
-.modal {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,.78);
-    z-index: 50;
-    align-items: center;
-    justify-content: center;
-    padding: 25px;
-}
-
-.modal-box {
-    width: 100%;
-    max-width: 430px;
-    background: #15141c;
-    border: 1px solid rgba(173,77,255,.45);
-    border-radius: 25px;
-    padding: 28px;
-    box-shadow: 0 0 50px rgba(125,35,220,.35);
-}
-
-.modal-box h2 {
-    font-family: "Cinzel", serif;
-    font-size: 27px;
-    margin-bottom: 22px;
-}
-
-label {
-    display: block;
-    color: #b9b4c3;
-    margin-bottom: 8px;
-    font-family: "Cinzel", serif;
-}
-
-input[type="text"] {
-    width: 100%;
-    padding: 15px;
-    border-radius: 14px;
-    border: 1px solid #4d3b5f;
-    background: #0d0c11;
-    color: white;
-    font-family: "Playfair Display", serif;
-    font-size: 18px;
-    margin-bottom: 20px;
-}
-
-input[type="file"] {
-    width: 100%;
-    color: #aaa;
-    margin-bottom: 25px;
-}
-
-.modal-buttons {
-    display: flex;
-    gap: 12px;
-}
-
-.save-btn,
-.cancel-btn {
-    flex: 1;
-    padding: 14px;
-    border-radius: 15px;
-    border: none;
-    font-family: "Cinzel", serif;
-    cursor: pointer;
-}
-
-.save-btn {
-    background: linear-gradient(135deg,#aa4fff,#711de5);
-    color: white;
-}
-
-.cancel-btn {
-    background: #292630;
-    color: white;
-}
-
-/* MOBILE */
-
-@media(max-width:600px) {
-
-    header {
-        height: 140px;
-        padding: 0 22px;
-    }
-
-    .logo {
-        font-size: 39px;
-    }
-
-    .back {
-        font-size: 36px;
-    }
-
-    .profile {
-        padding-top: 45px;
-    }
-
-    .avatar-wrap {
-        width: 175px;
-        height: 175px;
-    }
-
-    h1 {
-        font-size: 38px;
-    }
-
-    .subtitle {
-        font-size: 19px;
-    }
-
-    .card {
-        font-size: 20px;
-        padding: 20px;
-    }
 }
 
 </style>
+
 </head>
+
 
 <body>
 
+
 <header>
 
-<a class="back" href="index.html">‹</a>
-
-<div class="logo">Zynora</div>
+<div class="logo">
+Zynora
+</div>
 
 </header>
 
 
-<section class="profile">
+<main>
 
-<div class="avatar-wrap">
 
-<div class="avatar">
+<!-- ACCOUNT AT TOP -->
 
-<img id="profileImage">
+<div class="account-card">
 
-<div class="avatar-letter" id="avatarLetter">Z</div>
+<div class="account-left">
 
+<div class="account-icon">
+👤
+</div>
+
+<div>
+
+<div class="account-title">
+Account
+</div>
+
+<div class="account-status">
+Manage your Zynora account
 </div>
 
 </div>
 
-<h1 id="profileName">My Profile</h1>
+</div>
 
-<p class="subtitle">Welcome to Zynora</p>
+<div class="account-arrow">
+›
+</div>
 
-<button class="edit-btn" onclick="openEditor()">
-✦ Edit Profile
+</div>
+
+
+<!-- PROFILE -->
+
+<div class="profile">
+
+
+<div class="avatar-wrapper">
+
+<img
+id="profileImage"
+class="avatar"
+style="display:none;"
+>
+
+<div
+id="defaultLetter"
+class="default-letter">
+Z
+</div>
+
+</div>
+
+
+<h1 id="displayName">
+My Profile
+</h1>
+
+<p class="welcome">
+Welcome to Zynora
+</p>
+
+
+<button
+class="edit-btn"
+onclick="openEditor()">
+
+✎ Edit Profile
+
 </button>
 
-</section>
-
-
-<section class="menu">
-
-<!-- ACCOUNT FIRST -->
-
-<div class="card" onclick="accountMessage()">
-<div class="icon">♙</div>
-<span>Account</span>
 </div>
 
 
-<div class="card" onclick="helpMessage()">
-<div class="icon">?</div>
-<span>Help & Support</span>
+<!-- COINS -->
+
+<div class="coin-card">
+
+<div class="coin-label">
+Zynora Coins
+</div>
+
+<div class="coin-number">
+🪙 <span id="coinBalance">100</span>
+</div>
+
 </div>
 
 
-<!-- SETTINGS AT THE BOTTOM -->
+<!-- MENU -->
 
-<div class="card settings" onclick="settingsMessage()">
-<div class="icon">⚙</div>
-<span>Settings</span>
+<div class="menu">
+
+<div class="menu-title">
+Your Zynora
 </div>
 
 
-<div class="card logout" onclick="logoutMessage()">
-<div class="icon">↪</div>
-<span>Log Out</span>
+<button
+class="menu-item"
+onclick="showMessage('Settings')">
+
+<div class="menu-icon">
+⚙
 </div>
 
-</section>
+<div>
+Settings
+</div>
+
+<div class="menu-arrow">
+›
+</div>
+
+</button>
 
 
-<!-- BOTTOM NAVIGATION -->
+<button
+class="menu-item"
+onclick="showMessage('Help & Support')">
 
-<nav class="bottom-nav">
+<div class="menu-icon">
+?
+</div>
 
-<a class="nav-item" href="index.html">
-<div class="nav-icon">⌂</div>
-<div>Home</div>
-</a>
+<div>
+Help & Support
+</div>
 
-<a class="nav-item" href="discover.html">
-<div class="nav-icon">◉</div>
-<div>Discover</div>
-</a>
+<div class="menu-arrow">
+›
+</div>
 
-<a class="nav-item" href="library.html">
-<div class="nav-icon">□</div>
-<div>Library</div>
-</a>
-
-<a class="nav-item active" href="profile.html">
-<div class="nav-icon">●</div>
-<div>Profile</div>
-</a>
-
-</nav>
+</button>
 
 
-<!-- EDIT PROFILE MODAL -->
+</div>
 
-<div class="modal" id="editModal">
 
-<div class="modal-box">
+<!-- SETTINGS AT BOTTOM -->
 
-<h2>Edit Your Profile</h2>
+<div class="settings">
 
-<label>Display Name</label>
+<h2>
+Settings
+</h2>
+
+<div class="setting-row">
+
+<div class="setting-name">
+Notifications
+</div>
+
+<div class="toggle"></div>
+
+</div>
+
+
+<div class="setting-row">
+
+<div class="setting-name">
+Auto Play
+</div>
+
+<div class="toggle"></div>
+
+</div>
+
+
+<div class="setting-row">
+
+<div class="setting-name">
+Video Quality
+</div>
+
+<div>
+Auto
+</div>
+
+</div>
+
+</div>
+
+
+</main>
+
+
+<!-- EDIT PROFILE POPUP -->
+
+<div
+id="editor"
+class="overlay">
+
+<div class="popup">
+
+<h2>
+Edit Profile
+</h2>
+
+
+<label>
+Display Name
+</label>
 
 <input
 type="text"
 id="nameInput"
 placeholder="Enter your name"
+maxlength="30"
 >
 
-<label>Profile Picture</label>
+
+<label
+for="photoInput"
+class="photo-label">
+
+📷 Choose Profile Picture
+
+</label>
 
 <input
 type="file"
-id="imageInput"
+id="photoInput"
 accept="image/*"
 >
 
-<div class="modal-buttons">
 
-<button class="cancel-btn" onclick="closeEditor()">
+<div class="popup-buttons">
+
+<button
+class="cancel"
+onclick="closeEditor()">
+
 Cancel
+
 </button>
 
-<button class="save-btn" onclick="saveProfile()">
+<button
+class="save"
+onclick="saveProfile()">
+
 Save Profile
+
 </button>
 
 </div>
@@ -455,90 +1068,146 @@ Save Profile
 </div>
 
 </div>
+
+
+<!-- NAVIGATION -->
+
+<nav class="bottom-nav">
+
+
+<a
+href="index.html"
+class="nav-item">
+
+<span class="nav-icon">
+⌂
+</span>
+
+Home
+
+</a>
+
+
+<a
+href="discover.html"
+class="nav-item">
+
+<span class="nav-icon">
+◉
+</span>
+
+Discover
+
+</a>
+
+
+<a
+href="library.html"
+class="nav-item">
+
+<span class="nav-icon">
+▣
+</span>
+
+Library
+
+</a>
+
+
+<a
+href="profile.html"
+class="nav-item active">
+
+<span class="nav-icon">
+●
+</span>
+
+Profile
+
+</a>
+
+
+</nav>
 
 
 <script>
 
-const nameElement = document.getElementById("profileName");
-const imageElement = document.getElementById("profileImage");
-const letterElement = document.getElementById("avatarLetter");
 
-
-// LOAD SAVED PROFILE
-
-const savedName = localStorage.getItem("zynoraName");
-const savedImage = localStorage.getItem("zynoraProfileImage");
-
-if (savedName) {
-    nameElement.textContent = savedName;
-}
-
-if (savedImage) {
-
-    imageElement.src = savedImage;
-    imageElement.style.display = "block";
-    letterElement.style.display = "none";
-
-}
-
-
-// OPEN EDITOR
+/* OPEN EDITOR */
 
 function openEditor() {
 
-    document.getElementById("editModal").style.display = "flex";
+    document
+        .getElementById("nameInput")
+        .value =
+        localStorage.getItem("zynoraName")
+        || "";
 
-    document.getElementById("nameInput").value =
-        localStorage.getItem("zynoraName") || "";
+    document
+        .getElementById("editor")
+        .classList.add("show");
 
 }
 
 
-// CLOSE EDITOR
+/* CLOSE EDITOR */
 
 function closeEditor() {
 
-    document.getElementById("editModal").style.display = "none";
+    document
+        .getElementById("editor")
+        .classList.remove("show");
 
 }
 
 
-// SAVE PROFILE
+/* SAVE PROFILE */
 
 function saveProfile() {
 
     const name =
-        document.getElementById("nameInput").value.trim();
-
-    const file =
-        document.getElementById("imageInput").files[0];
-
+        document
+        .getElementById("nameInput")
+        .value
+        .trim();
 
     if (name) {
 
-        localStorage.setItem("zynoraName", name);
+        localStorage.setItem(
+            "zynoraName",
+            name
+        );
 
-        nameElement.textContent = name;
+        document
+        .getElementById("displayName")
+        .textContent = name;
 
     }
 
 
+    const file =
+        document
+        .getElementById("photoInput")
+        .files[0];
+
+
     if (file) {
 
-        const reader = new FileReader();
+        const reader =
+            new FileReader();
 
-        reader.onload = function(event) {
+        reader.onload =
+        function(event) {
+
+            const image =
+                event.target.result;
 
             localStorage.setItem(
                 "zynoraProfileImage",
-                event.target.result
+                image
             );
 
-            imageElement.src = event.target.result;
-
-            imageElement.style.display = "block";
-
-            letterElement.style.display = "none";
+            showProfileImage(image);
 
         };
 
@@ -552,52 +1221,78 @@ function saveProfile() {
 }
 
 
-// ACCOUNT
+/* SHOW PROFILE IMAGE */
 
-function accountMessage() {
+function showProfileImage(image) {
 
-    alert("Zynora Account\n\nYour account information will appear here.");
+    const img =
+        document
+        .getElementById("profileImage");
 
-}
+    const letter =
+        document
+        .getElementById("defaultLetter");
 
+    img.src = image;
 
-// HELP
+    img.style.display = "block";
 
-function helpMessage() {
-
-    alert("Zynora Help & Support\n\nHow can we help you?");
-
-}
-
-
-// SETTINGS
-
-function settingsMessage() {
-
-    alert("Zynora Settings\n\nSettings panel coming next.");
+    letter.style.display = "none";
 
 }
 
 
-// LOGOUT
+/* LOAD PROFILE */
 
-function logoutMessage() {
+function loadProfile() {
 
-    const confirmLogout =
-        confirm("Do you want to log out of Zynora?");
+    const savedName =
+        localStorage.getItem(
+            "zynoraName"
+        );
 
-    if (confirmLogout) {
+    const savedImage =
+        localStorage.getItem(
+            "zynoraProfileImage"
+        );
 
-        localStorage.removeItem("zynoraName");
-        localStorage.removeItem("zynoraProfileImage");
 
-        window.location.href = "index.html";
+    if (savedName) {
+
+        document
+        .getElementById("displayName")
+        .textContent =
+        savedName;
+
+    }
+
+
+    if (savedImage) {
+
+        showProfileImage(savedImage);
 
     }
 
 }
 
+
+/* BUTTON MESSAGES */
+
+function showMessage(title) {
+
+    alert(
+        title +
+        "\n\nThis Zynora feature is being connected next."
+    );
+
+}
+
+
+loadProfile();
+
 </script>
 
+
 </body>
+
 </html>
