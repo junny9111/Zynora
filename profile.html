@@ -3,18 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Zynora Profile</title>
 
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       background: #09090d;
-      color: white;
+      color: #ffffff;
       font-family: Arial, sans-serif;
+      min-height: 100vh;
     }
 
     header {
-      height: 70px;
+      height: 72px;
       display: flex;
       align-items: center;
       padding: 0 20px;
@@ -22,16 +28,16 @@
       border-bottom: 1px solid #292933;
     }
 
-    header a {
-      color: white;
+    .back {
+      color: #ffffff;
       text-decoration: none;
-      font-size: 25px;
-      margin-right: 20px;
+      font-size: 28px;
+      margin-right: 18px;
     }
 
     .logo {
       font-size: 28px;
-      font-weight: bold;
+      font-weight: 800;
     }
 
     .logo span {
@@ -39,61 +45,207 @@
     }
 
     main {
+      padding: 45px 20px 120px;
       text-align: center;
-      padding: 45px 20px;
     }
 
     .avatar {
-      width: 90px;
-      height: 90px;
-      margin: auto;
+      width: 95px;
+      height: 95px;
+      margin: 0 auto 20px;
       border-radius: 50%;
-      background: #a855f7;
 
       display: flex;
       align-items: center;
       justify-content: center;
 
-      font-size: 38px;
-      font-weight: bold;
+      background: linear-gradient(
+        135deg,
+        #a855f7,
+        #7c3aed
+      );
+
+      font-size: 40px;
+      font-weight: 800;
     }
 
     h1 {
-      margin-top: 20px;
+      margin: 0;
+      font-size: 28px;
     }
 
-    #email {
-      color: #999;
-      margin-bottom: 35px;
+    .subtitle {
+      margin-top: 8px;
+      color: #9999a5;
     }
 
     .menu {
       max-width: 500px;
-      margin: auto;
+      margin: 35px auto 0;
     }
 
     .menu a {
       display: block;
       padding: 18px;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
 
       background: #15151c;
       border: 1px solid #292933;
-      border-radius: 12px;
+      border-radius: 14px;
 
       color: white;
       text-decoration: none;
       text-align: left;
+
+      font-size: 16px;
+    }
+
+    .menu a:active {
+      transform: scale(0.98);
     }
 
     .logout {
-      width: 100%;
       max-width: 500px;
+      width: 100%;
+      margin-top: 15px;
 
-      margin-top: 20px;
       padding: 16px;
 
-      background: #241018;
+      background: #211116;
       color: #ff6680;
 
-      border: 1px solid #4
+      border: 1px solid #4b202d;
+      border-radius: 14px;
+
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .bottom {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+
+      height: 78px;
+
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+
+      background: #111116;
+      border-top: 1px solid #292933;
+    }
+
+    .bottom a {
+      color: #777783;
+      text-decoration: none;
+      text-align: center;
+      font-size: 12px;
+    }
+
+    .bottom .active {
+      color: #a855f7;
+    }
+
+    .bottom-icon {
+      display: block;
+      font-size: 23px;
+      margin-bottom: 4px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+
+    <a href="index.html" class="back">‹</a>
+
+    <div class="logo">
+      Zyn<span>ora</span>
+    </div>
+
+  </header>
+
+
+  <main>
+
+    <div class="avatar">
+      Z
+    </div>
+
+    <h1>
+      My Profile
+    </h1>
+
+    <div class="subtitle">
+      Welcome to Zynora
+    </div>
+
+
+    <div class="menu">
+
+      <a href="library.html">
+        ♡ &nbsp; My List
+      </a>
+
+      <a href="#">
+        ⚙ &nbsp; Settings
+      </a>
+
+      <a href="#">
+        ? &nbsp; Help & Support
+      </a>
+
+    </div>
+
+
+    <button
+      class="logout"
+      onclick="logout()">
+
+      Log Out
+
+    </button>
+
+  </main>
+
+
+  <nav class="bottom">
+
+    <a href="index.html">
+      <span class="bottom-icon">⌂</span>
+      Home
+    </a>
+
+    <a href="#">
+      <span class="bottom-icon">◉</span>
+      Discover
+    </a>
+
+    <a href="library.html">
+      <span class="bottom-icon">♡</span>
+      Library
+    </a>
+
+    <a href="profile.html" class="active">
+      <span class="bottom-icon">●</span>
+      Profile
+    </a>
+
+  </nav>
+
+
+  <script>
+
+    function logout() {
+
+      alert("Logout will be connected to your Zynora account next.");
+
+    }
+
+  </script>
+
+</body>
+</html>
