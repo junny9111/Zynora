@@ -6,237 +6,370 @@
 
 <title>Zynora</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet">
+
 <style>
+
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-  margin: 0;
-  background: #09090d;
-  color: #ffffff;
-  font-family: Arial, sans-serif;
+    background:
+        radial-gradient(circle at 50% 25%, rgba(145,55,255,.14), transparent 32%),
+        #08070c;
+    color: white;
+    font-family: "Playfair Display", Georgia, serif;
+    padding-bottom: 95px;
 }
 
+/* HEADER */
+
 header {
-  height: 72px;
-  background: #111116;
-  border-bottom: 1px solid #292933;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  padding: 0 20px;
+    height: 95px;
+    background: #111016;
+    border-bottom: 1px solid rgba(173,77,255,.25);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 22px;
+    position: sticky;
+    top: 0;
+    z-index: 20;
 }
 
 .logo {
-  font-size: 30px;
-  font-weight: 800;
-  letter-spacing: -1px;
-}
-
-.logo span {
-  color: #a855f7;
+    font-family: "Cinzel", serif;
+    font-size: 37px;
+    font-weight: 700;
+    letter-spacing: -2px;
+    background: linear-gradient(90deg,#fff,#d19aff,#8e38ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 25px rgba(155,70,255,.35);
 }
 
 .search {
-  width: 45%;
-  max-width: 280px;
-
-  background: #1a1a21;
-  border: 1px solid #30303a;
-  border-radius: 30px;
-
-  padding: 13px 18px;
-
-  color: #aaa;
-  font-size: 15px;
+    width: 150px;
+    background: #1a1920;
+    border: 1px solid rgba(173,77,255,.2);
+    border-radius: 30px;
+    padding: 13px 18px;
+    color: #aaa;
+    font-family: "Playfair Display",serif;
 }
 
-.hero {
-  min-height: 570px;
+/* COIN BAR */
 
-  padding: 110px 42px 60px;
-
-  background:
-    radial-gradient(
-      circle at 20% 25%,
-      #35105f 0%,
-      #160c27 35%,
-      #09090d 70%
+.coin-bar {
+    margin: 18px 20px 0;
+    padding: 14px 18px;
+    border-radius: 18px;
+    background: linear-gradient(
+        135deg,
+        rgba(117,35,200,.25),
+        rgba(40,25,70,.5)
     );
+    border: 1px solid rgba(173,77,255,.25);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.coins {
+    font-family: "Cinzel",serif;
+    font-size: 16px;
+}
+
+.coin {
+    color: #ffd95c;
+    font-size: 21px;
+}
+
+.reward {
+    color: #c88aff;
+    font-size: 14px;
+}
+
+/* HERO */
+
+.hero {
+    margin: 20px;
+    min-height: 520px;
+    border-radius: 28px;
+    overflow: hidden;
+    position: relative;
+    background:
+        linear-gradient(
+            90deg,
+            rgba(12,8,20,.98) 0%,
+            rgba(35,12,60,.78) 45%,
+            rgba(10,7,15,.35) 100%
+        );
+    border: 1px solid rgba(173,77,255,.25);
+    box-shadow: 0 0 50px rgba(120,35,220,.12);
+}
+
+.hero-content {
+    position: absolute;
+    left: 28px;
+    right: 28px;
+    bottom: 35px;
 }
 
 .badge {
-  display: inline-block;
-
-  padding: 12px 20px;
-
-  border-radius: 30px;
-
-  background: linear-gradient(
-    90deg,
-    #a855f7,
-    #8b5cf6
-  );
-
-  font-weight: bold;
-  font-size: 15px;
+    display: inline-block;
+    padding: 11px 18px;
+    border-radius: 25px;
+    background: linear-gradient(135deg,#a84fff,#7521e4);
+    font-family: "Cinzel",serif;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 20px;
 }
 
 .hero h1 {
-  max-width: 600px;
-
-  font-size: 55px;
-  line-height: 1.05;
-
-  margin: 28px 0 20px;
+    font-family: "Cinzel",serif;
+    font-size: 43px;
+    line-height: 1.15;
+    margin-bottom: 15px;
 }
 
 .hero p {
-  max-width: 600px;
-
-  color: #b7b7c2;
-
-  font-size: 19px;
-  line-height: 1.6;
+    color: #c5c0cc;
+    font-size: 18px;
+    line-height: 1.7;
+    max-width: 370px;
 }
 
 .watch {
-  display: inline-block;
-
-  margin-top: 25px;
-
-  padding: 17px 30px;
-
-  border-radius: 12px;
-
-  background: white;
-  color: #09090d;
-
-  text-decoration: none;
-
-  font-size: 17px;
-  font-weight: bold;
+    margin-top: 25px;
+    padding: 16px 25px;
+    border: none;
+    border-radius: 17px;
+    background: white;
+    color: #111;
+    font-family: "Cinzel",serif;
+    font-weight: 700;
+    font-size: 16px;
 }
+
+/* SECTIONS */
 
 section {
-  padding: 35px 38px 110px;
+    padding: 10px 20px 20px;
 }
 
-section h2 {
-  font-size: 30px;
-  margin-bottom: 22px;
+.section-title {
+    font-family: "Cinzel",serif;
+    font-size: 25px;
+    margin-bottom: 17px;
 }
+
+.section-title span {
+    float: right;
+    font-family: "Playfair Display",serif;
+    font-size: 14px;
+    color: #b66aff;
+    margin-top: 7px;
+}
+
+/* CATEGORY */
 
 .categories {
-  display: flex;
-  gap: 12px;
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 12px;
+}
 
-  overflow-x: auto;
-
-  padding-bottom: 10px;
+.categories::-webkit-scrollbar {
+    display: none;
 }
 
 .category {
-  flex-shrink: 0;
-
-  padding: 14px 24px;
-
-  border-radius: 30px;
-
-  background: #18181f;
-  border: 1px solid #30303a;
-
-  color: white;
-
-  cursor: pointer;
-
-  font-size: 15px;
+    flex: 0 0 auto;
+    padding: 12px 20px;
+    border-radius: 25px;
+    background: #18171e;
+    border: 1px solid #302c38;
+    font-family: "Cinzel",serif;
+    color: #d0ccd6;
 }
 
 .category.active {
-  background: #a855f7;
-  border-color: #a855f7;
+    background: linear-gradient(135deg,#a84fff,#7521e4);
+    color: white;
+    border-color: transparent;
 }
 
-.message {
-  margin-top: 35px;
+/* DRAMA CARDS */
 
-  padding: 30px;
-
-  border-radius: 18px;
-
-  background: #13131a;
-  border: 1px solid #292933;
-
-  color: #aaa;
-
-  text-align: center;
+.drama-row {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    padding-bottom: 15px;
 }
 
-.bottom {
-  position: fixed;
-
-  left: 0;
-  right: 0;
-  bottom: 0;
-
-  height: 78px;
-
-  background: #111116;
-
-  border-top: 1px solid #292933;
-
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-
-  z-index: 100;
+.drama-row::-webkit-scrollbar {
+    display: none;
 }
 
-.bottom a {
-  color: #777783;
-
-  text-decoration: none;
-
-  text-align: center;
-
-  font-size: 12px;
+.drama {
+    flex: 0 0 155px;
 }
 
-.bottom a.active {
-  color: #a855f7;
+.poster {
+    height: 215px;
+    border-radius: 18px;
+    background:
+        linear-gradient(
+            145deg,
+            #9b3fff,
+            #251037 60%,
+            #09070c
+        );
+    border: 1px solid rgba(173,77,255,.25);
+    display: flex;
+    align-items: flex-end;
+    padding: 13px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0,0,0,.3);
 }
 
-.icon {
-  display: block;
-
-  font-size: 23px;
-
-  margin-bottom: 5px;
+.poster.second {
+    background: linear-gradient(145deg,#53208d,#171022,#08070c);
 }
 
-@media (max-width: 600px) {
+.poster.third {
+    background: linear-gradient(145deg,#7b285d,#25101d,#08070c);
+}
 
-  .hero {
-    padding: 80px 42px 50px;
-  }
+.poster.fourth {
+    background: linear-gradient(145deg,#303b91,#101328,#08070c);
+}
 
-  .hero h1 {
-    font-size: 46px;
-  }
-
-  .hero p {
+.poster-title {
+    font-family: "Cinzel",serif;
     font-size: 17px;
-  }
+    text-shadow: 0 2px 10px #000;
+}
 
-  .search {
-    width: 43%;
-  }
+.drama-name {
+    font-family: "Playfair Display",serif;
+    font-size: 16px;
+    margin-top: 9px;
+}
+
+.episode {
+    color: #9994a2;
+    font-size: 13px;
+    margin-top: 4px;
+}
+
+/* CONTINUE */
+
+.continue-card {
+    background: #15141b;
+    border: 1px solid rgba(173,77,255,.18);
+    border-radius: 18px;
+    padding: 16px;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.continue-poster {
+    width: 75px;
+    height: 100px;
+    border-radius: 12px;
+    background: linear-gradient(145deg,#a94cff,#21102f);
+}
+
+.continue-info {
+    flex: 1;
+}
+
+.continue-info h3 {
+    font-family: "Cinzel",serif;
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+.progress {
+    height: 5px;
+    background: #302d35;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.progress div {
+    width: 62%;
+    height: 100%;
+    background: linear-gradient(90deg,#a84fff,#7521e4);
+}
+
+.continue-info small {
+    display: block;
+    margin-top: 8px;
+    color: #9994a2;
+}
+
+/* NAVIGATION */
+
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 92px;
+    background: rgba(17,16,22,.98);
+    border-top: 1px solid rgba(173,77,255,.2);
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    z-index: 30;
+}
+
+.nav-item {
+    text-decoration: none;
+    color: #777582;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    font-family: "Cinzel",serif;
+    font-size: 12px;
+}
+
+.nav-icon {
+    font-size: 25px;
+}
+
+.nav-item.active {
+    color: #a94dff;
+    text-shadow: 0 0 15px rgba(169,77,255,.5);
+}
+
+@media(max-width:600px) {
+
+    .hero {
+        min-height: 500px;
+    }
+
+    .hero h1 {
+        font-size: 40px;
+    }
 
 }
+
 </style>
 </head>
 
@@ -244,205 +377,261 @@ section h2 {
 
 <header>
 
-  <div class="logo">
-    Zyn<span>ora</span>
-  </div>
+<div class="logo">Zynora</div>
 
-  <input
-    class="search"
-    type="search"
-    placeholder="Search..."
-    id="searchBox"
-  >
+<input
+class="search"
+type="search"
+placeholder="Search..."
+>
 
 </header>
 
 
-<div class="hero">
+<!-- COINS -->
 
-  <div class="badge">
-    ZYNORA ORIGINAL
-  </div>
+<div class="coin-bar">
 
-  <h1>
-    The Billionaire's Secret
-  </h1>
+<div class="coins">
+<span class="coin">🪙</span>
+<span id="coinBalance">100</span> Coins
+</div>
 
-  <p>
-    Discover addictive short dramas, romance,
-    suspense and original series made for Zynora.
-  </p>
-
-  <a href="#" class="watch" onclick="watchNow()">
-    ▶ Watch Now
-  </a>
+<div class="reward">
+🎁 Daily Reward
+</div>
 
 </div>
 
 
+<!-- FEATURED -->
+
+<div class="hero">
+
+<div class="hero-content">
+
+<div class="badge">
+ZYNORA ORIGINAL
+</div>
+
+<h1>
+The Billionaire's Secret
+</h1>
+
+<p>
+A powerful billionaire. A hidden identity.
+One dangerous secret that could change everything.
+</p>
+
+<button class="watch" onclick="watchDrama()">
+▶ Watch Now
+</button>
+
+</div>
+
+</div>
+
+
+<!-- EXPLORE -->
+
 <section>
 
-  <h2>
-    Explore
-  </h2>
+<div class="section-title">
+Explore
+</div>
 
-  <div class="categories">
+<div class="categories">
 
-    <button
-      class="category active"
-      onclick="selectCategory(this, 'For You')">
-      For You
-    </button>
+<div class="category active">For You</div>
+<div class="category">Romance</div>
+<div class="category">Drama</div>
+<div class="category">Action</div>
+<div class="category">Suspense</div>
 
-    <button
-      class="category"
-      onclick="selectCategory(this, 'Romance')">
-      Romance
-    </button>
-
-    <button
-      class="category"
-      onclick="selectCategory(this, 'Drama')">
-      Drama
-    </button>
-
-    <button
-      class="category"
-      onclick="selectCategory(this, 'Action')">
-      Action
-    </button>
-
-    <button
-      class="category"
-      onclick="selectCategory(this, 'Suspense')">
-      Suspense
-    </button>
-
-  </div>
-
-
-  <div class="message" id="categoryMessage">
-
-    Showing stories recommended for you.
-
-  </div>
+</div>
 
 </section>
 
 
-<nav class="bottom">
+<!-- TRENDING -->
 
-  <a href="index.html" class="active">
+<section>
 
-    <span class="icon">⌂</span>
+<div class="section-title">
+Trending Now
+<span>See All</span>
+</div>
 
-    Home
+<div class="drama-row">
 
-  </a>
+<div class="drama">
+
+<div class="poster">
+
+<div class="poster-title">
+The Billionaire's Secret
+</div>
+
+</div>
+
+<div class="drama-name">
+The Billionaire's Secret
+</div>
+
+<div class="episode">
+Episode 12
+</div>
+
+</div>
 
 
-  <a href="#" onclick="discover()">
+<div class="drama">
 
-    <span class="icon">◉</span>
+<div class="poster second">
 
-    Discover
+<div class="poster-title">
+Love After Lies
+</div>
 
-  </a>
+</div>
+
+<div class="drama-name">
+Love After Lies
+</div>
+
+<div class="episode">
+Episode 8
+</div>
+
+</div>
 
 
-  <a href="#" onclick="library()">
+<div class="drama">
 
-    <span class="icon">□</span>
+<div class="poster third">
 
-    Library
+<div class="poster-title">
+Forbidden Promise
+</div>
 
-  </a>
+</div>
+
+<div class="drama-name">
+Forbidden Promise
+</div>
+
+<div class="episode">
+Episode 15
+</div>
+
+</div>
 
 
-  <a href="profile.html">
+<div class="drama">
 
-    <span class="icon">●</span>
+<div class="poster fourth">
 
-    Profile
+<div class="poster-title">
+Hidden Heir
+</div>
 
-  </a>
+</div>
+
+<div class="drama-name">
+Hidden Heir
+</div>
+
+<div class="episode">
+Episode 6
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- CONTINUE WATCHING -->
+
+<section>
+
+<div class="section-title">
+Continue Watching
+</div>
+
+<div class="continue-card">
+
+<div class="continue-poster"></div>
+
+<div class="continue-info">
+
+<h3>
+The Billionaire's Secret
+</h3>
+
+<div class="progress">
+<div></div>
+</div>
+
+<small>
+Episode 12 • 62% watched
+</small>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- NAVIGATION -->
+
+<nav class="bottom-nav">
+
+<a class="nav-item active" href="index.html">
+
+<div class="nav-icon">⌂</div>
+<div>Home</div>
+
+</a>
+
+
+<a class="nav-item" href="discover.html">
+
+<div class="nav-icon">◉</div>
+<div>Discover</div>
+
+</a>
+
+
+<a class="nav-item" href="library.html">
+
+<div class="nav-icon">□</div>
+<div>Library</div>
+
+</a>
+
+
+<a class="nav-item" href="profile.html">
+
+<div class="nav-icon">●</div>
+<div>Profile</div>
+
+</a>
 
 </nav>
 
 
 <script>
 
-function watchNow() {
+function watchDrama() {
 
-  alert(
-    "Zynora player is coming next."
-  );
-
-}
-
-
-function selectCategory(button, category) {
-
-  document
-    .querySelectorAll(".category")
-    .forEach(function(item) {
-
-      item.classList.remove("active");
-
-    });
-
-  button.classList.add("active");
-
-  document.getElementById(
-    "categoryMessage"
-  ).innerText =
-    "Showing " + category +
-    " stories on Zynora.";
+alert(
+"🎬 The Billionaire's Secret\n\nEpisode 1 is ready to watch!"
+);
 
 }
-
-
-function discover() {
-
-  alert(
-    "Discover will be built next."
-  );
-
-}
-
-
-function library() {
-
-  alert(
-    "Your Zynora Library will be built next."
-  );
-
-}
-
-
-document
-  .getElementById("searchBox")
-  .addEventListener("keypress", function(event) {
-
-    if (event.key === "Enter") {
-
-      let value = this.value.trim();
-
-      if (value === "") {
-
-        alert("Type something to search.");
-
-      } else {
-
-        alert(
-          "Searching Zynora for: " + value
-        );
-
-      }
-
-    }
-
-  });
 
 </script>
 
