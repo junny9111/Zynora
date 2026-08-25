@@ -2,584 +2,509 @@
 <html lang="en">
 
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Zynora Library</title>
 
-<link rel="preconnect"
-href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link rel="preconnect"
-href="https://fonts.gstatic.com"
-crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap"
-rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet">
 
 <style>
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
 }
 
-body {
-    min-height: 100vh;
-
-    background:
-        radial-gradient(
-            circle at 50% 8%,
-            rgba(145,55,255,.18),
-            transparent 32%
-        ),
-        #08070c;
-
-    color: white;
-
-    font-family:
-        "Playfair Display",
-        Georgia,
-        serif;
-
-    padding-bottom: 105px;
+body{
+min-height:100vh;
+background:
+radial-gradient(circle at 50% 8%,rgba(145,55,255,.18),transparent 32%),
+#08070c;
+color:white;
+font-family:"Playfair Display",Georgia,serif;
+padding-bottom:105px;
 }
 
-
-/* HEADER */
-
-header {
-    height: 95px;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    padding: 0 22px;
-
-    background: #111016;
-
-    border-bottom:
-        1px solid
-        rgba(173,77,255,.25);
+header{
+height:95px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 22px;
+background:#111016;
+border-bottom:1px solid rgba(173,77,255,.25);
 }
 
-
-.logo {
-    font-family:
-        "Cinzel",
-        serif;
-
-    font-size: 37px;
-
-    font-weight: 700;
-
-    letter-spacing: -2px;
-
-    background:
-        linear-gradient(
-            90deg,
-            #ffffff,
-            #d19aff,
-            #8e38ff
-        );
-
-    -webkit-background-clip: text;
-    background-clip: text;
-
-    color: transparent;
+.logo{
+font-family:"Cinzel",serif;
+font-size:37px;
+font-weight:700;
+letter-spacing:-2px;
+background:linear-gradient(90deg,#fff,#d19aff,#8e38ff);
+-webkit-background-clip:text;
+background-clip:text;
+color:transparent;
 }
 
-
-.coin-top {
-    padding: 10px 14px;
-
-    border-radius: 18px;
-
-    background:
-        rgba(130,45,220,.16);
-
-    border:
-        1px solid
-        rgba(173,77,255,.25);
-
-    color: #ffd75c;
-
-    font-family:
-        "Cinzel",
-        serif;
-
-    font-size: 13px;
+.coin-top{
+padding:10px 14px;
+border-radius:18px;
+background:rgba(130,45,220,.16);
+border:1px solid rgba(173,77,255,.25);
+color:#ffd75c;
+font-family:"Cinzel",serif;
+font-size:13px;
 }
 
-
-/* MAIN */
-
-main {
-    max-width: 650px;
-
-    margin: auto;
-
-    padding: 28px 20px;
+main{
+max-width:650px;
+margin:auto;
+padding:28px 20px;
 }
 
-
-.title {
-    font-family:
-        "Cinzel",
-        serif;
-
-    font-size: 31px;
+h1{
+font-family:"Cinzel",serif;
+font-size:31px;
 }
 
-
-.subtitle {
-    margin-top: 7px;
-
-    color: #9994a2;
-
-    font-style: italic;
-
-    margin-bottom: 25px;
+.subtitle{
+margin:7px 0 25px;
+color:#9994a2;
+font-style:italic;
 }
 
-
-/* TABS */
-
-.tabs {
-    display: grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
-    gap: 8px;
-
-    padding: 5px;
-
-    background: #121117;
-
-    border-radius: 18px;
-
-    border:
-        1px solid
-        rgba(255,255,255,.07);
-
-    margin-bottom: 26px;
+.tabs{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:8px;
+padding:5px;
+background:#121117;
+border-radius:18px;
+margin-bottom:26px;
 }
 
-
-.tab {
-    padding: 12px 6px;
-
-    border: none;
-
-    border-radius: 14px;
-
-    background: transparent;
-
-    color: #777582;
-
-    font-family:
-        "Cinzel",
-        serif;
-
-    font-size: 11px;
+.tab{
+padding:12px 6px;
+border:0;
+border-radius:14px;
+background:transparent;
+color:#777582;
+font-family:"Cinzel",serif;
 }
 
-
-.tab.active {
-    background:
-        linear-gradient(
-            135deg,
-            #a84fff,
-            #7521e4
-        );
-
-    color: white;
+.tab.active{
+background:linear-gradient(135deg,#a84fff,#7521e4);
+color:white;
 }
 
-
-/* PANELS */
-
-.panel {
-    display: none;
+.panel{
+display:none;
 }
 
-
-.panel.active {
-    display: block;
+.panel.active{
+display:block;
 }
 
-
-/* EMPTY STATE */
-
-.empty {
-    background:
-        linear-gradient(
-            145deg,
-            #15141b,
-            #101016
-        );
-
-    border:
-        1px solid
-        rgba(173,77,255,.18);
-
-    border-radius: 24px;
-
-    padding: 48px 24px;
-
-    text-align: center;
+.card{
+display:flex;
+gap:14px;
+padding:15px;
+margin-bottom:13px;
+border-radius:19px;
+background:#15141b;
+border:1px solid rgba(255,255,255,.07);
 }
 
-
-.empty-icon {
-    width: 82px;
-    height: 82px;
-
-    margin: 0 auto 20px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 50%;
-
-    background:
-        linear-gradient(
-            135deg,
-            #a84fff,
-            #7521e4
-        );
-
-    font-size: 33px;
-
-    box-shadow:
-        0 0 30px
-        rgba(145,50,255,.35);
+.poster{
+width:80px;
+height:105px;
+flex:0 0 80px;
+border-radius:13px;
+background:linear-gradient(145deg,#a84fff,#24102f);
 }
 
-
-.empty h2 {
-    font-family:
-        "Cinzel",
-        serif;
-
-    font-size: 20px;
-
-    margin-bottom: 11px;
+.content{
+flex:1;
 }
 
-
-.empty p {
-    color: #9994a2;
-
-    line-height: 1.6;
-
-    font-size: 14px;
-
-    max-width: 320px;
-
-    margin: auto;
+.title2{
+font-family:"Cinzel",serif;
+font-size:14px;
+margin-bottom:7px;
 }
 
-
-.browse {
-    display: inline-block;
-
-    margin-top: 23px;
-
-    padding: 14px 22px;
-
-    border-radius: 15px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #a84fff,
-            #7521e4
-        );
-
-    color: white;
-
-    text-decoration: none;
-
-    font-family:
-        "Cinzel",
-        serif;
-
-    font-size: 13px;
+.info{
+color:#918c98;
+font-size:12px;
 }
 
-
-/* EPISODE CARD */
-
-.episode-card {
-    display: flex;
-
-    gap: 14px;
-
-    padding: 15px;
-
-    margin-bottom: 13px;
-
-    border-radius: 19px;
-
-    background: #15141b;
-
-    border:
-        1px solid
-        rgba(255,255,255,.07);
+.action{
+display:inline-block;
+margin-top:12px;
+padding:9px 14px;
+border-radius:12px;
+background:rgba(155,60,245,.18);
+border:1px solid rgba(173,77,255,.35);
+color:#d3a4ff;
+text-decoration:none;
+font-family:"Cinzel",serif;
+font-size:10px;
 }
 
-
-.poster {
-    width: 80px;
-    height: 105px;
-
-    flex: 0 0 80px;
-
-    border-radius: 13px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #a84fff,
-            #24102f
-        );
+.empty{
+padding:45px 22px;
+text-align:center;
+background:#121117;
+border-radius:24px;
+border:1px solid rgba(173,77,255,.18);
+color:#9994a2;
 }
 
-
-.episode-content {
-    flex: 1;
+.empty h2{
+font-family:"Cinzel",serif;
+color:white;
+margin-bottom:10px;
 }
 
-
-.episode-title {
-    font-family:
-        "Cinzel",
-        serif;
-
-    font-size: 14px;
-
-    margin-bottom: 7px;
+.bottom-nav{
+position:fixed;
+left:0;
+right:0;
+bottom:0;
+height:90px;
+background:#111016;
+display:grid;
+grid-template-columns:repeat(5,1fr);
+border-top:1px solid rgba(173,77,255,.2);
 }
 
-
-.episode-info {
-    color: #918c98;
-
-    font-size: 12px;
+.nav-item{
+text-decoration:none;
+color:#777582;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+gap:5px;
+font-family:"Cinzel",serif;
+font-size:9px;
 }
 
-
-.watch-btn {
-    display: inline-block;
-
-    margin-top: 12px;
-
-    padding: 9px 15px;
-
-    border-radius: 12px;
-
-    background:
-        rgba(155,60,245,.18);
-
-    border:
-        1px solid
-        rgba(173,77,255,.35);
-
-    color: #d3a4ff;
-
-    text-decoration: none;
-
-    font-family:
-        "Cinzel",
-        serif;
-
-    font-size: 10px;
+.nav-icon{
+font-size:21px;
 }
 
-
-/* NAV */
-
-.bottom-nav {
-    position: fixed;
-
-    left: 0;
-    right: 0;
-    bottom: 0;
-
-    height: 90px;
-
-    background:
-        rgba(17,16,22,.98);
-
-    border-top:
-        1px solid
-        rgba(173,77,255,.2);
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(5,1fr);
-
-    z-index: 50;
-}
-
-
-.nav-item {
-    text-decoration: none;
-
-    color: #777582;
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-    justify-content: center;
-
-    gap: 5px;
-
-    font-family:
-        "Cinzel",
-        serif;
-
-    font-size: 9px;
-}
-
-
-.nav-icon {
-    font-size: 21px;
-}
-
-
-.nav-item.active {
-    color: #a94dff;
-
-    text-shadow:
-        0 0 15px
-        rgba(169,77,255,.5);
+.nav-item.active{
+color:#a94dff;
 }
 
 </style>
-
 </head>
-
 
 <body>
 
-
 <header>
 
-<div class="logo">
-Zynora
-</div>
+<div class="logo">Zynora</div>
 
 <div class="coin-top">
-🪙 <span id="coinDisplay">0</span>
+🪙 <span id="coins">0</span>
 </div>
 
 </header>
 
-
 <main>
 
-<h1 class="title">
-My Library
-</h1>
+<h1>My Library</h1>
 
 <p class="subtitle">
-Your saved dramas, history and unlocked episodes.
+Your saved dramas, watch history and unlocked episodes.
 </p>
-
-
-<!-- TABS -->
 
 <div class="tabs">
 
-<button
-class="tab active"
-onclick="openTab('saved', this)">
-
+<button id="savedTab" class="tab active">
 Saved
-
 </button>
 
-
-<button
-class="tab"
-onclick="openTab('history', this)">
-
+<button id="historyTab" class="tab">
 History
-
 </button>
 
-
-<button
-class="tab"
-onclick="openTab('unlocked', this)">
-
+<button id="unlockedTab" class="tab">
 Unlocked
-
 </button>
 
 </div>
 
+<div id="savedPanel" class="panel active"></div>
 
-<!-- SAVED -->
+<div id="historyPanel" class="panel"></div>
 
-<section
-id="saved"
-class="panel active">
+<div id="unlockedPanel" class="panel">
 
 <div class="empty">
 
-<div class="empty-icon">
-♡
-</div>
-
-<h2>
-No saved dramas yet
-</h2>
+<h2>No unlocked episodes yet</h2>
 
 <p>
-Tap the save button on a Zynora drama and it will appear here.
+Episodes purchased with Zynora Coins will appear here.
 </p>
 
-<a
-href="discover.html"
-class="browse">
+</div>
 
-Discover Dramas
+</div>
 
+</main>
+
+<nav class="bottom-nav">
+
+<a href="index.html" class="nav-item">
+<span class="nav-icon">⌂</span>
+Home
+</a>
+
+<a href="discover.html" class="nav-item">
+<span class="nav-icon">◉</span>
+Discover
+</a>
+
+<a href="rewards.html" class="nav-item">
+<span class="nav-icon">🎁</span>
+Rewards
+</a>
+
+<a href="library.html" class="nav-item active">
+<span class="nav-icon">▣</span>
+Library
+</a>
+
+<a href="profile.html" class="nav-item">
+<span class="nav-icon">●</span>
+Profile
+</a>
+
+</nav>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+const client = supabase.createClient(
+"https://ozshekxpuvganemaajms.supabase.co",
+"sb_publishable__GsW9RahFD_XDWJTFzh9eQ_dNBZfa32"
+);
+
+let user = null;
+
+const savedTab = document.getElementById("savedTab");
+const historyTab = document.getElementById("historyTab");
+const unlockedTab = document.getElementById("unlockedTab");
+
+const savedPanel = document.getElementById("savedPanel");
+const historyPanel = document.getElementById("historyPanel");
+const unlockedPanel = document.getElementById("unlockedPanel");
+
+function showPanel(panel,button){
+
+document.querySelectorAll(".panel").forEach(p=>{
+p.classList.remove("active");
+});
+
+document.querySelectorAll(".tab").forEach(t=>{
+t.classList.remove("active");
+});
+
+panel.classList.add("active");
+button.classList.add("active");
+
+}
+
+savedTab.onclick=()=>{
+showPanel(savedPanel,savedTab);
+};
+
+historyTab.onclick=()=>{
+showPanel(historyPanel,historyTab);
+};
+
+unlockedTab.onclick=()=>{
+showPanel(unlockedPanel,unlockedTab);
+};
+
+async function start(){
+
+const result=await client.auth.getUser();
+
+user=result.data.user;
+
+if(!user){
+
+savedPanel.innerHTML=
+'<div class="empty"><h2>Please log in</h2><p>Your saved dramas require a Zynora account.</p></div>';
+
+historyPanel.innerHTML=
+'<div class="empty"><h2>Please log in</h2></div>';
+
+return;
+
+}
+
+await loadCoins();
+await loadSaved();
+await loadHistory();
+
+}
+
+async function loadCoins(){
+
+const result=await client
+.from("coin_wallets")
+.select("balance")
+.eq("user_id",user.id)
+.maybeSingle();
+
+if(result.data){
+
+document.getElementById("coins").textContent=
+result.data.balance;
+
+}
+
+}
+
+async function loadSaved(){
+
+const result=await client
+.from("saved_dramas")
+.select("*")
+.eq("user_id",user.id)
+.order("created_at",{ascending:false});
+
+if(result.error){
+
+savedPanel.innerHTML=
+'<div class="empty"><h2>Unable to load Saved</h2><p>'+
+result.error.message+
+'</p></div>';
+
+return;
+
+}
+
+if(!result.data.length){
+
+savedPanel.innerHTML=
+'<div class="empty"><h2>No saved dramas yet</h2><p>Save a drama from Discover and it will appear here.</p></div>';
+
+return;
+
+}
+
+savedPanel.innerHTML="";
+
+result.data.forEach(item=>{
+
+savedPanel.innerHTML+=`
+
+<div class="card">
+
+<div class="poster"></div>
+
+<div class="content">
+
+<div class="title2">
+${item.drama_title}
+</div>
+
+<div class="info">
+Saved to your Zynora Library
+</div>
+
+<a class="action" href="player.html">
+▶ Watch
 </a>
 
 </div>
 
-</section>
+</div>
 
+`;
 
-<!-- HISTORY -->
+});
 
-<section
-id="history"
-class="panel">
+}
 
-<div class="episode-card">
+async function loadHistory(){
+
+const result=await client
+.from("watch_history")
+.select("*")
+.eq("user_id",user.id)
+.order("watched_at",{ascending:false});
+
+if(result.error){
+
+historyPanel.innerHTML=
+'<div class="empty"><h2>Unable to load History</h2><p>'+
+result.error.message+
+'</p></div>';
+
+return;
+
+}
+
+if(!result.data.length){
+
+historyPanel.innerHTML=
+'<div class="empty"><h2>No watch history yet</h2><p>Your watched episodes will appear here.</p></div>';
+
+return;
+
+}
+
+historyPanel.innerHTML="";
+
+result.data.forEach(item=>{
+
+historyPanel.innerHTML+=`
+
+<div class="card">
 
 <div class="poster"></div>
 
-<div class="episode-content">
+<div class="content">
 
-<div class="episode-title">
-The Billionaire's Secret
+<div class="title2">
+${item.drama_title}
 </div>
 
-<div class="episode-info">
-Episode
+<div class="info">
+Episode ${item.episode_number}
+</div>
+
+<a class="action" href="player.html">
+▶ Continue
+</a>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+}
+
+start();
+
+</script>
+
+</body>
+</html>
