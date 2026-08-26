@@ -8,11 +8,9 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
 
 <style>
-
 * {
   box-sizing: border-box;
   margin: 0;
@@ -22,82 +20,98 @@
 body {
   min-height: 100vh;
   background:
-    radial-gradient(circle at 50% 5%, rgba(145,55,255,.22), transparent 35%),
+    radial-gradient(circle at 50% 0%, rgba(143, 48, 255, .25), transparent 34%),
     #08070c;
-  color: white;
+  color: #fff;
   font-family: "Playfair Display", Georgia, serif;
   padding-bottom: 105px;
 }
 
 header {
-  height: 90px;
+  height: 88px;
   display: flex;
   align-items: center;
   padding: 0 22px;
-  background: #111016;
-  border-bottom: 1px solid rgba(173,77,255,.25);
+  background: rgba(15, 14, 20, .96);
+  border-bottom: 1px solid rgba(173, 77, 255, .22);
 }
 
 .logo {
   font-family: "Cinzel", serif;
-  font-size: 37px;
+  font-size: 34px;
   font-weight: 700;
   letter-spacing: -2px;
-  background: linear-gradient(90deg,#fff,#d19aff,#8e38ff);
+  background: linear-gradient(90deg, #ffffff, #d7a6ff, #8f3cff);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
 main {
-  max-width: 600px;
-  margin: auto;
-  padding: 28px 20px;
+  width: 100%;
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 26px 20px;
 }
 
 h1 {
   font-family: "Cinzel", serif;
-  font-size: 31px;
+  font-size: 30px;
+  margin-bottom: 5px;
 }
 
 .subtitle {
-  color: #9994a2;
-  margin: 7px 0 25px;
-  font-style: italic;
+  color: #9993a3;
+  font-size: 14px;
+  margin-bottom: 24px;
 }
 
-.wallet {
-  padding: 25px;
-  border-radius: 24px;
-  background: linear-gradient(135deg,#6e20bd,#301052);
-  border: 1px solid rgba(205,145,255,.45);
-  margin-bottom: 30px;
-  box-shadow: 0 0 40px rgba(130,40,220,.28);
-}
-
-.wallet-label {
-  color: #ddd0e9;
+#status {
+  display: none;
+  margin-bottom: 18px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: #17131e;
+  border: 1px solid rgba(173, 77, 255, .22);
+  color: #cfc5d8;
+  text-align: center;
   font-size: 13px;
 }
 
-.balance {
+.wallet {
+  padding: 24px;
+  border-radius: 24px;
+  background:
+    linear-gradient(135deg, rgba(129, 44, 220, .95), rgba(51, 16, 86, .95));
+  border: 1px solid rgba(210, 151, 255, .38);
+  box-shadow: 0 18px 50px rgba(85, 20, 145, .25);
+  margin-bottom: 30px;
+}
+
+.wallet-label {
   font-family: "Cinzel", serif;
-  font-size: 40px;
+  color: #d8c8e4;
+  font-size: 12px;
+}
+
+.balance {
   margin-top: 8px;
+  font-family: "Cinzel", serif;
+  font-size: 38px;
 }
 
 .section-title {
   font-family: "Cinzel", serif;
-  font-size: 19px;
+  font-size: 18px;
   margin-bottom: 15px;
 }
 
 .reward {
-  background: #15141b;
-  border: 1px solid rgba(255,255,255,.08);
-  border-radius: 20px;
   padding: 19px;
-  margin-bottom: 14px;
+  margin-bottom: 15px;
+  border-radius: 21px;
+  background: #15141b;
+  border: 1px solid rgba(255, 255, 255, .09);
 }
 
 .reward-head {
@@ -107,47 +121,46 @@ h1 {
 }
 
 .reward-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 15px;
-  background: rgba(150,60,240,.18);
+  width: 52px;
+  height: 52px;
+  flex: 0 0 52px;
+  border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 24px;
-  flex-shrink: 0;
+  background: rgba(149, 62, 235, .18);
+  font-size: 25px;
 }
 
 .reward-name {
   font-family: "Cinzel", serif;
   font-size: 15px;
+  margin-bottom: 5px;
 }
 
 .reward-description {
-  color: #97929f;
+  color: #97919e;
   font-size: 13px;
-  margin-top: 5px;
-  line-height: 1.4;
+  line-height: 1.45;
 }
 
 .reward-btn {
-  display: block;
   width: 100%;
   margin-top: 16px;
-  padding: 14px;
+  padding: 14px 10px;
   border: 0;
   border-radius: 14px;
-  background: linear-gradient(135deg,#a84fff,#7521e4);
-  color: white;
+  background: linear-gradient(135deg, #aa4fff, #741de8);
+  color: #fff;
   font-family: "Cinzel", serif;
-  font-size: 13px;
   font-weight: 700;
+  font-size: 12px;
   cursor: pointer;
 }
 
 .reward-btn:disabled {
   background: #292631;
-  color: #77737f;
+  color: #77727f;
   cursor: not-allowed;
 }
 
@@ -155,69 +168,39 @@ h1 {
   display: none !important;
 }
 
-#status {
-  margin: 15px 0 22px;
-  padding: 13px;
-  border-radius: 13px;
-  background: #17131e;
-  border: 1px solid rgba(173,77,255,.2);
-  color: #c9c3d0;
+/* GAME */
+
+.game-panel {
   display: none;
-  text-align: center;
-}
-
-.history {
-  margin-top: 30px;
-}
-
-.history-row {
-  display: flex;
-  justify-content: space-between;
-  gap: 14px;
-  padding: 13px 0;
-  border-bottom: 1px solid rgba(255,255,255,.07);
-}
-
-.history-amount {
-  color: #ffd75c;
-  font-family: "Cinzel", serif;
-  white-space: nowrap;
-}
-
-
-/* MINI GAME */
-
-.game-box {
   margin-top: 16px;
-  padding: 18px;
+  padding: 16px;
   border-radius: 16px;
-  background: #0e0d13;
-  border: 1px solid rgba(173,77,255,.25);
-  display: none;
+  background: #0c0b10;
+  border: 1px solid rgba(165, 75, 255, .25);
 }
 
-.game-box.show {
+.game-panel.open {
   display: block;
 }
 
 .game-title {
-  font-family: "Cinzel", serif;
   text-align: center;
-  margin-bottom: 8px;
+  font-family: "Cinzel", serif;
+  font-size: 15px;
 }
 
-.game-text {
-  color: #aaa3b2;
+.game-instructions {
   text-align: center;
-  font-size: 13px;
-  margin-bottom: 15px;
+  color: #9c96a3;
+  font-size: 12px;
+  margin: 7px 0 12px;
 }
 
 .game-score {
   text-align: center;
+  color: #d6a9ff;
   font-family: "Cinzel", serif;
-  margin-bottom: 14px;
-  color: #d5a7ff;
+  margin-bottom: 12px;
 }
 
 .game-area {
@@ -227,4 +210,187 @@ h1 {
   overflow: hidden;
   border-radius: 15px;
   background:
-    radial-gradient(circle at center, rgba(135
+    radial-gradient(circle, rgba(145, 50, 230, .13), transparent 65%),
+    #08070b;
+  border: 1px solid rgba(255, 255, 255, .06);
+}
+
+.star {
+  width: 55px;
+  height: 55px;
+  position: absolute;
+  border: 0;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #c168ff, #7d25ea);
+  color: white;
+  font-size: 25px;
+  box-shadow: 0 0 28px rgba(177, 75, 255, .45);
+  cursor: pointer;
+}
+
+.close-game {
+  width: 100%;
+  margin-top: 12px;
+  padding: 11px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.09);
+  background: transparent;
+  color: #99929f;
+}
+
+/* HISTORY */
+
+.history {
+  margin-top: 31px;
+}
+
+.history-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 13px 0;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+  font-size: 14px;
+}
+
+.history-amount {
+  color: #ffd75c;
+  font-family: "Cinzel", serif;
+  white-space: nowrap;
+}
+
+.empty-history {
+  color: #817a89;
+  font-size: 14px;
+}
+
+/* NAVIGATION */
+
+.bottom-nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 88px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  background: #111016;
+  border-top: 1px solid rgba(173, 77, 255, .20);
+  z-index: 100;
+}
+
+.nav-item {
+  text-decoration: none;
+  color: #777582;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  font-family: "Cinzel", serif;
+  font-size: 9px;
+}
+
+.nav-icon {
+  font-size: 21px;
+}
+
+.nav-item.active {
+  color: #ad50ff;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">Zynora</div>
+</header>
+
+<main>
+
+<h1>Rewards</h1>
+
+<p class="subtitle">
+  Earn Zynora Coins and unlock more entertainment.
+</p>
+
+<div id="status"></div>
+
+<div class="wallet">
+
+  <div class="wallet-label">
+    YOUR ZYNORA COINS
+  </div>
+
+  <div class="balance">
+    🪙 <span id="balance">0</span>
+  </div>
+
+</div>
+
+<div class="section-title">
+  Available Rewards
+</div>
+
+
+<!-- DAILY CHECK-IN -->
+
+<div class="reward" id="dailyReward">
+
+  <div class="reward-head">
+
+    <div class="reward-icon">
+      🎁
+    </div>
+
+    <div>
+      <div class="reward-name">
+        Daily Check-In
+      </div>
+
+      <div class="reward-description">
+        Claim 20 coins once every day.
+      </div>
+    </div>
+
+  </div>
+
+  <button
+    id="dailyBtn"
+    class="reward-btn">
+    Claim 20 Coins
+  </button>
+
+</div>
+
+
+<!-- WELCOME REWARD -->
+
+<div class="reward" id="welcomeReward">
+
+  <div class="reward-head">
+
+    <div class="reward-icon">
+      ✨
+    </div>
+
+    <div>
+      <div class="reward-name">
+        Welcome Reward
+      </div>
+
+      <div class="reward-description">
+        New Zynora members can claim 100 coins once.
+      </div>
+    </div>
+
+  </div>
+
+  <button
+    id="welcomeBtn"
+    class="reward-btn">
+    Claim 100 Coins
+  </button>
+
+</div>
