@@ -2,440 +2,508 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
 <title>Zynora AI Studio</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
 
 <style>
-
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
+*{box-sizing:border-box;margin:0;padding:0}
 
 body{
-  min-height:100vh;
-  background:
-    radial-gradient(circle at 50% 0%,rgba(145,55,255,.24),transparent 34%),
-    #08070c;
-  color:white;
-  font-family:"Playfair Display",Georgia,serif;
-  padding-bottom:60px;
+background:#08070c;
+color:#fff;
+font-family:"Playfair Display",serif;
+padding-bottom:60px;
 }
 
 header{
-  min-height:88px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:15px;
-  padding:0 20px;
-  background:#111016;
-  border-bottom:1px solid rgba(173,77,255,.25);
+height:82px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 20px;
+background:#111016;
+border-bottom:1px solid #382345;
 }
 
 .logo{
-  font-family:"Cinzel",serif;
-  font-size:27px;
-  font-weight:700;
-  letter-spacing:-2px;
-  background:linear-gradient(90deg,#fff,#d19aff,#8e38ff);
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent;
+font-family:"Cinzel",serif;
+font-size:25px;
+background:linear-gradient(90deg,#fff,#d19aff,#8e38ff);
+-webkit-background-clip:text;
+color:transparent;
 }
 
-.back{
-  text-decoration:none;
-  color:#b765ff;
-  font-family:"Cinzel",serif;
-  font-size:10px;
+header a{
+color:#bd75ff;
+text-decoration:none;
+font-size:12px;
 }
 
 main{
-  max-width:680px;
-  margin:auto;
-  padding:28px 20px 60px;
+max-width:650px;
+margin:auto;
+padding:25px 18px;
 }
 
 h1{
-  font-family:"Cinzel",serif;
-  font-size:29px;
-  margin-bottom:6px;
+font-family:"Cinzel",serif;
+font-size:27px;
+margin-bottom:7px;
 }
 
-.subtitle{
-  color:#9994a2;
-  font-size:14px;
-  margin-bottom:25px;
-  line-height:1.5;
+.sub{
+color:#9993a1;
+margin-bottom:22px;
+}
+
+.box{
+background:#15141b;
+border:1px solid #2c2732;
+border-radius:22px;
+padding:20px;
+margin-bottom:20px;
 }
 
 .hero{
-  padding:24px;
-  border-radius:24px;
-  background:linear-gradient(135deg,#4b1475,#191023);
-  border:1px solid rgba(195,118,255,.34);
-  margin-bottom:24px;
+background:linear-gradient(135deg,#491270,#201027);
+border-color:#6c3295;
 }
 
-.hero h2{
-  font-family:"Cinzel",serif;
-  font-size:18px;
-  margin-bottom:8px;
-}
-
-.hero p{
-  color:#c8b8d1;
-  font-size:13px;
-  line-height:1.6;
-}
-
-#status{
-  display:none;
-  padding:13px;
-  margin-bottom:18px;
-  border-radius:14px;
-  background:#17131e;
-  border:1px solid rgba(173,77,255,.22);
-  color:#cec4d6;
-  font-size:13px;
-  text-align:center;
-  line-height:1.5;
-}
-
-.card{
-  background:#15141b;
-  border:1px solid rgba(255,255,255,.08);
-  border-radius:23px;
-  padding:20px;
-  margin-bottom:20px;
-}
-
-.card-title{
-  font-family:"Cinzel",serif;
-  font-size:16px;
-  margin-bottom:15px;
+h2{
+font-family:"Cinzel",serif;
+font-size:17px;
+margin-bottom:10px;
 }
 
 label{
-  display:block;
-  font-family:"Cinzel",serif;
-  font-size:11px;
-  color:#b8a7c4;
-  margin:17px 0 8px;
+display:block;
+font-family:"Cinzel",serif;
+font-size:11px;
+color:#b9a7c4;
+margin:16px 0 7px;
 }
 
-input,
 textarea,
 select{
-  width:100%;
-  padding:14px;
-  border-radius:14px;
-  border:1px solid #39333f;
-  background:#0d0c11;
-  color:white;
-  font-family:"Playfair Display",serif;
-  font-size:15px;
-  outline:none;
+width:100%;
+padding:14px;
+background:#0c0b10;
+border:1px solid #3c3442;
+border-radius:14px;
+color:white;
+font-family:"Playfair Display",serif;
+font-size:15px;
 }
 
 textarea{
-  min-height:120px;
-  resize:vertical;
+min-height:180px;
 }
 
-input:focus,
-textarea:focus,
-select:focus{
-  border-color:#a84fff;
+button{
+width:100%;
+border:0;
+border-radius:15px;
+padding:15px;
+margin-top:16px;
+background:linear-gradient(135deg,#ad50ff,#741be8);
+color:white;
+font-family:"Cinzel",serif;
+font-weight:700;
+cursor:pointer;
 }
 
-.grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:12px;
+button:disabled{
+opacity:.5;
 }
 
-.btn{
-  width:100%;
-  padding:15px;
-  border-radius:15px;
-  font-family:"Cinzel",serif;
-  font-size:11px;
-  font-weight:700;
-  cursor:pointer;
+#status{
+display:none;
+background:#17131e;
+border:1px solid #50256e;
+padding:13px;
+border-radius:14px;
+margin-bottom:18px;
+text-align:center;
+color:#cec2d5;
 }
 
-.primary{
-  border:none;
-  background:linear-gradient(135deg,#a84fff,#7521e4);
-  color:white;
-  margin-top:18px;
+#plan,
+#production{
+display:none;
 }
 
-.secondary{
-  border:1px solid rgba(255,255,255,.09);
-  background:#211e28;
-  color:#cbc4d0;
-  margin-top:10px;
+.planBlock{
+background:#0f0e13;
+padding:15px;
+border-radius:15px;
+margin-top:12px;
+line-height:1.55;
 }
 
-.btn:disabled{
-  opacity:.45;
-  cursor:not-allowed;
-}
-
-.plan{
-  display:none;
-}
-
-.plan.show{
-  display:block;
-}
-
-.plan-block{
-  padding:16px;
-  border-radius:17px;
-  background:#101015;
-  border:1px solid rgba(255,255,255,.06);
-  margin-bottom:12px;
-}
-
-.plan-label{
-  font-family:"Cinzel",serif;
-  font-size:11px;
-  color:#aa6bff;
-  margin-bottom:7px;
-}
-
-.plan-text{
-  color:#d5cedb;
-  font-size:13px;
-  line-height:1.6;
-  white-space:pre-wrap;
+.purple{
+color:#b86cff;
+font-family:"Cinzel",serif;
+font-size:11px;
+margin-bottom:7px;
 }
 
 .scene{
-  padding:17px;
-  border-radius:19px;
-  background:#121117;
-  border:1px solid rgba(255,255,255,.07);
-  margin-bottom:15px;
-}
-
-.scene-number{
-  font-family:"Cinzel",serif;
-  font-size:11px;
-  color:#b76cff;
+background:#111016;
+border:1px solid #302a35;
+border-radius:18px;
+padding:17px;
+margin-top:15px;
 }
 
 .scene h3{
-  font-family:"Cinzel",serif;
-  font-size:14px;
-  margin:7px 0;
+font-family:"Cinzel",serif;
+font-size:14px;
+margin:7px 0;
 }
 
-.scene-description{
-  color:#aaa3b1;
-  font-size:13px;
-  line-height:1.55;
+.scene p{
+color:#aaa3b0;
+font-size:13px;
+line-height:1.5;
 }
 
-.scene-prompt{
-  margin-top:12px;
-  padding:12px;
-  border-radius:12px;
-  background:#0c0b10;
-  color:#cfc3d8;
-  font-size:12px;
-  line-height:1.55;
+.prompt{
+margin-top:10px;
+background:#09080c;
+padding:12px;
+border-radius:12px;
+font-size:12px;
+color:#cbbfd2;
+line-height:1.5;
 }
 
-.scene-actions{
-  margin-top:13px;
+.renderStatus{
+margin-top:10px;
+font-size:12px;
+color:#c5b9cd;
 }
 
-.generate-scene{
-  width:100%;
-  padding:13px;
-  border:0;
-  border-radius:13px;
-  background:linear-gradient(135deg,#a84fff,#7521e4);
-  color:white;
-  font-family:"Cinzel",serif;
-  font-size:10px;
-  font-weight:700;
+video{
+width:100%;
+margin-top:13px;
+border-radius:14px;
+background:#000;
+display:none;
 }
-
-.generate-scene:disabled{
-  opacity:.5;
-}
-
-.render-status{
-  display:none;
-  margin-top:11px;
-  padding:10px;
-  border-radius:11px;
-  background:#19141f;
-  color:#bfb4c8;
-  font-size:12px;
-  line-height:1.45;
-}
-
-.render-status.show{
-  display:block;
-}
-
-.video-result{
-  display:none;
-  margin-top:14px;
-}
-
-.video-result.show{
-  display:block;
-}
-
-.video-result video{
-  width:100%;
-  max-height:520px;
-  border-radius:16px;
-  background:black;
-}
-
-.video-link{
-  display:block;
-  margin-top:10px;
-  text-decoration:none;
-  color:#c67cff;
-  text-align:center;
-  font-family:"Cinzel",serif;
-  font-size:10px;
-}
-
-.project-row{
-  display:flex;
-  justify-content:space-between;
-  gap:12px;
-  padding:13px 0;
-  border-bottom:1px solid rgba(255,255,255,.06);
-}
-
-.project-title{
-  font-family:"Cinzel",serif;
-  font-size:12px;
-}
-
-.project-meta{
-  color:#8e8796;
-  font-size:11px;
-  margin-top:4px;
-}
-
-.small-btn{
-  border:1px solid rgba(173,77,255,.25);
-  background:#211928;
-  color:#caa6e5;
-  border-radius:10px;
-  padding:8px 10px;
-  font-size:9px;
-  font-family:"Cinzel",serif;
-  height:max-content;
-}
-
-.warning{
-  padding:14px;
-  margin-bottom:20px;
-  border-radius:16px;
-  background:rgba(126,83,15,.13);
-  border:1px solid rgba(255,193,71,.18);
-  color:#c6b48f;
-  font-size:12px;
-  line-height:1.55;
-}
-
 </style>
 </head>
 
 <body>
 
 <header>
-
-<div class="logo">
-Zynora AI Studio
-</div>
-
-<a href="creator.html" class="back">
-← Creator
-</a>
-
+<div class="logo">Zynora AI Studio</div>
+<a href="creator.html">← Creator</a>
 </header>
 
 <main>
 
-<h1>
-Create AI Drama
-</h1>
-
-<p class="subtitle">
-Build your story, scenes and real AI-generated video clips.
-</p>
+<h1>Create AI Drama</h1>
+<div class="sub">Turn a story idea into real AI-generated scenes.</div>
 
 <div id="status"></div>
 
-<div class="hero">
-
-<h2>
-From Story to Real Video
-</h2>
-
+<div class="box hero">
+<h2>Story → Scenes → Video</h2>
 <p>
-Zynora creates the drama structure first. Each scene can then be sent securely through your Supabase Edge Function to Runway for real AI video generation.
+Build the drama first, then generate individual cinematic scenes through your secure Zynora video server.
 </p>
-
 </div>
 
-<div class="warning">
-Runway video rendering requires available Runway API credits. Your Zynora Studio and secure connection can work now, but if the Runway account has zero credits the provider may reject the actual render request.
-</div>
+<div class="box">
 
+<h2>Drama Project</h2>
 
-<!-- PROJECT -->
+<label>Drama Idea</label>
 
-<div class="card">
+<textarea id="idea">A poor young woman named Aria has spent her entire life believing she is an ordinary orphan. On her twenty-first birthday, a mysterious stranger saves her from an attack and reveals that she is actually the missing heir to a powerful hidden kingdom. Her parents were betrayed and murdered, the throne was stolen, and Aria must secretly return to the palace to discover the truth and reclaim her kingdom. She falls in love with Commander Kael, the same man ordered to hunt down the missing princess.</textarea>
 
-<div class="card-title">
-Drama Project
-</div>
-
-<label>
-Drama Idea
-</label>
-
-<textarea
-id="idea"
-placeholder="Describe the story you want to create..."></textarea>
-
-<label>
-Genre
-</label>
+<label>Genre</label>
 
 <select id="genre">
+<option>Fantasy</option>
 <option>Romance</option>
 <option>Drama</option>
 <option>Thriller</option>
 <option>Crime</option>
-<option>Mystery</option>
-<option>Comedy</option>
-<option>Fantasy</option>
 <option>Action</option>
 </select>
 
+<label>Episode Length</label>
 
-<div
+<select id="length">
+<option value="5">5 Minutes</option>
+<option value="10" selected>10 Minutes</option>
+<option value="20">20 Minutes</option>
+<option value="30">30 Minutes</option>
+</select>
+
+<label>Number of Episodes</label>
+
+<select id="episodes">
+<option value="10">10 Episodes</option>
+<option value="20" selected>20 Episodes</option>
+<option value="30">30 Episodes</option>
+</select>
+
+<label>Visual Style</label>
+
+<select id="style">
+<option>Epic Fantasy Cinematic</option>
+<option>Cinematic Modern Drama</option>
+<option>Luxury Romance</option>
+<option>Dark Thriller</option>
+</select>
+
+<button onclick="generatePlan()">
+GENERATE DRAMA PLAN
+</button>
+
+</div>
+
+
+<div id="plan" class="box">
+
+<h2>Drama Plan</h2>
+
+<div class="planBlock">
+<div class="purple">TITLE</div>
+<div id="title"></div>
+</div>
+
+<div class="planBlock">
+<div class="purple">STORY SUMMARY</div>
+<div id="summary"></div>
+</div>
+
+<div class="planBlock">
+<div class="purple">CHARACTERS</div>
+<div id="characters"></div>
+</div>
+
+<button onclick="buildScenes()">
+BUILD EPISODE 1 SCENES
+</button>
+
+</div>
+
+
+<div id="production" class="box">
+
+<h2>Episode 1 Production</h2>
+
+<div id="scenes"></div>
+
+</div>
+
+</main>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+const SUPABASE_URL =
+"https://ozshekxpuvganemaajms.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable__GsW9RahFD_XDWJTFzh9eQ_dNBZfa32";
+
+const FUNCTION_URL =
+SUPABASE_URL +
+"/functions/v1/zynora-video";
+
+const client =
+supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+);
+
+let currentUser = null;
+
+const scenes = [];
+
+
+/* LOGIN CHECK */
+
+async function start(){
+
+const r =
+await client.auth.getUser();
+
+currentUser =
+r.data.user || null;
+
+if(!currentUser){
+
+show(
+"Log in to Zynora before generating real videos."
+);
+
+}
+
+}
+
+start();
+
+
+function show(text){
+
+const box =
+document.getElementById("status");
+
+box.textContent =
+text;
+
+box.style.display =
+"block";
+
+}
+
+
+/* DRAMA PLAN */
+
+function generatePlan(){
+
+const idea =
+document.getElementById("idea")
+.value.trim();
+
+if(!idea){
+
+show(
+"Enter your drama idea."
+);
+
+return;
+
+}
+
+document.getElementById("title")
+.textContent =
+"The Kingdom Beyond Midnight";
+
+document.getElementById("summary")
+.textContent =
+idea +
+" Aria must survive the royal court, uncover the conspiracy behind her parents' deaths and decide whether Commander Kael is her greatest danger or her strongest ally.";
+
+document.getElementById("characters")
+.innerHTML =
+`
+<strong>Aria</strong> — 21-year-old hidden princess, long dark wavy hair, brown eyes, brave and intelligent.<br><br>
+
+<strong>Kael</strong> — royal commander in his early thirties, dark hair, athletic build, black royal armor and a guarded personality.<br><br>
+
+<strong>Victor</strong> — powerful royal enemy connected to the murder of Aria's parents.
+`;
+
+document.getElementById("plan")
+.style.display =
+"block";
+
+document.getElementById("plan")
+.scrollIntoView({
+behavior:"smooth"
+});
+
+show(
+"Drama plan created."
+);
+
+}
+
+
+/* SCENES */
+
+function buildScenes(){
+
+scenes.length = 0;
+
+scenes.push(
+
+{
+title:"Aria's Village",
+text:"Aria walks home through her village at dusk on her twenty-first birthday.",
+prompt:"Epic cinematic fantasy television drama. Aria is a beautiful 21-year-old woman with long dark wavy hair and expressive brown eyes. She wears simple medieval village clothing and walks through a misty stone village at dusk. Warm lanterns glow around her. Aria suddenly senses someone watching her and slowly turns. Realistic human actor, emotional performance, premium streaming-series cinematography, cinematic lighting, natural camera movement."
+},
+
+{
+title:"The Attack",
+text:"A masked attacker follows Aria into a narrow alley.",
+prompt:"Premium cinematic fantasy drama. Same Aria, same long dark wavy hair, brown eyes and medieval clothing. She walks into a narrow lantern-lit stone alley at night. A masked attacker appears behind her. Aria realizes she is in danger and runs. Realistic acting, tense atmosphere, dramatic lighting, natural cinematic camera movement."
+},
+
+{
+title:"Kael Arrives",
+text:"Commander Kael appears and protects Aria.",
+prompt:"Epic cinematic fantasy drama. Commander Kael is a tall athletic man in his early thirties with dark hair, strong facial features, black royal armor and a dark cloak. He arrives and protects Aria from a masked attacker. Same Aria from previous scenes. Realistic actors, controlled sword action, emotional expressions, premium television cinematography."
+},
+
+{
+title:"The Royal Mark",
+text:"Kael notices an ancient royal symbol belonging to Aria.",
+prompt:"Intimate cinematic fantasy drama scene. Same Aria and Commander Kael. Warm lantern light. Kael examines an ancient royal symbol on Aria's necklace and becomes visibly disturbed. Aria looks confused and frightened. Realistic actors, subtle facial expressions, slow cinematic camera movement, premium television lighting."
+},
+
+{
+title:"The Revelation",
+text:"Kael realizes Aria may be the missing princess.",
+prompt:"Fantasy television drama cliffhanger. Same Commander Kael stands alone inside a dark royal chamber holding Aria's necklace. He recognizes the forgotten royal crest and realizes she may be the missing princess. His expression changes from disbelief to fear. Moonlight enters through enormous palace windows. Premium cinematic fantasy series, realistic human actor, dramatic slow camera push."
+}
+
+);
+
+renderScenes();
+
+document.getElementById("production")
+.style.display =
+"block";
+
+document.getElementById("production")
+.scrollIntoView({
+behavior:"smooth"
+});
+
+show(
+"Episode 1 scenes created. Generate Scene 1 first."
+);
+
+}
+
+
+function renderScenes(){
+
+const area =
+document.getElementById("scenes");
+
+area.innerHTML = "";
+
+scenes.forEach(
+(scene,index)=>{
+
+const div =
+document.createElement("div");
+
+div.className =
+"scene";
+
+div.innerHTML =
+`
+<div class="purple">
+SCENE ${index + 1}
+</div>
+
+<h3>${scene.title}</h3>
+
+<p>${scene.text}</p>
+
+<div class="prompt">
+<strong
