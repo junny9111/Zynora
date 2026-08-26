@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome to Zynora</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top, rgba(139, 92, 246, 0.22), transparent 35%),
+        linear-gradient(180deg, #0b0711 0%, #12091d 50%, #08050d 100%);
+      color: #f7ecff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .success-card {
+      width: 100%;
+      max-width: 430px;
+      background: rgba(20, 11, 31, 0.92);
+      border: 1px solid rgba(226, 197, 255, 0.22);
+      border-radius: 28px;
+      padding: 38px 24px 28px;
+      text-align: center;
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(14px);
+    }
+
+    .logo {
+      font-size: 38px;
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      margin-bottom: 25px;
+      color: #f8eaff;
+    }
+
+    .logo span {
+      color: #c88cff;
+    }
+
+    .check-circle {
+      width: 86px;
+      height: 86px;
+      border-radius: 50%;
+      margin: 0 auto 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #b567ff, #ec8fff);
+      box-shadow: 0 12px 35px rgba(190, 103, 255, 0.35);
+    }
+
+    .check-circle::after {
+      content: "✓";
+      font-size: 45px;
+      font-weight: 800;
+      color: #14091f;
+    }
+
+    h1 {
+      font-size: 30px;
+      line-height: 1.15;
+      margin-bottom: 14px;
+      color: #fff1ff;
+    }
+
+    .message {
+      color: #cdbbd7;
+      font-size: 16px;
+      line-height: 1.65;
+      margin-bottom: 28px;
+    }
+
+    .welcome-box {
+      background: rgba(255, 255, 255, 0.045);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 18px;
+      padding: 17px;
+      margin-bottom: 25px;
+    }
+
+    .welcome-box strong {
+      display: block;
+      color: #e4b8ff;
+      margin-bottom: 7px;
+      font-size: 15px;
+    }
+
+    .welcome-box p {
+      color: #b8a8c1;
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .continue-btn {
+      display: block;
+      width: 100%;
+      text-decoration: none;
+      border: none;
+      border-radius: 16px;
+      padding: 16px 18px;
+      font-size: 16px;
+      font-weight: 700;
+      color: #16091e;
+      background: linear-gradient(135deg, #d99cff, #a95cff);
+      box-shadow: 0 12px 30px rgba(175, 90, 255, 0.3);
+      cursor: pointer;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .continue-btn:active {
+      transform: scale(0.98);
+    }
+
+    .small-text {
+      margin-top: 18px;
+      color: #766a7d;
+      font-size: 12px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="success-card">
+
+    <div class="logo">
+      Zyn<span>ora</span>
+    </div>
+
+    <div class="check-circle"></div>
+
+    <h1>You're in!</h1>
+
+    <p class="message">
+      Your Zynora account was created successfully.
+      Welcome to a world of short dramas, episodes, rewards and entertainment.
+    </p>
+
+    <div class="welcome-box">
+      <strong>Welcome to Zynora</strong>
+      <p>
+        Start discovering short drama series, save your favorites,
+        explore episodes and enjoy the Zynora experience.
+      </p>
+    </div>
+
+    <a
+      class="continue-btn"
+      href="index.html"
+    >
+      Continue to Zynora
+    </a>
+
+    <p class="small-text">
+      Account registration completed successfully.
+    </p>
+
+  </main>
+
+</body>
+</html>
