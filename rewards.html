@@ -8,9 +8,11 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
 
 <style>
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -20,9 +22,9 @@
 body {
   min-height: 100vh;
   background:
-    radial-gradient(circle at 50% 0%, rgba(143, 48, 255, .25), transparent 34%),
+    radial-gradient(circle at 50% 0%, rgba(145,55,255,.24), transparent 35%),
     #08070c;
-  color: #fff;
+  color: white;
   font-family: "Playfair Display", Georgia, serif;
   padding-bottom: 105px;
 }
@@ -32,86 +34,114 @@ header {
   display: flex;
   align-items: center;
   padding: 0 22px;
-  background: rgba(15, 14, 20, .96);
-  border-bottom: 1px solid rgba(173, 77, 255, .22);
+  background: #111016;
+  border-bottom: 1px solid rgba(173,77,255,.25);
 }
 
 .logo {
   font-family: "Cinzel", serif;
-  font-size: 34px;
+  font-size: 35px;
   font-weight: 700;
   letter-spacing: -2px;
-  background: linear-gradient(90deg, #ffffff, #d7a6ff, #8f3cff);
+
+  background:
+    linear-gradient(
+      90deg,
+      #ffffff,
+      #d19aff,
+      #8e38ff
+    );
+
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
 main {
-  width: 100%;
   max-width: 620px;
-  margin: 0 auto;
-  padding: 26px 20px;
+  margin: auto;
+  padding: 28px 20px;
 }
 
 h1 {
   font-family: "Cinzel", serif;
   font-size: 30px;
-  margin-bottom: 5px;
 }
 
 .subtitle {
-  color: #9993a3;
+  color: #9994a2;
+  margin: 7px 0 25px;
   font-size: 14px;
-  margin-bottom: 24px;
 }
 
 #status {
   display: none;
   margin-bottom: 18px;
-  padding: 12px 14px;
-  border-radius: 14px;
+  padding: 13px;
+  border-radius: 13px;
+
   background: #17131e;
-  border: 1px solid rgba(173, 77, 255, .22);
-  color: #cfc5d8;
+
+  border:
+    1px solid
+    rgba(173,77,255,.2);
+
+  color: #c9c3d0;
   text-align: center;
   font-size: 13px;
 }
 
 .wallet {
-  padding: 24px;
+  padding: 25px;
   border-radius: 24px;
+
   background:
-    linear-gradient(135deg, rgba(129, 44, 220, .95), rgba(51, 16, 86, .95));
-  border: 1px solid rgba(210, 151, 255, .38);
-  box-shadow: 0 18px 50px rgba(85, 20, 145, .25);
+    linear-gradient(
+      135deg,
+      #6e20bd,
+      #301052
+    );
+
+  border:
+    1px solid
+    rgba(205,145,255,.45);
+
   margin-bottom: 30px;
+
+  box-shadow:
+    0 0 40px
+    rgba(130,40,220,.28);
 }
 
 .wallet-label {
-  font-family: "Cinzel", serif;
-  color: #d8c8e4;
+  color: #ddd0e9;
   font-size: 12px;
+  font-family: "Cinzel", serif;
 }
 
 .balance {
-  margin-top: 8px;
   font-family: "Cinzel", serif;
-  font-size: 38px;
+  font-size: 40px;
+  margin-top: 8px;
 }
 
 .section-title {
   font-family: "Cinzel", serif;
-  font-size: 18px;
+  font-size: 19px;
   margin-bottom: 15px;
 }
 
 .reward {
-  padding: 19px;
-  margin-bottom: 15px;
-  border-radius: 21px;
   background: #15141b;
-  border: 1px solid rgba(255, 255, 255, .09);
+
+  border:
+    1px solid
+    rgba(255,255,255,.08);
+
+  border-radius: 20px;
+
+  padding: 19px;
+  margin-bottom: 14px;
 }
 
 .reward-head {
@@ -121,46 +151,65 @@ h1 {
 }
 
 .reward-icon {
-  width: 52px;
-  height: 52px;
-  flex: 0 0 52px;
-  border-radius: 16px;
+  width: 50px;
+  height: 50px;
+
+  flex-shrink: 0;
+
+  border-radius: 15px;
+
+  background:
+    rgba(150,60,240,.18);
+
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(149, 62, 235, .18);
-  font-size: 25px;
+
+  font-size: 24px;
 }
 
 .reward-name {
   font-family: "Cinzel", serif;
   font-size: 15px;
-  margin-bottom: 5px;
 }
 
 .reward-description {
-  color: #97919e;
+  color: #97929f;
   font-size: 13px;
+  margin-top: 5px;
   line-height: 1.45;
 }
 
 .reward-btn {
+  display: block;
   width: 100%;
+
   margin-top: 16px;
-  padding: 14px 10px;
+  padding: 14px;
+
   border: 0;
   border-radius: 14px;
-  background: linear-gradient(135deg, #aa4fff, #741de8);
-  color: #fff;
+
+  background:
+    linear-gradient(
+      135deg,
+      #a84fff,
+      #7521e4
+    );
+
+  color: white;
+
   font-family: "Cinzel", serif;
-  font-weight: 700;
+
   font-size: 12px;
+  font-weight: 700;
+
   cursor: pointer;
 }
 
 .reward-btn:disabled {
   background: #292631;
-  color: #77727f;
+  color: #77737f;
   cursor: not-allowed;
 }
 
@@ -168,15 +217,24 @@ h1 {
   display: none !important;
 }
 
-/* GAME */
+
+/* =============================
+   MINI GAME
+============================= */
 
 .game-panel {
   display: none;
+
   margin-top: 16px;
   padding: 16px;
+
+  background: #0d0c12;
+
+  border:
+    1px solid
+    rgba(160,75,255,.25);
+
   border-radius: 16px;
-  background: #0c0b10;
-  border: 1px solid rgba(165, 75, 255, .25);
 }
 
 .game-panel.open {
@@ -184,110 +242,195 @@ h1 {
 }
 
 .game-title {
-  text-align: center;
   font-family: "Cinzel", serif;
+  text-align: center;
   font-size: 15px;
 }
 
-.game-instructions {
+.game-text {
+  color: #9993a1;
   text-align: center;
-  color: #9c96a3;
+
   font-size: 12px;
-  margin: 7px 0 12px;
+
+  margin:
+    8px 0
+    13px;
 }
 
 .game-score {
   text-align: center;
-  color: #d6a9ff;
-  font-family: "Cinzel", serif;
+
+  font-family:
+    "Cinzel",
+    serif;
+
+  color: #d5a7ff;
+
   margin-bottom: 12px;
 }
 
 .game-area {
+  position: relative;
+
   width: 100%;
   height: 220px;
-  position: relative;
+
   overflow: hidden;
+
   border-radius: 15px;
+
   background:
-    radial-gradient(circle, rgba(145, 50, 230, .13), transparent 65%),
+    radial-gradient(
+      circle,
+      rgba(145,50,230,.15),
+      transparent 65%
+    ),
     #08070b;
-  border: 1px solid rgba(255, 255, 255, .06);
+
+  border:
+    1px solid
+    rgba(255,255,255,.06);
 }
 
-.star {
-  width: 55px;
-  height: 55px;
+.game-star {
   position: absolute;
-  border: 0;
+
+  width: 56px;
+  height: 56px;
+
+  border: none;
+
   border-radius: 50%;
-  background: linear-gradient(135deg, #c168ff, #7d25ea);
+
+  background:
+    linear-gradient(
+      135deg,
+      #c168ff,
+      #7521e4
+    );
+
   color: white;
+
   font-size: 25px;
-  box-shadow: 0 0 28px rgba(177, 75, 255, .45);
+
   cursor: pointer;
+
+  box-shadow:
+    0 0 26px
+    rgba(175,70,255,.5);
 }
 
 .close-game {
   width: 100%;
+
   margin-top: 12px;
   padding: 11px;
-  border-radius: 12px;
-  border: 1px solid rgba(255,255,255,.09);
+
   background: transparent;
+
+  border:
+    1px solid
+    rgba(255,255,255,.1);
+
   color: #99929f;
+
+  border-radius: 12px;
+
+  cursor: pointer;
 }
 
-/* HISTORY */
+
+/* =============================
+   HISTORY
+============================= */
 
 .history {
-  margin-top: 31px;
+  margin-top: 32px;
 }
 
 .history-row {
   display: flex;
-  justify-content: space-between;
-  gap: 14px;
+
+  justify-content:
+    space-between;
+
+  gap: 15px;
+
   padding: 13px 0;
-  border-bottom: 1px solid rgba(255,255,255,.07);
-  font-size: 14px;
+
+  border-bottom:
+    1px solid
+    rgba(255,255,255,.07);
+}
+
+.history-description {
+  color: #d9d3de;
 }
 
 .history-amount {
   color: #ffd75c;
-  font-family: "Cinzel", serif;
+
+  font-family:
+    "Cinzel",
+    serif;
+
   white-space: nowrap;
 }
 
-.empty-history {
+.history-empty {
   color: #817a89;
-  font-size: 14px;
 }
 
-/* NAVIGATION */
+
+/* =============================
+   BOTTOM NAV
+============================= */
 
 .bottom-nav {
   position: fixed;
+
+  bottom: 0;
   left: 0;
   right: 0;
-  bottom: 0;
+
   height: 88px;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
+
   background: #111016;
-  border-top: 1px solid rgba(173, 77, 255, .20);
+
+  border-top:
+    1px solid
+    rgba(173,77,255,.2);
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(5,1fr);
+
   z-index: 100;
 }
 
 .nav-item {
-  text-decoration: none;
   color: #777582;
+
+  text-decoration: none;
+
+  text-align: center;
+
   display: flex;
+
   flex-direction: column;
+
   align-items: center;
+
   justify-content: center;
+
   gap: 5px;
-  font-family: "Cinzel", serif;
+
+  font-family:
+    "Cinzel",
+    serif;
+
   font-size: 9px;
 }
 
@@ -296,26 +439,38 @@ h1 {
 }
 
 .nav-item.active {
-  color: #ad50ff;
+  color: #a94dff;
 }
+
 </style>
 </head>
 
 <body>
 
 <header>
-  <div class="logo">Zynora</div>
+  <div class="logo">
+    Zynora
+  </div>
 </header>
+
 
 <main>
 
-<h1>Rewards</h1>
+<h1>
+  Rewards
+</h1>
 
 <p class="subtitle">
-  Earn Zynora Coins and unlock more entertainment.
+  Earn Zynora Coins and unlock episodes.
 </p>
 
+
 <div id="status"></div>
+
+
+<!-- =============================
+     WALLET
+============================= -->
 
 <div class="wallet">
 
@@ -324,19 +479,27 @@ h1 {
   </div>
 
   <div class="balance">
-    🪙 <span id="balance">0</span>
+    🪙
+    <span id="balance">
+      0
+    </span>
   </div>
 
 </div>
+
 
 <div class="section-title">
   Available Rewards
 </div>
 
 
-<!-- DAILY CHECK-IN -->
+<!-- =============================
+     DAILY CHECK-IN
+============================= -->
 
-<div class="reward" id="dailyReward">
+<div
+  class="reward"
+  id="dailyReward">
 
   <div class="reward-head">
 
@@ -345,6 +508,7 @@ h1 {
     </div>
 
     <div>
+
       <div class="reward-name">
         Daily Check-In
       </div>
@@ -352,22 +516,30 @@ h1 {
       <div class="reward-description">
         Claim 20 coins once every day.
       </div>
+
     </div>
 
   </div>
 
   <button
     id="dailyBtn"
-    class="reward-btn">
+    class="reward-btn"
+    type="button">
+
     Claim 20 Coins
+
   </button>
 
 </div>
 
 
-<!-- WELCOME REWARD -->
+<!-- =============================
+     WELCOME REWARD
+============================= -->
 
-<div class="reward" id="welcomeReward">
+<div
+  class="reward"
+  id="welcomeReward">
 
   <div class="reward-head">
 
@@ -376,21 +548,1382 @@ h1 {
     </div>
 
     <div>
+
       <div class="reward-name">
         Welcome Reward
       </div>
 
       <div class="reward-description">
-        New Zynora members can claim 100 coins once.
+        New Zynora members receive 100 coins once.
       </div>
+
     </div>
 
   </div>
 
   <button
     id="welcomeBtn"
-    class="reward-btn">
+    class="reward-btn"
+    type="button">
+
     Claim 100 Coins
+
   </button>
 
 </div>
+
+
+<!-- =============================
+     NOTIFICATIONS
+============================= -->
+
+<div
+  class="reward"
+  id="notificationReward">
+
+  <div class="reward-head">
+
+    <div class="reward-icon">
+      🔔
+    </div>
+
+    <div>
+
+      <div class="reward-name">
+        Turn On Notifications
+      </div>
+
+      <div class="reward-description">
+        Enable Zynora notifications and earn 100 coins once.
+      </div>
+
+    </div>
+
+  </div>
+
+  <button
+    id="notificationBtn"
+    class="reward-btn"
+    type="button">
+
+    Turn On Notifications • Claim 100
+
+  </button>
+
+</div>
+
+
+<!-- =============================
+     GAME
+============================= -->
+
+<div class="reward">
+
+  <div class="reward-head">
+
+    <div class="reward-icon">
+      🎮
+    </div>
+
+    <div>
+
+      <div class="reward-name">
+        Play Game & Earn
+      </div>
+
+      <div class="reward-description">
+        Complete Zynora Star Hunt and earn 25 coins.
+      </div>
+
+    </div>
+
+  </div>
+
+  <button
+    id="gameBtn"
+    class="reward-btn"
+    type="button">
+
+    Play Game • Earn 25 Coins
+
+  </button>
+
+
+  <div
+    id="gamePanel"
+    class="game-panel">
+
+    <div class="game-title">
+      Zynora Star Hunt
+    </div>
+
+    <div class="game-text">
+      Catch the glowing star 5 times.
+    </div>
+
+    <div class="game-score">
+
+      Stars:
+
+      <span id="gameScore">
+        0
+      </span>
+
+      / 5
+
+    </div>
+
+    <div
+      id="gameArea"
+      class="game-area">
+
+      <button
+        id="gameStar"
+        class="game-star"
+        type="button">
+
+        ✨
+
+      </button>
+
+    </div>
+
+    <button
+      id="closeGame"
+      class="close-game"
+      type="button">
+
+      Close Game
+
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- =============================
+     WATCH AD
+============================= -->
+
+<div class="reward">
+
+  <div class="reward-head">
+
+    <div class="reward-icon">
+      📺
+    </div>
+
+    <div>
+
+      <div class="reward-name">
+        Watch & Earn
+      </div>
+
+      <div class="reward-description">
+        Watch rewarded advertising and earn 30 coins.
+      </div>
+
+    </div>
+
+  </div>
+
+  <button
+    id="adBtn"
+    class="reward-btn"
+    type="button">
+
+    Watch Ad • Earn 30 Coins
+
+  </button>
+
+</div>
+
+
+<!-- =============================
+     COIN HISTORY
+============================= -->
+
+<div class="history">
+
+  <div class="section-title">
+    Coin History
+  </div>
+
+  <div
+    id="historyList"
+    class="history-empty">
+
+    Loading coin history...
+
+  </div>
+
+</div>
+
+</main>
+
+
+<!-- =============================
+     NAVIGATION
+============================= -->
+
+<nav class="bottom-nav">
+
+<a
+  href="index.html"
+  class="nav-item">
+
+  <span class="nav-icon">
+    ⌂
+  </span>
+
+  Home
+
+</a>
+
+
+<a
+  href="discover.html"
+  class="nav-item">
+
+  <span class="nav-icon">
+    ◉
+  </span>
+
+  Discover
+
+</a>
+
+
+<a
+  href="rewards.html"
+  class="nav-item active">
+
+  <span class="nav-icon">
+    🎁
+  </span>
+
+  Rewards
+
+</a>
+
+
+<a
+  href="library.html"
+  class="nav-item">
+
+  <span class="nav-icon">
+    ▣
+  </span>
+
+  Library
+
+</a>
+
+
+<a
+  href="profile.html"
+  class="nav-item">
+
+  <span class="nav-icon">
+    ●
+  </span>
+
+  Profile
+
+</a>
+
+</nav>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+/* ============================================
+   ZYNORA SUPABASE
+============================================ */
+
+const SUPABASE_URL =
+"https://ozshekxpuvganemaajms.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable__GsW9RahFD_XDWJTFzh9eQ_dNBZfa32";
+
+
+const client =
+supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+
+let currentUser = null;
+
+let gameScore = 0;
+
+let gameFinished = false;
+
+
+/* ============================================
+   ELEMENTS
+============================================ */
+
+const balanceText =
+document.getElementById(
+  "balance"
+);
+
+const statusBox =
+document.getElementById(
+  "status"
+);
+
+const dailyBtn =
+document.getElementById(
+  "dailyBtn"
+);
+
+const welcomeBtn =
+document.getElementById(
+  "welcomeBtn"
+);
+
+const welcomeReward =
+document.getElementById(
+  "welcomeReward"
+);
+
+const notificationBtn =
+document.getElementById(
+  "notificationBtn"
+);
+
+const notificationReward =
+document.getElementById(
+  "notificationReward"
+);
+
+const gameBtn =
+document.getElementById(
+  "gameBtn"
+);
+
+const gamePanel =
+document.getElementById(
+  "gamePanel"
+);
+
+const gameArea =
+document.getElementById(
+  "gameArea"
+);
+
+const gameStar =
+document.getElementById(
+  "gameStar"
+);
+
+const gameScoreText =
+document.getElementById(
+  "gameScore"
+);
+
+const historyList =
+document.getElementById(
+  "historyList"
+);
+
+
+/* ============================================
+   STATUS
+============================================ */
+
+function showStatus(text) {
+
+  statusBox.textContent =
+    text;
+
+  statusBox.style.display =
+    "block";
+
+}
+
+
+/* ============================================
+   START REWARDS
+============================================ */
+
+async function startRewards() {
+
+  try {
+
+    showStatus(
+      "Connecting to your Zynora account..."
+    );
+
+
+    const userResult =
+      await client.auth.getUser();
+
+
+    if (
+      userResult.error ||
+      !userResult.data ||
+      !userResult.data.user
+    ) {
+
+      showStatus(
+        "Please log in to use Zynora Rewards."
+      );
+
+      historyList.textContent =
+        "Log in to see your coin history.";
+
+      return;
+
+    }
+
+
+    currentUser =
+      userResult.data.user;
+
+
+    /*
+      Load all real Supabase
+      information before showing
+      reward state.
+    */
+
+    await loadBalance();
+
+    await loadHistory();
+
+    await checkWelcomeReward();
+
+    await checkNotificationReward();
+
+    await checkDailyReward();
+
+
+    showStatus(
+      "Your Zynora Rewards are ready."
+    );
+
+  }
+
+  catch (error) {
+
+    console.error(
+      "Rewards startup error:",
+      error
+    );
+
+
+    showStatus(
+      "Rewards loaded, but Zynora could not connect to your account."
+    );
+
+  }
+
+}
+
+
+/* ============================================
+   LOAD REAL WALLET BALANCE
+============================================ */
+
+async function loadBalance() {
+
+  if (!currentUser) {
+    return;
+  }
+
+
+  const result =
+    await client
+    .from(
+      "coin_wallets"
+    )
+    .select(
+      "balance"
+    )
+    .eq(
+      "user_id",
+      currentUser.id
+    )
+    .maybeSingle();
+
+
+  if (result.error) {
+
+    console.error(
+      "Balance error:",
+      result.error
+    );
+
+    return;
+
+  }
+
+
+  const realBalance =
+    result.data &&
+    result.data.balance != null
+      ? Number(
+          result.data.balance
+        )
+      : 0;
+
+
+  balanceText.textContent =
+    realBalance;
+
+}
+
+
+/* ============================================
+   CHECK WELCOME REWARD
+============================================ */
+
+async function checkWelcomeReward() {
+
+  if (!currentUser) {
+    return;
+  }
+
+
+  const result =
+    await client
+    .from(
+      "coin_transactions"
+    )
+    .select(
+      "id,description,amount"
+    )
+    .eq(
+      "user_id",
+      currentUser.id
+    )
+    .eq(
+      "description",
+      "Welcome Reward"
+    )
+    .limit(1);
+
+
+  if (result.error) {
+
+    console.error(
+      "Welcome check error:",
+      result.error
+    );
+
+    return;
+
+  }
+
+
+  /*
+    Your database already contains:
+
+    Welcome Reward = 100
+
+    Therefore this account's card
+    will be removed.
+  */
+
+  if (
+    result.data &&
+    result.data.length > 0
+  ) {
+
+    welcomeReward.classList.add(
+      "hidden"
+    );
+
+  }
+
+}
+
+
+/* ============================================
+   CHECK NOTIFICATION REWARD
+============================================ */
+
+async function checkNotificationReward() {
+
+  if (!currentUser) {
+    return;
+  }
+
+
+  const result =
+    await client
+    .from(
+      "coin_transactions"
+    )
+    .select(
+      "id"
+    )
+    .eq(
+      "user_id",
+      currentUser.id
+    )
+    .eq(
+      "description",
+      "Notification Reward"
+    )
+    .limit(1);
+
+
+  if (result.error) {
+
+    console.error(
+      result.error
+    );
+
+    return;
+
+  }
+
+
+  if (
+    result.data &&
+    result.data.length > 0
+  ) {
+
+    notificationReward.classList.add(
+      "hidden"
+    );
+
+  }
+
+}
+
+
+/* ============================================
+   DAILY STATUS
+============================================ */
+
+async function checkDailyReward() {
+
+  if (!currentUser) {
+    return;
+  }
+
+
+  const result =
+    await client
+    .from(
+      "coin_transactions"
+    )
+    .select(
+      "description,created_at"
+    )
+    .eq(
+      "user_id",
+      currentUser.id
+    )
+    .eq(
+      "description",
+      "Daily Check-In"
+    )
+    .order(
+      "created_at",
+      {
+        ascending: false
+      }
+    )
+    .limit(1);
+
+
+  if (
+    result.error ||
+    !result.data ||
+    result.data.length === 0
+  ) {
+
+    return;
+
+  }
+
+
+  const lastClaim =
+    new Date(
+      result.data[0].created_at
+    );
+
+
+  const now =
+    new Date();
+
+
+  const claimedToday =
+    lastClaim.getFullYear()
+      ===
+    now.getFullYear()
+
+    &&
+
+    lastClaim.getMonth()
+      ===
+    now.getMonth()
+
+    &&
+
+    lastClaim.getDate()
+      ===
+    now.getDate();
+
+
+  if (claimedToday) {
+
+    dailyBtn.disabled =
+      true;
+
+    dailyBtn.textContent =
+      "Claimed Today";
+
+  }
+
+}
+
+
+/* ============================================
+   CLAIM REWARD
+============================================ */
+
+async function claimReward(
+  rewardType,
+  button
+) {
+
+  if (!currentUser) {
+
+    showStatus(
+      "Please log in first."
+    );
+
+    return false;
+
+  }
+
+
+  const oldText =
+    button.textContent;
+
+
+  button.disabled =
+    true;
+
+
+  button.textContent =
+    "Processing...";
+
+
+  try {
+
+    const result =
+      await client.rpc(
+        "claim_reward",
+        {
+          p_reward_type:
+            rewardType
+        }
+      );
+
+
+    if (result.error) {
+
+      showStatus(
+        result.error.message
+      );
+
+
+      button.disabled =
+        false;
+
+
+      button.textContent =
+        oldText;
+
+
+      return false;
+
+    }
+
+
+    /*
+      The RPC returns the
+      new wallet balance.
+    */
+
+    if (
+      result.data != null
+    ) {
+
+      balanceText.textContent =
+        Number(
+          result.data
+        );
+
+    }
+
+
+    /*
+      Load again directly
+      from Supabase to make
+      sure displayed balance
+      always matches database.
+    */
+
+    await loadBalance();
+
+    await loadHistory();
+
+
+    return true;
+
+  }
+
+  catch (error) {
+
+    console.error(error);
+
+
+    showStatus(
+      "Unable to claim this reward."
+    );
+
+
+    button.disabled =
+      false;
+
+
+    button.textContent =
+      oldText;
+
+
+    return false;
+
+  }
+
+}
+
+
+/* ============================================
+   DAILY
+============================================ */
+
+dailyBtn.addEventListener(
+  "click",
+  async function() {
+
+    const success =
+      await claimReward(
+        "daily",
+        dailyBtn
+      );
+
+
+    if (success) {
+
+      dailyBtn.disabled =
+        true;
+
+
+      dailyBtn.textContent =
+        "Claimed Today";
+
+
+      showStatus(
+        "Daily Check-In complete! +20 coins. 🎁🪙"
+      );
+
+    }
+
+  }
+);
+
+
+/* ============================================
+   WELCOME
+============================================ */
+
+welcomeBtn.addEventListener(
+  "click",
+  async function() {
+
+    const success =
+      await claimReward(
+        "welcome",
+        welcomeBtn
+      );
+
+
+    if (success) {
+
+      welcomeReward.classList.add(
+        "hidden"
+      );
+
+
+      showStatus(
+        "Welcome Reward claimed! +100 coins. ✨🪙"
+      );
+
+    }
+
+  }
+);
+
+
+/* ============================================
+   NOTIFICATIONS
+============================================ */
+
+notificationBtn.addEventListener(
+  "click",
+  async function() {
+
+    if (
+      !("Notification" in window)
+    ) {
+
+      showStatus(
+        "Notifications are not supported by this browser."
+      );
+
+      return;
+
+    }
+
+
+    try {
+
+      const permission =
+        await Notification.requestPermission();
+
+
+      if (
+        permission !==
+        "granted"
+      ) {
+
+        showStatus(
+          "Allow notifications to receive this reward."
+        );
+
+        return;
+
+      }
+
+
+      const success =
+        await claimReward(
+          "notifications",
+          notificationBtn
+        );
+
+
+      if (success) {
+
+        notificationReward
+        .classList
+        .add(
+          "hidden"
+        );
+
+
+        showStatus(
+          "Notifications enabled! +100 coins. 🔔🪙"
+        );
+
+      }
+
+    }
+
+    catch (error) {
+
+      console.error(error);
+
+
+      showStatus(
+        "Unable to enable notifications."
+      );
+
+    }
+
+  }
+);
+
+
+/* ============================================
+   GAME
+============================================ */
+
+gameBtn.addEventListener(
+  "click",
+  function() {
+
+    gameScore =
+      0;
+
+
+    gameFinished =
+      false;
+
+
+    gameScoreText.textContent =
+      "0";
+
+
+    gameStar.disabled =
+      false;
+
+
+    gameStar.textContent =
+      "✨";
+
+
+    gamePanel.classList.add(
+      "open"
+    );
+
+
+    moveGameStar();
+
+  }
+);
+
+
+function moveGameStar() {
+
+  const starSize =
+    56;
+
+
+  const maxX =
+    Math.max(
+      1,
+      gameArea.clientWidth -
+      starSize
+    );
+
+
+  const maxY =
+    Math.max(
+      1,
+      gameArea.clientHeight -
+      starSize
+    );
+
+
+  const x =
+    Math.floor(
+      Math.random() *
+      maxX
+    );
+
+
+  const y =
+    Math.floor(
+      Math.random() *
+      maxY
+    );
+
+
+  gameStar.style.left =
+    x + "px";
+
+
+  gameStar.style.top =
+    y + "px";
+
+}
+
+
+gameStar.addEventListener(
+  "click",
+  async function() {
+
+    if (gameFinished) {
+      return;
+    }
+
+
+    gameScore +=
+      1;
+
+
+    gameScoreText.textContent =
+      gameScore;
+
+
+    if (
+      gameScore < 5
+    ) {
+
+      moveGameStar();
+
+      return;
+
+    }
+
+
+    gameFinished =
+      true;
+
+
+    gameStar.disabled =
+      true;
+
+
+    gameStar.textContent =
+      "✓";
+
+
+    showStatus(
+      "Game complete! Adding your 25 coins..."
+    );
+
+
+    const success =
+      await claimReward(
+        "game",
+        gameBtn
+      );
+
+
+    if (success) {
+
+      showStatus(
+        "Zynora Star Hunt complete! +25 coins. 🎮🪙"
+      );
+
+
+      gameBtn.disabled =
+        false;
+
+
+      gameBtn.textContent =
+        "Play Again • Earn 25 Coins";
+
+    }
+
+    else {
+
+      gameBtn.disabled =
+        false;
+
+
+      gameBtn.textContent =
+        "Play Game • Earn 25 Coins";
+
+    }
+
+  }
+);
+
+
+document
+.getElementById(
+  "closeGame"
+)
+.addEventListener(
+  "click",
+  function() {
+
+    gamePanel
+    .classList
+    .remove(
+      "open"
+    );
+
+  }
+);
+
+
+/* ============================================
+   WATCH AD
+============================================ */
+
+document
+.getElementById(
+  "adBtn"
+)
+.addEventListener(
+  "click",
+  function() {
+
+    showStatus(
+      "Rewarded ads are not connected yet. No coins were added."
+    );
+
+  }
+);
+
+
+/* ============================================
+   COIN HISTORY
+============================================ */
+
+async function loadHistory() {
+
+  if (!currentUser) {
+    return;
+  }
+
+
+  const result =
+    await client
+    .from(
+      "coin_transactions"
+    )
+    .select(
+      "amount,description,created_at"
+    )
+    .eq(
+      "user_id",
+      currentUser.id
+    )
+    .order(
+      "created_at",
+      {
+        ascending: false
+      }
+    )
+    .limit(
+      20
+    );
+
+
+  if (result.error) {
+
+    console.error(
+      result.error
+    );
+
+
+    historyList.textContent =
+      "Unable to load coin history.";
+
+
+    return;
+
+  }
+
+
+  const transactions =
+    result.data || [];
+
+
+  if (
+    transactions.length === 0
+  ) {
+
+    historyList.textContent =
+      "No coin transactions yet.";
+
+
+    return;
+
+  }
+
+
+  historyList.classList.remove(
+    "history-empty"
+  );
+
+
+  historyList.innerHTML =
+    "";
+
+
+  transactions.forEach(
+    function(item) {
+
+      const row =
+        document.createElement(
+          "div"
+        );
+
+
+      row.className =
+        "history-row";
+
+
+      const description =
+        document.createElement(
+          "span"
+        );
+
+
+      description.className =
+        "history-description";
+
+
+      description.textContent =
+        item.description ||
+        "Coin Activity";
+
+
+      const amount =
+        document.createElement(
+          "span"
+        );
+
+
+      amount.className =
+        "history-amount";
+
+
+      const number =
+        Number(
+          item.amount || 0
+        );
+
+
+      amount.textContent =
+        (
+          number > 0
+            ? "+"
+            : ""
+        )
+        +
+        number
+        +
+        " 🪙";
+
+
+      row.appendChild(
+        description
+      );
+
+
+      row.appendChild(
+        amount
+      );
+
+
+      historyList.appendChild(
+        row
+      );
+
+    }
+  );
+
+}
+
+
+/* ============================================
+   START
+============================================ */
+
+startRewards();
+
+</script>
+
+</body>
+</html>
