@@ -106,6 +106,11 @@
       cursor: pointer;
     }
 
+    .submit:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
     .back {
       display: block;
       text-align: center;
@@ -122,6 +127,14 @@
       font-size: 14px;
       min-height: 20px;
       line-height: 1.4;
+    }
+
+    #message.success {
+      color: #d8b7ff;
+    }
+
+    #message.error {
+      color: #ff9b9b;
     }
   </style>
 </head>
@@ -143,6 +156,7 @@
     <button
       id="loginTab"
       class="tab active"
+      type="button"
       onclick="showLogin()">
       Login
     </button>
@@ -150,6 +164,7 @@
     <button
       id="signupTab"
       class="tab"
+      type="button"
       onclick="showSignup()">
       Sign Up
     </button>
@@ -166,6 +181,7 @@
         id="name"
         type="text"
         placeholder="Your name"
+        autocomplete="name"
       >
 
     </div>
@@ -176,6 +192,7 @@
       id="email"
       type="email"
       placeholder="you@example.com"
+      autocomplete="email"
       required
     >
 
@@ -185,11 +202,13 @@
       id="password"
       type="password"
       placeholder="Enter your password"
+      autocomplete="current-password"
       minlength="6"
       required
     >
 
     <button
+      id="submitButton"
       class="submit"
       type="submit">
       Login
@@ -248,11 +267,54 @@
   const nameField =
     document.getElementById("nameField");
 
+  const nameInput =
+    document.getElementById("name");
+
+  const emailInput =
+    document.getElementById("email");
+
+  const passwordInput =
+    document.getElementById("password");
+
   const submitButton =
-    document.querySelector(".submit");
+    document.getElementById("submitButton");
 
   const message =
     document.getElementById("message");
+
+
+  function setMessage(text, type = "") {
+
+    message.textContent = text;
+
+    message.className = type;
+
+  }
+
+
+  function setLoading(isLoading) {
+
+    submitButton.disabled = isLoading;
+
+    if (isLoading) {
+
+      submitButton.textContent =
+        mode === "signup"
+          ? "Creating Account..."
+          : "Logging In...";
+
+    }
+
+    else {
+
+      submitButton.textContent =
+        mode === "signup"
+          ? "Create Account"
+          : "Login";
+
+    }
+
+  }
 
 
   /* =====================================
@@ -268,9 +330,15 @@
 
     nameField.style.display = "none";
 
-    submitButton.textContent = "Login";
+    nameInput.required = false;
 
-    message.textContent = "";
+    passwordInput.autocomplete =
+      "current-password";
+
+    submitButton.textContent =
+      "Login";
+
+    setMessage("");
 
   }
 
@@ -288,9 +356,15 @@
 
     nameField.style.display = "block";
 
-    submitButton.textContent = "Create Account";
+    nameInput.required = true;
 
-    message.textContent = "";
+    passwordInput.autocomplete =
+      "new-password";
+
+    submitButton.textContent =
+      "Create Account";
+
+    setMessage("");
 
   }
 
@@ -311,23 +385,24 @@
 
         event.preventDefault();
 
-        message.textContent = "Please wait...";
+        setLoading(true);
+        setMessage("Please wait...");
+
+        const name =
+          nameInput.value.trim();
 
         const email =
-          document
-            .getElementById("email")
-            .value
-            .trim();
+          emailInput.value.trim();
 
         const password =
-          document
-            .getElementById("password")
-            .value;
+          passwordInput.value;
 
 
         try {
 
-          /* SIGN UP */
+          /* =====================================
+             SIGN UP
+             ===================================== */
 
           if (mode === "signup") {
 
@@ -335,45 +410,168 @@
               data,
               error
             } = await supabase.auth.signUp({
+
               email: email,
-              password: password
+
+              password: password,
+
+              options: {
+
+                data: {
+                  display_name: name
+                }
+
+              }
+
             });
+
 
             if (error) {
               throw error;
             }
 
-            message.textContent =
-              "Account created! Check your email to verify your account.";
+
+            /*
+              If email confirmation is enabled,
+              Supabase usually creates the user
+              but does not create a live session yet.
+            */
+
+            if (!data.session) {
+
+              localStorage.setItem(
+                "zynora_pending_signup",
+                "true"
+              );
+
+              setMessage(
+                "Account created! Check your email and verify your Zynora account. Then return here and log in.",
+                "success"
+              );
+
+              showLogin();
+
+              emailInput.value = email;
+
+              return;
+
+            }
+
+
+            /*
+              If Supabase automatically creates
+              a session, signup is already complete.
+            */
+
+            localStorage.setItem(
+              "zynora_signup_success_seen",
+              "true"
+            );
+
+            window.location.href =
+              "signup-success.html";
 
           }
 
 
-          /* LOGIN */
+          /* =====================================
+             LOGIN
+             ===================================== */
 
           else {
 
             const {
               data,
               error
-            } = await supabase.auth.signInWithPassword({
-              email: email,
-              password: password
-            });
+            } =
+              await supabase.auth.signInWithPassword({
+
+                email: email,
+                password: password
+
+              });
+
 
             if (error) {
               throw error;
             }
 
-            message.textContent =
-              "Login successful!";
 
-            setTimeout(function() {
+            const user =
+              data.user;
 
-              window.location.href =
-                "index.html";
 
-            }, 1000);
+            if (!user) {
+
+              throw new Error(
+                "Unable to verify your account."
+              );
+
+            }
+
+
+            /*
+              Check whether this login belongs
+              to a newly created account.
+            */
+
+            const pendingSignup =
+              localStorage.getItem(
+                "zynora_pending_signup"
+              );
+
+
+            const successAlreadySeen =
+              localStorage.getItem(
+                "zynora_signup_success_seen"
+              );
+
+
+            if (
+              pendingSignup === "true" &&
+              successAlreadySeen !== "true"
+            ) {
+
+              localStorage.removeItem(
+                "zynora_pending_signup"
+              );
+
+              localStorage.setItem(
+                "zynora_signup_success_seen",
+                "true"
+              );
+
+              setMessage(
+                "Account verified! Welcome to Zynora.",
+                "success"
+              );
+
+
+              setTimeout(function() {
+
+                window.location.href =
+                  "signup-success.html";
+
+              }, 700);
+
+            }
+
+            else {
+
+              setMessage(
+                "Login successful!",
+                "success"
+              );
+
+
+              setTimeout(function() {
+
+                window.location.href =
+                  "index.html";
+
+              }, 700);
+
+            }
 
           }
 
@@ -381,9 +579,19 @@
 
         catch (error) {
 
-          message.textContent =
+          console.error(error);
+
+          setMessage(
             error.message ||
-            "Something went wrong.";
+            "Something went wrong. Please try again.",
+            "error"
+          );
+
+        }
+
+        finally {
+
+          setLoading(false);
 
         }
 
