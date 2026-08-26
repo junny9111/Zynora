@@ -1,0 +1,1731 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Zynora Creator Studio</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Playfair+Display:wght@500;600&display=swap"
+rel="stylesheet">
+
+<style>
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
+
+body{
+min-height:100vh;
+
+background:
+radial-gradient(
+circle at 50% 0%,
+rgba(145,55,255,.23),
+transparent 35%
+),
+#08070c;
+
+color:white;
+
+font-family:
+"Playfair Display",
+Georgia,
+serif;
+
+padding-bottom:50px;
+}
+
+
+/* HEADER */
+
+header{
+height:88px;
+
+display:flex;
+align-items:center;
+justify-content:space-between;
+
+padding:0 20px;
+
+background:#111016;
+
+border-bottom:
+1px solid
+rgba(173,77,255,.25);
+}
+
+.logo{
+font-family:"Cinzel",serif;
+
+font-size:31px;
+
+font-weight:700;
+
+letter-spacing:-2px;
+
+background:
+linear-gradient(
+90deg,
+#fff,
+#d19aff,
+#8e38ff
+);
+
+-webkit-background-clip:text;
+background-clip:text;
+
+color:transparent;
+}
+
+.back-btn{
+text-decoration:none;
+
+color:#b565ff;
+
+font-family:"Cinzel",serif;
+
+font-size:12px;
+}
+
+
+/* MAIN */
+
+main{
+max-width:650px;
+margin:auto;
+
+padding:
+28px 20px
+50px;
+}
+
+.page-title{
+font-family:"Cinzel",serif;
+
+font-size:29px;
+
+margin-bottom:6px;
+}
+
+.subtitle{
+color:#9994a2;
+
+font-size:14px;
+
+margin-bottom:26px;
+}
+
+
+/* HERO */
+
+.creator-hero{
+padding:24px;
+
+border-radius:24px;
+
+background:
+linear-gradient(
+135deg,
+#481270,
+#1a1026
+);
+
+border:
+1px solid
+rgba(195,118,255,.35);
+
+box-shadow:
+0 0 40px
+rgba(122,39,202,.18);
+
+margin-bottom:28px;
+}
+
+.creator-hero h2{
+font-family:"Cinzel",serif;
+
+font-size:19px;
+
+margin-bottom:8px;
+}
+
+.creator-hero p{
+color:#c7b8cf;
+
+font-size:13px;
+
+line-height:1.6;
+}
+
+
+/* CREATOR OPTIONS */
+
+.section-title{
+font-family:"Cinzel",serif;
+
+font-size:17px;
+
+margin-bottom:14px;
+}
+
+.action-grid{
+display:grid;
+
+grid-template-columns:
+repeat(2,1fr);
+
+gap:12px;
+
+margin-bottom:30px;
+}
+
+.action-card{
+padding:19px 13px;
+
+border-radius:19px;
+
+background:#15141b;
+
+border:
+1px solid
+rgba(255,255,255,.08);
+
+text-align:center;
+
+cursor:pointer;
+}
+
+.action-icon{
+font-size:30px;
+
+margin-bottom:10px;
+}
+
+.action-title{
+font-family:"Cinzel",serif;
+
+font-size:12px;
+
+margin-bottom:5px;
+}
+
+.action-sub{
+font-size:11px;
+
+color:#8f8996;
+
+line-height:1.4;
+}
+
+
+/* FORM */
+
+.form-card{
+background:#15141b;
+
+border:
+1px solid
+rgba(255,255,255,.08);
+
+border-radius:23px;
+
+padding:20px;
+
+margin-bottom:25px;
+}
+
+label{
+display:block;
+
+font-family:"Cinzel",serif;
+
+font-size:11px;
+
+color:#b9a8c5;
+
+margin:
+17px 0 8px;
+}
+
+label:first-child{
+margin-top:0;
+}
+
+input,
+textarea,
+select{
+
+width:100%;
+
+padding:14px;
+
+border-radius:14px;
+
+border:
+1px solid
+#36313c;
+
+background:#0d0c11;
+
+color:white;
+
+font-family:
+"Playfair Display",
+serif;
+
+font-size:15px;
+
+outline:none;
+}
+
+textarea{
+min-height:100px;
+resize:vertical;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+
+border-color:#a84fff;
+}
+
+
+/* VIDEO UPLOAD */
+
+.upload-box{
+margin-top:10px;
+
+padding:24px 15px;
+
+border:
+1px dashed
+rgba(183,105,255,.5);
+
+border-radius:18px;
+
+text-align:center;
+
+background:
+rgba(142,54,228,.06);
+
+cursor:pointer;
+}
+
+.upload-icon{
+font-size:34px;
+margin-bottom:8px;
+}
+
+.upload-title{
+font-family:"Cinzel",serif;
+font-size:12px;
+}
+
+.upload-sub{
+color:#8f8996;
+font-size:11px;
+margin-top:6px;
+}
+
+#videoInput,
+#thumbnailInput{
+display:none;
+}
+
+
+/* VIDEO PREVIEW */
+
+#previewBox{
+display:none;
+
+margin-top:18px;
+}
+
+#videoPreview{
+width:100%;
+
+max-height:360px;
+
+border-radius:17px;
+
+background:black;
+}
+
+
+/* THUMBNAIL */
+
+.thumbnail-preview{
+width:100%;
+
+height:180px;
+
+object-fit:cover;
+
+display:none;
+
+border-radius:16px;
+
+margin-top:13px;
+}
+
+
+/* BUTTONS */
+
+.primary-btn{
+width:100%;
+
+padding:16px;
+
+border:0;
+
+border-radius:16px;
+
+background:
+linear-gradient(
+135deg,
+#a84fff,
+#7521e4
+);
+
+color:white;
+
+font-family:"Cinzel",serif;
+
+font-size:13px;
+
+font-weight:700;
+
+cursor:pointer;
+
+margin-top:18px;
+}
+
+.secondary-btn{
+width:100%;
+
+padding:14px;
+
+border-radius:16px;
+
+background:#211d28;
+
+border:
+1px solid
+rgba(255,255,255,.08);
+
+color:#c8c0cd;
+
+font-family:"Cinzel",serif;
+
+font-size:12px;
+
+margin-top:10px;
+
+cursor:pointer;
+}
+
+.primary-btn:disabled{
+opacity:.5;
+cursor:not-allowed;
+}
+
+
+/* AI STUDIO */
+
+.ai-box{
+display:none;
+
+padding:20px;
+
+border-radius:23px;
+
+background:
+linear-gradient(
+135deg,
+rgba(124,34,207,.22),
+rgba(21,18,30,.95)
+);
+
+border:
+1px solid
+rgba(177,83,255,.25);
+
+margin-bottom:25px;
+}
+
+.ai-box.show{
+display:block;
+}
+
+.ai-title{
+font-family:"Cinzel",serif;
+
+font-size:18px;
+
+margin-bottom:7px;
+}
+
+.ai-text{
+color:#aaa2b2;
+
+font-size:13px;
+
+line-height:1.5;
+
+margin-bottom:15px;
+}
+
+
+/* STATUS */
+
+#status{
+display:none;
+
+padding:13px;
+
+border-radius:14px;
+
+margin-bottom:20px;
+
+background:#17131e;
+
+border:
+1px solid
+rgba(173,77,255,.2);
+
+color:#c9c3d0;
+
+text-align:center;
+
+font-size:13px;
+}
+
+
+/* DRAFTS */
+
+.draft{
+padding:16px;
+
+background:#15141b;
+
+border:
+1px solid
+rgba(255,255,255,.07);
+
+border-radius:18px;
+
+margin-bottom:11px;
+}
+
+.draft-title{
+font-family:"Cinzel",serif;
+
+font-size:13px;
+}
+
+.draft-info{
+color:#8e8894;
+
+font-size:11px;
+
+margin-top:5px;
+}
+
+.empty{
+color:#77717f;
+font-size:13px;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<div class="logo">
+Zynora Studio
+</div>
+
+<a
+href="profile.html"
+class="back-btn">
+
+← Profile
+
+</a>
+
+</header>
+
+
+<main>
+
+
+<h1 class="page-title">
+Creator Studio
+</h1>
+
+<p class="subtitle">
+Create, upload and publish Zynora dramas.
+</p>
+
+
+<div id="status"></div>
+
+
+<div class="creator-hero">
+
+<h2>
+Create Your Next Drama
+</h2>
+
+<p>
+Upload your own episodes or use Zynora AI Studio to build stories,
+characters, scenes and complete drama episodes.
+</p>
+
+</div>
+
+
+<div class="section-title">
+Create Content
+</div>
+
+
+<div class="action-grid">
+
+
+<div
+class="action-card"
+onclick="showUpload()">
+
+<div class="action-icon">
+⬆️
+</div>
+
+<div class="action-title">
+Upload Episode
+</div>
+
+<div class="action-sub">
+Upload your finished drama video.
+</div>
+
+</div>
+
+
+<div
+class="action-card"
+onclick="openAIStudio()">
+
+<div class="action-icon">
+✨
+</div>
+
+<div class="action-title">
+Create AI Drama
+</div>
+
+<div class="action-sub">
+Build stories and episodes with AI.
+</div>
+
+</div>
+
+
+<div
+class="action-card"
+onclick="scrollToDrafts()">
+
+<div class="action-icon">
+🎬
+</div>
+
+<div class="action-title">
+My Episodes
+</div>
+
+<div class="action-sub">
+View your saved episode drafts.
+</div>
+
+</div>
+
+
+<div
+class="action-card"
+onclick="showStatus('Publishing tools are being prepared.')">
+
+<div class="action-icon">
+🚀
+</div>
+
+<div class="action-title">
+Published
+</div>
+
+<div class="action-sub">
+Manage content already on Zynora.
+</div>
+
+</div>
+
+
+</div>
+
+
+<!-- AI STUDIO -->
+
+<div
+id="aiStudio"
+class="ai-box">
+
+<div class="ai-title">
+✨ Zynora AI Studio
+</div>
+
+<div class="ai-text">
+
+Tell Zynora what kind of drama you want.
+Later this studio will generate the script, characters,
+voices, scenes and full episodes automatically.
+
+</div>
+
+
+<label>
+Drama Idea
+</label>
+
+<textarea
+id="aiIdea"
+placeholder="Example: A wealthy businessman falls in love with a woman who secretly owns the company competing against him.">
+</textarea>
+
+
+<label>
+Genre
+</label>
+
+<select id="aiGenre">
+
+<option>
+Romance
+</option>
+
+<option>
+Drama
+</option>
+
+<option>
+Thriller
+</option>
+
+<option>
+Crime
+</option>
+
+<option>
+Mystery
+</option>
+
+<option>
+Comedy
+</option>
+
+<option>
+Fantasy
+</option>
+
+<option>
+Action
+</option>
+
+</select>
+
+
+<label>
+Episode Length
+</label>
+
+<select id="aiLength">
+
+<option value="5">
+5 Minutes
+</option>
+
+<option value="10">
+10 Minutes
+</option>
+
+<option value="15">
+15 Minutes
+</option>
+
+<option value="20">
+20 Minutes
+</option>
+
+<option value="30">
+30 Minutes
+</option>
+
+<option value="40">
+40 Minutes
+</option>
+
+</select>
+
+
+<button
+class="primary-btn"
+onclick="prepareAIStory()">
+
+Generate Drama Plan
+
+</button>
+
+
+<button
+class="secondary-btn"
+onclick="closeAIStudio()">
+
+Close AI Studio
+
+</button>
+
+</div>
+
+
+<!-- UPLOAD FORM -->
+
+<div
+id="uploadSection"
+class="form-card">
+
+
+<label>
+Drama / Series Title
+</label>
+
+<input
+id="seriesTitle"
+type="text"
+placeholder="Example: Love Behind The Contract">
+
+
+<label>
+Episode Title
+</label>
+
+<input
+id="episodeTitle"
+type="text"
+placeholder="Example: The Secret Meeting">
+
+
+<label>
+Episode Number
+</label>
+
+<input
+id="episodeNumber"
+type="number"
+min="1"
+value="1">
+
+
+<label>
+Description
+</label>
+
+<textarea
+id="description"
+placeholder="Tell viewers what happens in this episode.">
+</textarea>
+
+
+<label>
+Genre
+</label>
+
+<select id="genre">
+
+<option>
+Romance
+</option>
+
+<option>
+Drama
+</option>
+
+<option>
+Action
+</option>
+
+<option>
+Thriller
+</option>
+
+<option>
+Crime
+</option>
+
+<option>
+Mystery
+</option>
+
+<option>
+Comedy
+</option>
+
+<option>
+Fantasy
+</option>
+
+</select>
+
+
+<label>
+Episode Video
+</label>
+
+
+<label
+for="videoInput"
+class="upload-box">
+
+<div class="upload-icon">
+🎥
+</div>
+
+<div class="upload-title">
+Choose Video
+</div>
+
+<div
+id="videoFileName"
+class="upload-sub">
+
+MP4, WebM or compatible video
+
+</div>
+
+</label>
+
+
+<input
+id="videoInput"
+type="file"
+accept="video/*">
+
+
+<div id="previewBox">
+
+<video
+id="videoPreview"
+controls>
+</video>
+
+</div>
+
+
+<label>
+Episode Thumbnail
+</label>
+
+
+<label
+for="thumbnailInput"
+class="upload-box">
+
+<div class="upload-icon">
+🖼️
+</div>
+
+<div class="upload-title">
+Choose Thumbnail
+</div>
+
+<div
+id="thumbnailFileName"
+class="upload-sub">
+
+Poster or episode cover image
+
+</div>
+
+</label>
+
+
+<input
+id="thumbnailInput"
+type="file"
+accept="image/*">
+
+
+<img
+id="thumbnailPreview"
+class="thumbnail-preview"
+alt="Thumbnail preview">
+
+
+<button
+class="secondary-btn"
+onclick="saveDraft()">
+
+Save Draft
+
+</button>
+
+
+<button
+id="publishBtn"
+class="primary-btn"
+onclick="publishEpisode()">
+
+Publish Episode
+
+</button>
+
+
+</div>
+
+
+<!-- DRAFTS -->
+
+<div
+id="draftSection">
+
+<div class="section-title">
+My Episode Drafts
+</div>
+
+<div id="draftList">
+</div>
+
+</div>
+
+
+</main>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+<script>
+
+
+/* ========================================
+   SUPABASE
+======================================== */
+
+
+const SUPABASE_URL =
+"https://ozshekxpuvganemaajms.supabase.co";
+
+
+const SUPABASE_KEY =
+"sb_publishable__GsW9RahFD_XDWJTFzh9eQ_dNBZfa32";
+
+
+const client =
+supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+);
+
+
+let currentUser = null;
+
+let selectedVideo = null;
+
+let selectedThumbnail = null;
+
+
+/* ========================================
+   START
+======================================== */
+
+
+async function startCreator(){
+
+try{
+
+const result =
+await client.auth.getUser();
+
+
+if(
+result.error ||
+!result.data.user
+){
+
+showStatus(
+"Log in to your Zynora account before publishing."
+);
+
+return;
+
+}
+
+
+currentUser =
+result.data.user;
+
+
+showStatus(
+"Zynora Creator Studio is ready."
+);
+
+
+loadDrafts();
+
+}
+catch(error){
+
+console.error(error);
+
+showStatus(
+"Creator Studio loaded, but account connection failed."
+);
+
+}
+
+}
+
+
+/* ========================================
+   STATUS
+======================================== */
+
+
+function showStatus(text){
+
+const box =
+document.getElementById("status");
+
+
+box.textContent =
+text;
+
+
+box.style.display =
+"block";
+
+
+clearTimeout(
+window.creatorTimer
+);
+
+
+window.creatorTimer =
+setTimeout(
+function(){
+
+box.style.display =
+"none";
+
+},
+4000
+);
+
+}
+
+
+/* ========================================
+   UPLOAD VIDEO PREVIEW
+======================================== */
+
+
+document
+.getElementById("videoInput")
+.addEventListener(
+"change",
+function(){
+
+const file =
+this.files[0];
+
+
+if(!file){
+return;
+}
+
+
+selectedVideo =
+file;
+
+
+document
+.getElementById("videoFileName")
+.textContent =
+file.name;
+
+
+const preview =
+document.getElementById(
+"videoPreview"
+);
+
+
+preview.src =
+URL.createObjectURL(
+file
+);
+
+
+document
+.getElementById(
+"previewBox"
+)
+.style.display =
+"block";
+
+}
+);
+
+
+/* ========================================
+   THUMBNAIL PREVIEW
+======================================== */
+
+
+document
+.getElementById("thumbnailInput")
+.addEventListener(
+"change",
+function(){
+
+const file =
+this.files[0];
+
+
+if(!file){
+return;
+}
+
+
+selectedThumbnail =
+file;
+
+
+document
+.getElementById(
+"thumbnailFileName"
+)
+.textContent =
+file.name;
+
+
+const image =
+document.getElementById(
+"thumbnailPreview"
+);
+
+
+image.src =
+URL.createObjectURL(
+file
+);
+
+
+image.style.display =
+"block";
+
+}
+);
+
+
+/* ========================================
+   SAVE DRAFT
+======================================== */
+
+
+function saveDraft(){
+
+const seriesTitle =
+document
+.getElementById(
+"seriesTitle"
+)
+.value
+.trim();
+
+
+const episodeTitle =
+document
+.getElementById(
+"episodeTitle"
+)
+.value
+.trim();
+
+
+const episodeNumber =
+document
+.getElementById(
+"episodeNumber"
+)
+.value;
+
+
+const description =
+document
+.getElementById(
+"description"
+)
+.value
+.trim();
+
+
+const genre =
+document
+.getElementById(
+"genre"
+)
+.value;
+
+
+if(!seriesTitle){
+
+showStatus(
+"Enter a drama title first."
+);
+
+return;
+
+}
+
+
+const drafts =
+JSON.parse(
+localStorage.getItem(
+"zynoraCreatorDrafts"
+)
+||
+"[]"
+);
+
+
+drafts.unshift({
+
+id:
+Date.now(),
+
+seriesTitle:
+seriesTitle,
+
+episodeTitle:
+episodeTitle,
+
+episodeNumber:
+episodeNumber,
+
+description:
+description,
+
+genre:
+genre,
+
+createdAt:
+new Date()
+.toISOString()
+
+});
+
+
+localStorage.setItem(
+"zynoraCreatorDrafts",
+JSON.stringify(
+drafts
+)
+);
+
+
+showStatus(
+"Episode draft saved."
+);
+
+
+loadDrafts();
+
+}
+
+
+/* ========================================
+   LOAD DRAFTS
+======================================== */
+
+
+function loadDrafts(){
+
+const list =
+document.getElementById(
+"draftList"
+);
+
+
+const drafts =
+JSON.parse(
+localStorage.getItem(
+"zynoraCreatorDrafts"
+)
+||
+"[]"
+);
+
+
+if(
+drafts.length === 0
+){
+
+list.innerHTML =
+'<div class="empty">No episode drafts yet.</div>';
+
+return;
+
+}
+
+
+list.innerHTML =
+"";
+
+
+drafts.forEach(
+function(draft){
+
+const card =
+document.createElement(
+"div"
+);
+
+
+card.className =
+"draft";
+
+
+const title =
+document.createElement(
+"div"
+);
+
+
+title.className =
+"draft-title";
+
+
+title.textContent =
+draft.seriesTitle +
+" • Episode " +
+draft.episodeNumber;
+
+
+const info =
+document.createElement(
+"div"
+);
+
+
+info.className =
+"draft-info";
+
+
+info.textContent =
+draft.episodeTitle
+||
+draft.genre;
+
+
+card.appendChild(
+title
+);
+
+
+card.appendChild(
+info
+);
+
+
+list.appendChild(
+card
+);
+
+}
+);
+
+}
+
+
+/* ========================================
+   PUBLISH
+======================================== */
+
+
+async function publishEpisode(){
+
+if(!currentUser){
+
+showStatus(
+"Please log in before publishing."
+);
+
+return;
+
+}
+
+
+const seriesTitle =
+document
+.getElementById(
+"seriesTitle"
+)
+.value
+.trim();
+
+
+const episodeTitle =
+document
+.getElementById(
+"episodeTitle"
+)
+.value
+.trim();
+
+
+if(!seriesTitle){
+
+showStatus(
+"Enter the drama title."
+);
+
+return;
+
+}
+
+
+if(!episodeTitle){
+
+showStatus(
+"Enter an episode title."
+);
+
+return;
+
+}
+
+
+if(!selectedVideo){
+
+showStatus(
+"Choose an episode video."
+);
+
+return;
+
+}
+
+
+/*
+IMPORTANT:
+
+The Creator Studio interface is ready.
+
+The next step is creating the Zynora
+Supabase video storage bucket and
+episodes database table.
+
+Until those are created we DO NOT
+pretend that a video has been published.
+*/
+
+
+showStatus(
+"Creator Studio is ready. Video publishing storage must be connected next."
+);
+
+}
+
+
+/* ========================================
+   AI STUDIO
+======================================== */
+
+
+function openAIStudio(){
+
+document
+.getElementById(
+"aiStudio"
+)
+.classList.add(
+"show"
+);
+
+
+window.scrollTo({
+top:
+document
+.getElementById(
+"aiStudio"
+)
+.offsetTop
+-
+100,
+
+behavior:
+"smooth"
+});
+
+}
+
+
+function closeAIStudio(){
+
+document
+.getElementById(
+"aiStudio"
+)
+.classList.remove(
+"show"
+);
+
+}
+
+
+function prepareAIStory(){
+
+const idea =
+document
+.getElementById(
+"aiIdea"
+)
+.value
+.trim();
+
+
+const genre =
+document
+.getElementById(
+"aiGenre"
+)
+.value;
+
+
+const length =
+document
+.getElementById(
+"aiLength"
+)
+.value;
+
+
+if(!idea){
+
+showStatus(
+"Describe the drama you want Zynora AI to create."
+);
+
+return;
+
+}
+
+
+localStorage.setItem(
+"zynoraAIStoryIdea",
+idea
+);
+
+
+localStorage.setItem(
+"zynoraAIGenre",
+genre
+);
+
+
+localStorage.setItem(
+"zynoraAILength",
+length
+);
+
+
+showStatus(
+"Drama idea saved. The AI generation engine will be connected next."
+);
+
+}
+
+
+/* ========================================
+   NAVIGATION HELPERS
+======================================== */
+
+
+function showUpload(){
+
+window.scrollTo({
+top:
+document
+.getElementById(
+"uploadSection"
+)
+.offsetTop
+-
+90,
+
+behavior:
+"smooth"
+});
+
+}
+
+
+function scrollToDrafts(){
+
+window.scrollTo({
+top:
+document
+.getElementById(
+"draftSection"
+)
+.offsetTop
+-
+90,
+
+behavior:
+"smooth"
+});
+
+}
+
+
+/* ========================================
+   START
+======================================== */
+
+
+startCreator();
+
+
+</script>
+
+
+</body>
+
+</html>
