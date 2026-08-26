@@ -28,265 +28,184 @@ padding:0;
 
 body{
 min-height:100vh;
-
 background:
-radial-gradient(
-circle at 50% 0%,
-rgba(145,55,255,.23),
-transparent 35%
-),
+radial-gradient(circle at 50% 0%,rgba(145,55,255,.23),transparent 35%),
 #08070c;
-
 color:white;
-
-font-family:
-"Playfair Display",
-Georgia,
-serif;
-
-padding-bottom:50px;
+font-family:"Playfair Display",Georgia,serif;
+padding-bottom:60px;
 }
-
-
-/* HEADER */
 
 header{
 height:88px;
-
 display:flex;
 align-items:center;
 justify-content:space-between;
-
 padding:0 20px;
-
 background:#111016;
-
-border-bottom:
-1px solid
-rgba(173,77,255,.25);
+border-bottom:1px solid rgba(173,77,255,.25);
 }
 
 .logo{
 font-family:"Cinzel",serif;
-
-font-size:31px;
-
+font-size:30px;
 font-weight:700;
-
 letter-spacing:-2px;
-
-background:
-linear-gradient(
-90deg,
-#fff,
-#d19aff,
-#8e38ff
-);
-
+background:linear-gradient(90deg,#fff,#d19aff,#8e38ff);
 -webkit-background-clip:text;
 background-clip:text;
-
 color:transparent;
 }
 
 .back-btn{
 text-decoration:none;
-
 color:#b565ff;
-
 font-family:"Cinzel",serif;
-
-font-size:12px;
+font-size:11px;
 }
-
-
-/* MAIN */
 
 main{
 max-width:650px;
 margin:auto;
-
-padding:
-28px 20px
-50px;
+padding:28px 20px 50px;
 }
 
 .page-title{
 font-family:"Cinzel",serif;
-
 font-size:29px;
-
 margin-bottom:6px;
 }
 
 .subtitle{
 color:#9994a2;
-
 font-size:14px;
-
-margin-bottom:26px;
+margin-bottom:25px;
 }
 
+#status{
+display:none;
+padding:14px;
+border-radius:14px;
+margin-bottom:20px;
+background:#17131e;
+border:1px solid rgba(173,77,255,.25);
+color:#d2c7dc;
+text-align:center;
+font-size:13px;
+line-height:1.5;
+}
 
-/* HERO */
-
-.creator-hero{
+.hero{
 padding:24px;
-
 border-radius:24px;
-
-background:
-linear-gradient(
-135deg,
-#481270,
-#1a1026
-);
-
-border:
-1px solid
-rgba(195,118,255,.35);
-
-box-shadow:
-0 0 40px
-rgba(122,39,202,.18);
-
+background:linear-gradient(135deg,#481270,#1a1026);
+border:1px solid rgba(195,118,255,.35);
 margin-bottom:28px;
 }
 
-.creator-hero h2{
+.hero h2{
 font-family:"Cinzel",serif;
-
 font-size:19px;
-
 margin-bottom:8px;
 }
 
-.creator-hero p{
+.hero p{
 color:#c7b8cf;
-
 font-size:13px;
-
 line-height:1.6;
 }
 
-
-/* CREATOR OPTIONS */
-
 .section-title{
 font-family:"Cinzel",serif;
-
 font-size:17px;
-
 margin-bottom:14px;
 }
 
 .action-grid{
 display:grid;
-
-grid-template-columns:
-repeat(2,1fr);
-
+grid-template-columns:repeat(2,1fr);
 gap:12px;
-
-margin-bottom:30px;
+margin-bottom:28px;
 }
 
 .action-card{
-padding:19px 13px;
-
+padding:18px 12px;
 border-radius:19px;
-
 background:#15141b;
-
-border:
-1px solid
-rgba(255,255,255,.08);
-
+border:1px solid rgba(255,255,255,.08);
 text-align:center;
-
 cursor:pointer;
 }
 
 .action-icon{
-font-size:30px;
-
-margin-bottom:10px;
+font-size:29px;
+margin-bottom:9px;
 }
 
 .action-title{
 font-family:"Cinzel",serif;
-
-font-size:12px;
-
-margin-bottom:5px;
+font-size:11px;
 }
 
 .action-sub{
 font-size:11px;
-
 color:#8f8996;
-
+margin-top:6px;
 line-height:1.4;
 }
 
-
-/* FORM */
-
-.form-card{
+.form-card,
+.ai-box{
 background:#15141b;
-
-border:
-1px solid
-rgba(255,255,255,.08);
-
+border:1px solid rgba(255,255,255,.08);
 border-radius:23px;
-
 padding:20px;
-
 margin-bottom:25px;
+}
+
+.ai-box{
+display:none;
+background:
+linear-gradient(135deg,rgba(124,34,207,.22),rgba(21,18,30,.95));
+border-color:rgba(177,83,255,.25);
+}
+
+.ai-box.show{
+display:block;
+}
+
+.ai-title{
+font-family:"Cinzel",serif;
+font-size:18px;
+margin-bottom:7px;
+}
+
+.ai-text{
+color:#aaa2b2;
+font-size:13px;
+line-height:1.5;
+margin-bottom:15px;
 }
 
 label{
 display:block;
-
 font-family:"Cinzel",serif;
-
 font-size:11px;
-
 color:#b9a8c5;
-
-margin:
-17px 0 8px;
-}
-
-label:first-child{
-margin-top:0;
+margin:17px 0 8px;
 }
 
 input,
 textarea,
 select{
-
 width:100%;
-
 padding:14px;
-
 border-radius:14px;
-
-border:
-1px solid
-#36313c;
-
+border:1px solid #36313c;
 background:#0d0c11;
-
 color:white;
-
-font-family:
-"Playfair Display",
-serif;
-
+font-family:"Playfair Display",serif;
 font-size:15px;
-
 outline:none;
 }
 
@@ -298,46 +217,33 @@ resize:vertical;
 input:focus,
 textarea:focus,
 select:focus{
-
 border-color:#a84fff;
 }
 
-
-/* VIDEO UPLOAD */
-
 .upload-box{
-margin-top:10px;
-
 padding:24px 15px;
-
-border:
-1px dashed
-rgba(183,105,255,.5);
-
+border:1px dashed rgba(183,105,255,.5);
 border-radius:18px;
-
 text-align:center;
-
-background:
-rgba(142,54,228,.06);
-
+background:rgba(142,54,228,.06);
 cursor:pointer;
 }
 
 .upload-icon{
 font-size:34px;
-margin-bottom:8px;
 }
 
 .upload-title{
 font-family:"Cinzel",serif;
 font-size:12px;
+margin-top:7px;
 }
 
 .upload-sub{
-color:#8f8996;
 font-size:11px;
+color:#8f8996;
 margin-top:6px;
+word-break:break-word;
 }
 
 #videoInput,
@@ -345,96 +251,50 @@ margin-top:6px;
 display:none;
 }
 
-
-/* VIDEO PREVIEW */
-
 #previewBox{
 display:none;
-
 margin-top:18px;
 }
 
 #videoPreview{
 width:100%;
-
 max-height:360px;
-
-border-radius:17px;
-
 background:black;
+border-radius:17px;
 }
 
-
-/* THUMBNAIL */
-
-.thumbnail-preview{
-width:100%;
-
-height:180px;
-
-object-fit:cover;
-
+#thumbnailPreview{
 display:none;
-
+width:100%;
+height:180px;
+object-fit:cover;
 border-radius:16px;
-
-margin-top:13px;
+margin-top:14px;
 }
 
-
-/* BUTTONS */
+.primary-btn,
+.secondary-btn{
+width:100%;
+padding:15px;
+border-radius:16px;
+font-family:"Cinzel",serif;
+font-size:12px;
+font-weight:700;
+cursor:pointer;
+}
 
 .primary-btn{
-width:100%;
-
-padding:16px;
-
-border:0;
-
-border-radius:16px;
-
-background:
-linear-gradient(
-135deg,
-#a84fff,
-#7521e4
-);
-
-color:white;
-
-font-family:"Cinzel",serif;
-
-font-size:13px;
-
-font-weight:700;
-
-cursor:pointer;
-
 margin-top:18px;
+border:none;
+background:linear-gradient(135deg,#a84fff,#7521e4);
+color:white;
 }
 
 .secondary-btn{
-width:100%;
-
-padding:14px;
-
-border-radius:16px;
-
-background:#211d28;
-
-border:
-1px solid
-rgba(255,255,255,.08);
-
-color:#c8c0cd;
-
-font-family:"Cinzel",serif;
-
-font-size:12px;
-
 margin-top:10px;
-
-cursor:pointer;
+border:1px solid rgba(255,255,255,.08);
+background:#211d28;
+color:#c8c0cd;
 }
 
 .primary-btn:disabled{
@@ -442,106 +302,47 @@ opacity:.5;
 cursor:not-allowed;
 }
 
-
-/* AI STUDIO */
-
-.ai-box{
+.progress{
 display:none;
-
-padding:20px;
-
-border-radius:23px;
-
-background:
-linear-gradient(
-135deg,
-rgba(124,34,207,.22),
-rgba(21,18,30,.95)
-);
-
-border:
-1px solid
-rgba(177,83,255,.25);
-
-margin-bottom:25px;
+margin-top:14px;
+height:8px;
+border-radius:10px;
+overflow:hidden;
+background:#292331;
 }
 
-.ai-box.show{
-display:block;
+.progress-bar{
+width:0%;
+height:100%;
+background:linear-gradient(90deg,#a84fff,#d08cff);
+transition:width .3s;
 }
 
-.ai-title{
-font-family:"Cinzel",serif;
-
-font-size:18px;
-
-margin-bottom:7px;
-}
-
-.ai-text{
-color:#aaa2b2;
-
-font-size:13px;
-
-line-height:1.5;
-
-margin-bottom:15px;
-}
-
-
-/* STATUS */
-
-#status{
-display:none;
-
-padding:13px;
-
-border-radius:14px;
-
-margin-bottom:20px;
-
-background:#17131e;
-
-border:
-1px solid
-rgba(173,77,255,.2);
-
-color:#c9c3d0;
-
-text-align:center;
-
-font-size:13px;
-}
-
-
-/* DRAFTS */
-
-.draft{
-padding:16px;
-
-background:#15141b;
-
-border:
-1px solid
-rgba(255,255,255,.07);
-
+.episode-card{
+padding:17px;
 border-radius:18px;
-
-margin-bottom:11px;
+background:#15141b;
+border:1px solid rgba(255,255,255,.07);
+margin-bottom:12px;
 }
 
-.draft-title{
+.episode-title{
 font-family:"Cinzel",serif;
-
 font-size:13px;
 }
 
-.draft-info{
+.episode-info{
 color:#8e8894;
-
 font-size:11px;
+margin-top:6px;
+}
 
-margin-top:5px;
+.episode-link{
+display:inline-block;
+margin-top:9px;
+color:#bb72ff;
+font-size:12px;
+text-decoration:none;
 }
 
 .empty{
@@ -553,9 +354,7 @@ font-size:13px;
 
 </head>
 
-
 <body>
-
 
 <header>
 
@@ -566,16 +365,12 @@ Zynora Studio
 <a
 href="profile.html"
 class="back-btn">
-
 ← Profile
-
 </a>
 
 </header>
 
-
 <main>
-
 
 <h1 class="page-title">
 Creator Studio
@@ -585,19 +380,18 @@ Creator Studio
 Create, upload and publish Zynora dramas.
 </p>
 
-
 <div id="status"></div>
 
-
-<div class="creator-hero">
+<div class="hero">
 
 <h2>
 Create Your Next Drama
 </h2>
 
 <p>
-Upload your own episodes or use Zynora AI Studio to build stories,
-characters, scenes and complete drama episodes.
+Upload finished episodes today. Zynora AI Studio will also become the
+production system for AI scripts, characters, voices, scenes and complete
+long-form drama episodes.
 </p>
 
 </div>
@@ -607,107 +401,82 @@ characters, scenes and complete drama episodes.
 Create Content
 </div>
 
-
 <div class="action-grid">
 
+<div class="action-card" onclick="showUpload()">
 
-<div
-class="action-card"
-onclick="showUpload()">
-
-<div class="action-icon">
-⬆️
-</div>
+<div class="action-icon">⬆️</div>
 
 <div class="action-title">
 Upload Episode
 </div>
 
 <div class="action-sub">
-Upload your finished drama video.
+Publish a finished video.
 </div>
 
 </div>
 
 
-<div
-class="action-card"
-onclick="openAIStudio()">
+<div class="action-card" onclick="openAIStudio()">
 
-<div class="action-icon">
-✨
-</div>
+<div class="action-icon">✨</div>
 
 <div class="action-title">
 Create AI Drama
 </div>
 
 <div class="action-sub">
-Build stories and episodes with AI.
+Prepare an AI drama production.
 </div>
 
 </div>
 
 
-<div
-class="action-card"
-onclick="scrollToDrafts()">
+<div class="action-card" onclick="scrollToEpisodes()">
 
-<div class="action-icon">
-🎬
-</div>
+<div class="action-icon">🎬</div>
 
 <div class="action-title">
 My Episodes
 </div>
 
 <div class="action-sub">
-View your saved episode drafts.
+View your published content.
 </div>
 
 </div>
 
 
-<div
-class="action-card"
-onclick="showStatus('Publishing tools are being prepared.')">
+<div class="action-card" onclick="window.location.href='index.html'">
 
-<div class="action-icon">
-🚀
-</div>
+<div class="action-icon">🚀</div>
 
 <div class="action-title">
-Published
+Open Zynora
 </div>
 
 <div class="action-sub">
-Manage content already on Zynora.
+Return to the streaming app.
 </div>
 
 </div>
-
 
 </div>
 
 
 <!-- AI STUDIO -->
 
-<div
-id="aiStudio"
-class="ai-box">
+<div id="aiStudio" class="ai-box">
 
 <div class="ai-title">
 ✨ Zynora AI Studio
 </div>
 
 <div class="ai-text">
-
-Tell Zynora what kind of drama you want.
-Later this studio will generate the script, characters,
-voices, scenes and full episodes automatically.
-
+Describe the drama you want Zynora AI to produce.
+Your idea will be saved as the starting point for the AI video engine.
 </div>
-
 
 <label>
 Drama Idea
@@ -715,9 +484,8 @@ Drama Idea
 
 <textarea
 id="aiIdea"
-placeholder="Example: A wealthy businessman falls in love with a woman who secretly owns the company competing against him.">
+placeholder="Describe the story, characters and situation...">
 </textarea>
-
 
 <label>
 Genre
@@ -725,100 +493,58 @@ Genre
 
 <select id="aiGenre">
 
-<option>
-Romance
-</option>
-
-<option>
-Drama
-</option>
-
-<option>
-Thriller
-</option>
-
-<option>
-Crime
-</option>
-
-<option>
-Mystery
-</option>
-
-<option>
-Comedy
-</option>
-
-<option>
-Fantasy
-</option>
-
-<option>
-Action
-</option>
+<option>Romance</option>
+<option>Drama</option>
+<option>Thriller</option>
+<option>Crime</option>
+<option>Mystery</option>
+<option>Comedy</option>
+<option>Fantasy</option>
+<option>Action</option>
 
 </select>
 
-
 <label>
-Episode Length
+Target Episode Length
 </label>
 
 <select id="aiLength">
 
-<option value="5">
-5 Minutes
-</option>
-
-<option value="10">
-10 Minutes
-</option>
-
-<option value="15">
-15 Minutes
-</option>
-
-<option value="20">
-20 Minutes
-</option>
-
-<option value="30">
-30 Minutes
-</option>
-
-<option value="40">
-40 Minutes
-</option>
+<option value="5">5 Minutes</option>
+<option value="10">10 Minutes</option>
+<option value="15">15 Minutes</option>
+<option value="20">20 Minutes</option>
+<option value="30">30 Minutes</option>
+<option value="40">40 Minutes</option>
 
 </select>
-
 
 <button
 class="primary-btn"
 onclick="prepareAIStory()">
 
-Generate Drama Plan
+Save AI Drama Project
 
 </button>
-
 
 <button
 class="secondary-btn"
 onclick="closeAIStudio()">
 
-Close AI Studio
+Close
 
 </button>
 
 </div>
 
 
-<!-- UPLOAD FORM -->
+<!-- UPLOAD -->
 
-<div
-id="uploadSection"
-class="form-card">
+<div id="uploadSection" class="form-card">
 
+<div class="section-title">
+Publish Episode
+</div>
 
 <label>
 Drama / Series Title
@@ -827,8 +553,7 @@ Drama / Series Title
 <input
 id="seriesTitle"
 type="text"
-placeholder="Example: Love Behind The Contract">
-
+placeholder="Love Behind The Contract">
 
 <label>
 Episode Title
@@ -837,8 +562,7 @@ Episode Title
 <input
 id="episodeTitle"
 type="text"
-placeholder="Example: The Secret Meeting">
-
+placeholder="The Secret Meeting">
 
 <label>
 Episode Number
@@ -847,9 +571,8 @@ Episode Number
 <input
 id="episodeNumber"
 type="number"
-min="1"
-value="1">
-
+value="1"
+min="1">
 
 <label>
 Description
@@ -857,9 +580,8 @@ Description
 
 <textarea
 id="description"
-placeholder="Tell viewers what happens in this episode.">
+placeholder="Describe this episode...">
 </textarea>
-
 
 <label>
 Genre
@@ -867,37 +589,14 @@ Genre
 
 <select id="genre">
 
-<option>
-Romance
-</option>
-
-<option>
-Drama
-</option>
-
-<option>
-Action
-</option>
-
-<option>
-Thriller
-</option>
-
-<option>
-Crime
-</option>
-
-<option>
-Mystery
-</option>
-
-<option>
-Comedy
-</option>
-
-<option>
-Fantasy
-</option>
+<option>Romance</option>
+<option>Drama</option>
+<option>Action</option>
+<option>Thriller</option>
+<option>Crime</option>
+<option>Mystery</option>
+<option>Comedy</option>
+<option>Fantasy</option>
 
 </select>
 
@@ -906,17 +605,14 @@ Fantasy
 Episode Video
 </label>
 
-
-<label
-for="videoInput"
-class="upload-box">
+<label for="videoInput" class="upload-box">
 
 <div class="upload-icon">
 🎥
 </div>
 
 <div class="upload-title">
-Choose Video
+Choose Episode Video
 </div>
 
 <div
@@ -928,7 +624,6 @@ MP4, WebM or compatible video
 </div>
 
 </label>
-
 
 <input
 id="videoInput"
@@ -950,49 +645,44 @@ controls>
 Episode Thumbnail
 </label>
 
-
-<label
-for="thumbnailInput"
-class="upload-box">
+<label for="thumbnailInput" class="upload-box">
 
 <div class="upload-icon">
 🖼️
 </div>
 
 <div class="upload-title">
-Choose Thumbnail
+Choose Cover Image
 </div>
 
 <div
 id="thumbnailFileName"
 class="upload-sub">
 
-Poster or episode cover image
+JPG, PNG or WebP
 
 </div>
 
 </label>
-
 
 <input
 id="thumbnailInput"
 type="file"
 accept="image/*">
 
-
 <img
 id="thumbnailPreview"
-class="thumbnail-preview"
-alt="Thumbnail preview">
+alt="Episode thumbnail">
 
 
-<button
-class="secondary-btn"
-onclick="saveDraft()">
+<div id="progress" class="progress">
 
-Save Draft
+<div
+id="progressBar"
+class="progress-bar">
+</div>
 
-</button>
+</div>
 
 
 <button
@@ -1004,46 +694,35 @@ Publish Episode
 
 </button>
 
-
 </div>
 
 
-<!-- DRAFTS -->
+<!-- PUBLISHED EPISODES -->
 
-<div
-id="draftSection">
+<div id="episodeSection">
 
 <div class="section-title">
-My Episode Drafts
+My Published Episodes
 </div>
 
-<div id="draftList">
+<div id="episodeList">
+Loading...
 </div>
 
 </div>
-
 
 </main>
 
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-
 <script>
-
-
-/* ========================================
-   SUPABASE
-======================================== */
-
 
 const SUPABASE_URL =
 "https://ozshekxpuvganemaajms.supabase.co";
 
-
 const SUPABASE_KEY =
 "sb_publishable__GsW9RahFD_XDWJTFzh9eQ_dNBZfa32";
-
 
 const client =
 supabase.createClient(
@@ -1053,16 +732,13 @@ SUPABASE_KEY
 
 
 let currentUser = null;
-
 let selectedVideo = null;
-
 let selectedThumbnail = null;
 
 
-/* ========================================
+/* ===============================
    START
-======================================== */
-
+================================ */
 
 async function startCreator(){
 
@@ -1071,31 +747,32 @@ try{
 const result =
 await client.auth.getUser();
 
-
 if(
 result.error ||
 !result.data.user
 ){
 
 showStatus(
-"Log in to your Zynora account before publishing."
+"Please log in before using Creator Studio."
 );
+
+document
+.getElementById("episodeList")
+.textContent =
+"Log in to view your episodes.";
 
 return;
 
 }
 
-
 currentUser =
 result.data.user;
 
-
 showStatus(
-"Zynora Creator Studio is ready."
+"Zynora Creator Studio connected."
 );
 
-
-loadDrafts();
+await loadEpisodes();
 
 }
 catch(error){
@@ -1103,7 +780,7 @@ catch(error){
 console.error(error);
 
 showStatus(
-"Creator Studio loaded, but account connection failed."
+"Creator Studio could not connect to your account."
 );
 
 }
@@ -1111,48 +788,27 @@ showStatus(
 }
 
 
-/* ========================================
+/* ===============================
    STATUS
-======================================== */
-
+================================ */
 
 function showStatus(text){
 
 const box =
 document.getElementById("status");
 
-
 box.textContent =
 text;
-
 
 box.style.display =
 "block";
 
-
-clearTimeout(
-window.creatorTimer
-);
-
-
-window.creatorTimer =
-setTimeout(
-function(){
-
-box.style.display =
-"none";
-
-},
-4000
-);
-
 }
 
 
-/* ========================================
-   UPLOAD VIDEO PREVIEW
-======================================== */
-
+/* ===============================
+   VIDEO SELECT
+================================ */
 
 document
 .getElementById("videoInput")
@@ -1163,38 +819,26 @@ function(){
 const file =
 this.files[0];
 
-
 if(!file){
 return;
 }
 
-
 selectedVideo =
 file;
-
 
 document
 .getElementById("videoFileName")
 .textContent =
 file.name;
 
-
 const preview =
-document.getElementById(
-"videoPreview"
-);
-
+document.getElementById("videoPreview");
 
 preview.src =
-URL.createObjectURL(
-file
-);
-
+URL.createObjectURL(file);
 
 document
-.getElementById(
-"previewBox"
-)
+.getElementById("previewBox")
 .style.display =
 "block";
 
@@ -1202,10 +846,9 @@ document
 );
 
 
-/* ========================================
-   THUMBNAIL PREVIEW
-======================================== */
-
+/* ===============================
+   THUMBNAIL SELECT
+================================ */
 
 document
 .getElementById("thumbnailInput")
@@ -1216,35 +859,23 @@ function(){
 const file =
 this.files[0];
 
-
 if(!file){
 return;
 }
 
-
 selectedThumbnail =
 file;
 
-
 document
-.getElementById(
-"thumbnailFileName"
-)
+.getElementById("thumbnailFileName")
 .textContent =
 file.name;
 
-
 const image =
-document.getElementById(
-"thumbnailPreview"
-);
-
+document.getElementById("thumbnailPreview");
 
 image.src =
-URL.createObjectURL(
-file
-);
-
+URL.createObjectURL(file);
 
 image.style.display =
 "block";
@@ -1253,237 +884,51 @@ image.style.display =
 );
 
 
-/* ========================================
-   SAVE DRAFT
-======================================== */
+/* ===============================
+   SAFE FILE NAME
+================================ */
 
+function safeName(name){
 
-function saveDraft(){
-
-const seriesTitle =
-document
-.getElementById(
-"seriesTitle"
-)
-.value
-.trim();
-
-
-const episodeTitle =
-document
-.getElementById(
-"episodeTitle"
-)
-.value
-.trim();
-
-
-const episodeNumber =
-document
-.getElementById(
-"episodeNumber"
-)
-.value;
-
-
-const description =
-document
-.getElementById(
-"description"
-)
-.value
-.trim();
-
-
-const genre =
-document
-.getElementById(
-"genre"
-)
-.value;
-
-
-if(!seriesTitle){
-
-showStatus(
-"Enter a drama title first."
-);
-
-return;
+return name
+.toLowerCase()
+.replace(/[^a-z0-9.\-_]/g,"-")
+.replace(/-+/g,"-");
 
 }
 
 
-const drafts =
-JSON.parse(
-localStorage.getItem(
-"zynoraCreatorDrafts"
-)
-||
-"[]"
-);
+/* ===============================
+   PROGRESS
+================================ */
 
+function setProgress(percent){
 
-drafts.unshift({
+const progress =
+document.getElementById("progress");
 
-id:
-Date.now(),
+const bar =
+document.getElementById("progressBar");
 
-seriesTitle:
-seriesTitle,
+progress.style.display =
+"block";
 
-episodeTitle:
-episodeTitle,
-
-episodeNumber:
-episodeNumber,
-
-description:
-description,
-
-genre:
-genre,
-
-createdAt:
-new Date()
-.toISOString()
-
-});
-
-
-localStorage.setItem(
-"zynoraCreatorDrafts",
-JSON.stringify(
-drafts
-)
-);
-
-
-showStatus(
-"Episode draft saved."
-);
-
-
-loadDrafts();
+bar.style.width =
+percent + "%";
 
 }
 
 
-/* ========================================
-   LOAD DRAFTS
-======================================== */
-
-
-function loadDrafts(){
-
-const list =
-document.getElementById(
-"draftList"
-);
-
-
-const drafts =
-JSON.parse(
-localStorage.getItem(
-"zynoraCreatorDrafts"
-)
-||
-"[]"
-);
-
-
-if(
-drafts.length === 0
-){
-
-list.innerHTML =
-'<div class="empty">No episode drafts yet.</div>';
-
-return;
-
-}
-
-
-list.innerHTML =
-"";
-
-
-drafts.forEach(
-function(draft){
-
-const card =
-document.createElement(
-"div"
-);
-
-
-card.className =
-"draft";
-
-
-const title =
-document.createElement(
-"div"
-);
-
-
-title.className =
-"draft-title";
-
-
-title.textContent =
-draft.seriesTitle +
-" • Episode " +
-draft.episodeNumber;
-
-
-const info =
-document.createElement(
-"div"
-);
-
-
-info.className =
-"draft-info";
-
-
-info.textContent =
-draft.episodeTitle
-||
-draft.genre;
-
-
-card.appendChild(
-title
-);
-
-
-card.appendChild(
-info
-);
-
-
-list.appendChild(
-card
-);
-
-}
-);
-
-}
-
-
-/* ========================================
+/* ===============================
    PUBLISH
-======================================== */
-
+================================ */
 
 async function publishEpisode(){
 
 if(!currentUser){
 
 showStatus(
-"Please log in before publishing."
+"Please log in first."
 );
 
 return;
@@ -1493,20 +938,33 @@ return;
 
 const seriesTitle =
 document
-.getElementById(
-"seriesTitle"
-)
+.getElementById("seriesTitle")
 .value
 .trim();
-
 
 const episodeTitle =
 document
-.getElementById(
-"episodeTitle"
-)
+.getElementById("episodeTitle")
 .value
 .trim();
+
+const episodeNumber =
+Number(
+document
+.getElementById("episodeNumber")
+.value
+);
+
+const description =
+document
+.getElementById("description")
+.value
+.trim();
+
+const genre =
+document
+.getElementById("genre")
+.value;
 
 
 if(!seriesTitle){
@@ -1523,7 +981,7 @@ return;
 if(!episodeTitle){
 
 showStatus(
-"Enter an episode title."
+"Enter the episode title."
 );
 
 return;
@@ -1542,55 +1000,415 @@ return;
 }
 
 
-/*
-IMPORTANT:
+const publishBtn =
+document.getElementById("publishBtn");
 
-The Creator Studio interface is ready.
+publishBtn.disabled =
+true;
 
-The next step is creating the Zynora
-Supabase video storage bucket and
-episodes database table.
+publishBtn.textContent =
+"Publishing...";
 
-Until those are created we DO NOT
-pretend that a video has been published.
-*/
+
+try{
+
+setProgress(10);
+
+showStatus(
+"Uploading episode video..."
+);
+
+
+const timestamp =
+Date.now();
+
+
+const videoPath =
+currentUser.id
++
+"/"
++
+timestamp
++
+"-"
++
+safeName(
+selectedVideo.name
+);
+
+
+const videoUpload =
+await client.storage
+.from("zynora-videos")
+.upload(
+videoPath,
+selectedVideo,
+{
+cacheControl:"3600",
+upsert:false
+}
+);
+
+
+if(videoUpload.error){
+
+throw videoUpload.error;
+
+}
+
+
+setProgress(55);
+
+
+const videoPublic =
+client.storage
+.from("zynora-videos")
+.getPublicUrl(
+videoPath
+);
+
+
+const videoUrl =
+videoPublic.data.publicUrl;
+
+
+let thumbnailUrl =
+null;
+
+
+if(selectedThumbnail){
+
+showStatus(
+"Uploading thumbnail..."
+);
+
+
+const thumbnailPath =
+currentUser.id
++
+"/"
++
+timestamp
++
+"-"
++
+safeName(
+selectedThumbnail.name
+);
+
+
+const thumbnailUpload =
+await client.storage
+.from("zynora-thumbnails")
+.upload(
+thumbnailPath,
+selectedThumbnail,
+{
+cacheControl:"3600",
+upsert:false
+}
+);
+
+
+if(thumbnailUpload.error){
+
+throw thumbnailUpload.error;
+
+}
+
+
+const thumbnailPublic =
+client.storage
+.from("zynora-thumbnails")
+.getPublicUrl(
+thumbnailPath
+);
+
+
+thumbnailUrl =
+thumbnailPublic.data.publicUrl;
+
+}
+
+
+setProgress(80);
 
 
 showStatus(
-"Creator Studio is ready. Video publishing storage must be connected next."
+"Saving episode..."
+);
+
+
+const insertResult =
+await client
+.from("episodes")
+.insert({
+
+creator_id:
+currentUser.id,
+
+series_title:
+seriesTitle,
+
+episode_title:
+episodeTitle,
+
+episode_number:
+episodeNumber || 1,
+
+description:
+description,
+
+genre:
+genre,
+
+video_url:
+videoUrl,
+
+thumbnail_url:
+thumbnailUrl,
+
+is_published:
+true
+
+})
+.select()
+.single();
+
+
+if(insertResult.error){
+
+throw insertResult.error;
+
+}
+
+
+setProgress(100);
+
+
+showStatus(
+"Episode published successfully! 🎬"
+);
+
+
+publishBtn.textContent =
+"Published ✓";
+
+
+await loadEpisodes();
+
+
+setTimeout(
+function(){
+
+publishBtn.disabled =
+false;
+
+publishBtn.textContent =
+"Publish Episode";
+
+setProgress(0);
+
+document
+.getElementById("progress")
+.style.display =
+"none";
+
+},
+1800
+);
+
+
+}
+catch(error){
+
+console.error(error);
+
+showStatus(
+"Publish error: " +
+(
+error.message ||
+"Unable to publish episode."
+)
+);
+
+publishBtn.disabled =
+false;
+
+publishBtn.textContent =
+"Publish Episode";
+
+}
+
+}
+
+
+/* ===============================
+   LOAD PUBLISHED EPISODES
+================================ */
+
+async function loadEpisodes(){
+
+if(!currentUser){
+return;
+}
+
+
+const result =
+await client
+.from("episodes")
+.select(
+"id,series_title,episode_title,episode_number,genre,video_url,created_at"
+)
+.eq(
+"creator_id",
+currentUser.id
+)
+.order(
+"created_at",
+{
+ascending:false
+}
+);
+
+
+const list =
+document.getElementById(
+"episodeList"
+);
+
+
+if(result.error){
+
+list.textContent =
+result.error.message;
+
+return;
+
+}
+
+
+if(
+!result.data ||
+result.data.length === 0
+){
+
+list.innerHTML =
+'<div class="empty">No published episodes yet.</div>';
+
+return;
+
+}
+
+
+list.innerHTML =
+"";
+
+
+result.data.forEach(
+function(episode){
+
+const card =
+document.createElement(
+"div"
+);
+
+card.className =
+"episode-card";
+
+
+const title =
+document.createElement(
+"div"
+);
+
+title.className =
+"episode-title";
+
+title.textContent =
+episode.series_title
++
+" • Episode "
++
+episode.episode_number;
+
+
+const info =
+document.createElement(
+"div"
+);
+
+info.className =
+"episode-info";
+
+info.textContent =
+episode.episode_title
++
+" • "
++
+(
+episode.genre ||
+"Drama"
+);
+
+
+const link =
+document.createElement(
+"a"
+);
+
+link.className =
+"episode-link";
+
+link.href =
+episode.video_url;
+
+link.target =
+"_blank";
+
+link.rel =
+"noopener";
+
+link.textContent =
+"▶ View Uploaded Video";
+
+
+card.appendChild(
+title
+);
+
+card.appendChild(
+info
+);
+
+card.appendChild(
+link
+);
+
+list.appendChild(
+card
+);
+
+}
 );
 
 }
 
 
-/* ========================================
+/* ===============================
    AI STUDIO
-======================================== */
-
+================================ */
 
 function openAIStudio(){
 
 document
-.getElementById(
-"aiStudio"
-)
-.classList.add(
-"show"
-);
+.getElementById("aiStudio")
+.classList.add("show");
 
-
-window.scrollTo({
-top:
 document
-.getElementById(
-"aiStudio"
-)
-.offsetTop
--
-100,
-
-behavior:
-"smooth"
+.getElementById("aiStudio")
+.scrollIntoView({
+behavior:"smooth"
 });
 
 }
@@ -1599,12 +1417,8 @@ behavior:
 function closeAIStudio(){
 
 document
-.getElementById(
-"aiStudio"
-)
-.classList.remove(
-"show"
-);
+.getElementById("aiStudio")
+.classList.remove("show");
 
 }
 
@@ -1613,33 +1427,25 @@ function prepareAIStory(){
 
 const idea =
 document
-.getElementById(
-"aiIdea"
-)
+.getElementById("aiIdea")
 .value
 .trim();
 
-
 const genre =
 document
-.getElementById(
-"aiGenre"
-)
+.getElementById("aiGenre")
 .value;
-
 
 const length =
 document
-.getElementById(
-"aiLength"
-)
+.getElementById("aiLength")
 .value;
 
 
 if(!idea){
 
 showStatus(
-"Describe the drama you want Zynora AI to create."
+"Describe the drama you want to create."
 );
 
 return;
@@ -1652,12 +1458,10 @@ localStorage.setItem(
 idea
 );
 
-
 localStorage.setItem(
 "zynoraAIGenre",
 genre
 );
-
 
 localStorage.setItem(
 "zynoraAILength",
@@ -1666,65 +1470,45 @@ length
 
 
 showStatus(
-"Drama idea saved. The AI generation engine will be connected next."
+"AI drama project saved. Next we will connect the actual AI generation engine."
 );
 
 }
 
 
-/* ========================================
-   NAVIGATION HELPERS
-======================================== */
-
+/* ===============================
+   NAVIGATION
+================================ */
 
 function showUpload(){
 
-window.scrollTo({
-top:
 document
-.getElementById(
-"uploadSection"
-)
-.offsetTop
--
-90,
-
-behavior:
-"smooth"
+.getElementById("uploadSection")
+.scrollIntoView({
+behavior:"smooth"
 });
 
 }
 
 
-function scrollToDrafts(){
+function scrollToEpisodes(){
 
-window.scrollTo({
-top:
 document
-.getElementById(
-"draftSection"
-)
-.offsetTop
--
-90,
-
-behavior:
-"smooth"
+.getElementById("episodeSection")
+.scrollIntoView({
+behavior:"smooth"
 });
 
 }
 
 
-/* ========================================
+/* ===============================
    START
-======================================== */
-
+================================ */
 
 startCreator();
 
-
 </script>
-
 
 </body>
 
