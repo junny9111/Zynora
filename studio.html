@@ -1,439 +1,338 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Zynora AI Studio</title>
 
-<link
-href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Playfair+Display:wght@500;600&display=swap"
-rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
 
 <style>
-
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
-body{
-  min-height:100vh;
-  background:
-    radial-gradient(circle at 50% 0%,rgba(145,55,255,.22),transparent 32%),
-    #08070c;
-  color:#fff;
-  font-family:"Playfair Display",Georgia,serif;
-  padding-bottom:60px;
-}
-
-header{
-  height:82px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 20px;
-  background:#111016;
-  border-bottom:1px solid #382345;
-}
-
-.logo{
-  font-family:"Cinzel",serif;
-  font-size:25px;
-  font-weight:700;
-  background:linear-gradient(90deg,#fff,#d19aff,#8e38ff);
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent;
-}
-
-header a{
-  color:#bd75ff;
-  text-decoration:none;
-  font-size:12px;
-}
-
-main{
-  max-width:650px;
-  margin:auto;
-  padding:25px 18px;
-}
-
-h1{
-  font-family:"Cinzel",serif;
-  font-size:27px;
-  margin-bottom:7px;
-}
-
-.sub{
-  color:#9993a1;
-  margin-bottom:22px;
-  line-height:1.5;
-}
-
-.box{
-  background:#15141b;
-  border:1px solid #2c2732;
-  border-radius:22px;
-  padding:20px;
-  margin-bottom:20px;
-}
-
-.hero{
-  background:linear-gradient(135deg,#491270,#201027);
-  border-color:#6c3295;
-}
-
-.hero p{
-  color:#c9bdd0;
-  line-height:1.6;
-  font-size:14px;
-}
-
-h2{
-  font-family:"Cinzel",serif;
-  font-size:17px;
-  margin-bottom:10px;
-}
-
-label{
-  display:block;
-  font-family:"Cinzel",serif;
-  font-size:11px;
-  color:#b9a7c4;
-  margin:16px 0 7px;
-}
-
-textarea,
-select{
-  width:100%;
-  padding:14px;
-  background:#0c0b10;
-  border:1px solid #3c3442;
-  border-radius:14px;
-  color:white;
-  font-family:"Playfair Display",serif;
-  font-size:15px;
-  outline:none;
-}
-
-textarea{
-  min-height:180px;
-  resize:vertical;
-}
-
-textarea:focus,
-select:focus{
-  border-color:#a84fff;
-}
-
-button{
-  width:100%;
-  border:0;
-  border-radius:15px;
-  padding:15px;
-  margin-top:16px;
-  background:linear-gradient(135deg,#ad50ff,#741be8);
-  color:white;
-  font-family:"Cinzel",serif;
-  font-weight:700;
-  cursor:pointer;
-}
-
-button:disabled{
-  opacity:.5;
-  cursor:not-allowed;
-}
-
-#status{
-  display:none;
-  background:#17131e;
-  border:1px solid #50256e;
-  padding:13px;
-  border-radius:14px;
-  margin-bottom:18px;
-  text-align:center;
-  color:#cec2d5;
-  line-height:1.5;
-}
-
-#plan,
-#production{
-  display:none;
-}
-
-.planBlock{
-  background:#0f0e13;
-  padding:15px;
-  border-radius:15px;
-  margin-top:12px;
-  line-height:1.55;
-}
-
-.purple{
-  color:#b86cff;
-  font-family:"Cinzel",serif;
-  font-size:11px;
-  margin-bottom:7px;
-}
-
-.scene{
-  background:#111016;
-  border:1px solid #302a35;
-  border-radius:18px;
-  padding:17px;
-  margin-top:15px;
-}
-
-.scene h3{
-  font-family:"Cinzel",serif;
-  font-size:14px;
-  margin:7px 0;
-}
-
-.scene p{
-  color:#aaa3b0;
-  font-size:13px;
-  line-height:1.5;
-}
-
-.prompt{
-  margin-top:10px;
-  background:#09080c;
-  padding:12px;
-  border-radius:12px;
-  font-size:12px;
-  color:#cbbfd2;
-  line-height:1.5;
-}
-
-.renderStatus{
-  margin-top:10px;
-  font-size:12px;
-  color:#c5b9cd;
-  line-height:1.5;
-}
-
-video{
-  width:100%;
-  margin-top:13px;
-  border-radius:14px;
-  background:#000;
-  display:none;
-}
-
-.videoLink{
-  display:none;
-  color:#bd75ff;
-  text-decoration:none;
-  text-align:center;
-  margin-top:10px;
-  font-size:12px;
-}
-
-.note{
-  color:#827988;
-  font-size:12px;
-  line-height:1.5;
-  margin-top:12px;
-}
-
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#08070c;color:#fff;font-family:"Playfair Display",serif;padding-bottom:50px}
+header{height:82px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;background:#111016;border-bottom:1px solid #382345}
+.logo{font-family:"Cinzel",serif;font-size:24px;background:linear-gradient(90deg,#fff,#d19aff,#8e38ff);-webkit-background-clip:text;color:transparent}
+header a{color:#bd75ff;text-decoration:none;font-size:12px}
+main{max-width:650px;margin:auto;padding:24px 18px}
+h1,h2{font-family:"Cinzel",serif}
+h1{font-size:27px;margin-bottom:7px}
+h2{font-size:17px;margin-bottom:12px}
+.sub{color:#9993a1;margin-bottom:20px}
+.box{background:#15141b;border:1px solid #2c2732;border-radius:20px;padding:18px;margin-bottom:18px}
+.hero{background:linear-gradient(135deg,#491270,#201027);border-color:#6c3295}
+label{display:block;font-family:"Cinzel",serif;font-size:11px;color:#b9a7c4;margin:15px 0 7px}
+textarea,select{width:100%;padding:13px;background:#0c0b10;border:1px solid #3c3442;border-radius:13px;color:#fff;font-family:"Playfair Display",serif;font-size:15px}
+textarea{min-height:160px}
+button{width:100%;border:0;border-radius:14px;padding:14px;margin-top:15px;background:linear-gradient(135deg,#ad50ff,#741be8);color:#fff;font-family:"Cinzel",serif;font-weight:700}
+button:disabled{opacity:.5}
+#status{display:none;background:#17131e;border:1px solid #50256e;padding:12px;border-radius:13px;margin-bottom:16px;text-align:center;color:#cec2d5}
+#plan,#production{display:none}
+.planBlock{background:#0f0e13;padding:14px;border-radius:14px;margin-top:10px;line-height:1.55}
+.purple{color:#b86cff;font-family:"Cinzel",serif;font-size:11px;margin-bottom:7px}
+.scene{background:#111016;border:1px solid #302a35;border-radius:17px;padding:16px;margin-top:14px}
+.scene h3{font-family:"Cinzel",serif;font-size:14px;margin:7px 0}
+.scene p{color:#aaa3b0;font-size:13px;line-height:1.5}
+.prompt{margin-top:10px;background:#09080c;padding:11px;border-radius:11px;font-size:12px;color:#cbbfd2;line-height:1.5}
+.renderStatus{margin-top:9px;font-size:12px;color:#c5b9cd}
+video{width:100%;margin-top:12px;border-radius:13px;background:#000;display:none}
 </style>
-
 </head>
 
 <body>
 
 <header>
-
-<div class="logo">
-Zynora AI Studio
-</div>
-
-<a href="creator.html">
-← Creator
-</a>
-
+<div class="logo">Zynora AI Studio</div>
+<a href="creator.html">← Creator</a>
 </header>
 
 <main>
 
-<h1>
-Create AI Drama
-</h1>
-
-<div class="sub">
-Turn your story idea into scenes and then into real AI-generated video.
-</div>
+<h1>Create AI Drama</h1>
+<div class="sub">Story → scenes → real AI video.</div>
 
 <div id="status"></div>
 
-
 <div class="box hero">
-
-<h2>
-Story → Scenes → Video
-</h2>
-
-<p>
-Create the drama plan first. Zynora will then prepare cinematic scenes that can be sent securely through your Supabase Edge Function to the AI video generator.
-</p>
-
+<h2>From Story to Video</h2>
+<p>Build Episode 1, then generate each scene through your secure Zynora video function.</p>
 </div>
 
-
 <div class="box">
+<h2>Drama Project</h2>
 
-<h2>
-Drama Project
-</h2>
+<label>Drama Idea</label>
+<textarea id="idea">A poor young woman named Aria discovers she is the missing heir to a hidden kingdom. Her parents were murdered, the throne was stolen, and she must return secretly to the palace. She falls in love with Commander Kael, the same man ordered to hunt down the missing princess.</textarea>
 
-<label>
-Drama Idea
-</label>
-
-<textarea id="idea">A poor young woman named Aria has spent her entire life believing she is an ordinary orphan. On her twenty-first birthday, a mysterious stranger saves her from an attack and reveals that she is actually the missing heir to a powerful hidden kingdom. Her parents were betrayed and murdered, the throne was stolen, and Aria must secretly return to the palace to discover the truth and reclaim her kingdom. She falls in love with Commander Kael, the same man ordered to hunt down the missing princess.</textarea>
-
-
-<label>
-Genre
-</label>
-
+<label>Genre</label>
 <select id="genre">
-
 <option>Fantasy</option>
 <option>Romance</option>
 <option>Drama</option>
 <option>Thriller</option>
 <option>Crime</option>
 <option>Action</option>
-
 </select>
 
-
-<label>
-Episode Length
-</label>
-
+<label>Episode Length</label>
 <select id="length">
-
-<option value="5">
-5 Minutes
-</option>
-
-<option value="10" selected>
-10 Minutes
-</option>
-
-<option value="20">
-20 Minutes
-</option>
-
-<option value="30">
-30 Minutes
-</option>
-
+<option value="5">5 Minutes</option>
+<option value="10" selected>10 Minutes</option>
+<option value="20">20 Minutes</option>
 </select>
 
-
-<label>
-Number of Episodes
-</label>
-
+<label>Episodes</label>
 <select id="episodes">
-
-<option value="10">
-10 Episodes
-</option>
-
-<option value="20" selected>
-20 Episodes
-</option>
-
-<option value="30">
-30 Episodes
-</option>
-
+<option value="10">10 Episodes</option>
+<option value="20" selected>20 Episodes</option>
+<option value="30">30 Episodes</option>
 </select>
 
-
-<label>
-Visual Style
-</label>
-
-<select id="style">
-
-<option>
-Epic Fantasy Cinematic
-</option>
-
-<option>
-Cinematic Modern Drama
-</option>
-
-<option>
-Luxury Romance
-</option>
-
-<option>
-Dark Thriller
-</option>
-
-</select>
-
-
-<button type="button" onclick="generatePlan()">
-GENERATE DRAMA PLAN
-</button>
-
+<button onclick="generatePlan()">GENERATE DRAMA PLAN</button>
 </div>
-
 
 <div id="plan" class="box">
-
-<h2>
-Drama Plan
-</h2>
+<h2>Drama Plan</h2>
 
 <div class="planBlock">
-
-<div class="purple">
-TITLE
-</div>
-
+<div class="purple">TITLE</div>
 <div id="title"></div>
-
 </div>
-
 
 <div class="planBlock">
-
-<div class="purple">
-STORY SUMMARY
-</div>
-
+<div class="purple">SUMMARY</div>
 <div id="summary"></div>
-
 </div>
-
 
 <div class="planBlock">
-
-<div class="purple">
-CHARACTERS
-</div>
-
+<div class="purple">CHARACTERS</div>
 <div id="characters"></div>
-
 </div>
 
-
-<div class="planBlock">
-
-<div class="purple">
-SERIES FORMAT
+<button onclick="buildScenes()">BUILD EPISODE 1 SCENES</button>
 </div>
 
-<div id="seriesFormat
+<div id="production" class="box">
+<h2>Episode 1 Production</h2>
+<div id="scenes"></div>
+</div>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+const SUPABASE_URL="https://ozshekxpuvganemaajms.supabase.co";
+const SUPABASE_KEY="sb_publishable__GsW9RahFD_XDWJTFzh9eQ_dNBZfa32";
+const FUNCTION_URL=SUPABASE_URL+"/functions/v1/zynora-video";
+
+const client=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+
+let currentUser=null;
+const scenes=[];
+
+async function start(){
+  const r=await client.auth.getUser();
+  currentUser=r.data.user||null;
+  if(!currentUser) show("Please log in before generating real videos.");
+}
+start();
+
+function show(text){
+  const box=document.getElementById("status");
+  box.textContent=text;
+  box.style.display="block";
+}
+
+function generatePlan(){
+  const idea=document.getElementById("idea").value.trim();
+  if(!idea){show("Enter your drama idea.");return;}
+
+  document.getElementById("title").textContent="The Kingdom Beyond Midnight";
+
+  document.getElementById("summary").textContent=
+    idea+" Aria must uncover the conspiracy behind her parents' deaths while deciding whether Commander Kael is her enemy or strongest ally.";
+
+  document.getElementById("characters").innerHTML=
+    "<strong>Aria</strong> — 21-year-old hidden princess, long dark wavy hair, brown eyes.<br><br>"+
+    "<strong>Kael</strong> — royal commander, early thirties, dark hair, black royal armor.<br><br>"+
+    "<strong>Victor</strong> — powerful enemy connected to the stolen throne.";
+
+  document.getElementById("plan").style.display="block";
+  document.getElementById("plan").scrollIntoView({behavior:"smooth"});
+  show("Drama plan created.");
+}
+
+function buildScenes(){
+  scenes.length=0;
+
+  scenes.push(
+    {
+      title:"Aria's Village",
+      text:"Aria walks through her village at dusk and senses someone watching her.",
+      prompt:"Epic cinematic fantasy television drama. Aria is a beautiful 21-year-old woman with long dark wavy hair and brown eyes, wearing simple medieval village clothing. She walks through a misty stone village at dusk with warm lantern light. She suddenly senses someone watching her and turns. Realistic human actor, premium streaming-series cinematography, cinematic lighting, natural camera movement."
+    },
+    {
+      title:"The Attack",
+      text:"A masked attacker follows Aria into a narrow alley.",
+      prompt:"Premium cinematic fantasy drama. Same Aria, same hair, eyes and clothing. Night in a narrow lantern-lit stone alley. A masked attacker appears behind her. Aria realizes she is in danger and runs. Realistic acting, tense atmosphere, dramatic lighting."
+    },
+    {
+      title:"Kael Arrives",
+      text:"Commander Kael saves Aria.",
+      prompt:"Epic cinematic fantasy drama. Commander Kael is a tall athletic man in his early thirties with dark hair, strong features, black royal armor and a dark cloak. He protects the same Aria from the attacker. Realistic actors, controlled sword action, premium television cinematography."
+    },
+    {
+      title:"The Royal Mark",
+      text:"Kael notices the ancient royal symbol on Aria's necklace.",
+      prompt:"Intimate cinematic fantasy drama. Same Aria and Kael under warm lantern light. Kael examines an ancient royal symbol on Aria's necklace and becomes disturbed. Aria looks confused and frightened. Realistic actors, subtle expressions, slow cinematic camera movement."
+    },
+    {
+      title:"The Revelation",
+      text:"Kael realizes Aria may be the missing princess.",
+      prompt:"Fantasy television drama cliffhanger. Same Kael stands alone in a dark royal chamber holding Aria's necklace. He recognizes the forgotten royal crest and realizes she may be the missing princess. Moonlight through palace windows. Realistic actor, dramatic slow camera push."
+    }
+  );
+
+  renderScenes();
+  document.getElementById("production").style.display="block";
+  document.getElementById("production").scrollIntoView({behavior:"smooth"});
+  show("Scenes ready. Generate Scene 1 first.");
+}
+
+function renderScenes(){
+  const area=document.getElementById("scenes");
+  area.innerHTML="";
+
+  scenes.forEach((scene,index)=>{
+    const div=document.createElement("div");
+    div.className="scene";
+
+    div.innerHTML=`
+      <div class="purple">SCENE ${index+1}</div>
+      <h3>${scene.title}</h3>
+      <p>${scene.text}</p>
+      <div class="prompt"><strong>VIDEO PROMPT</strong><br><br>${scene.prompt}</div>
+      <button id="btn${index}" onclick="generateVideo(${index})">✨ GENERATE REAL VIDEO</button>
+      <div id="status${index}" class="renderStatus"></div>
+      <video id="video${index}" controls playsinline></video>
+    `;
+
+    area.appendChild(div);
+  });
+}
+
+async function generateVideo(index){
+  if(!currentUser){show("Please log in first.");return;}
+
+  const button=document.getElementById("btn"+index);
+  const message=document.getElementById("status"+index);
+
+  button.disabled=true;
+  button.textContent="STARTING...";
+  message.textContent="Sending scene to Zynora AI...";
+
+  try{
+    const s=await client.auth.getSession();
+    const session=s.data.session;
+    if(!session) throw new Error("Login session expired.");
+
+    const response=await fetch(FUNCTION_URL,{
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json",
+        "apikey":SUPABASE_KEY,
+        "Authorization":"Bearer "+session.access_token
+      },
+      body:JSON.stringify({
+        action:"generate",
+        prompt:scenes[index].prompt,
+        model:"gen4.5",
+        ratio:"720:1280",
+        duration:5
+      })
+    });
+
+    const data=await response.json();
+
+    if(!response.ok){
+      throw new Error(data.error||data.message||"Video generation failed.");
+    }
+
+    if(!data.taskId){
+      throw new Error("No task ID returned.");
+    }
+
+    button.textContent="GENERATING...";
+    message.textContent="AI video started...";
+
+    await checkVideo(index,data.taskId);
+
+  }catch(error){
+    message.textContent="Error: "+error.message;
+    button.disabled=false;
+    button.textContent="TRY AGAIN";
+  }
+}
+
+async function checkVideo(index,taskId){
+  const message=document.getElementById("status"+index);
+  const button=document.getElementById("btn"+index);
+
+  for(let i=1;i<=120;i++){
+    await new Promise(r=>setTimeout(r,5000));
+
+    const s=await client.auth.getSession();
+    const session=s.data.session;
+    if(!session) throw new Error("Login session expired.");
+
+    const response=await fetch(FUNCTION_URL,{
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json",
+        "apikey":SUPABASE_KEY,
+        "Authorization":"Bearer "+session.access_token
+      },
+      body:JSON.stringify({
+        action:"status",
+        taskId:taskId
+      })
+    });
+
+    const data=await response.json();
+
+    if(!response.ok){
+      throw new Error(data.error||"Unable to check video.");
+    }
+
+    const state=String(data.status||"").toUpperCase();
+    message.textContent="AI generation: "+state;
+
+    if(state==="SUCCEEDED"){
+      const url=data.output&&data.output[0];
+      if(!url) throw new Error("No video URL returned.");
+
+      const video=document.getElementById("video"+index);
+      video.src=url;
+      video.style.display="block";
+
+      message.textContent="Scene complete! 🎬";
+      button.disabled=false;
+      button.textContent="GENERATE AGAIN";
+      return;
+    }
+
+    if(state==="FAILED"){
+      throw new Error(data.failure||"AI generation failed.");
+    }
+
+    if(state==="CANCELED"){
+      throw new Error("Generation canceled.");
+    }
+  }
+
+  throw new Error("Generation took too long.");
+}
+</script>
+
+</body>
+</html>
