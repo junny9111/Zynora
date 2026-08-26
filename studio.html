@@ -235,24 +235,33 @@ display:none;
 <main>
 
 <h1>Create AI Drama</h1>
-<div class="sub">Story → cast → scenes → real AI video.</div>
+
+<div class="sub">
+Story → cast → scenes → real AI video.
+</div>
 
 <div id="status"></div>
 
 <div class="box hero">
+
 <h2>From Story to Video</h2>
+
 <p>
-Build the drama first, then Zynora prepares recurring characters and scene prompts for real AI video generation.
+Build your drama, create the cast and scenes, then generate real AI video.
 </p>
+
 </div>
 
 <div class="box">
+
 <h2>Drama Project</h2>
 
 <label>Drama Idea</label>
+
 <textarea id="idea">A poor young woman named Aria discovers she is the missing heir to a hidden kingdom. Her parents were murdered, the throne was stolen, and she must return secretly to the palace. She falls in love with Commander Kael, the same man ordered to hunt down the missing princess.</textarea>
 
 <label>Genre</label>
+
 <select id="genre">
 <option>Fantasy</option>
 <option>Romance</option>
@@ -263,6 +272,7 @@ Build the drama first, then Zynora prepares recurring characters and scene promp
 </select>
 
 <label>Episode Length</label>
+
 <select id="length">
 <option value="5">5 Minutes</option>
 <option value="10" selected>10 Minutes</option>
@@ -270,17 +280,23 @@ Build the drama first, then Zynora prepares recurring characters and scene promp
 </select>
 
 <label>Episodes</label>
+
 <select id="episodes">
 <option value="10">10 Episodes</option>
 <option value="20" selected>20 Episodes</option>
 <option value="30">30 Episodes</option>
 </select>
 
-<button onclick="generatePlan()">GENERATE DRAMA PLAN</button>
+<button onclick="generatePlan()">
+GENERATE DRAMA
+</button>
+
 </div>
 
+
 <div id="plan" class="box">
-<h2>Drama Plan</h2>
+
+<h2>Your Drama</h2>
 
 <div class="planBlock">
 <div class="purple">TITLE</div>
@@ -288,346 +304,768 @@ Build the drama first, then Zynora prepares recurring characters and scene promp
 </div>
 
 <div class="planBlock">
-<div class="purple">SUMMARY</div>
+<div class="purple">STORY</div>
 <div id="summary"></div>
 </div>
 
 <div class="planBlock">
-<div class="purple">CAST & CHARACTER BIBLE</div>
-<div id="characters" class="cast-grid"></div>
+
+<div class="purple">
+14 CHARACTER CAST
 </div>
 
-<button onclick="buildScenes()">BUILD EPISODE 1 SCENES</button>
+<div id="characters" class="cast-grid"></div>
+
 </div>
+
+<button onclick="buildScenes()">
+BUILD EPISODE 1
+</button>
+
+</div>
+
 
 <div id="production" class="box">
+
 <h2>Episode 1 Production</h2>
+
 <div id="scenes"></div>
+
 </div>
 
 </main>
 
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
-const SUPABASE_URL="https://ozshekxpuvganemaajms.supabase.co";
-const SUPABASE_KEY="sb_publishable__GsW9RahFD_XDWJTFzh9eQ_dNBZfa32";
-const FUNCTION_URL=SUPABASE_URL+"/functions/v1/zynora-video";
 
-const client=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+const SUPABASE_URL =
+"https://ozshekxpuvganemaajms.supabase.co";
 
-let currentUser=null;
-const scenes=[];
+const SUPABASE_KEY =
+"sb_publishable__GsW9RahFD_XDWJTFzh9eQ_dNBZfa32";
 
-const cast=[
+const FUNCTION_URL =
+SUPABASE_URL +
+"/functions/v1/zynora-video";
+
+const client =
+supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+);
+
+let currentUser = null;
+
+const scenes = [];
+
+
+/* 14 CHARACTERS */
+
+const cast = [
+
 {
 name:"Aria Vale",
-profile:"21-year-old hidden princess. Long dark wavy hair, expressive brown eyes, elegant features. Brave, intelligent, compassionate and emotionally guarded."
+profile:"21-year-old hidden princess. Long dark wavy hair, expressive brown eyes, elegant features. Brave, intelligent and compassionate."
 },
+
 {
 name:"Commander Kael Varyn",
-profile:"31-year-old royal commander. Tall athletic build, dark hair, strong facial features, black royal armor and dark cloak. Disciplined, loyal and conflicted."
+profile:"31-year-old royal commander. Tall athletic build, dark hair, strong features, black royal armor and dark cloak."
 },
+
 {
 name:"King Victor Vale",
-profile:"52-year-old ruler and Aria's uncle. Silver-streaked dark hair, sharp features, regal black-and-gold clothing. Charismatic, ruthless and politically dangerous."
+profile:"52-year-old ruler and Aria's uncle. Silver-streaked dark hair, sharp features and regal black-and-gold clothing."
 },
+
 {
 name:"Queen Selene Vale",
-profile:"46-year-old queen. Long black hair, pale complexion, elegant dark gowns and jeweled crowns. Intelligent, calm and secretly manipulative."
+profile:"46-year-old queen. Long black hair, elegant dark gowns and jeweled crowns. Intelligent and secretly manipulative."
 },
+
 {
 name:"Prince Lucian Vale",
-profile:"25-year-old royal heir. Dark blond hair, refined features and richly decorated royal clothing. Proud, ambitious and increasingly suspicious."
+profile:"25-year-old royal heir. Dark blond hair, refined features and richly decorated royal clothing."
 },
+
 {
 name:"Mira Elwyn",
-profile:"22-year-old palace servant and Aria's closest friend. Curly chestnut hair, warm brown skin and simple palace clothing. Loyal, witty and courageous."
+profile:"22-year-old palace servant and Aria's closest friend. Curly chestnut hair, warm brown skin and simple palace clothing."
 },
+
 {
 name:"Darius Kane",
-profile:"58-year-old former royal guard. Grey beard, weathered face, broad build and worn leather armor. Protective, honorable and knows the truth about Aria's parents."
+profile:"58-year-old former royal guard. Grey beard, weathered face and worn leather armor. He knows the truth about Aria's parents."
 },
+
 {
 name:"Lady Elara Moon",
-profile:"39-year-old mysterious noblewoman. Long silver-blond hair, elegant blue gowns and an unreadable expression. Sophisticated, secretive and powerful."
+profile:"39-year-old mysterious noblewoman. Long silver-blond hair and elegant blue gowns."
 },
+
 {
 name:"Rowan Thane",
-profile:"29-year-old elite soldier and Kael's closest friend. Short brown hair, athletic build and dark royal uniform. Loyal, humorous and fiercely protective."
+profile:"29-year-old elite soldier and Kael's closest friend. Short brown hair, athletic build and dark royal uniform."
 },
+
 {
 name:"Seraphine Dray",
-profile:"34-year-old royal sorceress. Long white hair, pale violet eyes and dark embroidered robes. Calm, mysterious and capable of dangerous magic."
+profile:"34-year-old royal sorceress. Long white hair, pale violet eyes and dark embroidered robes."
 },
+
 {
 name:"Lord Cassian Roake",
-profile:"41-year-old powerful nobleman. Black hair, trimmed beard, dark red formal clothing and commanding presence. Ambitious, intelligent and difficult to trust."
+profile:"41-year-old powerful nobleman. Black hair, trimmed beard and dark red royal clothing."
 },
+
 {
 name:"Nyla Voss",
-profile:"27-year-old palace spy. Straight black shoulder-length hair, sharp eyes and understated dark clothing. Observant, calculating and skilled at gathering secrets."
+profile:"27-year-old palace spy. Shoulder-length black hair, sharp eyes and understated dark clothing."
 },
+
 {
 name:"General Thorne Blackwell",
-profile:"49-year-old military leader loyal to Victor. Large build, shaved head, facial scar and heavy black armor. Brutal, disciplined and feared."
+profile:"49-year-old military leader loyal to Victor. Large build, shaved head, facial scar and heavy black armor."
 },
+
 {
 name:"Elias Crowe",
-profile:"33-year-old mysterious outsider. Dark curly hair, green eyes, rugged travel clothing and quiet intensity. Knows what happened the night Aria's parents died."
+profile:"33-year-old mysterious outsider. Dark curly hair, green eyes and rugged clothing. He knows what happened the night Aria's parents died."
 }
+
 ];
 
+
+/* LOGIN */
+
 async function start(){
-const r=await client.auth.getUser();
-currentUser=r.data.user||null;
-if(!currentUser) show("Please log in before generating real videos.");
+
+const result =
+await client.auth.getUser();
+
+currentUser =
+result.data.user || null;
+
+if(!currentUser){
+
+show(
+"Please log in before generating real videos."
+);
+
 }
+
+}
+
 start();
 
+
+/* STATUS */
+
 function show(text){
-const box=document.getElementById("status");
-box.textContent=text;
-box.style.display="block";
+
+const box =
+document.getElementById("status");
+
+box.textContent =
+text;
+
+box.style.display =
+"block";
+
 }
+
+
+/* GENERATE DRAMA */
 
 function generatePlan(){
-const idea=document.getElementById("idea").value.trim();
+
+const idea =
+document
+.getElementById("idea")
+.value
+.trim();
 
 if(!idea){
-show("Enter your drama idea.");
+
+show(
+"Enter your drama idea."
+);
+
 return;
+
 }
 
-document.getElementById("title").textContent=
+document
+.getElementById("title")
+.textContent =
 "The Kingdom Beyond Midnight";
 
-document.getElementById("summary").textContent=
-idea+
-" Aria must survive the royal court, uncover the conspiracy behind her parents' deaths, discover who among the fourteen central characters can be trusted, and decide whether Commander Kael is her enemy or strongest ally.";
+document
+.getElementById("summary")
+.textContent =
+idea +
+" Aria must enter the royal court, uncover the conspiracy behind her parents' deaths, discover who among the people surrounding the throne can be trusted, and decide whether Commander Kael is her enemy or her greatest ally.";
 
 renderCast();
 
-document.getElementById("plan").style.display="block";
-document.getElementById("plan").scrollIntoView({behavior:"smooth"});
+document
+.getElementById("plan")
+.style.display =
+"block";
 
-show("Drama plan and 14-character cast created.");
+document
+.getElementById("plan")
+.scrollIntoView({
+behavior:"smooth"
+});
+
+show(
+"Your drama and 14-character cast are ready."
+);
+
 }
 
+
+/* SHOW CAST */
+
 function renderCast(){
-const area=document.getElementById("characters");
-area.innerHTML="";
 
-cast.forEach((person,index)=>{
-const card=document.createElement("div");
-card.className="cast-card";
+const area =
+document.getElementById("characters");
 
-card.innerHTML=`
-<div class="cast-name">${index+1}. ${person.name}</div>
-<div class="cast-role">${person.profile}</div>
+area.innerHTML =
+"";
+
+cast.forEach(
+function(person,index){
+
+const card =
+document.createElement("div");
+
+card.className =
+"cast-card";
+
+card.innerHTML =
+`
+<div class="cast-name">
+${index + 1}. ${person.name}
+</div>
+
+<div class="cast-role">
+${person.profile}
+</div>
 `;
 
 area.appendChild(card);
+
 });
+
 }
+
+
+/* BUILD EPISODE */
 
 function buildScenes(){
-scenes.length=0;
 
-const aria="Aria Vale, 21 years old, long dark wavy hair, expressive brown eyes, elegant features";
-const kael="Commander Kael Varyn, 31 years old, tall athletic build, dark hair, strong facial features, black royal armor and dark cloak";
+scenes.length =
+0;
+
+const aria =
+"Aria Vale, 21 years old, long dark wavy hair, expressive brown eyes and elegant features";
+
+const kael =
+"Commander Kael Varyn, 31 years old, tall athletic build, dark hair, strong facial features, black royal armor and dark cloak";
+
 
 scenes.push(
+
 {
 title:"Aria's Village",
-text:"Aria walks through her village at dusk and senses someone watching her.",
-prompt:`Epic cinematic fantasy television drama. ${aria}. She wears simple medieval village clothing and walks through a misty stone village at dusk. Warm lanterns glow around her. She suddenly senses someone watching her and turns. Realistic human actor, premium streaming-series cinematography, cinematic lighting, natural camera movement.`
+
+text:
+"Aria walks through her village at dusk and senses someone watching her.",
+
+prompt:
+`Epic cinematic fantasy television drama. ${aria}. She wears simple medieval village clothing and walks through a misty stone village at dusk. Warm lanterns glow around her. She senses someone watching her and turns. Realistic human actor, premium streaming-series cinematography, cinematic lighting and natural camera movement.`
 },
+
+
 {
 title:"The Attack",
-text:"A masked attacker follows Aria into a narrow alley.",
-prompt:`Premium cinematic fantasy drama. Same ${aria}. Same facial features, same hair, same clothing continuity. Night in a narrow lantern-lit stone alley. A masked attacker appears behind her. Aria realizes she is in danger and runs. Realistic acting, tense atmosphere, dramatic lighting.`
+
+text:
+"A masked attacker follows Aria into a narrow alley.",
+
+prompt:
+`Premium cinematic fantasy drama. Same ${aria}. Maintain the same face, hair and clothing. A masked attacker appears behind her in a narrow lantern-lit stone alley. Aria realizes she is in danger and runs. Realistic acting and dramatic cinematic lighting.`
 },
+
+
 {
 title:"Kael Arrives",
-text:"Commander Kael saves Aria.",
-prompt:`Epic cinematic fantasy drama. ${kael}. He protects the same ${aria} from the attacker. Keep both characters visually consistent with previous scenes. Controlled sword action, realistic performances, premium television cinematography.`
+
+text:
+"Commander Kael arrives and protects Aria.",
+
+prompt:
+`Epic cinematic fantasy drama. ${kael}. He protects the same ${aria} from a masked attacker. Maintain exact character appearance continuity. Controlled sword action, realistic human actors and premium television cinematography.`
 },
+
+
 {
 title:"The Royal Mark",
-text:"Kael notices the ancient royal symbol on Aria's necklace.",
-prompt:`Intimate cinematic fantasy drama. Same ${aria} and same ${kael}. Warm lantern light. Kael examines an ancient royal symbol on Aria's necklace and becomes disturbed. Aria looks confused and frightened. Maintain exact character appearance continuity. Realistic actors, subtle expressions, slow cinematic camera movement.`
+
+text:
+"Kael discovers the ancient royal symbol on Aria's necklace.",
+
+prompt:
+`Intimate cinematic fantasy drama. Same ${aria} and same ${kael}. Kael examines an ancient royal symbol on Aria's necklace beneath warm lantern light. He becomes disturbed while Aria looks confused. Maintain exact character appearance continuity. Realistic acting and slow cinematic camera movement.`
 },
+
+
 {
 title:"The Revelation",
-text:"Kael realizes Aria may be the missing princess.",
-prompt:`Fantasy television drama cliffhanger. Same ${kael} stands alone in a dark royal chamber holding Aria's necklace. He recognizes the forgotten royal crest and realizes ${aria} may be the missing princess. Moonlight enters through palace windows. Maintain Kael's exact appearance from earlier scenes. Realistic actor, dramatic slow camera push.`
+
+text:
+"Kael realizes Aria may be the missing princess.",
+
+prompt:
+`Fantasy television drama cliffhanger. Same ${kael} stands inside a dark royal chamber holding Aria's necklace. He recognizes the forgotten royal crest and realizes ${aria} may be the missing princess. Moonlight enters through palace windows. Maintain Kael's exact appearance. Dramatic slow cinematic camera push.`
 }
+
 );
 
 renderScenes();
 
-document.getElementById("production").style.display="block";
-document.getElementById("production").scrollIntoView({behavior:"smooth"});
+document
+.getElementById("production")
+.style.display =
+"block";
 
-show("Episode 1 scenes ready. Generate Scene 1 first.");
+document
+.getElementById("production")
+.scrollIntoView({
+behavior:"smooth"
+});
+
+show(
+"Episode 1 is ready for video generation."
+);
+
 }
 
+
+/* DISPLAY SCENES */
+
 function renderScenes(){
-const area=document.getElementById("scenes");
-area.innerHTML="";
 
-scenes.forEach((scene,index)=>{
-const div=document.createElement("div");
-div.className="scene";
+const area =
+document.getElementById("scenes");
 
-div.innerHTML=`
-<div class="purple">SCENE ${index+1}</div>
-<h3>${scene.title}</h3>
-<p>${scene.text}</p>
+area.innerHTML =
+"";
 
-<div class="prompt">
-<strong>VIDEO PROMPT</strong><br><br>
-${scene.prompt}
+scenes.forEach(
+function(scene,index){
+
+const div =
+document.createElement("div");
+
+div.className =
+"scene";
+
+div.innerHTML =
+`
+<div class="purple">
+SCENE ${index + 1}
 </div>
 
-<button id="btn${index}" onclick="generateVideo(${index})">
+<h3>
+${scene.title}
+</h3>
+
+<p>
+${scene.text}
+</p>
+
+<div class="prompt">
+
+<strong>
+AI VIDEO PROMPT
+</strong>
+
+<br><br>
+
+${scene.prompt}
+
+</div>
+
+<button
+id="btn${index}"
+onclick="generateVideo(${index})">
+
 ✨ GENERATE REAL VIDEO
+
 </button>
 
-<div id="status${index}" class="renderStatus"></div>
+<div
+id="status${index}"
+class="renderStatus">
+</div>
 
-<video id="video${index}" controls playsinline></video>
+<video
+id="video${index}"
+controls
+playsinline>
+</video>
 `;
 
 area.appendChild(div);
+
 });
+
 }
+
+
+/* REAL VIDEO */
 
 async function generateVideo(index){
+
 if(!currentUser){
-show("Please log in first.");
+
+show(
+"Please log in first."
+);
+
 return;
+
 }
 
-const button=document.getElementById("btn"+index);
-const message=document.getElementById("status"+index);
+const button =
+document.getElementById(
+"btn" + index
+);
 
-button.disabled=true;
-button.textContent="STARTING...";
-message.textContent="Sending scene to Zynora AI...";
+const message =
+document.getElementById(
+"status" + index
+);
+
+button.disabled =
+true;
+
+button.textContent =
+"STARTING...";
+
+message.textContent =
+"Sending scene to Zynora AI...";
+
 
 try{
-const sessionResult=await client.auth.getSession();
-const session=sessionResult.data.session;
+
+const sessionResult =
+await client.auth.getSession();
+
+const session =
+sessionResult.data.session;
 
 if(!session){
-throw new Error("Login session expired.");
+
+throw new Error(
+"Login session expired."
+);
+
 }
 
-const response=await fetch(FUNCTION_URL,{
-method:"POST",
-headers:{
-"Content-Type":"application/json",
-"apikey":SUPABASE_KEY,
-"Authorization":"Bearer "+session.access_token
-},
-body:JSON.stringify({
-action:"generate",
-prompt:scenes[index].prompt,
-model:"gen4.5",
-ratio:"720:1280",
-duration:5
-})
-});
 
-const data=await response.json();
+const response =
+await fetch(
+FUNCTION_URL,
+{
+
+method:"POST",
+
+headers:{
+
+"Content-Type":
+"application/json",
+
+"apikey":
+SUPABASE_KEY,
+
+"Authorization":
+"Bearer " +
+session.access_token
+
+},
+
+body:
+JSON.stringify({
+
+action:"generate",
+
+prompt:
+scenes[index].prompt,
+
+model:
+"gen4.5",
+
+ratio:
+"720:1280",
+
+duration:
+5
+
+})
+
+}
+);
+
+
+const data =
+await response.json();
+
 
 if(!response.ok){
-throw new Error(data.error||data.message||"Video generation failed.");
+
+throw new Error(
+data.error ||
+data.message ||
+"Video generation failed."
+);
+
 }
+
 
 if(!data.taskId){
-throw new Error("No task ID returned.");
+
+throw new Error(
+"No task ID returned."
+);
+
 }
 
-button.textContent="GENERATING...";
-message.textContent="AI video started...";
 
-await checkVideo(index,data.taskId);
+button.textContent =
+"GENERATING...";
 
-}catch(error){
-message.textContent="Error: "+error.message;
-button.disabled=false;
-button.textContent="TRY AGAIN";
+message.textContent =
+"AI video started...";
+
+
+await checkVideo(
+index,
+data.taskId
+);
+
+
 }
+catch(error){
+
+message.textContent =
+"Error: " +
+error.message;
+
+button.disabled =
+false;
+
+button.textContent =
+"TRY AGAIN";
+
 }
 
-async function checkVideo(index,taskId){
-const message=document.getElementById("status"+index);
-const button=document.getElementById("btn"+index);
+}
 
-for(let i=1;i<=120;i++){
-await new Promise(resolve=>setTimeout(resolve,5000));
 
-const sessionResult=await client.auth.getSession();
-const session=sessionResult.data.session;
+/* CHECK VIDEO */
+
+async function checkVideo(
+index,
+taskId
+){
+
+const message =
+document.getElementById(
+"status" + index
+);
+
+const button =
+document.getElementById(
+"btn" + index
+);
+
+
+for(
+let i = 1;
+i <= 120;
+i++
+){
+
+await new Promise(
+resolve =>
+setTimeout(
+resolve,
+5000
+)
+);
+
+
+const sessionResult =
+await client.auth.getSession();
+
+const session =
+sessionResult.data.session;
+
 
 if(!session){
-throw new Error("Login session expired.");
+
+throw new Error(
+"Login session expired."
+);
+
 }
 
-const response=await fetch(FUNCTION_URL,{
-method:"POST",
-headers:{
-"Content-Type":"application/json",
-"apikey":SUPABASE_KEY,
-"Authorization":"Bearer "+session.access_token
-},
-body:JSON.stringify({
-action:"status",
-taskId:taskId
-})
-});
 
-const data=await response.json();
+const response =
+await fetch(
+FUNCTION_URL,
+{
+
+method:"POST",
+
+headers:{
+
+"Content-Type":
+"application/json",
+
+"apikey":
+SUPABASE_KEY,
+
+"Authorization":
+"Bearer " +
+session.access_token
+
+},
+
+body:
+JSON.stringify({
+
+action:"status",
+
+taskId:
+taskId
+
+})
+
+}
+);
+
+
+const data =
+await response.json();
+
 
 if(!response.ok){
-throw new Error(data.error||"Unable to check video.");
+
+throw new Error(
+data.error ||
+"Unable to check video."
+);
+
 }
 
-const state=String(data.status||"").toUpperCase();
-message.textContent="AI generation: "+state;
 
-if(state==="SUCCEEDED"){
-const url=data.output&&data.output[0];
+const state =
+String(
+data.status || ""
+)
+.toUpperCase();
+
+
+message.textContent =
+"AI generation: " +
+state;
+
+
+if(
+state === "SUCCEEDED"
+){
+
+const url =
+data.output &&
+data.output[0];
+
 
 if(!url){
-throw new Error("No video URL returned.");
+
+throw new Error(
+"No video URL returned."
+);
+
 }
 
-const video=document.getElementById("video"+index);
-video.src=url;
-video.style.display="block";
 
-message.textContent="Scene complete! 🎬";
-button.disabled=false;
-button.textContent="GENERATE AGAIN";
+const video =
+document.getElementById(
+"video" + index
+);
+
+video.src =
+url;
+
+video.style.display =
+"block";
+
+
+message.textContent =
+"Scene complete! 🎬";
+
+
+button.disabled =
+false;
+
+button.textContent =
+"GENERATE AGAIN";
+
 
 return;
+
 }
 
-if(state==="FAILED"){
-throw new Error(data.failure||"AI generation failed.");
+
+if(
+state === "FAILED"
+){
+
+throw new Error(
+data.failure ||
+"AI generation failed."
+);
+
 }
 
-if(state==="CANCELED"){
-throw new Error("Generation canceled.");
-}
+
+if(
+state === "CANCELED"
+){
+
+throw new Error(
+"Generation canceled."
+);
+
 }
 
-throw new Error("Generation took too long.");
 }
+
+
+throw new Error(
+"Generation took too long."
+);
+
+}
+
 </script>
 
 </body>
