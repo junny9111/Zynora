@@ -1,312 +1,366 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Zynora AI Studio</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link
-href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Playfair+Display:wght@500;600&display=swap"
-rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
 
 <style>
 
 *{
-box-sizing:border-box;
-margin:0;
-padding:0;
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
 }
 
 body{
-min-height:100vh;
-background:
-radial-gradient(circle at 50% 0%,rgba(145,55,255,.24),transparent 34%),
-#08070c;
-color:white;
-font-family:"Playfair Display",Georgia,serif;
-padding-bottom:45px;
+  min-height:100vh;
+  background:
+    radial-gradient(circle at 50% 0%,rgba(145,55,255,.24),transparent 34%),
+    #08070c;
+  color:white;
+  font-family:"Playfair Display",Georgia,serif;
+  padding-bottom:60px;
 }
 
 header{
-height:88px;
-display:flex;
-align-items:center;
-justify-content:space-between;
-padding:0 20px;
-background:#111016;
-border-bottom:1px solid rgba(173,77,255,.25);
+  min-height:88px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  padding:0 20px;
+  background:#111016;
+  border-bottom:1px solid rgba(173,77,255,.25);
 }
 
 .logo{
-font-family:"Cinzel",serif;
-font-size:29px;
-font-weight:700;
-letter-spacing:-2px;
-background:linear-gradient(90deg,#fff,#d19aff,#8e38ff);
--webkit-background-clip:text;
-background-clip:text;
-color:transparent;
+  font-family:"Cinzel",serif;
+  font-size:27px;
+  font-weight:700;
+  letter-spacing:-2px;
+  background:linear-gradient(90deg,#fff,#d19aff,#8e38ff);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
 }
 
 .back{
-text-decoration:none;
-color:#b765ff;
-font-family:"Cinzel",serif;
-font-size:11px;
+  text-decoration:none;
+  color:#b765ff;
+  font-family:"Cinzel",serif;
+  font-size:10px;
 }
 
 main{
-max-width:680px;
-margin:auto;
-padding:28px 20px 60px;
+  max-width:680px;
+  margin:auto;
+  padding:28px 20px 60px;
 }
 
 h1{
-font-family:"Cinzel",serif;
-font-size:29px;
-margin-bottom:6px;
+  font-family:"Cinzel",serif;
+  font-size:29px;
+  margin-bottom:6px;
 }
 
 .subtitle{
-color:#9994a2;
-font-size:14px;
-margin-bottom:25px;
-line-height:1.5;
+  color:#9994a2;
+  font-size:14px;
+  margin-bottom:25px;
+  line-height:1.5;
 }
 
 .hero{
-padding:24px;
-border-radius:24px;
-background:linear-gradient(135deg,#4b1475,#191023);
-border:1px solid rgba(195,118,255,.34);
-margin-bottom:27px;
-box-shadow:0 0 35px rgba(120,38,200,.18);
+  padding:24px;
+  border-radius:24px;
+  background:linear-gradient(135deg,#4b1475,#191023);
+  border:1px solid rgba(195,118,255,.34);
+  margin-bottom:24px;
 }
 
 .hero h2{
-font-family:"Cinzel",serif;
-font-size:18px;
-margin-bottom:8px;
+  font-family:"Cinzel",serif;
+  font-size:18px;
+  margin-bottom:8px;
 }
 
 .hero p{
-color:#c8b8d1;
-font-size:13px;
-line-height:1.6;
+  color:#c8b8d1;
+  font-size:13px;
+  line-height:1.6;
 }
 
 #status{
-display:none;
-padding:13px;
-margin-bottom:20px;
-border-radius:14px;
-background:#17131e;
-border:1px solid rgba(173,77,255,.22);
-color:#cec4d6;
-font-size:13px;
-text-align:center;
+  display:none;
+  padding:13px;
+  margin-bottom:18px;
+  border-radius:14px;
+  background:#17131e;
+  border:1px solid rgba(173,77,255,.22);
+  color:#cec4d6;
+  font-size:13px;
+  text-align:center;
+  line-height:1.5;
 }
 
 .card{
-background:#15141b;
-border:1px solid rgba(255,255,255,.08);
-border-radius:23px;
-padding:20px;
-margin-bottom:20px;
+  background:#15141b;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:23px;
+  padding:20px;
+  margin-bottom:20px;
 }
 
 .card-title{
-font-family:"Cinzel",serif;
-font-size:16px;
-margin-bottom:15px;
+  font-family:"Cinzel",serif;
+  font-size:16px;
+  margin-bottom:15px;
 }
 
 label{
-display:block;
-font-family:"Cinzel",serif;
-font-size:11px;
-color:#b8a7c4;
-margin:17px 0 8px;
-}
-
-label:first-of-type{
-margin-top:0;
+  display:block;
+  font-family:"Cinzel",serif;
+  font-size:11px;
+  color:#b8a7c4;
+  margin:17px 0 8px;
 }
 
 input,
 textarea,
 select{
-width:100%;
-padding:14px;
-border-radius:14px;
-border:1px solid #39333f;
-background:#0d0c11;
-color:white;
-font-family:"Playfair Display",serif;
-font-size:15px;
-outline:none;
+  width:100%;
+  padding:14px;
+  border-radius:14px;
+  border:1px solid #39333f;
+  background:#0d0c11;
+  color:white;
+  font-family:"Playfair Display",serif;
+  font-size:15px;
+  outline:none;
 }
 
 textarea{
-min-height:110px;
-resize:vertical;
+  min-height:120px;
+  resize:vertical;
 }
 
 input:focus,
 textarea:focus,
 select:focus{
-border-color:#a84fff;
+  border-color:#a84fff;
 }
 
 .grid{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:12px;
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
 }
 
 .btn{
-width:100%;
-padding:15px;
-border-radius:15px;
-font-family:"Cinzel",serif;
-font-size:12px;
-font-weight:700;
-cursor:pointer;
+  width:100%;
+  padding:15px;
+  border-radius:15px;
+  font-family:"Cinzel",serif;
+  font-size:11px;
+  font-weight:700;
+  cursor:pointer;
 }
 
 .primary{
-border:none;
-background:linear-gradient(135deg,#a84fff,#7521e4);
-color:white;
-margin-top:18px;
+  border:none;
+  background:linear-gradient(135deg,#a84fff,#7521e4);
+  color:white;
+  margin-top:18px;
 }
 
 .secondary{
-border:1px solid rgba(255,255,255,.09);
-background:#211e28;
-color:#cbc4d0;
-margin-top:10px;
+  border:1px solid rgba(255,255,255,.09);
+  background:#211e28;
+  color:#cbc4d0;
+  margin-top:10px;
+}
+
+.btn:disabled{
+  opacity:.45;
+  cursor:not-allowed;
 }
 
 .plan{
-display:none;
+  display:none;
 }
 
 .plan.show{
-display:block;
+  display:block;
 }
 
 .plan-block{
-padding:16px;
-border-radius:17px;
-background:#101015;
-border:1px solid rgba(255,255,255,.06);
-margin-bottom:12px;
+  padding:16px;
+  border-radius:17px;
+  background:#101015;
+  border:1px solid rgba(255,255,255,.06);
+  margin-bottom:12px;
 }
 
 .plan-label{
-font-family:"Cinzel",serif;
-font-size:11px;
-color:#aa6bff;
-margin-bottom:7px;
+  font-family:"Cinzel",serif;
+  font-size:11px;
+  color:#aa6bff;
+  margin-bottom:7px;
 }
 
 .plan-text{
-color:#d5cedb;
-font-size:13px;
-line-height:1.6;
-white-space:pre-wrap;
+  color:#d5cedb;
+  font-size:13px;
+  line-height:1.6;
+  white-space:pre-wrap;
 }
 
 .scene{
-padding:17px;
-border-radius:18px;
-background:#121117;
-border:1px solid rgba(255,255,255,.07);
-margin-bottom:12px;
+  padding:17px;
+  border-radius:19px;
+  background:#121117;
+  border:1px solid rgba(255,255,255,.07);
+  margin-bottom:15px;
 }
 
 .scene-number{
-font-family:"Cinzel",serif;
-font-size:11px;
-color:#b76cff;
+  font-family:"Cinzel",serif;
+  font-size:11px;
+  color:#b76cff;
 }
 
 .scene h3{
-font-family:"Cinzel",serif;
-font-size:14px;
-margin:7px 0;
+  font-family:"Cinzel",serif;
+  font-size:14px;
+  margin:7px 0;
 }
 
-.scene p{
-color:#aaa3b1;
-font-size:13px;
-line-height:1.55;
+.scene-description{
+  color:#aaa3b1;
+  font-size:13px;
+  line-height:1.55;
 }
 
 .scene-prompt{
-margin-top:10px;
-padding:11px;
-border-radius:12px;
-background:#0c0b10;
-color:#cfc3d8;
-font-size:12px;
-line-height:1.5;
+  margin-top:12px;
+  padding:12px;
+  border-radius:12px;
+  background:#0c0b10;
+  color:#cfc3d8;
+  font-size:12px;
+  line-height:1.55;
+}
+
+.scene-actions{
+  margin-top:13px;
+}
+
+.generate-scene{
+  width:100%;
+  padding:13px;
+  border:0;
+  border-radius:13px;
+  background:linear-gradient(135deg,#a84fff,#7521e4);
+  color:white;
+  font-family:"Cinzel",serif;
+  font-size:10px;
+  font-weight:700;
+}
+
+.generate-scene:disabled{
+  opacity:.5;
+}
+
+.render-status{
+  display:none;
+  margin-top:11px;
+  padding:10px;
+  border-radius:11px;
+  background:#19141f;
+  color:#bfb4c8;
+  font-size:12px;
+  line-height:1.45;
+}
+
+.render-status.show{
+  display:block;
+}
+
+.video-result{
+  display:none;
+  margin-top:14px;
+}
+
+.video-result.show{
+  display:block;
+}
+
+.video-result video{
+  width:100%;
+  max-height:520px;
+  border-radius:16px;
+  background:black;
+}
+
+.video-link{
+  display:block;
+  margin-top:10px;
+  text-decoration:none;
+  color:#c67cff;
+  text-align:center;
+  font-family:"Cinzel",serif;
+  font-size:10px;
 }
 
 .project-row{
-display:flex;
-justify-content:space-between;
-gap:12px;
-padding:13px 0;
-border-bottom:1px solid rgba(255,255,255,.06);
-}
-
-.project-row:last-child{
-border-bottom:none;
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  padding:13px 0;
+  border-bottom:1px solid rgba(255,255,255,.06);
 }
 
 .project-title{
-font-family:"Cinzel",serif;
-font-size:12px;
+  font-family:"Cinzel",serif;
+  font-size:12px;
 }
 
 .project-meta{
-color:#8e8796;
-font-size:11px;
-margin-top:4px;
+  color:#8e8796;
+  font-size:11px;
+  margin-top:4px;
 }
 
 .small-btn{
-border:1px solid rgba(173,77,255,.25);
-background:#211928;
-color:#caa6e5;
-border-radius:10px;
-padding:8px 10px;
-font-size:10px;
-font-family:"Cinzel",serif;
-cursor:pointer;
-height:max-content;
+  border:1px solid rgba(173,77,255,.25);
+  background:#211928;
+  color:#caa6e5;
+  border-radius:10px;
+  padding:8px 10px;
+  font-size:9px;
+  font-family:"Cinzel",serif;
+  height:max-content;
 }
 
-.footer-note{
-color:#756f7b;
-font-size:11px;
-line-height:1.5;
-margin-top:18px;
-text-align:center;
+.warning{
+  padding:14px;
+  margin-bottom:20px;
+  border-radius:16px;
+  background:rgba(126,83,15,.13);
+  border:1px solid rgba(255,193,71,.18);
+  color:#c6b48f;
+  font-size:12px;
+  line-height:1.55;
 }
 
 </style>
-
 </head>
 
 <body>
@@ -317,12 +371,8 @@ text-align:center;
 Zynora AI Studio
 </div>
 
-<a
-href="creator.html"
-class="back">
-
+<a href="creator.html" class="back">
 ← Creator
-
 </a>
 
 </header>
@@ -334,7 +384,7 @@ Create AI Drama
 </h1>
 
 <p class="subtitle">
-Plan complete stories, episodes and scenes now. Video rendering can be connected later.
+Build your story, scenes and real AI-generated video clips.
 </p>
 
 <div id="status"></div>
@@ -342,16 +392,21 @@ Plan complete stories, episodes and scenes now. Video rendering can be connected
 <div class="hero">
 
 <h2>
-From Idea to Episode
+From Story to Real Video
 </h2>
 
 <p>
-Describe your drama once. Zynora AI Studio will turn it into a title,
-story structure, characters, episode plan and scene-by-scene video prompts.
+Zynora creates the drama structure first. Each scene can then be sent securely through your Supabase Edge Function to Runway for real AI video generation.
 </p>
 
 </div>
 
+<div class="warning">
+Runway video rendering requires available Runway API credits. Your Zynora Studio and secure connection can work now, but if the Runway account has zero credits the provider may reject the actual render request.
+</div>
+
+
+<!-- PROJECT -->
 
 <div class="card">
 
@@ -365,16 +420,13 @@ Drama Idea
 
 <textarea
 id="idea"
-placeholder="Example: A young woman marries a mysterious businessman and later discovers he secretly owns the largest company in the city.">
-</textarea>
-
+placeholder="Describe the story you want to create..."></textarea>
 
 <label>
 Genre
 </label>
 
 <select id="genre">
-
 <option>Romance</option>
 <option>Drama</option>
 <option>Thriller</option>
@@ -383,975 +435,7 @@ Genre
 <option>Comedy</option>
 <option>Fantasy</option>
 <option>Action</option>
-
 </select>
 
 
-<div class="grid">
-
-<div>
-
-<label>
-Episode Length
-</label>
-
-<select id="length">
-
-<option value="5">5 Minutes</option>
-<option value="10">10 Minutes</option>
-<option value="15">15 Minutes</option>
-<option value="20" selected>20 Minutes</option>
-<option value="30">30 Minutes</option>
-<option value="40">40 Minutes</option>
-
-</select>
-
-</div>
-
-
-<div>
-
-<label>
-Episodes
-</label>
-
-<select id="episodes">
-
-<option value="5">5 Episodes</option>
-<option value="10" selected>10 Episodes</option>
-<option value="20">20 Episodes</option>
-<option value="30">30 Episodes</option>
-
-</select>
-
-</div>
-
-</div>
-
-
-<label>
-Visual Style
-</label>
-
-<select id="style">
-
-<option>Cinematic Modern Drama</option>
-<option>Luxury Romance</option>
-<option>Dark Crime Thriller</option>
-<option>Fantasy Cinematic</option>
-<option>Bright Comedy</option>
-<option>Action Film</option>
-
-</select>
-
-
-<button
-class="btn primary"
-onclick="generatePlan()">
-
-Generate Drama Plan
-
-</button>
-
-<button
-class="btn secondary"
-onclick="saveProject()">
-
-Save Project
-
-</button>
-
-</div>
-
-
 <div
-id="planSection"
-class="plan">
-
-<div class="card">
-
-<div class="card-title">
-AI Drama Plan
-</div>
-
-<div class="plan-block">
-
-<div class="plan-label">
-TITLE
-</div>
-
-<div
-id="generatedTitle"
-class="plan-text">
-</div>
-
-</div>
-
-
-<div class="plan-block">
-
-<div class="plan-label">
-STORY SUMMARY
-</div>
-
-<div
-id="generatedSummary"
-class="plan-text">
-</div>
-
-</div>
-
-
-<div class="plan-block">
-
-<div class="plan-label">
-MAIN CHARACTERS
-</div>
-
-<div
-id="generatedCharacters"
-class="plan-text">
-</div>
-
-</div>
-
-
-<div class="plan-block">
-
-<div class="plan-label">
-EPISODE ARC
-</div>
-
-<div
-id="generatedArc"
-class="plan-text">
-</div>
-
-</div>
-
-
-<button
-class="btn primary"
-onclick="generateScenes()">
-
-Build Episode 1 Scenes
-
-</button>
-
-</div>
-
-
-<div class="card">
-
-<div class="card-title">
-Episode 1 Production
-</div>
-
-<div id="sceneList">
-
-<div style="color:#7d7683;font-size:13px;">
-Generate scenes to begin production.
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-
-<div class="card">
-
-<div class="card-title">
-Saved AI Projects
-</div>
-
-<div id="projectList">
-</div>
-
-</div>
-
-
-<div class="footer-note">
-
-This version creates the production blueprint without paid AI video credits.
-The future renderer will use these scene prompts to generate real clips and combine them into full episodes.
-
-</div>
-
-</main>
-
-
-<script>
-
-let currentPlan = null;
-
-
-/* =====================================
-   STATUS
-===================================== */
-
-function showStatus(text){
-
-const box =
-document.getElementById("status");
-
-box.textContent =
-text;
-
-box.style.display =
-"block";
-
-clearTimeout(
-window.studioTimer
-);
-
-window.studioTimer =
-setTimeout(
-function(){
-
-box.style.display =
-"none";
-
-},
-3500
-);
-
-}
-
-
-/* =====================================
-   SIMPLE TITLE GENERATOR
-===================================== */
-
-function createTitle(idea,genre){
-
-const lower =
-idea.toLowerCase();
-
-if(
-lower.includes("billion")
-||
-lower.includes("wealth")
-||
-lower.includes("business")
-){
-
-return "The Secret Behind His Empire";
-
-}
-
-if(
-lower.includes("marry")
-||
-lower.includes("marriage")
-||
-lower.includes("husband")
-){
-
-return "A Marriage Built on Secrets";
-
-}
-
-if(genre === "Crime"){
-
-return "Shadows of the City";
-
-}
-
-if(genre === "Thriller"){
-
-return "The Truth She Was Never Meant to Find";
-
-}
-
-if(genre === "Fantasy"){
-
-return "The Kingdom Beyond Midnight";
-
-}
-
-return "Hidden Hearts";
-
-}
-
-
-/* =====================================
-   GENERATE PLAN
-===================================== */
-
-function generatePlan(){
-
-const idea =
-document
-.getElementById("idea")
-.value
-.trim();
-
-const genre =
-document
-.getElementById("genre")
-.value;
-
-const length =
-Number(
-document
-.getElementById("length")
-.value
-);
-
-const episodeCount =
-Number(
-document
-.getElementById("episodes")
-.value
-);
-
-const style =
-document
-.getElementById("style")
-.value;
-
-
-if(!idea){
-
-showStatus(
-"Describe your drama idea first."
-);
-
-return;
-
-}
-
-
-const title =
-createTitle(
-idea,
-genre
-);
-
-
-const summary =
-idea
-+
-"\n\nThe story develops through escalating secrets, emotional conflict, betrayal, discovery and a final turning point designed to keep viewers watching from one episode to the next.";
-
-
-const characters =
-[
-"1. Maya — intelligent, determined and emotionally guarded. She becomes the heart of the story.",
-"2. Adrian — powerful, mysterious and hiding a life-changing secret.",
-"3. Lena — Maya's closest friend, loyal but suspicious of Adrian.",
-"4. Victor — the main rival whose actions force the truth into the open."
-]
-.join("\n");
-
-
-let arc = "";
-
-
-for(
-let i = 1;
-i <= episodeCount;
-i++
-){
-
-let stage = "";
-
-if(
-i === 1
-){
-
-stage =
-"Introduce the characters, central secret and first major conflict.";
-
-}
-else if(
-i < episodeCount * .4
-){
-
-stage =
-"Deepen the relationship while revealing clues and increasing tension.";
-
-}
-else if(
-i < episodeCount * .75
-){
-
-stage =
-"A major betrayal or discovery changes the direction of the story.";
-
-}
-else if(
-i < episodeCount
-){
-
-stage =
-"Secrets collapse, alliances shift and the final confrontation approaches.";
-
-}
-else{
-
-stage =
-"Resolve the main conflict with an emotional payoff and a strong final reveal.";
-
-}
-
-
-arc +=
-"Episode "
-+
-i
-+
-" — "
-+
-stage
-+
-"\n";
-
-}
-
-
-currentPlan = {
-
-id:
-Date.now(),
-
-idea:
-idea,
-
-genre:
-genre,
-
-length:
-length,
-
-episodeCount:
-episodeCount,
-
-style:
-style,
-
-title:
-title,
-
-summary:
-summary,
-
-characters:
-characters,
-
-arc:
-arc,
-
-createdAt:
-new Date()
-.toISOString()
-
-};
-
-
-document
-.getElementById("generatedTitle")
-.textContent =
-title;
-
-
-document
-.getElementById("generatedSummary")
-.textContent =
-summary;
-
-
-document
-.getElementById("generatedCharacters")
-.textContent =
-characters;
-
-
-document
-.getElementById("generatedArc")
-.textContent =
-arc;
-
-
-document
-.getElementById("planSection")
-.classList.add("show");
-
-
-document
-.getElementById("planSection")
-.scrollIntoView({
-behavior:"smooth"
-});
-
-
-showStatus(
-"Drama plan created."
-);
-
-}
-
-
-/* =====================================
-   GENERATE SCENES
-===================================== */
-
-function generateScenes(){
-
-if(!currentPlan){
-
-showStatus(
-"Generate the drama plan first."
-);
-
-return;
-
-}
-
-
-const sceneCount =
-Math.max(
-6,
-Math.round(
-currentPlan.length
-/
-2
-)
-);
-
-
-const list =
-document
-.getElementById("sceneList");
-
-
-list.innerHTML =
-"";
-
-
-for(
-let i = 1;
-i <= sceneCount;
-i++
-){
-
-const scene =
-document.createElement("div");
-
-scene.className =
-"scene";
-
-
-let purpose = "";
-
-if(i === 1){
-
-purpose =
-"Opening hook. Introduce the lead character and immediately establish emotional tension.";
-
-}
-else if(i === sceneCount){
-
-purpose =
-"End on a powerful cliffhanger that makes the viewer want Episode 2.";
-
-}
-else if(i === Math.ceil(sceneCount / 2)){
-
-purpose =
-"Major reveal. A new clue changes what the lead character believes.";
-
-}
-else{
-
-purpose =
-"Advance the relationship and conflict while revealing another piece of the central secret.";
-
-}
-
-
-const visualPrompt =
-currentPlan.style
-+
-", "
-+
-currentPlan.genre
-+
-" drama scene, realistic cinematic actors, consistent lead characters, professional lighting, expressive performances, natural camera movement, detailed environment. "
-+
-purpose;
-
-
-scene.innerHTML =
-
-'<div class="scene-number">SCENE '
-+
-i
-+
-'</div>'
-+
-'<h3>'
-+
-(
-i === 1
-? "Opening Hook"
-: i === sceneCount
-? "Episode Cliffhanger"
-: "Story Development"
-)
-+
-'</h3>'
-+
-'<p>'
-+
-purpose
-+
-'</p>'
-+
-'<div class="scene-prompt">'
-+
-'<strong>Video Prompt:</strong><br>'
-+
-visualPrompt
-+
-'</div>';
-
-
-list.appendChild(
-scene
-);
-
-}
-
-
-currentPlan.sceneCount =
-sceneCount;
-
-
-showStatus(
-sceneCount +
-" scenes prepared for Episode 1."
-);
-
-}
-
-
-/* =====================================
-   SAVE PROJECT
-===================================== */
-
-function saveProject(){
-
-if(!currentPlan){
-
-generatePlan();
-
-if(!currentPlan){
-return;
-}
-
-}
-
-
-const projects =
-JSON.parse(
-localStorage.getItem(
-"zynoraAIProjects"
-)
-||
-"[]"
-);
-
-
-const existingIndex =
-projects.findIndex(
-function(project){
-
-return project.id === currentPlan.id;
-
-}
-);
-
-
-if(existingIndex >= 0){
-
-projects[existingIndex] =
-currentPlan;
-
-}
-else{
-
-projects.unshift(
-currentPlan
-);
-
-}
-
-
-localStorage.setItem(
-"zynoraAIProjects",
-JSON.stringify(
-projects
-)
-);
-
-
-showStatus(
-"AI drama project saved."
-);
-
-
-loadProjects();
-
-}
-
-
-/* =====================================
-   LOAD PROJECTS
-===================================== */
-
-function loadProjects(){
-
-const list =
-document
-.getElementById("projectList");
-
-
-const projects =
-JSON.parse(
-localStorage.getItem(
-"zynoraAIProjects"
-)
-||
-"[]"
-);
-
-
-if(
-projects.length === 0
-){
-
-list.innerHTML =
-'<div style="color:#77717f;font-size:13px;">No AI projects saved yet.</div>';
-
-return;
-
-}
-
-
-list.innerHTML =
-"";
-
-
-projects.forEach(
-function(project){
-
-const row =
-document.createElement(
-"div"
-);
-
-
-row.className =
-"project-row";
-
-
-const left =
-document.createElement(
-"div"
-);
-
-
-left.innerHTML =
-'<div class="project-title">'
-+
-project.title
-+
-'</div>'
-+
-'<div class="project-meta">'
-+
-project.genre
-+
-" • "
-+
-project.episodeCount
-+
-" episodes • "
-+
-project.length
-+
-" min each"
-+
-'</div>';
-
-
-const button =
-document.createElement(
-"button"
-);
-
-
-button.className =
-"small-btn";
-
-
-button.textContent =
-"Open";
-
-
-button.onclick =
-function(){
-
-openProject(
-project.id
-);
-
-};
-
-
-row.appendChild(
-left
-);
-
-
-row.appendChild(
-button
-);
-
-
-list.appendChild(
-row
-);
-
-}
-);
-
-}
-
-
-/* =====================================
-   OPEN SAVED PROJECT
-===================================== */
-
-function openProject(id){
-
-const projects =
-JSON.parse(
-localStorage.getItem(
-"zynoraAIProjects"
-)
-||
-"[]"
-);
-
-
-const project =
-projects.find(
-function(item){
-
-return item.id === id;
-
-}
-);
-
-
-if(!project){
-return;
-}
-
-
-currentPlan =
-project;
-
-
-document
-.getElementById("idea")
-.value =
-project.idea;
-
-
-document
-.getElementById("genre")
-.value =
-project.genre;
-
-
-document
-.getElementById("length")
-.value =
-String(
-project.length
-);
-
-
-document
-.getElementById("episodes")
-.value =
-String(
-project.episodeCount
-);
-
-
-document
-.getElementById("style")
-.value =
-project.style;
-
-
-document
-.getElementById("generatedTitle")
-.textContent =
-project.title;
-
-
-document
-.getElementById("generatedSummary")
-.textContent =
-project.summary;
-
-
-document
-.getElementById("generatedCharacters")
-.textContent =
-project.characters;
-
-
-document
-.getElementById("generatedArc")
-.textContent =
-project.arc;
-
-
-document
-.getElementById("planSection")
-.classList.add("show");
-
-
-document
-.getElementById("planSection")
-.scrollIntoView({
-behavior:"smooth"
-});
-
-
-showStatus(
-"Project opened."
-);
-
-}
-
-
-/* =====================================
-   START
-===================================== */
-
-loadProjects();
-
-</script>
-
-</body>
-
-</html>
