@@ -146,6 +146,7 @@ h1 {
 .reward-btn:disabled {
   background: #292631;
   color: #77737f;
+  cursor: not-allowed;
 }
 
 .history {
@@ -155,6 +156,7 @@ h1 {
 .history-row {
   display: flex;
   justify-content: space-between;
+  gap: 15px;
   padding: 13px 0;
   border-bottom: 1px solid rgba(255,255,255,.07);
 }
@@ -162,6 +164,7 @@ h1 {
 .history-amount {
   color: #ffd75c;
   font-family: "Cinzel", serif;
+  white-space: nowrap;
 }
 
 #status {
@@ -173,6 +176,10 @@ h1 {
   color: #c9c3d0;
   display: none;
   text-align: center;
+}
+
+.hidden {
+  display: none !important;
 }
 
 .bottom-nav {
@@ -223,7 +230,7 @@ h1 {
 <h1>Rewards</h1>
 
 <p class="subtitle">
-Earn Zynora Coins and unlock episodes.
+  Earn Zynora Coins and unlock episodes.
 </p>
 
 <div id="status"></div>
@@ -240,18 +247,24 @@ Earn Zynora Coins and unlock episodes.
 
 </div>
 
+
 <div class="section-title">
-Available Rewards
+  Available Rewards
 </div>
 
 
-<div class="reward">
+<!-- DAILY CHECK-IN -->
+
+<div class="reward" id="dailyReward">
 
   <div class="reward-head">
 
-    <div class="reward-icon">🎁</div>
+    <div class="reward-icon">
+      🎁
+    </div>
 
     <div>
+
       <div class="reward-name">
         Daily Check-In
       </div>
@@ -259,49 +272,67 @@ Available Rewards
       <div class="reward-description">
         Claim 20 coins once every day.
       </div>
+
     </div>
 
   </div>
 
-  <button id="dailyBtn" class="reward-btn">
+  <button
+    id="dailyBtn"
+    class="reward-btn">
     Claim 20 Coins
   </button>
 
 </div>
 
 
-<div class="reward">
+<!-- WELCOME REWARD -->
+
+<div
+  class="reward"
+  id="welcomeReward">
 
   <div class="reward-head">
 
-    <div class="reward-icon">✨</div>
+    <div class="reward-icon">
+      ✨
+    </div>
 
     <div>
+
       <div class="reward-name">
         Welcome Reward
       </div>
 
       <div class="reward-description">
-        Claim 100 coins once.
+        New members receive 100 Zynora Coins once.
       </div>
+
     </div>
 
   </div>
 
-  <button id="welcomeBtn" class="reward-btn">
+  <button
+    id="welcomeBtn"
+    class="reward-btn">
     Claim 100 Coins
   </button>
 
 </div>
 
 
+<!-- WATCH AND EARN -->
+
 <div class="reward">
 
   <div class="reward-head">
 
-    <div class="reward-icon">📺</div>
+    <div class="reward-icon">
+      📺
+    </div>
 
     <div>
+
       <div class="reward-name">
         Watch & Earn
       </div>
@@ -309,16 +340,21 @@ Available Rewards
       <div class="reward-description">
         Rewarded advertising will be connected here.
       </div>
+
     </div>
 
   </div>
 
-  <button id="adBtn" class="reward-btn">
+  <button
+    id="adBtn"
+    class="reward-btn">
     Watch Ad • Earn 30 Coins
   </button>
 
 </div>
 
+
+<!-- COIN HISTORY -->
 
 <div class="history">
 
@@ -337,29 +373,49 @@ Available Rewards
 
 <nav class="bottom-nav">
 
-<a href="index.html" class="nav-item">
+<a
+  href="index.html"
+  class="nav-item">
+
   <span class="nav-icon">⌂</span>
   Home
+
 </a>
 
-<a href="discover.html" class="nav-item">
+<a
+  href="discover.html"
+  class="nav-item">
+
   <span class="nav-icon">◉</span>
   Discover
+
 </a>
 
-<a href="rewards.html" class="nav-item active">
+<a
+  href="rewards.html"
+  class="nav-item active">
+
   <span class="nav-icon">🎁</span>
   Rewards
+
 </a>
 
-<a href="library.html" class="nav-item">
+<a
+  href="library.html"
+  class="nav-item">
+
   <span class="nav-icon">▣</span>
   Library
+
 </a>
 
-<a href="profile.html" class="nav-item">
+<a
+  href="profile.html"
+  class="nav-item">
+
   <span class="nav-icon">●</span>
   Profile
+
 </a>
 
 </nav>
@@ -375,30 +431,78 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
 "sb_publishable__GsW9RahFD_XDWJTFzh9eQ_dNBZfa32";
 
+
 const client =
 supabase.createClient(
   SUPABASE_URL,
   SUPABASE_KEY
 );
 
+
 let currentUser = null;
 
+
+const welcomeReward =
+document.getElementById(
+  "welcomeReward"
+);
+
+
+const welcomeBtn =
+document.getElementById(
+  "welcomeBtn"
+);
+
+
+const dailyBtn =
+document.getElementById(
+  "dailyBtn"
+);
+
+
+/* =====================================
+   STATUS MESSAGE
+   ===================================== */
 
 function status(message) {
 
   const box =
-  document.getElementById("status");
+  document.getElementById(
+    "status"
+  );
 
-  box.textContent = message;
+  box.textContent =
+  message;
 
-  box.style.display = "block";
+  box.style.display =
+  "block";
 
 }
 
 
+/* =====================================
+   HIDE WELCOME REWARD
+   ===================================== */
+
+function hideWelcomeReward() {
+
+  welcomeReward.classList.add(
+    "hidden"
+  );
+
+}
+
+
+/* =====================================
+   START REWARDS
+   ===================================== */
+
 async function startZynoraRewards() {
 
-  status("Connecting to your Zynora account...");
+  status(
+    "Connecting to your Zynora account..."
+  );
+
 
   const result =
   await client.auth.getUser();
@@ -421,22 +525,40 @@ async function startZynoraRewards() {
   currentUser =
   result.data.user;
 
-  status("Rewards connected.");
 
   await loadBalance();
 
+  await loadRewardStatus();
+
   await loadHistory();
+
+
+  status(
+    "Rewards connected."
+  );
 
 }
 
 
+/* =====================================
+   LOAD COIN BALANCE
+   ===================================== */
+
 async function loadBalance() {
+
+  if (!currentUser) {
+    return;
+  }
+
 
   const result =
   await client
   .from("coin_wallets")
   .select("balance")
-  .eq("user_id", currentUser.id)
+  .eq(
+    "user_id",
+    currentUser.id
+  )
   .maybeSingle();
 
 
@@ -453,7 +575,9 @@ async function loadBalance() {
 
 
   document
-  .getElementById("balance")
+  .getElementById(
+    "balance"
+  )
   .textContent =
   result.data
     ? result.data.balance
@@ -462,7 +586,91 @@ async function loadBalance() {
 }
 
 
-async function claim(type, button) {
+/* =====================================
+   CHECK WHETHER WELCOME REWARD
+   WAS ALREADY CLAIMED
+   ===================================== */
+
+async function loadRewardStatus() {
+
+  if (!currentUser) {
+    return;
+  }
+
+
+  const result =
+  await client
+  .from("coin_transactions")
+  .select(
+    "amount,description,created_at"
+  )
+  .eq(
+    "user_id",
+    currentUser.id
+  )
+  .order(
+    "created_at",
+    {
+      ascending: false
+    }
+  );
+
+
+  if (result.error) {
+
+    console.error(
+      "Reward status error:",
+      result.error
+    );
+
+    return;
+
+  }
+
+
+  const transactions =
+  result.data || [];
+
+
+  const welcomeWasClaimed =
+  transactions.some(
+    function(item) {
+
+      const description =
+      String(
+        item.description || ""
+      ).toLowerCase();
+
+
+      return (
+        description.includes(
+          "welcome"
+        )
+        &&
+        Number(item.amount) > 0
+      );
+
+    }
+  );
+
+
+  if (welcomeWasClaimed) {
+
+    hideWelcomeReward();
+
+  }
+
+}
+
+
+/* =====================================
+   CLAIM REWARD
+   ===================================== */
+
+async function claim(
+  type,
+  button
+) {
 
   if (!currentUser) {
 
@@ -475,10 +683,13 @@ async function claim(type, button) {
   }
 
 
-  button.disabled = true;
+  button.disabled =
+  true;
+
 
   const oldText =
   button.textContent;
+
 
   button.textContent =
   "Processing...";
@@ -495,33 +706,113 @@ async function claim(type, button) {
 
   if (result.error) {
 
-    status(result.error.message);
+    status(
+      result.error.message
+    );
 
-    button.disabled = false;
+
+    button.disabled =
+    false;
+
 
     button.textContent =
     oldText;
+
+
+    /*
+      If Supabase says the welcome
+      reward was already claimed,
+      remove the card anyway.
+    */
+
+    if (
+      type === "welcome"
+      &&
+      String(
+        result.error.message || ""
+      )
+      .toLowerCase()
+      .includes("already")
+    ) {
+
+      hideWelcomeReward();
+
+    }
+
 
     return;
 
   }
 
 
+  /*
+    claim_reward currently returns
+    the user's new balance.
+  */
+
   document
-  .getElementById("balance")
+  .getElementById(
+    "balance"
+  )
   .textContent =
   result.data;
 
 
-  status(
-    "Reward claimed successfully! 🪙"
-  );
+  if (
+    type === "welcome"
+  ) {
 
+    status(
+      "Welcome to Zynora! 100 coins added. 🪙"
+    );
+
+
+    /*
+      Welcome card disappears
+      immediately after claiming.
+    */
+
+    hideWelcomeReward();
+
+  }
+
+  else if (
+    type === "daily"
+  ) {
+
+    status(
+      "Daily reward claimed! 20 coins added. 🪙"
+    );
+
+
+    button.disabled =
+    true;
+
+
+    button.textContent =
+    "Claimed Today";
+
+  }
+
+  else {
+
+    status(
+      "Reward claimed successfully! 🪙"
+    );
+
+  }
+
+
+  await loadBalance();
 
   await loadHistory();
 
 }
 
+
+/* =====================================
+   LOAD COIN HISTORY
+   ===================================== */
 
 async function loadHistory() {
 
@@ -536,10 +827,15 @@ async function loadHistory() {
   .select(
     "amount,description,created_at"
   )
-  .eq("user_id", currentUser.id)
+  .eq(
+    "user_id",
+    currentUser.id
+  )
   .order(
     "created_at",
-    { ascending: false }
+    {
+      ascending: false
+    }
   )
   .limit(15);
 
@@ -573,21 +869,28 @@ async function loadHistory() {
   }
 
 
-  list.innerHTML = "";
+  list.innerHTML =
+  "";
 
 
   result.data.forEach(
     function(item) {
 
       const row =
-      document.createElement("div");
+      document.createElement(
+        "div"
+      );
+
 
       row.className =
       "history-row";
 
 
       const description =
-      document.createElement("span");
+      document.createElement(
+        "span"
+      );
+
 
       description.textContent =
       item.description ||
@@ -595,10 +898,14 @@ async function loadHistory() {
 
 
       const amount =
-      document.createElement("span");
+      document.createElement(
+        "span"
+      );
+
 
       amount.className =
       "history-amount";
+
 
       amount.textContent =
       (
@@ -612,11 +919,19 @@ async function loadHistory() {
       " 🪙";
 
 
-      row.appendChild(description);
+      row.appendChild(
+        description
+      );
 
-      row.appendChild(amount);
 
-      list.appendChild(row);
+      row.appendChild(
+        amount
+      );
+
+
+      list.appendChild(
+        row
+      );
 
     }
   );
@@ -624,8 +939,11 @@ async function loadHistory() {
 }
 
 
-document
-.getElementById("dailyBtn")
+/* =====================================
+   DAILY CHECK-IN BUTTON
+   ===================================== */
+
+dailyBtn
 .addEventListener(
   "click",
   function() {
@@ -639,8 +957,11 @@ document
 );
 
 
-document
-.getElementById("welcomeBtn")
+/* =====================================
+   WELCOME REWARD BUTTON
+   ===================================== */
+
+welcomeBtn
 .addEventListener(
   "click",
   function() {
@@ -654,8 +975,14 @@ document
 );
 
 
+/* =====================================
+   REWARDED AD BUTTON
+   ===================================== */
+
 document
-.getElementById("adBtn")
+.getElementById(
+  "adBtn"
+)
 .addEventListener(
   "click",
   function() {
@@ -667,6 +994,10 @@ document
   }
 );
 
+
+/* =====================================
+   START
+   ===================================== */
 
 startZynoraRewards();
 
