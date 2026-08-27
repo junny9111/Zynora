@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>Zynora Buy Coins</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(
+          circle at 50% 12%,
+          rgba(151, 55, 255, 0.25),
+          transparent 35%
+        ),
+        #08070c;
+
+      color: white;
+      font-family: Arial, sans-serif;
+
+      padding: 24px 18px 40px;
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: 460px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      text-align: center;
+      font-size: 40px;
+      font-weight: bold;
+      margin: 10px 0 8px;
+
+      background:
+        linear-gradient(
+          90deg,
+          #ffffff,
+          #d29cff,
+          #8d32ff
+        );
+
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 26px;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #aaa4b2;
+      line-height: 1.5;
+      margin-bottom: 28px;
+    }
+
+    .balance {
+      background: #121018;
+      border: 1px solid rgba(170, 80, 255, 0.3);
+      border-radius: 20px;
+      padding: 18px;
+      margin-bottom: 22px;
+      text-align: center;
+    }
+
+    .balance-label {
+      color: #aaa4b2;
+      font-size: 14px;
+    }
+
+    .balance-value {
+      margin-top: 6px;
+      font-size: 28px;
+      font-weight: bold;
+      color: #c987ff;
+    }
+
+    .packages {
+      display: grid;
+      gap: 14px;
+    }
+
+    .package {
+      width: 100%;
+      border: 1px solid rgba(170, 80, 255, 0.28);
+      background: #121018;
+      border-radius: 20px;
+      padding: 20px;
+      color: white;
+      text-align: left;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .package.active {
+      border-color: #a742ff;
+      box-shadow: 0 0 25px rgba(159, 64, 255, 0.18);
+      transform: translateY(-1px);
+    }
+
+    .coin-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .coins {
+      font-size: 24px;
+      font-weight: bold;
+      color: #d08bff;
+    }
+
+    .price {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .package-name {
+      margin-top: 8px;
+      color: #aaa4b2;
+      font-size: 14px;
+    }
+
+    .summary {
+      margin-top: 22px;
+      background: #0c0b11;
+      border-radius: 18px;
+      padding: 18px;
+      border: 1px solid rgba(170, 80, 255, 0.18);
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      margin-bottom: 10px;
+      color: #bbb4c5;
+    }
+
+    .summary-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .summary strong {
+      color: white;
+    }
+
+    #continueButton {
+      width: 100%;
+      margin-top: 20px;
+      border: none;
+      border-radius: 18px;
+      padding: 17px;
+
+      background:
+        linear-gradient(
+          90deg,
+          #b341ff,
+          #7417ee
+        );
+
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    #continueButton:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+
+    #result {
+      display: none;
+      margin-top: 18px;
+      padding: 16px;
+      border-radius: 16px;
+      background: #0c0b11;
+      line-height: 1.5;
+      word-break: break-word;
+    }
+
+    .success {
+      color: #75f0a7;
+    }
+
+    .error {
+      color: #ff8a9a;
+    }
+
+    .note {
+      text-align: center;
+      color: #827b8d;
+      font-size: 12px;
+      line-height: 1.5;
+      margin-top: 18px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="wrap">
+
+    <div class="logo">
+      Zynora
+    </div>
+
+    <h1>
+      Buy Coins
+    </h1>
+
+    <div class="subtitle">
+      Choose a Zynora coin package.
+      Payments are currently running in PayPal Sandbox mode.
+    </div>
+
+    <div class="balance">
+      <div class="balance-label">
+        Current Coin Balance
+      </div>
+
+      <div class="balance-value" id="balance">
+        🪙 0
+      </div>
+    </div>
+
+    <div class="packages">
+
+      <button
+        class="package active"
+        data-package="coins_500"
+        data-coins="500"
+        data-price="4.99"
+        onclick="selectPackage(this)"
+      >
+        <div class="coin-row">
+          <div class="coins">
+            🪙 500 Coins
+          </div>
+
+          <div class="price">
+            $4.99
+          </div>
+        </div>
+
+        <div class="package-name">
+          Starter Pack
+        </div>
+      </button>
+
+
+      <button
+        class="package"
+        data-package="coins_1200"
+        data-coins="1200"
+        data-price="9.99"
+        onclick="selectPackage(this)"
+      >
+        <div class="coin-row">
+          <div class="coins">
+            🪙 1,200 Coins
+          </div>
+
+          <div class="price">
+            $9.99
+          </div>
+        </div>
+
+        <div class="package-name">
+          Popular Pack
+        </div>
+      </button>
+
+
+      <button
+        class="package"
+        data-package="coins_3000"
+        data-coins="3000"
+        data-price="19.99"
+        onclick="selectPackage(this)"
+      >
+        <div class="coin-row">
+          <div class="coins">
+            🪙 3,000 Coins
+          </div>
+
+          <div class="price">
+            $19.99
+          </div>
+        </div>
+
+        <div class="package-name">
+          Premium Pack
+        </div>
+      </button>
+
+    </div>
+
+
+    <div class="summary">
+
+      <div class="summary-row">
+        <span>Selected</span>
+        <strong id="selectedCoins">
+          500 Coins
+        </strong>
+      </div>
+
+      <div class="summary-row">
+        <span>Total</span>
+        <strong id="selectedPrice">
+          $4.99 USD
+        </strong>
+      </div>
+
+    </div>
+
+
+    <button
+      id="continueButton"
+      onclick="createPayPalOrder()"
+    >
+      CONTINUE TO PAYPAL
+    </button>
+
+
+    <div id="result"></div>
+
+
+    <div class="note">
+      Sandbox test only. No real customer payment should be processed
+      until the checkout, capture, verification and coin-credit system
+      are fully secured.
+    </div>
+
+  </div>
+
+
+<script>
+
+const FUNCTION_URL =
+  "https://ozshekxpuvganemaajms.supabase.co/functions/v1/zynora-paypal";
+
+
+let selectedPackage = {
+  packageId: "coins_500",
+  coins: 500,
+  price: "4.99"
+};
+
+
+function selectPackage(button) {
+
+  document
+    .querySelectorAll(".package")
+    .forEach(item => {
+      item.classList.remove("active");
+    });
+
+  button.classList.add("active");
+
+
+  selectedPackage = {
+    packageId:
+      button.dataset.package,
+
+    coins:
+      Number(button.dataset.coins),
+
+    price:
+      button.dataset.price
+  };
+
+
+  document.getElementById("selectedCoins").textContent =
+    selectedPackage.coins.toLocaleString() + " Coins";
+
+
+  document.getElementById("selectedPrice").textContent =
+    "$" + selectedPackage.price + " USD";
+}
+
+
+async function createPayPalOrder() {
+
+  const button =
+    document.getElementById("continueButton");
+
+  const result =
+    document.getElementById("result");
+
+
+  button.disabled = true;
+
+  button.textContent =
+    "CREATING PAYPAL ORDER...";
+
+
+  result.style.display =
+    "block";
+
+  result.className =
+    "";
+
+  result.textContent =
+    "Connecting to PayPal...";
+
+
+  try {
+
+    const response =
+      await fetch(
+        FUNCTION_URL,
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type":
+              "application/json"
+          },
+
+          body:
+            JSON.stringify({
+              action:
+                "create-order",
+
+              packageId:
+                selectedPackage.packageId
+            })
+        }
+      );
+
+
+    const text =
+      await response.text();
+
+
+    let data;
+
+    try {
+
+      data =
+        JSON.parse(text);
+
+    } catch {
+
+      data = {
+        rawResponse: text
+      };
+
+    }
+
+
+    if (!response.ok) {
+
+      throw new Error(
+        data.error ||
+        data.message ||
+        data.rawResponse ||
+        "Unable to create PayPal order."
+      );
+    }
+
+
+    result.className =
+      "success";
+
+
+    result.innerHTML =
+      "<strong>ORDER CREATED ✅</strong><br><br>" +
+      "Package: " +
+      selectedPackage.coins.toLocaleString() +
+      " Coins<br>" +
+      "Amount: $" +
+      selectedPackage.price +
+      " USD<br><br>" +
+      "PayPal Order ID:<br>" +
+      (
+        data.orderId ||
+        data.id ||
+        "Created"
+      ) +
+      "<br><br>" +
+      "Next we will connect this order to the PayPal approval screen.";
+
+
+    console.log(
+      "PayPal order:",
+      data
+    );
+
+  } catch (error) {
+
+    console.error(
+      "PayPal error:",
+      error
+    );
+
+
+    result.className =
+      "error";
+
+
+    result.innerHTML =
+      "<strong>PAYMENT ERROR ❌</strong><br><br>" +
+      error.message;
+  }
+
+
+  button.disabled =
+    false;
+
+  button.textContent =
+    "CONTINUE TO PAYPAL";
+}
+
+
+</script>
+
+</body>
+</html>
