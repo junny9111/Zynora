@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>Zynora Payment Success</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+
+      background:
+        radial-gradient(
+          circle at 50% 12%,
+          rgba(151, 55, 255, 0.25),
+          transparent 35%
+        ),
+        #08070c;
+
+      color: white;
+      font-family: Arial, sans-serif;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: 24px;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 430px;
+
+      background: #121018;
+
+      border: 1px solid rgba(170, 80, 255, 0.35);
+      border-radius: 26px;
+
+      padding: 30px 22px;
+
+      text-align: center;
+
+      box-shadow:
+        0 0 40px rgba(140, 40, 255, 0.18);
+    }
+
+    .logo {
+      font-size: 38px;
+      font-weight: bold;
+
+      margin-bottom: 18px;
+
+      background:
+        linear-gradient(
+          90deg,
+          #ffffff,
+          #d29cff,
+          #8d32ff
+        );
+
+      -webkit-background-clip: text;
+      background-clip: text;
+
+      color: transparent;
+    }
+
+    .icon {
+      font-size: 60px;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: 26px;
+      margin-bottom: 12px;
+    }
+
+    .message {
+      color: #aaa4b2;
+      line-height: 1.5;
+      margin-bottom: 24px;
+    }
+
+    .receipt {
+      background: #09080d;
+
+      border:
+        1px solid rgba(170, 80, 255, 0.25);
+
+      border-radius: 18px;
+
+      padding: 20px;
+
+      text-align: left;
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+
+      margin-bottom: 14px;
+
+      color: #aaa4b2;
+    }
+
+    .row:last-child {
+      margin-bottom: 0;
+    }
+
+    .row strong {
+      color: white;
+      text-align: right;
+    }
+
+    .coins {
+      color: #c987ff !important;
+      font-size: 20px;
+    }
+
+    #statusBox {
+      margin-top: 20px;
+
+      padding: 16px;
+
+      border-radius: 16px;
+
+      background: #09080d;
+
+      line-height: 1.5;
+    }
+
+    .loading {
+      color: #d6b3ff;
+    }
+
+    .success {
+      color: #75f0a7;
+    }
+
+    .error {
+      color: #ff8a9a;
+    }
+
+    .homeButton {
+      width: 100%;
+
+      margin-top: 22px;
+
+      border: none;
+      border-radius: 18px;
+
+      padding: 17px;
+
+      background:
+        linear-gradient(
+          90deg,
+          #b341ff,
+          #7417ee
+        );
+
+      color: white;
+
+      font-size: 16px;
+      font-weight: bold;
+
+      cursor: pointer;
+
+      display: none;
+    }
+  </style>
+</head>
+
+
+<body>
+
+  <div class="card">
+
+    <div class="logo">
+      Zynora
+    </div>
+
+    <div class="icon" id="icon">
+      ⏳
+    </div>
+
+    <h1 id="title">
+      Confirming Payment
+    </h1>
+
+    <div class="message" id="message">
+      Please wait while Zynora verifies your PayPal payment.
+    </div>
+
+    <div
+      class="receipt"
+      id="receipt"
+      style="display:none;"
+    >
+
+      <div class="row">
+        <span>Payment</span>
+        <strong id="paymentStatus">
+          -
+        </strong>
+      </div>
+
+      <div class="row">
+        <span>Coins Received</span>
+        <strong
+          class="coins"
+          id="coinsReceived"
+        >
+          -
+        </strong>
+      </div>
+
+      <div class="row">
+        <span>Amount Paid</span>
+        <strong id="amountPaid">
+          -
+        </strong>
+      </div>
+
+      <div class="row">
+        <span>Order ID</span>
+        <strong id="orderId">
+          -
+        </strong>
+      </div>
+
+    </div>
+
+    <div
+      id="statusBox"
+      class="loading"
+    >
+      Capturing PayPal payment...
+    </div>
+
+    <button
+      class="homeButton"
+      id="homeButton"
+      onclick="goHome()"
+    >
+      RETURN TO ZYNORA
+    </button>
+
+  </div>
+
+
+<script>
+
+const FUNCTION_URL =
+  "https://ozshekxpuvganemaajms.supabase.co/functions/v1/zynora-paypal";
+
+
+async function completePayment() {
+
+  const params =
+    new URLSearchParams(
+      window.location.search
+    );
+
+
+  const paypalToken =
+    params.get("token");
+
+
+  const savedOrderRaw =
+    localStorage.getItem(
+      "zynora_pending_order"
+    );
+
+
+  let savedOrder = null;
+
+
+  try {
+
+    savedOrder =
+      savedOrderRaw
+        ? JSON.parse(savedOrderRaw)
+        : null;
+
+  } catch {
+
+    savedOrder = null;
+  }
+
+
+  const orderId =
+    paypalToken ||
+    savedOrder?.orderId;
+
+
+  if (!orderId) {
+
+    showError(
+      "PayPal order information is missing."
+    );
+
+    return;
+  }
+
+
+  try {
+
+    const response =
+      await fetch(
+        FUNCTION_URL,
+        {
+          method:
+            "POST",
+
+          headers: {
+            "Content-Type":
+              "application/json"
+          },
+
+          body:
+            JSON.stringify({
+
+              action:
+                "capture-order",
+
+              orderId:
+                orderId
+
+            })
+        }
+      );
+
+
+    const data =
+      await response.json();
+
+
+    if (!response.ok) {
+
+      throw new Error(
+        data.error ||
+        "Unable to confirm PayPal payment."
+      );
+    }
+
+
+    if (
+      !data.success ||
+      data.status !== "COMPLETED"
+    ) {
+
+      throw new Error(
+        "PayPal payment was not completed."
+      );
+    }
+
+
+    /*
+      TEMPORARY LOCAL COIN BALANCE
+
+      Later we will replace this with
+      the authenticated Supabase
+      user coin balance.
+    */
+
+    const oldBalance =
+      Number(
+        localStorage.getItem(
+          "zynora_coin_balance"
+        ) || "0"
+      );
+
+
+    const coinsReceived =
+      Number(
+        data.coins || 0
+      );
+
+
+    const newBalance =
+      oldBalance +
+      coinsReceived;
+
+
+    localStorage.setItem(
+      "zynora_coin_balance",
+      String(newBalance)
+    );
+
+
+    localStorage.removeItem(
+      "zynora_pending_order"
+    );
+
+
+    document.getElementById(
+      "icon"
+    ).textContent =
+      "✅";
+
+
+    document.getElementById(
+      "title"
+    ).textContent =
+      "Payment Successful";
+
+
+    document.getElementById(
+      "message"
+    ).textContent =
+      "Your payment has been accepted and your Zynora coins have been received.";
+
+
+    document.getElementById(
+      "receipt"
+    ).style.display =
+      "block";
+
+
+    document.getElementById(
+      "paymentStatus"
+    ).textContent =
+      "Accepted";
+
+
+    document.getElementById(
+      "coinsReceived"
+    ).textContent =
+      "🪙 " +
+      coinsReceived.toLocaleString();
+
+
+    document.getElementById(
+      "amountPaid"
+    ).textContent =
+      "$" +
+      (
+        data.amount ||
+        savedOrder?.amount ||
+        "0.00"
+      ) +
+      " " +
+      (
+        data.currency ||
+        "USD"
+      );
+
+
+    document.getElementById(
+      "orderId"
+    ).textContent =
+      data.orderId ||
+      orderId;
+
+
+    const statusBox =
+      document.getElementById(
+        "statusBox"
+      );
+
+
+    statusBox.className =
+      "success";
+
+
+    statusBox.innerHTML =
+      "<strong>COINS RECEIVED ✅</strong><br><br>" +
+      "New Zynora balance: 🪙 " +
+      newBalance.toLocaleString();
+
+
+    document.getElementById(
+      "homeButton"
+    ).style.display =
+      "block";
+
+
+  } catch (error) {
+
+    console.error(
+      "Payment capture error:",
+      error
+    );
+
+
+    showError(
+      error.message
+    );
+  }
+}
+
+
+function showError(message) {
+
+  document.getElementById(
+    "icon"
+  ).textContent =
+    "❌";
+
+
+  document.getElementById(
+    "title"
+  ).textContent =
+    "Payment Not Confirmed";
+
+
+  document.getElementById(
+    "message"
+  ).textContent =
+    "Zynora could not verify this payment.";
+
+
+  const statusBox =
+    document.getElementById(
+      "statusBox"
+    );
+
+
+  statusBox.className =
+    "error";
+
+
+  statusBox.innerHTML =
+    "<strong>PAYMENT ERROR</strong><br><br>" +
+    message;
+
+
+  document.getElementById(
+    "homeButton"
+  ).style.display =
+    "block";
+}
+
+
+function goHome() {
+
+  window.location.href =
+    "index.html";
+}
+
+
+completePayment();
+
+</script>
+
+</body>
+</html>
