@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1.0"
@@ -21,7 +20,7 @@
       min-height: 100vh;
       background:
         radial-gradient(
-          circle at 50% 12%,
+          circle at 50% 10%,
           rgba(151, 55, 255, 0.25),
           transparent 35%
         ),
@@ -29,7 +28,6 @@
 
       color: white;
       font-family: Arial, sans-serif;
-
       padding: 24px 18px 40px;
     }
 
@@ -229,7 +227,7 @@
     </h1>
 
     <div class="subtitle">
-      Choose a Zynora coin package.
+      Choose your Zynora coin package.
       Payments are currently running in PayPal Sandbox mode.
     </div>
 
@@ -247,14 +245,14 @@
 
       <button
         class="package active"
-        data-package="coins_500"
-        data-coins="500"
+        data-package="coins_250"
+        data-coins="250"
         data-price="4.99"
         onclick="selectPackage(this)"
       >
         <div class="coin-row">
           <div class="coins">
-            🪙 500 Coins
+            🪙 250 Coins
           </div>
 
           <div class="price">
@@ -263,21 +261,20 @@
         </div>
 
         <div class="package-name">
-          Starter Pack
+          Mini Pack
         </div>
       </button>
 
-
       <button
         class="package"
-        data-package="coins_1200"
-        data-coins="1200"
+        data-package="coins_500"
+        data-coins="500"
         data-price="9.99"
         onclick="selectPackage(this)"
       >
         <div class="coin-row">
           <div class="coins">
-            🪙 1,200 Coins
+            🪙 500 Coins
           </div>
 
           <div class="price">
@@ -286,16 +283,37 @@
         </div>
 
         <div class="package-name">
-          Popular Pack
+          Starter Pack
         </div>
       </button>
 
+      <button
+        class="package"
+        data-package="coins_1200"
+        data-coins="1200"
+        data-price="19.99"
+        onclick="selectPackage(this)"
+      >
+        <div class="coin-row">
+          <div class="coins">
+            🪙 1,200 Coins
+          </div>
+
+          <div class="price">
+            $19.99
+          </div>
+        </div>
+
+        <div class="package-name">
+          Popular Pack
+        </div>
+      </button>
 
       <button
         class="package"
         data-package="coins_3000"
         data-coins="3000"
-        data-price="19.99"
+        data-price="29.99"
         onclick="selectPackage(this)"
       >
         <div class="coin-row">
@@ -304,7 +322,7 @@
           </div>
 
           <div class="price">
-            $19.99
+            $29.99
           </div>
         </div>
 
@@ -315,13 +333,12 @@
 
     </div>
 
-
     <div class="summary">
 
       <div class="summary-row">
         <span>Selected</span>
         <strong id="selectedCoins">
-          500 Coins
+          250 Coins
         </strong>
       </div>
 
@@ -334,7 +351,6 @@
 
     </div>
 
-
     <button
       id="continueButton"
       onclick="createPayPalOrder()"
@@ -342,18 +358,15 @@
       CONTINUE TO PAYPAL
     </button>
 
-
     <div id="result"></div>
 
-
     <div class="note">
-      Sandbox test only. No real customer payment should be processed
-      until the checkout, capture, verification and coin-credit system
-      are fully secured.
+      Sandbox test only. Real payments should only be enabled after
+      checkout approval, capture verification and secure coin crediting
+      are fully connected.
     </div>
 
   </div>
-
 
 <script>
 
@@ -362,8 +375,8 @@ const FUNCTION_URL =
 
 
 let selectedPackage = {
-  packageId: "coins_500",
-  coins: 500,
+  packageId: "coins_250",
+  coins: 250,
   price: "4.99"
 };
 
@@ -378,22 +391,14 @@ function selectPackage(button) {
 
   button.classList.add("active");
 
-
   selectedPackage = {
-    packageId:
-      button.dataset.package,
-
-    coins:
-      Number(button.dataset.coins),
-
-    price:
-      button.dataset.price
+    packageId: button.dataset.package,
+    coins: Number(button.dataset.coins),
+    price: button.dataset.price
   };
-
 
   document.getElementById("selectedCoins").textContent =
     selectedPackage.coins.toLocaleString() + " Coins";
-
 
   document.getElementById("selectedPrice").textContent =
     "$" + selectedPackage.price + " USD";
@@ -408,12 +413,10 @@ async function createPayPalOrder() {
   const result =
     document.getElementById("result");
 
-
   button.disabled = true;
 
   button.textContent =
     "CREATING PAYPAL ORDER...";
-
 
   result.style.display =
     "block";
@@ -423,7 +426,6 @@ async function createPayPalOrder() {
 
   result.textContent =
     "Connecting to PayPal...";
-
 
   try {
 
@@ -449,26 +451,19 @@ async function createPayPalOrder() {
         }
       );
 
-
     const text =
       await response.text();
-
 
     let data;
 
     try {
-
       data =
         JSON.parse(text);
-
     } catch {
-
       data = {
         rawResponse: text
       };
-
     }
-
 
     if (!response.ok) {
 
@@ -480,10 +475,8 @@ async function createPayPalOrder() {
       );
     }
 
-
     result.className =
       "success";
-
 
     result.innerHTML =
       "<strong>ORDER CREATED ✅</strong><br><br>" +
@@ -498,10 +491,7 @@ async function createPayPalOrder() {
         data.orderId ||
         data.id ||
         "Created"
-      ) +
-      "<br><br>" +
-      "Next we will connect this order to the PayPal approval screen.";
-
+      );
 
     console.log(
       "PayPal order:",
@@ -515,16 +505,13 @@ async function createPayPalOrder() {
       error
     );
 
-
     result.className =
       "error";
-
 
     result.innerHTML =
       "<strong>PAYMENT ERROR ❌</strong><br><br>" +
       error.message;
   }
-
 
   button.disabled =
     false;
@@ -532,7 +519,6 @@ async function createPayPalOrder() {
   button.textContent =
     "CONTINUE TO PAYPAL";
 }
-
 
 </script>
 
