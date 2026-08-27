@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
+
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1.0"
-  />
+  >
 
   <title>Zynora Buy Coins</title>
 
@@ -18,6 +20,7 @@
 
     body {
       min-height: 100vh;
+
       background:
         radial-gradient(
           circle at 50% 10%,
@@ -28,6 +31,7 @@
 
       color: white;
       font-family: Arial, sans-serif;
+
       padding: 24px 18px 40px;
     }
 
@@ -53,6 +57,7 @@
 
       -webkit-background-clip: text;
       background-clip: text;
+
       color: transparent;
     }
 
@@ -71,10 +76,16 @@
 
     .balance {
       background: #121018;
-      border: 1px solid rgba(170, 80, 255, 0.3);
+
+      border:
+        1px solid rgba(170, 80, 255, 0.3);
+
       border-radius: 20px;
+
       padding: 18px;
+
       margin-bottom: 22px;
+
       text-align: center;
     }
 
@@ -97,26 +108,41 @@
 
     .package {
       width: 100%;
-      border: 1px solid rgba(170, 80, 255, 0.28);
+
+      border:
+        1px solid rgba(170, 80, 255, 0.28);
+
       background: #121018;
+
       border-radius: 20px;
+
       padding: 20px;
+
       color: white;
+
       text-align: left;
+
       cursor: pointer;
+
       transition: 0.2s ease;
     }
 
     .package.active {
       border-color: #a742ff;
-      box-shadow: 0 0 25px rgba(159, 64, 255, 0.18);
+
+      box-shadow:
+        0 0 25px rgba(159, 64, 255, 0.18);
+
       transform: translateY(-1px);
     }
 
     .coin-row {
       display: flex;
+
       justify-content: space-between;
+
       align-items: center;
+
       gap: 14px;
     }
 
@@ -139,17 +165,26 @@
 
     .summary {
       margin-top: 22px;
+
       background: #0c0b11;
+
       border-radius: 18px;
+
       padding: 18px;
-      border: 1px solid rgba(170, 80, 255, 0.18);
+
+      border:
+        1px solid rgba(170, 80, 255, 0.18);
     }
 
     .summary-row {
       display: flex;
+
       justify-content: space-between;
+
       gap: 15px;
+
       margin-bottom: 10px;
+
       color: #bbb4c5;
     }
 
@@ -163,9 +198,13 @@
 
     #continueButton {
       width: 100%;
+
       margin-top: 20px;
+
       border: none;
+
       border-radius: 18px;
+
       padding: 17px;
 
       background:
@@ -176,8 +215,11 @@
         );
 
       color: white;
+
       font-size: 16px;
+
       font-weight: bold;
+
       cursor: pointer;
     }
 
@@ -188,11 +230,17 @@
 
     #result {
       display: none;
+
       margin-top: 18px;
+
       padding: 16px;
+
       border-radius: 16px;
+
       background: #0c0b11;
+
       line-height: 1.5;
+
       word-break: break-word;
     }
 
@@ -202,13 +250,19 @@
 
     .note {
       text-align: center;
+
       color: #827b8d;
+
       font-size: 12px;
+
       line-height: 1.5;
+
       margin-top: 18px;
     }
   </style>
+
 </head>
+
 
 <body>
 
@@ -227,17 +281,25 @@
       Payments are currently running in PayPal Sandbox mode.
     </div>
 
+
     <div class="balance">
+
       <div class="balance-label">
         Current Coin Balance
       </div>
 
-      <div class="balance-value" id="balance">
+      <div
+        class="balance-value"
+        id="balance"
+      >
         🪙 0
       </div>
+
     </div>
 
+
     <div class="packages">
+
 
       <button
         class="package active"
@@ -246,7 +308,9 @@
         data-price="4.99"
         onclick="selectPackage(this)"
       >
+
         <div class="coin-row">
+
           <div class="coins">
             🪙 250 Coins
           </div>
@@ -254,12 +318,15 @@
           <div class="price">
             $4.99
           </div>
+
         </div>
 
         <div class="package-name">
           Mini Pack
         </div>
+
       </button>
+
 
       <button
         class="package"
@@ -268,7 +335,9 @@
         data-price="9.99"
         onclick="selectPackage(this)"
       >
+
         <div class="coin-row">
+
           <div class="coins">
             🪙 500 Coins
           </div>
@@ -276,12 +345,15 @@
           <div class="price">
             $9.99
           </div>
+
         </div>
 
         <div class="package-name">
           Starter Pack
         </div>
+
       </button>
+
 
       <button
         class="package"
@@ -290,7 +362,9 @@
         data-price="19.99"
         onclick="selectPackage(this)"
       >
+
         <div class="coin-row">
+
           <div class="coins">
             🪙 1,200 Coins
           </div>
@@ -298,12 +372,15 @@
           <div class="price">
             $19.99
           </div>
+
         </div>
 
         <div class="package-name">
           Popular Pack
         </div>
+
       </button>
+
 
       <button
         class="package"
@@ -312,7 +389,9 @@
         data-price="29.99"
         onclick="selectPackage(this)"
       >
+
         <div class="coin-row">
+
           <div class="coins">
             🪙 3,000 Coins
           </div>
@@ -320,32 +399,48 @@
           <div class="price">
             $29.99
           </div>
+
         </div>
 
         <div class="package-name">
           Premium Pack
         </div>
+
       </button>
 
+
     </div>
+
 
     <div class="summary">
 
       <div class="summary-row">
-        <span>Selected</span>
+
+        <span>
+          Selected
+        </span>
+
         <strong id="selectedCoins">
           250 Coins
         </strong>
+
       </div>
 
+
       <div class="summary-row">
-        <span>Total</span>
+
+        <span>
+          Total
+        </span>
+
         <strong id="selectedPrice">
           $4.99 USD
         </strong>
+
       </div>
 
     </div>
+
 
     <button
       id="continueButton"
@@ -354,14 +449,17 @@
       CONTINUE TO PAYPAL
     </button>
 
+
     <div id="result"></div>
 
+
     <div class="note">
-      Sandbox test only. Real payments should only be enabled after
-      successful PayPal capture and secure coin crediting.
+      Sandbox testing only.
+      Zynora will verify the payment before coins are credited.
     </div>
 
   </div>
+
 
 <script>
 
@@ -376,45 +474,99 @@ let selectedPackage = {
 };
 
 
+function loadBalance() {
+
+  const balance =
+    Number(
+      localStorage.getItem(
+        "zynora_coin_balance"
+      ) || "0"
+    );
+
+
+  document.getElementById(
+    "balance"
+  ).textContent =
+    "🪙 " +
+    balance.toLocaleString();
+}
+
+
 function selectPackage(button) {
 
   document
     .querySelectorAll(".package")
     .forEach(item => {
-      item.classList.remove("active");
+
+      item.classList.remove(
+        "active"
+      );
+
     });
 
-  button.classList.add("active");
+
+  button.classList.add(
+    "active"
+  );
+
 
   selectedPackage = {
-    packageId: button.dataset.package,
-    coins: Number(button.dataset.coins),
-    price: button.dataset.price
+
+    packageId:
+      button.dataset.package,
+
+    coins:
+      Number(
+        button.dataset.coins
+      ),
+
+    price:
+      button.dataset.price
+
   };
 
-  document.getElementById("selectedCoins").textContent =
-    selectedPackage.coins.toLocaleString() + " Coins";
 
-  document.getElementById("selectedPrice").textContent =
-    "$" + selectedPackage.price + " USD";
+  document.getElementById(
+    "selectedCoins"
+  ).textContent =
+    selectedPackage.coins.toLocaleString() +
+    " Coins";
+
+
+  document.getElementById(
+    "selectedPrice"
+  ).textContent =
+    "$" +
+    selectedPackage.price +
+    " USD";
 }
 
 
 async function createPayPalOrder() {
 
   const button =
-    document.getElementById("continueButton");
+    document.getElementById(
+      "continueButton"
+    );
+
 
   const result =
-    document.getElementById("result");
+    document.getElementById(
+      "result"
+    );
 
-  button.disabled = true;
+
+  button.disabled =
+    true;
+
 
   button.textContent =
     "OPENING PAYPAL...";
 
+
   result.style.display =
     "none";
+
 
   try {
 
@@ -422,23 +574,35 @@ async function createPayPalOrder() {
       await fetch(
         FUNCTION_URL,
         {
-          method: "POST",
+
+          method:
+            "POST",
 
           headers: {
+
             "Content-Type":
               "application/json"
+
           },
 
           body:
             JSON.stringify({
-              action: "create-order",
-              packageId: selectedPackage.packageId
+
+              action:
+                "create-order",
+
+              packageId:
+                selectedPackage.packageId
+
             })
+
         }
       );
 
+
     const data =
       await response.json();
+
 
     if (!response.ok) {
 
@@ -446,6 +610,16 @@ async function createPayPalOrder() {
         data.error ||
         "Unable to create PayPal order."
       );
+
+    }
+
+
+    if (!data.orderId) {
+
+      throw new Error(
+        "PayPal order ID was not returned."
+      );
+
     }
 
 
@@ -454,22 +628,33 @@ async function createPayPalOrder() {
       throw new Error(
         "PayPal approval link was not returned."
       );
+
     }
 
 
     localStorage.setItem(
       "zynora_pending_order",
       JSON.stringify({
-        orderId: data.orderId,
-        packageId: data.packageId,
-        coins: data.coins,
-        amount: data.amount
+
+        orderId:
+          data.orderId,
+
+        packageId:
+          data.packageId,
+
+        coins:
+          data.coins,
+
+        amount:
+          data.amount
+
       })
     );
 
 
     window.location.href =
       data.approvalUrl;
+
 
   } catch (error) {
 
@@ -478,25 +663,67 @@ async function createPayPalOrder() {
       error
     );
 
+
     result.style.display =
       "block";
 
+
     result.className =
       "error";
+
 
     result.innerHTML =
       "<strong>PAYMENT ERROR ❌</strong><br><br>" +
       error.message;
 
+
     button.disabled =
       false;
 
+
     button.textContent =
       "CONTINUE TO PAYPAL";
+
   }
+
 }
+
+
+const params =
+  new URLSearchParams(
+    window.location.search
+  );
+
+
+if (
+  params.get("cancelled") === "1"
+) {
+
+  const result =
+    document.getElementById(
+      "result"
+    );
+
+
+  result.style.display =
+    "block";
+
+
+  result.className =
+    "error";
+
+
+  result.innerHTML =
+    "<strong>PAYMENT CANCELLED</strong><br><br>" +
+    "Your PayPal payment was cancelled. No coins were added.";
+
+}
+
+
+loadBalance();
 
 </script>
 
 </body>
+
 </html>
