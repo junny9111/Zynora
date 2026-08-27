@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
   <meta charset="UTF-8">
 
   <meta
@@ -13,7 +12,6 @@
   <title>Zynora PayPal Test</title>
 
   <style>
-
     * {
       box-sizing: border-box;
       margin: 0;
@@ -21,7 +19,6 @@
     }
 
     body {
-
       min-height: 100vh;
 
       background:
@@ -33,7 +30,6 @@
         #08070c;
 
       color: white;
-
       font-family: Arial, sans-serif;
 
       display: flex;
@@ -43,17 +39,13 @@
       padding: 25px;
     }
 
-
     .card {
-
       width: 100%;
       max-width: 430px;
 
       background: #121018;
 
-      border:
-        1px solid rgba(170, 80, 255, 0.35);
-
+      border: 1px solid rgba(170, 80, 255, 0.35);
       border-radius: 25px;
 
       padding: 30px 22px;
@@ -64,9 +56,7 @@
         0 0 40px rgba(140, 40, 255, 0.18);
     }
 
-
     .logo {
-
       font-size: 38px;
       font-weight: bold;
 
@@ -86,64 +76,42 @@
       color: transparent;
     }
 
-
     h1 {
-
       font-size: 23px;
-
       margin-bottom: 12px;
     }
 
-
     .description {
-
       color: #aaa4b2;
-
       line-height: 1.5;
-
       margin-bottom: 28px;
     }
 
-
     .package {
-
       background: #09080d;
 
-      border:
-        1px solid rgba(170, 80, 255, 0.25);
-
+      border: 1px solid rgba(170, 80, 255, 0.25);
       border-radius: 18px;
 
       padding: 20px;
-
       margin-bottom: 22px;
     }
 
-
     .coins {
-
       font-size: 28px;
-
       font-weight: bold;
-
       color: #c987ff;
     }
 
-
     .price {
-
       margin-top: 7px;
-
       color: #aaa4b2;
     }
 
-
     button {
-
       width: 100%;
 
       border: none;
-
       border-radius: 18px;
 
       padding: 17px;
@@ -158,23 +126,17 @@
       color: white;
 
       font-size: 16px;
-
       font-weight: bold;
 
       cursor: pointer;
     }
 
-
     button:disabled {
-
       opacity: 0.55;
-
       cursor: not-allowed;
     }
 
-
     #result {
-
       margin-top: 22px;
 
       padding: 15px;
@@ -192,67 +154,44 @@
       display: none;
     }
 
-
     .success {
-
       color: #75f0a7 !important;
     }
 
-
     .error {
-
       color: #ff8a9a !important;
     }
-
   </style>
-
 </head>
 
 
 <body>
 
-
   <div class="card">
 
-
     <div class="logo">
-
       Zynora
-
     </div>
 
-
     <h1>
-
       PayPal Sandbox Test
-
     </h1>
 
-
     <div class="description">
-
       This page tests whether Zynora can communicate
       securely with PayPal through Supabase.
-
     </div>
 
 
     <div class="package">
 
-
       <div class="coins">
-
         🪙 500 Coins
-
       </div>
-
 
       <div class="price">
-
         Test Package — $4.99 USD
-
       </div>
-
 
     </div>
 
@@ -261,105 +200,70 @@
       id="testButton"
       onclick="testPayPal()"
     >
-
       TEST PAYPAL PAYMENT
-
     </button>
 
 
     <div id="result"></div>
 
-
   </div>
-
 
 
 <script>
 
-
-/*
-  ZYNORA PAYPAL EDGE FUNCTION
-
-  IMPORTANT:
-  This is the corrected Supabase function URL.
-*/
-
 const FUNCTION_URL =
-  "https://ozshekpuvganemaajms.supabase.co/functions/v1/zynora-paypal";
-
+  "https://ozshekxpuvganemaajms.supabase.co/functions/v1/zynora-paypal";
 
 
 async function testPayPal() {
 
-
   const button =
     document.getElementById("testButton");
-
 
   const result =
     document.getElementById("result");
 
 
-
   button.disabled = true;
-
 
   button.textContent =
     "CONNECTING TO PAYPAL...";
 
 
-
   result.style.display =
     "block";
 
-
   result.className =
     "";
-
 
   result.textContent =
     "Contacting Zynora payment server...";
 
 
-
   try {
-
 
     const response =
       await fetch(
         FUNCTION_URL,
         {
-
           method: "POST",
 
-
           headers: {
-
             "Content-Type":
               "application/json"
-
           },
-
 
           body:
             JSON.stringify({
-
-              action:
-                "create-order",
-
-              packageId:
-                "coins_500"
-
+              action: "create-order",
+              packageId: "coins_500"
             })
-
         }
       );
 
 
-
     const text =
       await response.text();
-
 
 
     let data;
@@ -370,86 +274,55 @@ async function testPayPal() {
       data =
         JSON.parse(text);
 
-    }
-
-    catch {
+    } catch {
 
       data = {
-
-        rawResponse:
-          text
-
+        rawResponse: text
       };
 
     }
 
 
-
     if (!response.ok) {
 
-
       throw new Error(
-
         data.error ||
-
         data.message ||
-
         data.rawResponse ||
-
         "Payment server returned an error."
-
       );
 
     }
-
 
 
     result.className =
       "success";
 
 
-
     result.innerHTML =
-
       "<strong>SUCCESS ✅</strong><br><br>" +
-
-      "Zynora connected to the PayPal payment server.<br><br>" +
-
+      "Zynora connected successfully to PayPal through Supabase.<br><br>" +
+      "Status: " +
+      (data.status || "CONNECTED") +
+      "<br><br>" +
       "Order ID:<br>" +
-
       (
-
-        data.id ||
-
         data.orderId ||
-
-        "Order created — check response."
-
+        data.id ||
+        "Order created successfully."
       );
 
 
-
     console.log(
-
-      "PayPal response:",
-
+      "Zynora PayPal response:",
       data
-
     );
 
-
-  }
-
-
-  catch (error) {
-
+  } catch (error) {
 
     console.error(
-
       "Zynora PayPal error:",
-
       error
-
     );
 
 
@@ -458,28 +331,21 @@ async function testPayPal() {
 
 
     result.innerHTML =
-
       "<strong>TEST FAILED ❌</strong><br><br>" +
-
       error.message;
 
   }
 
 
-
   button.disabled =
     false;
-
 
   button.textContent =
     "TEST AGAIN";
 
-
 }
 
-
 </script>
-
 
 </body>
 
