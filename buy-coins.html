@@ -196,10 +196,6 @@
       word-break: break-word;
     }
 
-    .success {
-      color: #75f0a7;
-    }
-
     .error {
       color: #ff8a9a;
     }
@@ -362,8 +358,7 @@
 
     <div class="note">
       Sandbox test only. Real payments should only be enabled after
-      checkout approval, capture verification and secure coin crediting
-      are fully connected.
+      successful PayPal capture and secure coin crediting.
     </div>
 
   </div>
@@ -416,16 +411,10 @@ async function createPayPalOrder() {
   button.disabled = true;
 
   button.textContent =
-    "CREATING PAYPAL ORDER...";
+    "OPENING PAYPAL...";
 
   result.style.display =
-    "block";
-
-  result.className =
-    "";
-
-  result.textContent =
-    "Connecting to PayPal...";
+    "none";
 
   try {
 
@@ -442,68 +431,55 @@ async function createPayPalOrder() {
 
           body:
             JSON.stringify({
-              action:
-                "create-order",
-
-              packageId:
-                selectedPackage.packageId
+              action: "create-order",
+              packageId: selectedPackage.packageId
             })
         }
       );
 
-    const text =
-      await response.text();
-
-    let data;
-
-    try {
-      data =
-        JSON.parse(text);
-    } catch {
-      data = {
-        rawResponse: text
-      };
-    }
+    const data =
+      await response.json();
 
     if (!response.ok) {
 
       throw new Error(
         data.error ||
-        data.message ||
-        data.rawResponse ||
         "Unable to create PayPal order."
       );
     }
 
-    result.className =
-      "success";
 
-    result.innerHTML =
-      "<strong>ORDER CREATED ✅</strong><br><br>" +
-      "Package: " +
-      selectedPackage.coins.toLocaleString() +
-      " Coins<br>" +
-      "Amount: $" +
-      selectedPackage.price +
-      " USD<br><br>" +
-      "PayPal Order ID:<br>" +
-      (
-        data.orderId ||
-        data.id ||
-        "Created"
+    if (!data.approvalUrl) {
+
+      throw new Error(
+        "PayPal approval link was not returned."
       );
+    }
 
-    console.log(
-      "PayPal order:",
-      data
+
+    localStorage.setItem(
+      "zynora_pending_order",
+      JSON.stringify({
+        orderId: data.orderId,
+        packageId: data.packageId,
+        coins: data.coins,
+        amount: data.amount
+      })
     );
+
+
+    window.location.href =
+      data.approvalUrl;
 
   } catch (error) {
 
     console.error(
-      "PayPal error:",
+      "PayPal checkout error:",
       error
     );
+
+    result.style.display =
+      "block";
 
     result.className =
       "error";
@@ -511,13 +487,13 @@ async function createPayPalOrder() {
     result.innerHTML =
       "<strong>PAYMENT ERROR ❌</strong><br><br>" +
       error.message;
+
+    button.disabled =
+      false;
+
+    button.textContent =
+      "CONTINUE TO PAYPAL";
   }
-
-  button.disabled =
-    false;
-
-  button.textContent =
-    "CONTINUE TO PAYPAL";
 }
 
 </script>
