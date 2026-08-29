@@ -152,13 +152,6 @@ body {
 }
 
 
-/*
-Camera is hidden normally.
-
-It appears ONLY after
-EDIT PROFILE is pressed.
-*/
-
 .camera-button {
   display: none;
 
@@ -617,10 +610,6 @@ EDIT PROFILE is pressed.
 <main class="page">
 
 
-<!-- =========================
-     PROFILE
-========================= -->
-
 <section class="profile-card">
 
 
@@ -685,10 +674,6 @@ EDIT PROFILE is pressed.
 
 
 
-<!-- =========================
-     EDIT PANEL
-========================= -->
-
 <section
   class="edit-panel"
   id="editPanel">
@@ -727,10 +712,6 @@ EDIT PROFILE is pressed.
 </section>
 
 
-
-<!-- =========================
-     WALLET
-========================= -->
 
 <section class="wallet-card">
 
@@ -782,10 +763,6 @@ EDIT PROFILE is pressed.
 </button>
 
 
-
-<!-- =========================
-     ACCOUNT
-========================= -->
 
 <div class="section-title">
 
@@ -885,10 +862,6 @@ EDIT PROFILE is pressed.
 
 
 
-<!-- =========================
-     BOTTOM NAV
-========================= -->
-
 <nav class="bottom-nav">
 
 
@@ -986,8 +959,13 @@ const SUPABASE_KEY =
 "sb_publishable__GsW9RahFD_XDWJTFzh9eQ_dNBZfa32";
 
 
+/*
+  Uses your existing Supabase
+  Storage bucket.
+*/
+
 const AVATAR_BUCKET =
-"avatars";
+"Media";
 
 
 const supabaseClient =
@@ -1108,7 +1086,7 @@ function hideStatus() {
 
 
 /* =========================
-   AVATAR
+   AVATAR DISPLAY
 ========================= */
 
 function showAvatar(
@@ -1133,6 +1111,11 @@ function showAvatar(
 
 
   } else {
+
+
+    avatarImage.removeAttribute(
+      "src"
+    );
 
 
     avatarImage.style.display =
@@ -1319,7 +1302,7 @@ async function loadWallet() {
 
 
 /* =========================
-   OPEN / CLOSE EDIT
+   OPEN / CLOSE EDIT PROFILE
 ========================= */
 
 editButton.addEventListener(
@@ -1494,7 +1477,7 @@ photoInput.addEventListener(
 
 
 /* =========================
-   UPLOAD PHOTO
+   UPLOAD PROFILE PHOTO
 ========================= */
 
 async function uploadProfilePhoto() {
@@ -1536,8 +1519,13 @@ async function uploadProfilePhoto() {
   }
 
 
+  /*
+    Every user gets their own
+    profile-photo folder.
+  */
+
   const filePath =
-    `${userId}/profile-${Date.now()}.${extension}`;
+    `profile-photos/${userId}/profile-${Date.now()}.${extension}`;
 
 
   const {
@@ -1579,6 +1567,18 @@ async function uploadProfilePhoto() {
     .getPublicUrl(
       filePath
     );
+
+
+  if (
+    !data ||
+    !data.publicUrl
+  ) {
+
+    throw new Error(
+      "Unable to create profile photo URL."
+    );
+
+  }
 
 
   return data.publicUrl;
@@ -1850,7 +1850,7 @@ async () => {
 
 
 /* =========================
-   REFRESH
+   PAGE REFRESH
 ========================= */
 
 document.addEventListener(
@@ -1873,12 +1873,6 @@ async () => {
       await loadWallet();
 
     }
-
-
-    /*
-    Always hide camera after
-    returning to Profile.
-    */
 
 
     editPanel.style.display =
@@ -1917,11 +1911,6 @@ async function startProfile() {
 
 
   await loadWallet();
-
-
-  /*
-  Camera starts hidden.
-  */
 
 
   cameraButton.style.display =
