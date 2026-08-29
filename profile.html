@@ -1,1194 +1,861 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Zynora Profile</title>
+  <title>Zynora Profile</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-body{
-min-height:100vh;
-background:
-radial-gradient(circle at 50% 5%,rgba(145,55,255,.20),transparent 32%),
-#08070c;
-color:#fff;
-font-family:"Playfair Display",Georgia,serif;
-padding-bottom:105px;
-}
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding-bottom: 105px;
+      background:
+        radial-gradient(circle at top, #311146 0%, #12051f 38%, #08080d 72%);
+      color: white;
+      font-family: Georgia, "Times New Roman", serif;
+    }
 
-header{
-height:90px;
-display:flex;
-align-items:center;
-padding:0 20px;
-background:#111016;
-border-bottom:1px solid rgba(173,77,255,.25);
-}
+    .topbar {
+      padding: 32px 26px 24px;
+      background: #0d0d13;
+      border-bottom: 1px solid rgba(190, 78, 255, 0.25);
+    }
 
-.logo{
-font-family:"Cinzel",serif;
-font-size:34px;
-font-weight:700;
-letter-spacing:-2px;
-background:linear-gradient(90deg,#fff,#d19aff,#8e38ff);
--webkit-background-clip:text;
-background-clip:text;
-color:transparent;
-}
+    .logo {
+      font-size: 46px;
+      font-weight: bold;
+      letter-spacing: -2px;
+      background: linear-gradient(
+        90deg,
+        #ffffff,
+        #e989ff,
+        #8d2cff
+      );
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
 
-main{
-max-width:650px;
-margin:auto;
-padding:25px 18px 35px;
-}
+    .page {
+      width: 100%;
+      max-width: 700px;
+      margin: auto;
+      padding: 36px 24px;
+    }
 
-.account-card{
-display:flex;
-align-items:center;
-justify-content:space-between;
-gap:12px;
-padding:17px;
-border-radius:20px;
-background:linear-gradient(135deg,rgba(117,35,200,.24),rgba(40,25,70,.45));
-border:1px solid rgba(173,77,255,.25);
-margin-bottom:28px;
-cursor:pointer;
-}
+    .profile-card {
+      background: #121119;
+      border: 1px solid rgba(208, 84, 255, 0.25);
+      border-radius: 30px;
+      padding: 28px;
+      text-align: center;
+    }
 
-.account-left{
-display:flex;
-align-items:center;
-gap:12px;
-}
+    .avatar {
+      width: 105px;
+      height: 105px;
+      border-radius: 50%;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background:
+        linear-gradient(135deg, #8c20df, #e04cff);
+      font-family: Arial, sans-serif;
+      font-size: 42px;
+      font-weight: 900;
+      box-shadow: 0 0 28px rgba(198, 66, 255, 0.3);
+    }
 
-.account-icon{
-width:45px;
-height:45px;
-border-radius:50%;
-display:flex;
-align-items:center;
-justify-content:center;
-background:linear-gradient(135deg,#a84fff,#7521e4);
-font-size:21px;
-}
+    #profileName {
+      font-size: 30px;
+      margin-top: 18px;
+    }
 
-.account-title{
-font-family:"Cinzel",serif;
-font-size:15px;
-}
+    #profileEmail {
+      color: #aaa4af;
+      font-family: Arial, sans-serif;
+      margin-top: 7px;
+      word-break: break-word;
+    }
 
-.account-email{
-color:#9994a2;
-font-size:11px;
-margin-top:4px;
-word-break:break-all;
-}
+    .edit-button {
+      margin-top: 20px;
+      padding: 13px 28px;
+      border: 1px solid #c84cff;
+      border-radius: 18px;
+      background: transparent;
+      color: #df7cff;
+      font-family: inherit;
+      font-size: 17px;
+      cursor: pointer;
+    }
 
-.arrow{
-color:#a94dff;
-font-size:25px;
-}
+    .wallet-card {
+      margin-top: 26px;
+      padding: 27px;
+      border-radius: 30px;
+      background:
+        radial-gradient(circle at left, rgba(189, 47, 255, .55), transparent 60%),
+        linear-gradient(135deg, #7717c7, #321047);
+      border: 2px solid rgba(224, 99, 255, .7);
+    }
 
-.profile{
-text-align:center;
-}
+    .wallet-label {
+      color: #eee5f4;
+      font-size: 18px;
+      text-transform: uppercase;
+    }
 
-.avatar-wrap{
-position:relative;
-width:135px;
-height:135px;
-margin:0 auto 19px;
-}
+    .wallet-row {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-top: 14px;
+    }
 
-.avatar{
-width:135px;
-height:135px;
-border-radius:50%;
-object-fit:cover;
-border:3px solid rgba(190,120,255,.8);
-background:linear-gradient(135deg,#a84fff,#7521e4);
-box-shadow:0 0 35px rgba(140,50,255,.4);
-display:none;
-}
+    .coin-icon {
+      font-size: 52px;
+    }
 
-.letter{
-position:absolute;
-inset:0;
-border-radius:50%;
-display:flex;
-align-items:center;
-justify-content:center;
-background:linear-gradient(135deg,#8e38ff,#42105f);
-border:3px solid rgba(190,120,255,.8);
-font-family:"Cinzel",serif;
-font-size:54px;
-font-weight:700;
-}
+    #coinBalance {
+      font-size: 60px;
+    }
 
-.profile h1{
-font-family:"Cinzel",serif;
-font-size:29px;
-margin-bottom:6px;
-}
+    .wallet-note {
+      margin-top: 14px;
+      color: #e3d9e8;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+    }
 
-.welcome{
-color:#9994a2;
-font-style:italic;
-}
+    .buy-button {
+      width: 100%;
+      margin-top: 20px;
+      padding: 18px;
+      border: none;
+      border-radius: 18px;
+      background: linear-gradient(
+        90deg,
+        #8d20df,
+        #db47ff
+      );
+      color: white;
+      font-family: inherit;
+      font-weight: bold;
+      font-size: 20px;
+      cursor: pointer;
+    }
 
-.edit-btn{
-width:auto;
-padding:12px 22px;
-margin-top:17px;
-border-radius:16px;
-border:1px solid rgba(173,77,255,.45);
-background:linear-gradient(135deg,rgba(168,79,255,.30),rgba(117,33,228,.24));
-color:#fff;
-font-family:"Cinzel",serif;
-font-size:11px;
-font-weight:700;
-}
+    .section-title {
+      margin-top: 38px;
+      margin-bottom: 18px;
+      font-size: 27px;
+      text-transform: uppercase;
+    }
 
-.coin-card{
-margin-top:27px;
-padding:18px;
-border-radius:20px;
-display:flex;
-align-items:center;
-justify-content:space-between;
-background:linear-gradient(135deg,#201129,#131018);
-border:1px solid rgba(173,77,255,.22);
-}
+    .menu {
+      overflow: hidden;
+      background: #121119;
+      border: 1px solid rgba(255, 255, 255, .08);
+      border-radius: 25px;
+    }
 
-.coin-title{
-font-family:"Cinzel",serif;
-font-size:13px;
-}
+    .menu-item {
+      width: 100%;
+      padding: 21px;
+      border: 0;
+      border-bottom: 1px solid rgba(255,255,255,.07);
+      background: transparent;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: inherit;
+      font-size: 19px;
+      text-align: left;
+      cursor: pointer;
+    }
 
-.coin-sub{
-color:#9994a2;
-font-size:11px;
-margin-top:4px;
-}
+    .menu-item:last-child {
+      border-bottom: 0;
+    }
 
-.coin-number{
-font-family:"Cinzel",serif;
-font-size:23px;
-color:#ffd75c;
-}
+    .arrow {
+      color: #b44cff;
+    }
 
-#status{
-display:none;
-margin-top:14px;
-padding:12px;
-border-radius:13px;
-background:#17131e;
-border:1px solid rgba(173,77,255,.18);
-color:#c7bdce;
-text-align:center;
-font-size:12px;
-}
+    #status {
+      margin-top: 24px;
+      padding: 17px;
+      border-radius: 18px;
+      background: #101017;
+      color: #c2bbc8;
+      font-family: Arial, sans-serif;
+      display: none;
+      line-height: 1.5;
+    }
 
-.section{
-margin-top:28px;
-}
+    .edit-panel {
+      margin-top: 22px;
+      padding: 22px;
+      border-radius: 22px;
+      background: #121119;
+      display: none;
+    }
 
-.section-title{
-font-family:"Cinzel",serif;
-font-size:16px;
-margin-bottom:12px;
-}
+    .edit-panel input {
+      width: 100%;
+      padding: 16px;
+      border: 1px solid rgba(207, 77, 255, .35);
+      border-radius: 15px;
+      background: #09090e;
+      color: white;
+      font-size: 17px;
+      outline: none;
+    }
 
-.menu-item{
-width:100%;
-padding:17px;
-margin-bottom:11px;
-display:flex;
-align-items:center;
-gap:14px;
-border-radius:18px;
-border:1px solid rgba(255,255,255,.07);
-background:#15141b;
-color:#fff;
-font-family:"Playfair Display",serif;
-font-size:16px;
-text-align:left;
-}
+    .save-button {
+      width: 100%;
+      margin-top: 14px;
+      padding: 16px;
+      border: 0;
+      border-radius: 15px;
+      background: #ac2be5;
+      color: white;
+      font-weight: bold;
+      font-size: 17px;
+    }
 
-.menu-icon{
-width:35px;
-text-align:center;
-font-size:21px;
-}
+    .login-box {
+      display: none;
+      margin-top: 25px;
+      padding: 22px;
+      background: #22131f;
+      border-radius: 20px;
+      text-align: center;
+    }
 
-.menu-text{
-flex:1;
-}
+    .login-box a {
+      color: #df67ff;
+      text-decoration: none;
+      font-weight: bold;
+    }
 
-.settings-box{
-overflow:hidden;
-border-radius:20px;
-background:linear-gradient(135deg,#18161e,#111017);
-border:1px solid rgba(173,77,255,.18);
-}
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 92px;
+      background: #101016;
+      border-top: 1px solid rgba(177, 74, 255, .3);
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      z-index: 50;
+    }
 
-.setting{
-display:flex;
-align-items:center;
-justify-content:space-between;
-padding:17px;
-border-bottom:1px solid rgba(255,255,255,.06);
-cursor:pointer;
-}
+    .nav-item {
+      text-decoration: none;
+      color: #77717f;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+    }
 
-.setting:last-child{
-border-bottom:none;
-}
+    .nav-icon {
+      font-size: 24px;
+    }
 
-.setting-value{
-font-family:"Cinzel",serif;
-font-size:11px;
-color:#a94dff;
-}
-
-.logout{
-width:100%;
-padding:16px;
-margin-top:18px;
-border-radius:17px;
-border:1px solid rgba(255,70,110,.24);
-background:rgba(80,18,34,.35);
-color:#ff7196;
-font-family:"Cinzel",serif;
-font-size:12px;
-font-weight:700;
-}
-
-.overlay{
-display:none;
-position:fixed;
-inset:0;
-z-index:200;
-background:rgba(0,0,0,.82);
-align-items:center;
-justify-content:center;
-padding:18px;
-}
-
-.overlay.show{
-display:flex;
-}
-
-.popup{
-width:100%;
-max-width:420px;
-padding:23px;
-border-radius:22px;
-background:#15141b;
-border:1px solid rgba(173,77,255,.4);
-}
-
-.popup h2{
-font-family:"Cinzel",serif;
-font-size:20px;
-margin-bottom:17px;
-}
-
-.popup p{
-color:#aaa5b1;
-line-height:1.55;
-font-size:14px;
-}
-
-.popup label{
-display:block;
-color:#aaa5b1;
-font-size:13px;
-margin-bottom:7px;
-}
-
-.popup input[type="text"]{
-width:100%;
-padding:13px;
-margin-bottom:15px;
-border-radius:13px;
-border:1px solid #393440;
-background:#0d0c11;
-color:#fff;
-font-family:"Playfair Display",serif;
-font-size:15px;
-}
-
-.photo-button{
-display:block;
-padding:13px;
-margin-bottom:17px;
-border-radius:14px;
-text-align:center;
-background:linear-gradient(135deg,#a84fff,#7521e4);
-font-family:"Cinzel",serif;
-font-size:11px;
-}
-
-#photoInput{
-display:none;
-}
-
-.popup-actions{
-display:flex;
-gap:9px;
-margin-top:15px;
-}
-
-.popup-actions button{
-flex:1;
-padding:13px;
-border-radius:13px;
-font-family:"Cinzel",serif;
-font-size:11px;
-font-weight:700;
-}
-
-.cancel{
-background:#24212a;
-color:#fff;
-border:1px solid #393440;
-}
-
-.save{
-background:linear-gradient(135deg,#a84fff,#7521e4);
-color:#fff;
-border:0;
-}
-
-.bottom-nav{
-position:fixed;
-left:0;
-right:0;
-bottom:0;
-height:88px;
-display:grid;
-grid-template-columns:repeat(5,1fr);
-background:#111016;
-border-top:1px solid rgba(173,77,255,.2);
-z-index:100;
-}
-
-.nav-item{
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-gap:5px;
-text-decoration:none;
-color:#777582;
-font-family:"Cinzel",serif;
-font-size:8px;
-}
-
-.nav-icon{
-font-size:20px;
-}
-
-.nav-item.active{
-color:#a94dff;
-}
-</style>
+    .nav-item.active {
+      color: #c94dff;
+    }
+  </style>
 </head>
 
 <body>
 
-<header>
-<div class="logo">Zynora</div>
+<header class="topbar">
+  <div class="logo">ZYNORA</div>
 </header>
 
-<main>
 
-<div class="account-card" onclick="openAccount()">
+<main class="page">
 
-<div class="account-left">
+  <section class="profile-card">
 
-<div class="account-icon">👤</div>
+    <div class="avatar" id="avatar">
+      Z
+    </div>
 
-<div>
-<div class="account-title">Account</div>
-<div id="accountEmail" class="account-email">Loading account...</div>
-</div>
+    <div id="profileName">
+      Zynora User
+    </div>
 
-</div>
+    <div id="profileEmail">
+      Loading account...
+    </div>
 
-<div class="arrow">›</div>
+    <button class="edit-button" id="editButton">
+      EDIT PROFILE
+    </button>
 
-</div>
-
-
-<section class="profile">
-
-<div class="avatar-wrap">
-
-<img id="profileImage" class="avatar" alt="Profile picture">
-
-<div id="defaultLetter" class="letter">
-Z
-</div>
-
-</div>
-
-<h1 id="displayName">
-My Profile
-</h1>
-
-<div class="welcome">
-Welcome to Zynora
-</div>
-
-<button class="edit-btn" onclick="openEditor()">
-✎ EDIT PROFILE
-</button>
-
-</section>
+  </section>
 
 
-<div class="coin-card">
+  <section class="edit-panel" id="editPanel">
 
-<div>
-<div class="coin-title">Zynora Coins</div>
-<div class="coin-sub">Your live wallet balance</div>
-</div>
+    <input
+      id="nameInput"
+      type="text"
+      placeholder="Your display name"
+    >
 
-<div class="coin-number">
-🪙 <span id="coinBalance">0</span>
-</div>
+    <button class="save-button" id="saveNameButton">
+      SAVE NAME
+    </button>
 
-</div>
-
-<div id="status"></div>
-
-
-<section class="section">
-
-<div class="section-title">
-Your Zynora
-</div>
-
-<button class="menu-item" onclick="location.href='rewards.html'">
-<span class="menu-icon">🎁</span>
-<span class="menu-text">Rewards</span>
-<span>›</span>
-</button>
-
-<button class="menu-item" onclick="location.href='studio.html'">
-<span class="menu-icon">✨</span>
-<span class="menu-text">AI Studio</span>
-<span>›</span>
-</button>
-
-<button class="menu-item" onclick="location.href='creator.html'">
-<span class="menu-icon">🎬</span>
-<span class="menu-text">Creator Studio</span>
-<span>›</span>
-</button>
-
-<button class="menu-item" onclick="openHelp()">
-<span class="menu-icon">?</span>
-<span class="menu-text">Help & Support</span>
-<span>›</span>
-</button>
-
-</section>
+  </section>
 
 
-<section class="section">
+  <section class="wallet-card">
 
-<div class="section-title">
-App Settings
-</div>
+    <div class="wallet-label">
+      Your Zynora Coins
+    </div>
 
-<div class="settings-box">
+    <div class="wallet-row">
 
-<div class="setting" onclick="toggleNotifications()">
-<span>Notifications</span>
-<span id="notificationValue" class="setting-value">Off</span>
-</div>
+      <div class="coin-icon">
+        🪙
+      </div>
 
-<div class="setting" onclick="toggleAutoplay()">
-<span>Autoplay</span>
-<span id="autoplayValue" class="setting-value">On</span>
-</div>
+      <div id="coinBalance">
+        0
+      </div>
 
-<div class="setting" onclick="cycleQuality()">
-<span>Video Quality</span>
-<span id="qualityValue" class="setting-value">Auto</span>
-</div>
+    </div>
 
-</div>
+    <div class="wallet-note">
+      Your real Zynora wallet balance
+    </div>
 
-<button class="logout" onclick="logout()">
-LOG OUT
-</button>
+  </section>
 
-</section>
+
+  <button class="buy-button" id="buyCoinsButton">
+    BUY ZYNORA COINS
+  </button>
+
+
+  <div class="section-title">
+    Account
+  </div>
+
+
+  <div class="menu">
+
+    <button class="menu-item" id="rewardsButton">
+      <span>🎁 Rewards</span>
+      <span class="arrow">›</span>
+    </button>
+
+    <button class="menu-item" id="libraryButton">
+      <span>▣ My Library</span>
+      <span class="arrow">›</span>
+    </button>
+
+    <button class="menu-item" id="settingsButton">
+      <span>⚙ Settings</span>
+      <span class="arrow">›</span>
+    </button>
+
+    <button class="menu-item" id="logoutButton">
+      <span>↪ Log Out</span>
+      <span class="arrow">›</span>
+    </button>
+
+  </div>
+
+
+  <div id="loginBox" class="login-box">
+    You are not logged into Zynora.
+    <br><br>
+    <a href="login.html">LOGIN</a>
+  </div>
+
+
+  <div id="status"></div>
 
 </main>
 
 
-<!-- EDIT PROFILE -->
-
-<div id="editor" class="overlay">
-
-<div class="popup">
-
-<h2>Edit Profile</h2>
-
-<label>Display Name</label>
-
-<input
-id="nameInput"
-type="text"
-maxlength="30"
-placeholder="Enter your name">
-
-<label for="photoInput" class="photo-button">
-📷 CHOOSE PROFILE PICTURE
-</label>
-
-<input
-id="photoInput"
-type="file"
-accept="image/*">
-
-<div class="popup-actions">
-
-<button class="cancel" onclick="closeEditor()">
-Cancel
-</button>
-
-<button class="save" onclick="saveProfile()">
-Save
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- ACCOUNT -->
-
-<div id="accountPopup" class="overlay">
-
-<div class="popup">
-
-<h2>Account</h2>
-
-<p id="accountInfo">
-Loading your account...
-</p>
-
-<div class="popup-actions">
-
-<button class="save" onclick="closePopup('accountPopup')">
-Close
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- HELP -->
-
-<div id="helpPopup" class="overlay">
-
-<div class="popup">
-
-<h2>Help & Support</h2>
-
-<p>
-Welcome to Zynora Support.
-</p>
-
-<p style="margin-top:10px;">
-Help with episodes, AI Studio, coins, rewards, streaming and your account will appear here.
-</p>
-
-<div class="popup-actions">
-
-<button class="save" onclick="closePopup('helpPopup')">
-Close
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-
 <nav class="bottom-nav">
 
-<a href="index.html" class="nav-item">
-<span class="nav-icon">⌂</span>
-Home
-</a>
+  <a href="index.html" class="nav-item">
+    <div class="nav-icon">⌂</div>
+    <div>HOME</div>
+  </a>
 
-<a href="discover.html" class="nav-item">
-<span class="nav-icon">◉</span>
-Discover
-</a>
+  <a href="discover.html" class="nav-item">
+    <div class="nav-icon">◉</div>
+    <div>DISCOVER</div>
+  </a>
 
-<a href="rewards.html" class="nav-item">
-<span class="nav-icon">🎁</span>
-Rewards
-</a>
+  <a href="rewards.html" class="nav-item">
+    <div class="nav-icon">🎁</div>
+    <div>REWARDS</div>
+  </a>
 
-<a href="library.html" class="nav-item">
-<span class="nav-icon">▣</span>
-Library
-</a>
+  <a href="library.html" class="nav-item">
+    <div class="nav-icon">▣</div>
+    <div>LIBRARY</div>
+  </a>
 
-<a href="profile.html" class="nav-item active">
-<span class="nav-icon">●</span>
-Profile
-</a>
+  <a href="profile.html" class="nav-item active">
+    <div class="nav-icon">●</div>
+    <div>PROFILE</div>
+  </a>
 
 </nav>
 
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <script>
 
-const client =
-supabase.createClient(
-"https://ozshekxpuvganemaajms.supabase.co",
-"sb_publishable__GsW9RahFD_XDWJTFzh9eQ_dNBZfa32"
+const SUPABASE_URL =
+  "https://ozshekxpuvganemaajms.supabase.co";
+
+const SUPABASE_KEY =
+  "sb_publishable__GsW9RahFD_XDWJTFzh9eQ_dNBZfa32";
+
+
+const supabaseClient =
+  window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
+
+
+let currentSession =
+  null;
+
+
+const coinBalance =
+  document.getElementById(
+    "coinBalance"
+  );
+
+const profileName =
+  document.getElementById(
+    "profileName"
+  );
+
+const profileEmail =
+  document.getElementById(
+    "profileEmail"
+  );
+
+const avatar =
+  document.getElementById(
+    "avatar"
+  );
+
+const statusBox =
+  document.getElementById(
+    "status"
+  );
+
+const loginBox =
+  document.getElementById(
+    "loginBox"
+  );
+
+const editPanel =
+  document.getElementById(
+    "editPanel"
+  );
+
+const nameInput =
+  document.getElementById(
+    "nameInput"
+  );
+
+
+function showStatus(text) {
+
+  statusBox.style.display =
+    "block";
+
+  statusBox.textContent =
+    text;
+
+}
+
+
+function hideStatus() {
+
+  statusBox.style.display =
+    "none";
+
+}
+
+
+/* ==========================================
+   LOAD USER
+========================================== */
+
+async function loadUser() {
+
+  const {
+    data,
+    error
+  } =
+    await supabaseClient
+      .auth
+      .getSession();
+
+
+  if (error) {
+
+    showStatus(
+      "Unable to load your account."
+    );
+
+    return false;
+  }
+
+
+  currentSession =
+    data.session;
+
+
+  if (!currentSession) {
+
+    loginBox.style.display =
+      "block";
+
+    profileEmail.textContent =
+      "Not logged in";
+
+    return false;
+  }
+
+
+  loginBox.style.display =
+    "none";
+
+
+  const user =
+    currentSession.user;
+
+
+  const savedName =
+    user.user_metadata
+      ?.display_name ||
+    user.user_metadata
+      ?.name ||
+    "Zynora User";
+
+
+  profileName.textContent =
+    savedName;
+
+
+  profileEmail.textContent =
+    user.email || "";
+
+
+  nameInput.value =
+    savedName;
+
+
+  avatar.textContent =
+    savedName
+      .charAt(0)
+      .toUpperCase();
+
+
+  return true;
+
+}
+
+
+/* ==========================================
+   REAL SUPABASE WALLET
+========================================== */
+
+async function loadWallet() {
+
+  if (!currentSession) {
+    return;
+  }
+
+
+  const {
+    data,
+    error
+  } =
+    await supabaseClient
+      .from("wallets")
+      .select("balance")
+      .eq(
+        "user_id",
+        currentSession.user.id
+      )
+      .single();
+
+
+  if (error) {
+
+    console.error(
+      "Wallet error:",
+      error
+    );
+
+    showStatus(
+      "Unable to load your Zynora wallet."
+    );
+
+    return;
+  }
+
+
+  coinBalance.textContent =
+    Number(
+      data.balance
+    ).toLocaleString();
+
+}
+
+
+/* ==========================================
+   EDIT PROFILE
+========================================== */
+
+document
+  .getElementById("editButton")
+  .addEventListener(
+    "click",
+    () => {
+
+      editPanel.style.display =
+        editPanel.style.display ===
+        "block"
+          ? "none"
+          : "block";
+
+    }
+  );
+
+
+document
+  .getElementById("saveNameButton")
+  .addEventListener(
+    "click",
+    async () => {
+
+      const newName =
+        nameInput.value.trim();
+
+
+      if (!newName) {
+
+        showStatus(
+          "Please enter a name."
+        );
+
+        return;
+      }
+
+
+      const {
+        error
+      } =
+        await supabaseClient
+          .auth
+          .updateUser(
+            {
+              data: {
+                display_name:
+                  newName
+              }
+            }
+          );
+
+
+      if (error) {
+
+        showStatus(
+          error.message
+        );
+
+        return;
+      }
+
+
+      profileName.textContent =
+        newName;
+
+
+      avatar.textContent =
+        newName
+          .charAt(0)
+          .toUpperCase();
+
+
+      editPanel.style.display =
+        "none";
+
+
+      showStatus(
+        "Profile updated successfully."
+      );
+
+    }
+  );
+
+
+/* ==========================================
+   BUTTONS
+========================================== */
+
+document
+  .getElementById(
+    "buyCoinsButton"
+  )
+  .addEventListener(
+    "click",
+    () => {
+
+      window.location.href =
+        "buy-coins.html";
+
+    }
+  );
+
+
+document
+  .getElementById(
+    "rewardsButton"
+  )
+  .addEventListener(
+    "click",
+    () => {
+
+      window.location.href =
+        "rewards.html";
+
+    }
+  );
+
+
+document
+  .getElementById(
+    "libraryButton"
+  )
+  .addEventListener(
+    "click",
+    () => {
+
+      window.location.href =
+        "library.html";
+
+    }
+  );
+
+
+document
+  .getElementById(
+    "settingsButton"
+  )
+  .addEventListener(
+    "click",
+    () => {
+
+      showStatus(
+        "Zynora Settings are coming next."
+      );
+
+    }
+  );
+
+
+document
+  .getElementById(
+    "logoutButton"
+  )
+  .addEventListener(
+    "click",
+    async () => {
+
+      await supabaseClient
+        .auth
+        .signOut();
+
+
+      window.location.href =
+        "login.html";
+
+    }
+  );
+
+
+/* ==========================================
+   KEEP BALANCE UPDATED
+========================================== */
+
+document.addEventListener(
+  "visibilitychange",
+  async () => {
+
+    if (
+      document.visibilityState ===
+      "visible"
+    ) {
+
+      await loadUser();
+
+      await loadWallet();
+
+    }
+
+  }
 );
 
-let currentUser=null;
+
+/* ==========================================
+   START
+========================================== */
+
+async function startProfile() {
+
+  const loggedIn =
+    await loadUser();
 
 
-/* START */
+  if (!loggedIn) {
+    return;
+  }
 
-async function startProfile(){
 
-try{
+  await loadWallet();
 
-const result=
-await client.auth.getUser();
 
-currentUser=
-result.data.user||null;
-
-if(!currentUser){
-
-document.getElementById("accountEmail")
-.textContent="Not logged in";
-
-document.getElementById("accountInfo")
-.textContent="Please log in to your Zynora account.";
-
-return;
-}
-
-document.getElementById("accountEmail")
-.textContent=currentUser.email||"Zynora User";
-
-document.getElementById("accountInfo")
-.textContent=
-"Email: "+
-(currentUser.email||"Unavailable");
-
-await loadCoinBalance();
-
-}catch(error){
-
-showStatus(
-"Unable to load account."
-);
-
-}
+  hideStatus();
 
 }
 
 
-/* COINS */
-
-async function loadCoinBalance(){
-
-if(!currentUser)return;
-
-const result=
-await client
-.from("coin_wallets")
-.select("balance")
-.eq("user_id",currentUser.id)
-.maybeSingle();
-
-if(result.error){
-
-showStatus(
-"Unable to load coin balance."
-);
-
-return;
-}
-
-document.getElementById("coinBalance")
-.textContent=
-result.data
-? result.data.balance
-: 0;
-
-}
-
-
-/* PROFILE */
-
-function loadProfile(){
-
-const name=
-localStorage.getItem("zynoraName");
-
-const image=
-localStorage.getItem("zynoraProfileImage");
-
-if(name){
-
-document.getElementById("displayName")
-.textContent=name;
-
-document.getElementById("defaultLetter")
-.textContent=
-name.charAt(0).toUpperCase();
-
-}
-
-if(image){
-showProfileImage(image);
-}
-
-}
-
-
-function openEditor(){
-
-document.getElementById("nameInput")
-.value=
-localStorage.getItem("zynoraName")||"";
-
-document.getElementById("editor")
-.classList.add("show");
-
-}
-
-
-function closeEditor(){
-
-document.getElementById("editor")
-.classList.remove("show");
-
-}
-
-
-function saveProfile(){
-
-const name=
-document.getElementById("nameInput")
-.value.trim();
-
-if(name){
-
-localStorage.setItem(
-"zynoraName",
-name
-);
-
-document.getElementById("displayName")
-.textContent=name;
-
-document.getElementById("defaultLetter")
-.textContent=
-name.charAt(0).toUpperCase();
-
-}
-
-const file=
-document.getElementById("photoInput")
-.files[0];
-
-if(file){
-
-const reader=
-new FileReader();
-
-reader.onload=function(event){
-
-const image=
-event.target.result;
-
-try{
-
-localStorage.setItem(
-"zynoraProfileImage",
-image
-);
-
-showProfileImage(image);
-
-}catch(error){
-
-showStatus(
-"That photo is too large. Try a smaller image."
-);
-
-}
-
-};
-
-reader.readAsDataURL(file);
-
-}
-
-closeEditor();
-
-showStatus(
-"Profile saved."
-);
-
-}
-
-
-function showProfileImage(image){
-
-const photo=
-document.getElementById("profileImage");
-
-const letter=
-document.getElementById("defaultLetter");
-
-photo.src=image;
-
-photo.style.display="block";
-
-letter.style.display="none";
-
-}
-
-
-/* SETTINGS */
-
-function loadSettings(){
-
-if(
-localStorage.getItem("zynoraAutoplay")===null
-){
-
-localStorage.setItem(
-"zynoraAutoplay",
-"on"
-);
-
-}
-
-if(
-localStorage.getItem("zynoraVideoQuality")===null
-){
-
-localStorage.setItem(
-"zynoraVideoQuality",
-"Auto"
-);
-
-}
-
-document.getElementById("autoplayValue")
-.textContent=
-localStorage.getItem("zynoraAutoplay")==="off"
-? "Off"
-: "On";
-
-document.getElementById("qualityValue")
-.textContent=
-localStorage.getItem("zynoraVideoQuality")||"Auto";
-
-
-if(
-"Notification" in window &&
-Notification.permission==="granted" &&
-localStorage.getItem("zynoraNotifications")!=="off"
-){
-
-localStorage.setItem(
-"zynoraNotifications",
-"on"
-);
-
-}
-
-document.getElementById("notificationValue")
-.textContent=
-localStorage.getItem("zynoraNotifications")==="on"
-? "On"
-: "Off";
-
-}
-
-
-/* NOTIFICATIONS */
-
-async function toggleNotifications(){
-
-if(!("Notification" in window)){
-
-showStatus(
-"Notifications are not supported on this browser."
-);
-
-return;
-}
-
-const current=
-localStorage.getItem("zynoraNotifications");
-
-if(current==="on"){
-
-localStorage.setItem(
-"zynoraNotifications",
-"off"
-);
-
-document.getElementById("notificationValue")
-.textContent="Off";
-
-showStatus(
-"Zynora notifications turned off."
-);
-
-return;
-}
-
-if(Notification.permission==="denied"){
-
-showStatus(
-"Notifications are blocked in your browser settings."
-);
-
-return;
-}
-
-try{
-
-const permission=
-Notification.permission==="granted"
-? "granted"
-: await Notification.requestPermission();
-
-if(permission==="granted"){
-
-localStorage.setItem(
-"zynoraNotifications",
-"on"
-);
-
-document.getElementById("notificationValue")
-.textContent="On";
-
-showStatus(
-"Notifications turned on."
-);
-
-}else{
-
-localStorage.setItem(
-"zynoraNotifications",
-"off"
-);
-
-document.getElementById("notificationValue")
-.textContent="Off";
-
-showStatus(
-"Notification permission was not allowed."
-);
-
-}
-
-}catch(error){
-
-showStatus(
-"Unable to change notification setting."
-);
-
-}
-
-}
-
-
-/* AUTOPLAY */
-
-function toggleAutoplay(){
-
-const current=
-localStorage.getItem("zynoraAutoplay")||"on";
-
-const next=
-current==="on"
-? "off"
-: "on";
-
-localStorage.setItem(
-"zynoraAutoplay",
-next
-);
-
-document.getElementById("autoplayValue")
-.textContent=
-next==="on"
-? "On"
-: "Off";
-
-showStatus(
-next==="on"
-? "Autoplay turned on."
-: "Autoplay turned off."
-);
-
-}
-
-
-/* QUALITY */
-
-function cycleQuality(){
-
-const options=[
-"Auto",
-"480p",
-"720p",
-"1080p"
-];
-
-const current=
-localStorage.getItem("zynoraVideoQuality")||"Auto";
-
-let index=
-options.indexOf(current);
-
-if(index<0){
-index=0;
-}
-
-const next=
-options[
-(index+1)%options.length
-];
-
-localStorage.setItem(
-"zynoraVideoQuality",
-next
-);
-
-document.getElementById("qualityValue")
-.textContent=next;
-
-showStatus(
-"Video quality: "+next
-);
-
-}
-
-
-/* POPUPS */
-
-function openAccount(){
-
-document.getElementById("accountPopup")
-.classList.add("show");
-
-}
-
-function openHelp(){
-
-document.getElementById("helpPopup")
-.classList.add("show");
-
-}
-
-function closePopup(id){
-
-document.getElementById(id)
-.classList.remove("show");
-
-}
-
-
-/* LOGOUT */
-
-async function logout(){
-
-if(
-!confirm("Do you want to log out of Zynora?")
-){
-return;
-}
-
-const result=
-await client.auth.signOut();
-
-if(result.error){
-
-showStatus(
-result.error.message
-);
-
-return;
-}
-
-location.href="login.html";
-
-}
-
-
-/* STATUS */
-
-function showStatus(text){
-
-const box=
-document.getElementById("status");
-
-box.textContent=text;
-
-box.style.display="block";
-
-clearTimeout(
-window.profileMessageTimer
-);
-
-window.profileMessageTimer=
-setTimeout(
-function(){
-
-box.style.display="none";
-
-},
-3500
-);
-
-}
-
-
-/* LOAD */
-
-loadProfile();
-loadSettings();
 startProfile();
 
 </script>
