@@ -351,6 +351,8 @@ savedPanel.innerHTML=
 historyPanel.innerHTML=
 '<div class="empty"><h2>Please log in</h2></div>';
 
+document.getElementById("coins").textContent="0";
+
 return;
 
 }
@@ -364,15 +366,29 @@ await loadHistory();
 async function loadCoins(){
 
 const result=await client
-.from("coin_wallets")
+.from("wallets")
 .select("balance")
 .eq("user_id",user.id)
 .maybeSingle();
 
+if(result.error){
+
+console.error("Wallet error:",result.error);
+
+document.getElementById("coins").textContent="0";
+
+return;
+
+}
+
 if(result.data){
 
 document.getElementById("coins").textContent=
-result.data.balance;
+Number(result.data.balance || 0).toLocaleString();
+
+}else{
+
+document.getElementById("coins").textContent="0";
 
 }
 
@@ -501,6 +517,16 @@ Episode ${item.episode_number}
 });
 
 }
+
+document.addEventListener("visibilitychange",async()=>{
+
+if(document.visibilityState==="visible" && user){
+
+await loadCoins();
+
+}
+
+});
 
 start();
 
