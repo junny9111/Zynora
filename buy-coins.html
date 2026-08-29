@@ -1,461 +1,230 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Zynora Buy Coins</title>
 
   <style>
     * {
       box-sizing: border-box;
-      margin: 0;
-      padding: 0;
     }
 
     body {
+      margin: 0;
       min-height: 100vh;
-
-      background:
-        radial-gradient(
-          circle at 50% 10%,
-          rgba(151, 55, 255, 0.25),
-          transparent 35%
-        ),
-        #08070c;
-
-      color: white;
       font-family: Arial, sans-serif;
-
-      padding: 24px 18px 40px;
+      background:
+        radial-gradient(circle at top, #2a103f, #090910 55%);
+      color: #fff;
+      padding: 24px;
     }
 
     .wrap {
       width: 100%;
-      max-width: 460px;
+      max-width: 640px;
       margin: 0 auto;
     }
 
     .logo {
       text-align: center;
-      font-size: 40px;
-      font-weight: bold;
-      margin: 10px 0 8px;
-
-      background:
-        linear-gradient(
-          90deg,
-          #ffffff,
-          #d29cff,
-          #8d32ff
-        );
-
+      font-size: 48px;
+      font-weight: 900;
+      margin: 12px 0 6px;
+      background: linear-gradient(90deg, #fff, #d35cff, #8d2cff);
       -webkit-background-clip: text;
-      background-clip: text;
-
-      color: transparent;
-    }
-
-    h1 {
-      text-align: center;
-      font-size: 26px;
-      margin-bottom: 8px;
+      -webkit-text-fill-color: transparent;
     }
 
     .subtitle {
       text-align: center;
-      color: #aaa4b2;
-      line-height: 1.5;
+      color: #b8b8c8;
       margin-bottom: 28px;
     }
 
-    .balance {
-      background: #121018;
-
-      border:
-        1px solid rgba(170, 80, 255, 0.3);
-
-      border-radius: 20px;
-
-      padding: 18px;
-
-      margin-bottom: 22px;
-
+    .balance-card {
+      background: #11111a;
+      border: 1px solid rgba(211, 92, 255, 0.35);
+      border-radius: 24px;
+      padding: 22px;
+      margin-bottom: 26px;
       text-align: center;
     }
 
     .balance-label {
-      color: #aaa4b2;
+      color: #aaa9b8;
       font-size: 14px;
+      margin-bottom: 8px;
     }
 
     .balance-value {
-      margin-top: 6px;
-      font-size: 28px;
-      font-weight: bold;
-      color: #c987ff;
+      font-size: 38px;
+      font-weight: 900;
+      color: #d35cff;
     }
 
-    .packages {
+    .package-grid {
       display: grid;
+      grid-template-columns: repeat(2, 1fr);
       gap: 14px;
     }
 
     .package {
-      width: 100%;
-
-      border:
-        1px solid rgba(170, 80, 255, 0.28);
-
-      background: #121018;
-
-      border-radius: 20px;
-
-      padding: 20px;
-
-      color: white;
-
-      text-align: left;
-
+      background: #11111a;
+      border: 2px solid transparent;
+      border-radius: 22px;
+      padding: 22px 16px;
       cursor: pointer;
-
+      text-align: center;
       transition: 0.2s ease;
     }
 
     .package.active {
-      border-color: #a742ff;
-
-      box-shadow:
-        0 0 25px rgba(159, 64, 255, 0.18);
-
-      transform: translateY(-1px);
+      border-color: #d35cff;
+      transform: translateY(-2px);
     }
 
-    .coin-row {
-      display: flex;
-
-      justify-content: space-between;
-
-      align-items: center;
-
-      gap: 14px;
+    .package .coins {
+      font-size: 26px;
+      font-weight: 900;
+      color: #d35cff;
     }
 
-    .coins {
-      font-size: 24px;
-      font-weight: bold;
-      color: #d08bff;
-    }
-
-    .price {
-      font-size: 18px;
-      font-weight: bold;
-    }
-
-    .package-name {
+    .package .price {
       margin-top: 8px;
-      color: #aaa4b2;
-      font-size: 14px;
+      color: #d0d0db;
+      font-size: 18px;
     }
 
     .summary {
-      margin-top: 22px;
-
-      background: #0c0b11;
-
-      border-radius: 18px;
-
-      padding: 18px;
-
-      border:
-        1px solid rgba(170, 80, 255, 0.18);
-    }
-
-    .summary-row {
-      display: flex;
-
-      justify-content: space-between;
-
-      gap: 15px;
-
-      margin-bottom: 10px;
-
-      color: #bbb4c5;
-    }
-
-    .summary-row:last-child {
-      margin-bottom: 0;
+      margin-top: 24px;
+      padding: 20px;
+      border-radius: 20px;
+      background: #11111a;
+      border: 1px solid rgba(211, 92, 255, 0.25);
+      text-align: center;
     }
 
     .summary strong {
-      color: white;
+      color: #d35cff;
     }
 
-    #continueButton {
-      width: 100%;
+    #paypal-button-container {
+      margin-top: 24px;
+      min-height: 50px;
+    }
 
-      margin-top: 20px;
-
-      border: none;
-
+    .status {
+      margin-top: 22px;
+      padding: 18px;
+      background: #0c0c13;
       border-radius: 18px;
-
-      padding: 17px;
-
-      background:
-        linear-gradient(
-          90deg,
-          #b341ff,
-          #7417ee
-        );
-
-      color: white;
-
-      font-size: 16px;
-
-      font-weight: bold;
-
-      cursor: pointer;
-    }
-
-    #continueButton:disabled {
-      opacity: 0.55;
-      cursor: not-allowed;
-    }
-
-    #result {
-      display: none;
-
-      margin-top: 18px;
-
-      padding: 16px;
-
-      border-radius: 16px;
-
-      background: #0c0b11;
-
-      line-height: 1.5;
-
+      color: #d6d6df;
+      white-space: pre-wrap;
       word-break: break-word;
-    }
-
-    .error {
-      color: #ff8a9a;
-    }
-
-    .note {
-      text-align: center;
-
-      color: #827b8d;
-
-      font-size: 12px;
-
+      font-size: 14px;
       line-height: 1.5;
+    }
 
-      margin-top: 18px;
+    .login-warning {
+      margin-top: 20px;
+      padding: 18px;
+      border-radius: 18px;
+      background: #21131f;
+      border: 1px solid rgba(255, 90, 90, 0.35);
+      text-align: center;
+      display: none;
+    }
+
+    .login-warning a {
+      color: #d35cff;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    @media (max-width: 520px) {
+      .package-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 
-</head>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+  <script
+    src="https://www.paypal.com/sdk/js?client-id=BAAkUqT2hoXnVB9x48eX60l-_lxVKQkiwSJY61jaN_D1Icg5bOGmE5mcmuN_H6LhhCaqHGOWoJvZEQSDM4&currency=USD&intent=capture">
+  </script>
+</head>
 
 <body>
 
   <div class="wrap">
 
-    <div class="logo">
-      Zynora
+    <div class="logo">Zynora</div>
+    <div class="subtitle">Buy Zynora Coins</div>
+
+    <div class="balance-card">
+      <div class="balance-label">Your Coin Balance</div>
+      <div class="balance-value" id="balanceValue">0</div>
     </div>
 
-    <h1>
-      Buy Coins
-    </h1>
-
-    <div class="subtitle">
-      Choose your Zynora coin package.
-      Payments are currently running in PayPal Sandbox mode.
-    </div>
-
-
-    <div class="balance">
-
-      <div class="balance-label">
-        Current Coin Balance
-      </div>
+    <div class="package-grid">
 
       <div
-        class="balance-value"
-        id="balance"
-      >
-        🪙 0
-      </div>
-
-    </div>
-
-
-    <div class="packages">
-
-
-      <button
         class="package active"
         data-package="coins_250"
         data-coins="250"
-        data-price="4.99"
-        onclick="selectPackage(this)"
-      >
+        data-price="4.99">
+        <div class="coins">🪙 250</div>
+        <div class="price">$4.99 USD</div>
+      </div>
 
-        <div class="coin-row">
-
-          <div class="coins">
-            🪙 250 Coins
-          </div>
-
-          <div class="price">
-            $4.99
-          </div>
-
-        </div>
-
-        <div class="package-name">
-          Mini Pack
-        </div>
-
-      </button>
-
-
-      <button
+      <div
         class="package"
         data-package="coins_500"
         data-coins="500"
-        data-price="9.99"
-        onclick="selectPackage(this)"
-      >
+        data-price="9.99">
+        <div class="coins">🪙 500</div>
+        <div class="price">$9.99 USD</div>
+      </div>
 
-        <div class="coin-row">
-
-          <div class="coins">
-            🪙 500 Coins
-          </div>
-
-          <div class="price">
-            $9.99
-          </div>
-
-        </div>
-
-        <div class="package-name">
-          Starter Pack
-        </div>
-
-      </button>
-
-
-      <button
+      <div
         class="package"
         data-package="coins_1200"
         data-coins="1200"
-        data-price="19.99"
-        onclick="selectPackage(this)"
-      >
+        data-price="19.99">
+        <div class="coins">🪙 1,200</div>
+        <div class="price">$19.99 USD</div>
+      </div>
 
-        <div class="coin-row">
-
-          <div class="coins">
-            🪙 1,200 Coins
-          </div>
-
-          <div class="price">
-            $19.99
-          </div>
-
-        </div>
-
-        <div class="package-name">
-          Popular Pack
-        </div>
-
-      </button>
-
-
-      <button
+      <div
         class="package"
         data-package="coins_3000"
         data-coins="3000"
-        data-price="29.99"
-        onclick="selectPackage(this)"
-      >
-
-        <div class="coin-row">
-
-          <div class="coins">
-            🪙 3,000 Coins
-          </div>
-
-          <div class="price">
-            $29.99
-          </div>
-
-        </div>
-
-        <div class="package-name">
-          Premium Pack
-        </div>
-
-      </button>
-
+        data-price="29.99">
+        <div class="coins">🪙 3,000</div>
+        <div class="price">$29.99 USD</div>
+      </div>
 
     </div>
-
 
     <div class="summary">
-
-      <div class="summary-row">
-
-        <span>
-          Selected
-        </span>
-
-        <strong id="selectedCoins">
-          250 Coins
-        </strong>
-
-      </div>
-
-
-      <div class="summary-row">
-
-        <span>
-          Total
-        </span>
-
-        <strong id="selectedPrice">
-          $4.99 USD
-        </strong>
-
-      </div>
-
+      Selected:
+      <strong id="selectedCoins">250 Coins</strong>
+      for
+      <strong id="selectedPrice">$4.99 USD</strong>
     </div>
 
+    <div id="paypal-button-container"></div>
 
-    <button
-      id="continueButton"
-      onclick="createPayPalOrder()"
-    >
-      CONTINUE TO PAYPAL
-    </button>
+    <div class="login-warning" id="loginWarning">
+      You must be logged in to buy coins.
+      <br /><br />
+      <a href="login.html">Go to Login</a>
+    </div>
 
-
-    <div id="result"></div>
-
-
-    <div class="note">
-      Sandbox testing only.
-      Zynora will verify the payment before coins are credited.
+    <div class="status" id="statusBox">
+      Loading your Zynora account...
     </div>
 
   </div>
@@ -463,267 +232,503 @@
 
 <script>
 
+const SUPABASE_URL =
+  "https://ozshekxpuvganemaajms.supabase.co";
+
+const SUPABASE_KEY =
+  "sb_publishable__GsW9RahFD_XDWJTFzh9eQ_dNBZfa32";
+
 const FUNCTION_URL =
   "https://ozshekxpuvganemaajms.supabase.co/functions/v1/zynora-paypal";
 
-
-let selectedPackage = {
-  packageId: "coins_250",
-  coins: 250,
-  price: "4.99"
-};
-
-
-function loadBalance() {
-
-  const balance =
-    Number(
-      localStorage.getItem(
-        "zynora_coin_balance"
-      ) || "0"
-    );
-
-
-  document.getElementById(
-    "balance"
-  ).textContent =
-    "🪙 " +
-    balance.toLocaleString();
-}
-
-
-function selectPackage(button) {
-
-  document
-    .querySelectorAll(".package")
-    .forEach(item => {
-
-      item.classList.remove(
-        "active"
-      );
-
-    });
-
-
-  button.classList.add(
-    "active"
+const supabaseClient =
+  window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
   );
 
 
-  selectedPackage = {
+let selectedPackage =
+  "coins_250";
 
-    packageId:
-      button.dataset.package,
+let selectedCoins =
+  250;
 
-    coins:
-      Number(
-        button.dataset.coins
-      ),
+let selectedPrice =
+  "4.99";
 
-    price:
-      button.dataset.price
-
-  };
+let currentSession =
+  null;
 
 
-  document.getElementById(
-    "selectedCoins"
-  ).textContent =
-    selectedPackage.coins.toLocaleString() +
-    " Coins";
+const packageCards =
+  document.querySelectorAll(".package");
+
+const selectedCoinsText =
+  document.getElementById("selectedCoins");
+
+const selectedPriceText =
+  document.getElementById("selectedPrice");
+
+const balanceValue =
+  document.getElementById("balanceValue");
+
+const statusBox =
+  document.getElementById("statusBox");
+
+const loginWarning =
+  document.getElementById("loginWarning");
 
 
-  document.getElementById(
-    "selectedPrice"
-  ).textContent =
-    "$" +
-    selectedPackage.price +
-    " USD";
+function showStatus(message) {
+
+  if (typeof message === "string") {
+    statusBox.textContent = message;
+  } else {
+    statusBox.textContent =
+      JSON.stringify(message, null, 2);
+  }
 }
 
 
-async function createPayPalOrder() {
+/* ============================================================
+   PACKAGE SELECTION
+============================================================ */
 
-  const button =
-    document.getElementById(
-      "continueButton"
+packageCards.forEach(
+  (card) => {
+
+    card.addEventListener(
+      "click",
+      () => {
+
+        packageCards.forEach(
+          (item) =>
+            item.classList.remove("active")
+        );
+
+        card.classList.add("active");
+
+        selectedPackage =
+          card.dataset.package;
+
+        selectedCoins =
+          Number(card.dataset.coins);
+
+        selectedPrice =
+          card.dataset.price;
+
+        selectedCoinsText.textContent =
+          `${selectedCoins.toLocaleString()} Coins`;
+
+        selectedPriceText.textContent =
+          `$${selectedPrice} USD`;
+
+      }
     );
 
+  }
+);
 
-  const result =
-    document.getElementById(
-      "result"
+
+/* ============================================================
+   GET LOGGED-IN SESSION
+============================================================ */
+
+async function loadSession() {
+
+  const {
+    data,
+    error
+  } =
+    await supabaseClient.auth.getSession();
+
+  if (error) {
+
+    showStatus(
+      "Unable to load your Zynora session."
     );
 
+    return false;
+  }
 
-  button.disabled =
-    true;
+  currentSession =
+    data.session;
 
+  if (!currentSession) {
 
-  button.textContent =
-    "OPENING PAYPAL...";
+    loginWarning.style.display =
+      "block";
 
+    showStatus(
+      "You are not logged in. Log in to Zynora before purchasing coins."
+    );
 
-  result.style.display =
+    return false;
+  }
+
+  loginWarning.style.display =
     "none";
 
+  return true;
+}
 
-  try {
 
-    const response =
-      await fetch(
-        FUNCTION_URL,
-        {
+/* ============================================================
+   LOAD REAL COIN BALANCE
+============================================================ */
 
-          method:
-            "POST",
+async function loadBalance() {
 
-          headers: {
+  if (!currentSession) {
+    return;
+  }
 
-            "Content-Type":
-              "application/json"
+  const {
+    data,
+    error
+  } =
+    await supabaseClient
+      .from("wallets")
+      .select("balance")
+      .eq(
+        "user_id",
+        currentSession.user.id
+      )
+      .single();
 
-          },
+  if (error) {
 
-          body:
-            JSON.stringify({
+    console.error(
+      "Wallet load error:",
+      error
+    );
 
+    balanceValue.textContent =
+      "0";
+
+    return;
+  }
+
+  balanceValue.textContent =
+    Number(data.balance)
+      .toLocaleString();
+
+}
+
+
+/* ============================================================
+   CREATE PAYPAL ORDER
+============================================================ */
+
+async function createOrder() {
+
+  const sessionLoaded =
+    await loadSession();
+
+  if (!sessionLoaded) {
+
+    throw new Error(
+      "You must be logged in."
+    );
+  }
+
+  showStatus(
+    "Creating secure PayPal order..."
+  );
+
+  const response =
+    await fetch(
+      FUNCTION_URL,
+      {
+        method: "POST",
+
+        headers: {
+          "Content-Type":
+            "application/json",
+
+          "Authorization":
+            `Bearer ${currentSession.access_token}`
+        },
+
+        body:
+          JSON.stringify(
+            {
               action:
                 "create-order",
 
               packageId:
-                selectedPackage.packageId
-
-            })
-
-        }
-      );
-
-
-    const data =
-      await response.json();
-
-
-    if (!response.ok) {
-
-      throw new Error(
-        data.error ||
-        "Unable to create PayPal order."
-      );
-
-    }
-
-
-    if (!data.orderId) {
-
-      throw new Error(
-        "PayPal order ID was not returned."
-      );
-
-    }
-
-
-    if (!data.approvalUrl) {
-
-      throw new Error(
-        "PayPal approval link was not returned."
-      );
-
-    }
-
-
-    localStorage.setItem(
-      "zynora_pending_order",
-      JSON.stringify({
-
-        orderId:
-          data.orderId,
-
-        packageId:
-          data.packageId,
-
-        coins:
-          data.coins,
-
-        amount:
-          data.amount
-
-      })
+                selectedPackage
+            }
+          )
+      }
     );
 
+  const data =
+    await response.json();
 
-    window.location.href =
-      data.approvalUrl;
+  if (!response.ok) {
+
+    showStatus(data);
+
+    throw new Error(
+      data.error ||
+      "Unable to create PayPal order."
+    );
+  }
+
+  showStatus({
+    message:
+      "PayPal order created.",
+    orderId:
+      data.orderId,
+    coins:
+      data.coins,
+    amount:
+      data.amount
+  });
+
+  return data.orderId;
+
+}
 
 
-  } catch (error) {
+/* ============================================================
+   CAPTURE PAYMENT + CREDIT WALLET
+============================================================ */
 
-    console.error(
-      "PayPal checkout error:",
-      error
+async function captureOrder(
+  orderId
+) {
+
+  const sessionLoaded =
+    await loadSession();
+
+  if (!sessionLoaded) {
+
+    throw new Error(
+      "Your Zynora login session expired."
+    );
+  }
+
+  showStatus(
+    "Payment approved. Verifying and adding coins..."
+  );
+
+  const response =
+    await fetch(
+      FUNCTION_URL,
+      {
+        method: "POST",
+
+        headers: {
+          "Content-Type":
+            "application/json",
+
+          "Authorization":
+            `Bearer ${currentSession.access_token}`
+        },
+
+        body:
+          JSON.stringify(
+            {
+              action:
+                "capture-order",
+
+              orderId:
+                orderId
+            }
+          )
+      }
     );
 
+  const data =
+    await response.json();
 
-    result.style.display =
-      "block";
+  if (!response.ok) {
 
+    showStatus(data);
 
-    result.className =
-      "error";
+    throw new Error(
+      data.error ||
+      "Payment verification failed."
+    );
+  }
 
+  if (
+    !data.paymentCompleted
+  ) {
 
-    result.innerHTML =
-      "<strong>PAYMENT ERROR ❌</strong><br><br>" +
-      error.message;
+    throw new Error(
+      "PayPal payment did not complete."
+    );
+  }
 
+  if (
+    data.newBalance !== null &&
+    data.newBalance !== undefined
+  ) {
 
-    button.disabled =
-      false;
+    balanceValue.textContent =
+      Number(
+        data.newBalance
+      ).toLocaleString();
 
+  } else {
 
-    button.textContent =
-      "CONTINUE TO PAYPAL";
+    await loadBalance();
 
   }
 
+  return data;
+
 }
 
 
-const params =
-  new URLSearchParams(
-    window.location.search
-  );
-
+/* ============================================================
+   PAYPAL BUTTON
+============================================================ */
 
 if (
-  params.get("cancelled") === "1"
+  typeof paypal === "undefined"
 ) {
 
-  const result =
-    document.getElementById(
-      "result"
-    );
+  showStatus(
+    "PayPal SDK failed to load."
+  );
+
+} else {
+
+  paypal.Buttons({
+
+    style: {
+      layout:
+        "vertical",
+
+      shape:
+        "rect",
+
+      label:
+        "paypal"
+    },
 
 
-  result.style.display =
-    "block";
+    createOrder:
+      async function() {
+
+        return await createOrder();
+
+      },
 
 
-  result.className =
-    "error";
+    onApprove:
+      async function(data) {
+
+        try {
+
+          const result =
+            await captureOrder(
+              data.orderID
+            );
+
+          showStatus({
+            message:
+              "PAYMENT COMPLETED ✅",
+
+            coinsAdded:
+              result.credited
+                ? result.coins
+                : 0,
+
+            balance:
+              result.newBalance,
+
+            paymentStatus:
+              result.status,
+
+            captureId:
+              result.captureId
+          });
+
+          alert(
+            result.credited
+              ? `${result.coins} Zynora Coins added successfully!`
+              : "Payment already credited previously."
+          );
+
+        } catch (error) {
+
+          showStatus({
+            message:
+              "Payment error",
+            error:
+              error.message
+          });
+
+        }
+
+      },
 
 
-  result.innerHTML =
-    "<strong>PAYMENT CANCELLED</strong><br><br>" +
-    "Your PayPal payment was cancelled. No coins were added.";
+    onCancel:
+      function(data) {
+
+        showStatus({
+          message:
+            "Payment cancelled.",
+          orderId:
+            data.orderID || null
+        });
+
+      },
+
+
+    onError:
+      function(error) {
+
+        showStatus({
+          message:
+            "PayPal checkout error.",
+          error:
+            error?.message ||
+            String(error)
+        });
+
+      }
+
+  })
+  .render(
+    "#paypal-button-container"
+  );
 
 }
 
 
-loadBalance();
+/* ============================================================
+   START PAGE
+============================================================ */
+
+async function startPage() {
+
+  const loggedIn =
+    await loadSession();
+
+  if (!loggedIn) {
+    return;
+  }
+
+  await loadBalance();
+
+  showStatus(
+    "Your Zynora wallet is ready. Choose a coin package and pay securely with PayPal."
+  );
+
+}
+
+
+startPage();
 
 </script>
 
 </body>
-
 </html>
