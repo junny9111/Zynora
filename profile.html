@@ -58,11 +58,18 @@
       text-align: center;
     }
 
-    .avatar {
-      width: 105px;
-      height: 105px;
-      border-radius: 50%;
+    .avatar-wrap {
+      position: relative;
+      width: 110px;
+      height: 110px;
       margin: auto;
+    }
+
+    .avatar {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -72,6 +79,28 @@
       font-size: 42px;
       font-weight: 900;
       box-shadow: 0 0 28px rgba(198, 66, 255, 0.3);
+      border: 2px solid rgba(223, 103, 255, .7);
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: none;
+    }
+
+    .camera-button {
+      position: absolute;
+      right: -4px;
+      bottom: -1px;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 2px solid #121119;
+      background: #b134ee;
+      color: white;
+      font-size: 18px;
+      cursor: pointer;
     }
 
     #profileName {
@@ -211,7 +240,7 @@
       display: none;
     }
 
-    .edit-panel input {
+    .edit-panel input[type="text"] {
       width: 100%;
       padding: 16px;
       border: 1px solid rgba(207, 77, 255, .35);
@@ -220,6 +249,24 @@
       color: white;
       font-size: 17px;
       outline: none;
+    }
+
+    .photo-label {
+      display: block;
+      margin-top: 15px;
+      padding: 16px;
+      border: 1px solid rgba(207, 77, 255, .35);
+      border-radius: 15px;
+      text-align: center;
+      color: #e08aff;
+      background: #0d0c12;
+      cursor: pointer;
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+    }
+
+    #photoInput {
+      display: none;
     }
 
     .save-button {
@@ -289,13 +336,24 @@
   <div class="logo">ZYNORA</div>
 </header>
 
-
 <main class="page">
 
   <section class="profile-card">
 
-    <div class="avatar" id="avatar">
-      Z
+    <div class="avatar-wrap">
+
+      <div class="avatar" id="avatar">
+        <span id="avatarLetter">Z</span>
+        <img id="avatarImage" alt="Profile picture">
+      </div>
+
+      <button
+        class="camera-button"
+        id="cameraButton"
+        type="button">
+        📷
+      </button>
+
     </div>
 
     <div id="profileName">
@@ -321,8 +379,18 @@
       placeholder="Your display name"
     >
 
-    <button class="save-button" id="saveNameButton">
-      SAVE NAME
+    <label class="photo-label" for="photoInput">
+      📷 CHOOSE PROFILE PHOTO
+    </label>
+
+    <input
+      id="photoInput"
+      type="file"
+      accept="image/*"
+    >
+
+    <button class="save-button" id="saveProfileButton">
+      SAVE PROFILE
     </button>
 
   </section>
@@ -438,6 +506,12 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
   "sb_publishable__GsW9RahFD_XDWJTFzh9eQ_dNBZfa32";
 
+/*
+  If your existing profile-photo bucket uses a different name,
+  we only need to change this one line.
+*/
+const AVATAR_BUCKET = "avatars";
+
 
 const supabaseClient =
   window.supabase.createClient(
@@ -446,67 +520,70 @@ const supabaseClient =
   );
 
 
-let currentSession =
-  null;
+let currentSession = null;
+let selectedPhoto = null;
 
 
 const coinBalance =
-  document.getElementById(
-    "coinBalance"
-  );
+  document.getElementById("coinBalance");
 
 const profileName =
-  document.getElementById(
-    "profileName"
-  );
+  document.getElementById("profileName");
 
 const profileEmail =
-  document.getElementById(
-    "profileEmail"
-  );
+  document.getElementById("profileEmail");
 
-const avatar =
-  document.getElementById(
-    "avatar"
-  );
+const avatarLetter =
+  document.getElementById("avatarLetter");
+
+const avatarImage =
+  document.getElementById("avatarImage");
 
 const statusBox =
-  document.getElementById(
-    "status"
-  );
+  document.getElementById("status");
 
 const loginBox =
-  document.getElementById(
-    "loginBox"
-  );
+  document.getElementById("loginBox");
 
 const editPanel =
-  document.getElementById(
-    "editPanel"
-  );
+  document.getElementById("editPanel");
 
 const nameInput =
-  document.getElementById(
-    "nameInput"
-  );
+  document.getElementById("nameInput");
+
+const photoInput =
+  document.getElementById("photoInput");
 
 
 function showStatus(text) {
-
-  statusBox.style.display =
-    "block";
-
-  statusBox.textContent =
-    text;
-
+  statusBox.style.display = "block";
+  statusBox.textContent = text;
 }
 
 
 function hideStatus() {
+  statusBox.style.display = "none";
+}
 
-  statusBox.style.display =
-    "none";
 
+function showAvatar(name, photoUrl) {
+
+  if (photoUrl) {
+
+    avatarImage.src = photoUrl;
+    avatarImage.style.display = "block";
+    avatarLetter.style.display = "none";
+
+  } else {
+
+    avatarImage.style.display = "none";
+    avatarLetter.style.display = "block";
+
+    avatarLetter.textContent =
+      (name || "Z")
+        .charAt(0)
+        .toUpperCase();
+  }
 }
 
 
@@ -560,11 +637,14 @@ async function loadUser() {
 
 
   const savedName =
-    user.user_metadata
-      ?.display_name ||
-    user.user_metadata
-      ?.name ||
+    user.user_metadata?.display_name ||
+    user.user_metadata?.name ||
     "Zynora User";
+
+
+  const savedAvatar =
+    user.user_metadata?.avatar_url ||
+    "";
 
 
   profileName.textContent =
@@ -579,10 +659,10 @@ async function loadUser() {
     savedName;
 
 
-  avatar.textContent =
-    savedName
-      .charAt(0)
-      .toUpperCase();
+  showAvatar(
+    savedName,
+    savedAvatar
+  );
 
 
   return true;
@@ -632,14 +712,14 @@ async function loadWallet() {
 
   coinBalance.textContent =
     Number(
-      data.balance
+      data.balance || 0
     ).toLocaleString();
 
 }
 
 
 /* ==========================================
-   EDIT PROFILE
+   EDIT PROFILE PANEL
 ========================================== */
 
 document
@@ -649,8 +729,7 @@ document
     () => {
 
       editPanel.style.display =
-        editPanel.style.display ===
-        "block"
+        editPanel.style.display === "block"
           ? "none"
           : "block";
 
@@ -659,10 +738,171 @@ document
 
 
 document
-  .getElementById("saveNameButton")
+  .getElementById("cameraButton")
+  .addEventListener(
+    "click",
+    () => {
+
+      if (!currentSession) {
+        showStatus("Please log in first.");
+        return;
+      }
+
+      photoInput.click();
+
+    }
+  );
+
+
+/* ==========================================
+   PHOTO PREVIEW
+========================================== */
+
+photoInput.addEventListener(
+  "change",
+  () => {
+
+    const file =
+      photoInput.files?.[0];
+
+    if (!file) {
+      return;
+    }
+
+
+    if (!file.type.startsWith("image/")) {
+
+      showStatus(
+        "Please choose an image file."
+      );
+
+      photoInput.value = "";
+      return;
+    }
+
+
+    if (file.size > 5 * 1024 * 1024) {
+
+      showStatus(
+        "Profile photo must be smaller than 5 MB."
+      );
+
+      photoInput.value = "";
+      return;
+    }
+
+
+    selectedPhoto = file;
+
+
+    const previewUrl =
+      URL.createObjectURL(file);
+
+
+    avatarImage.src =
+      previewUrl;
+
+    avatarImage.style.display =
+      "block";
+
+    avatarLetter.style.display =
+      "none";
+
+
+    showStatus(
+      "Photo selected. Tap SAVE PROFILE."
+    );
+
+  }
+);
+
+
+/* ==========================================
+   UPLOAD PHOTO
+========================================== */
+
+async function uploadProfilePhoto() {
+
+  if (!selectedPhoto) {
+
+    return (
+      currentSession
+        ?.user
+        ?.user_metadata
+        ?.avatar_url || ""
+    );
+  }
+
+
+  const userId =
+    currentSession.user.id;
+
+
+  const extension =
+    selectedPhoto.name
+      .split(".")
+      .pop()
+      .toLowerCase();
+
+
+  const filePath =
+    `${userId}/profile-${Date.now()}.${extension}`;
+
+
+  const {
+    error: uploadError
+  } =
+    await supabaseClient
+      .storage
+      .from(AVATAR_BUCKET)
+      .upload(
+        filePath,
+        selectedPhoto,
+        {
+          cacheControl: "3600",
+          upsert: true
+        }
+      );
+
+
+  if (uploadError) {
+    throw uploadError;
+  }
+
+
+  const {
+    data
+  } =
+    supabaseClient
+      .storage
+      .from(AVATAR_BUCKET)
+      .getPublicUrl(filePath);
+
+
+  return data.publicUrl;
+
+}
+
+
+/* ==========================================
+   SAVE NAME + PHOTO
+========================================== */
+
+document
+  .getElementById("saveProfileButton")
   .addEventListener(
     "click",
     async () => {
+
+      if (!currentSession) {
+
+        showStatus(
+          "Please log in first."
+        );
+
+        return;
+      }
+
 
       const newName =
         nameInput.value.trim();
@@ -678,48 +918,92 @@ document
       }
 
 
-      const {
-        error
-      } =
-        await supabaseClient
-          .auth
-          .updateUser(
-            {
-              data: {
-                display_name:
-                  newName
-              }
-            }
-          );
-
-
-      if (error) {
-
-        showStatus(
-          error.message
+      const saveButton =
+        document.getElementById(
+          "saveProfileButton"
         );
 
-        return;
+
+      saveButton.disabled =
+        true;
+
+      saveButton.textContent =
+        "SAVING...";
+
+
+      try {
+
+        const avatarUrl =
+          await uploadProfilePhoto();
+
+
+        const {
+          error
+        } =
+          await supabaseClient
+            .auth
+            .updateUser(
+              {
+                data: {
+                  display_name: newName,
+                  avatar_url: avatarUrl
+                }
+              }
+            );
+
+
+        if (error) {
+          throw error;
+        }
+
+
+        profileName.textContent =
+          newName;
+
+
+        showAvatar(
+          newName,
+          avatarUrl
+        );
+
+
+        selectedPhoto =
+          null;
+
+
+        photoInput.value =
+          "";
+
+
+        editPanel.style.display =
+          "none";
+
+
+        showStatus(
+          "Profile updated successfully."
+        );
+
+
+        await loadUser();
+
+      } catch (error) {
+
+        console.error(error);
+
+        showStatus(
+          error.message ||
+          "Unable to update profile."
+        );
+
+      } finally {
+
+        saveButton.disabled =
+          false;
+
+        saveButton.textContent =
+          "SAVE PROFILE";
+
       }
-
-
-      profileName.textContent =
-        newName;
-
-
-      avatar.textContent =
-        newName
-          .charAt(0)
-          .toUpperCase();
-
-
-      editPanel.style.display =
-        "none";
-
-
-      showStatus(
-        "Profile updated successfully."
-      );
 
     }
   );
@@ -819,13 +1103,15 @@ document.addEventListener(
   async () => {
 
     if (
-      document.visibilityState ===
-      "visible"
+      document.visibilityState === "visible"
     ) {
 
-      await loadUser();
+      const loggedIn =
+        await loadUser();
 
-      await loadWallet();
+      if (loggedIn) {
+        await loadWallet();
+      }
 
     }
 
