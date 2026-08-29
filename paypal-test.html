@@ -1,15 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
-  <title>Zynora PayPal Test</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zynora PayPal Sandbox Test</title>
 
   <style>
     * {
@@ -20,333 +14,254 @@
 
     body {
       min-height: 100vh;
-
-      background:
-        radial-gradient(
-          circle at 50% 15%,
-          rgba(151, 55, 255, 0.25),
-          transparent 35%
-        ),
-        #08070c;
-
-      color: white;
       font-family: Arial, sans-serif;
-
+      background:
+        radial-gradient(circle at top, #23103b 0%, #0b0b12 45%, #07070b 100%);
+      color: #ffffff;
       display: flex;
       align-items: center;
       justify-content: center;
-
-      padding: 25px;
+      padding: 24px;
     }
 
     .card {
       width: 100%;
-      max-width: 430px;
-
-      background: #121018;
-
-      border: 1px solid rgba(170, 80, 255, 0.35);
-      border-radius: 25px;
-
-      padding: 30px 22px;
-
+      max-width: 560px;
+      background: rgba(18, 18, 28, 0.96);
+      border: 2px solid rgba(176, 69, 255, 0.28);
+      border-radius: 28px;
+      padding: 34px 24px;
+      box-shadow: 0 0 40px rgba(154, 61, 255, 0.12);
       text-align: center;
-
-      box-shadow:
-        0 0 40px rgba(140, 40, 255, 0.18);
     }
 
     .logo {
-      font-size: 38px;
-      font-weight: bold;
-
-      margin-bottom: 10px;
-
-      background:
-        linear-gradient(
-          90deg,
-          #ffffff,
-          #d29cff,
-          #8d32ff
-        );
-
+      font-size: 54px;
+      font-weight: 800;
+      margin-bottom: 20px;
+      background: linear-gradient(90deg, #ffffff, #c85cff, #8e2cff);
       -webkit-background-clip: text;
-      background-clip: text;
-
-      color: transparent;
+      -webkit-text-fill-color: transparent;
     }
 
     h1 {
-      font-size: 23px;
-      margin-bottom: 12px;
+      font-size: 32px;
+      margin-bottom: 18px;
     }
 
-    .description {
-      color: #aaa4b2;
-      line-height: 1.5;
-      margin-bottom: 28px;
+    .subtitle {
+      color: #b9b9c5;
+      font-size: 18px;
+      line-height: 1.6;
+      margin-bottom: 30px;
     }
 
     .package {
-      background: #09080d;
-
-      border: 1px solid rgba(170, 80, 255, 0.25);
-      border-radius: 18px;
-
-      padding: 20px;
-      margin-bottom: 22px;
+      border: 2px solid rgba(176, 69, 255, 0.22);
+      border-radius: 24px;
+      padding: 28px 20px;
+      margin-bottom: 28px;
+      background: #0d0d16;
     }
 
     .coins {
-      font-size: 28px;
-      font-weight: bold;
-      color: #c987ff;
+      font-size: 38px;
+      font-weight: 800;
+      color: #d45cff;
+      margin-bottom: 10px;
     }
 
     .price {
-      margin-top: 7px;
-      color: #aaa4b2;
+      color: #c6c6d1;
+      font-size: 20px;
     }
 
     button {
       width: 100%;
-
       border: none;
-      border-radius: 18px;
-
-      padding: 17px;
-
-      background:
-        linear-gradient(
-          90deg,
-          #b341ff,
-          #7417ee
-        );
-
+      border-radius: 20px;
+      padding: 20px;
+      font-size: 20px;
+      font-weight: 800;
       color: white;
-
-      font-size: 16px;
-      font-weight: bold;
-
       cursor: pointer;
+      background: linear-gradient(90deg, #bb2cff, #6d19ff);
     }
 
     button:disabled {
-      opacity: 0.55;
+      opacity: 0.6;
       cursor: not-allowed;
     }
 
-    #result {
-      margin-top: 22px;
-
-      padding: 15px;
-
-      border-radius: 14px;
-
-      background: #09080d;
-
-      color: #bbb4c5;
-
-      line-height: 1.5;
-
-      word-break: break-word;
-
+    .result {
       display: none;
+      text-align: left;
+      margin-top: 28px;
+      padding: 22px;
+      border-radius: 20px;
+      background: #0b0b13;
+      border: 1px solid rgba(255,255,255,0.08);
+      word-break: break-word;
     }
 
-    .success {
-      color: #75f0a7 !important;
+    .result.show {
+      display: block;
     }
 
-    .error {
-      color: #ff8a9a !important;
+    .result h2 {
+      font-size: 22px;
+      margin-bottom: 16px;
+      color: #ffffff;
+    }
+
+    pre {
+      white-space: pre-wrap;
+      word-break: break-word;
+      color: #d9d9e5;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .error h2 {
+      color: #ff7c98;
+    }
+
+    .success h2 {
+      color: #9cffb0;
     }
   </style>
 </head>
-
 
 <body>
 
   <div class="card">
 
-    <div class="logo">
-      Zynora
-    </div>
+    <div class="logo">Zynora</div>
 
-    <h1>
-      PayPal Sandbox Test
-    </h1>
+    <h1>PayPal Sandbox Test</h1>
 
-    <div class="description">
-      This page tests whether Zynora can communicate
-      securely with PayPal through Supabase.
-    </div>
-
+    <p class="subtitle">
+      This page tests whether Zynora can communicate securely
+      with PayPal through Supabase.
+    </p>
 
     <div class="package">
-
-      <div class="coins">
-        🪙 500 Coins
-      </div>
-
-      <div class="price">
-        Test Package — $4.99 USD
-      </div>
-
+      <div class="coins">🪙 250 Coins</div>
+      <div class="price">Test Package — $4.99 USD</div>
     </div>
 
-
-    <button
-      id="testButton"
-      onclick="testPayPal()"
-    >
+    <button id="testButton">
       TEST PAYPAL PAYMENT
     </button>
 
-
-    <div id="result"></div>
+    <div id="result" class="result">
+      <h2 id="resultTitle"></h2>
+      <pre id="resultBody"></pre>
+    </div>
 
   </div>
 
+  <script>
+    const FUNCTION_URL =
+      "https://ozshekxpuvganemaajms.supabase.co/functions/v1/zynora-paypal";
 
-<script>
+    const testButton =
+      document.getElementById("testButton");
 
-const FUNCTION_URL =
-  "https://ozshekxpuvganemaajms.supabase.co/functions/v1/zynora-paypal";
+    const result =
+      document.getElementById("result");
 
+    const resultTitle =
+      document.getElementById("resultTitle");
 
-async function testPayPal() {
+    const resultBody =
+      document.getElementById("resultBody");
 
-  const button =
-    document.getElementById("testButton");
+    function showResult(title, data, type) {
+      result.className =
+        "result show " + type;
 
-  const result =
-    document.getElementById("result");
+      resultTitle.textContent =
+        title;
 
+      resultBody.textContent =
+        JSON.stringify(data, null, 2);
+    }
 
-  button.disabled = true;
+    testButton.addEventListener(
+      "click",
+      async () => {
 
-  button.textContent =
-    "CONNECTING TO PAYPAL...";
+        testButton.disabled = true;
+        testButton.textContent =
+          "TESTING...";
 
+        result.className = "result";
 
-  result.style.display =
-    "block";
+        try {
 
-  result.className =
-    "";
+          const response =
+            await fetch(
+              FUNCTION_URL,
+              {
+                method: "POST",
 
-  result.textContent =
-    "Contacting Zynora payment server...";
+                headers: {
+                  "Content-Type":
+                    "application/json",
+                },
 
+                body: JSON.stringify({
+                  action:
+                    "create-order",
 
-  try {
+                  packageId:
+                    "coins_250",
+                }),
+              }
+            );
 
-    const response =
-      await fetch(
-        FUNCTION_URL,
-        {
-          method: "POST",
+          const data =
+            await response.json();
 
-          headers: {
-            "Content-Type":
-              "application/json"
-          },
+          if (!response.ok) {
 
-          body:
-            JSON.stringify({
-              action: "create-order",
-              packageId: "coins_500"
-            })
+            showResult(
+              "PAYPAL TEST ERROR ❌",
+              data,
+              "error"
+            );
+
+            return;
+          }
+
+          showResult(
+            "PAYPAL RESPONSE ✅",
+            data,
+            "success"
+          );
+
+        } catch (error) {
+
+          showResult(
+            "CONNECTION ERROR ❌",
+            {
+              message:
+                error.message,
+            },
+            "error"
+          );
+
+        } finally {
+
+          testButton.disabled = false;
+
+          testButton.textContent =
+            "TEST PAYPAL PAYMENT";
         }
-      );
-
-
-    const text =
-      await response.text();
-
-
-    let data;
-
-
-    try {
-
-      data =
-        JSON.parse(text);
-
-    } catch {
-
-      data = {
-        rawResponse: text
-      };
-
-    }
-
-
-    if (!response.ok) {
-
-      throw new Error(
-        data.error ||
-        data.message ||
-        data.rawResponse ||
-        "Payment server returned an error."
-      );
-
-    }
-
-
-    result.className =
-      "success";
-
-
-    result.innerHTML =
-      "<strong>SUCCESS ✅</strong><br><br>" +
-      "Zynora connected successfully to PayPal through Supabase.<br><br>" +
-      "Status: " +
-      (data.status || "CONNECTED") +
-      "<br><br>" +
-      "Order ID:<br>" +
-      (
-        data.orderId ||
-        data.id ||
-        "Order created successfully."
-      );
-
-
-    console.log(
-      "Zynora PayPal response:",
-      data
+      }
     );
-
-  } catch (error) {
-
-    console.error(
-      "Zynora PayPal error:",
-      error
-    );
-
-
-    result.className =
-      "error";
-
-
-    result.innerHTML =
-      "<strong>TEST FAILED ❌</strong><br><br>" +
-      error.message;
-
-  }
-
-
-  button.disabled =
-    false;
-
-  button.textContent =
-    "TEST AGAIN";
-
-}
-
-</script>
+  </script>
 
 </body>
-
 </html>
