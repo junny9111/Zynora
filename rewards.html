@@ -1,702 +1,1303 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Zynora Rewards</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<title>Zynora Rewards</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      background:
-        radial-gradient(circle at top, #321248 0%, #12051f 38%, #08080d 72%);
-      color: white;
-      font-family: Georgia, "Times New Roman", serif;
-      padding-bottom: 110px;
-    }
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
 
-    .topbar {
-      padding: 34px 26px 24px;
-      border-bottom: 1px solid rgba(173, 70, 255, 0.25);
-      background: #0d0d13;
-    }
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    .logo {
-      font-size: 46px;
-      font-weight: 700;
-      letter-spacing: -2px;
-      background: linear-gradient(90deg, #fff, #e989ff, #8d2cff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
+<style>
 
-    .page {
-      max-width: 700px;
-      margin: 0 auto;
-      padding: 42px 24px;
-    }
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
 
-    h1 {
-      margin: 0;
-      font-size: 48px;
-      text-transform: uppercase;
-    }
+body{
+min-height:100vh;
+background:
+radial-gradient(circle at 50% 5%,rgba(139,45,230,.22),transparent 32%),
+#08070c;
+color:white;
+font-family:"Playfair Display",Georgia,serif;
+padding-bottom:110px;
+}
 
-    .subtitle {
-      color: #b0a8b9;
-      font-size: 20px;
-      margin-top: 20px;
-      margin-bottom: 34px;
-    }
+header{
+height:96px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 22px;
+background:#111016;
+border-bottom:1px solid rgba(173,77,255,.24);
+}
 
-    .message {
-      display: none;
-      padding: 18px;
-      border-radius: 20px;
-      margin-bottom: 28px;
-      background: #18131e;
-      border: 1px solid rgba(220, 85, 255, 0.3);
-      text-align: center;
-      font-size: 17px;
-      line-height: 1.5;
-    }
+.logo{
+font-family:"Cinzel",serif;
+font-size:37px;
+font-weight:700;
+letter-spacing:-2px;
+background:linear-gradient(90deg,#ffffff,#d79fff,#8d36ff);
+-webkit-background-clip:text;
+background-clip:text;
+color:transparent;
+}
 
-    .wallet-card {
-      padding: 28px;
-      border-radius: 34px;
-      background:
-        radial-gradient(circle at left, rgba(186, 37, 255, 0.55), transparent 55%),
-        linear-gradient(135deg, #7d19ce, #321048);
-      border: 2px solid rgba(222, 100, 255, 0.75);
-      box-shadow: 0 0 34px rgba(150, 26, 255, 0.2);
-      margin-bottom: 28px;
-    }
+.coin-top{
+padding:10px 14px;
+border-radius:18px;
+background:rgba(130,45,220,.16);
+border:1px solid rgba(173,77,255,.28);
+color:#ffd75c;
+font-family:"Cinzel",serif;
+font-size:13px;
+}
 
-    .wallet-label {
-      font-size: 18px;
-      color: #efe5f4;
-      text-transform: uppercase;
-    }
+main{
+max-width:650px;
+margin:auto;
+padding:30px 20px;
+}
 
-    .wallet-balance {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      margin-top: 14px;
-    }
+h1{
+font-family:"Cinzel",serif;
+font-size:31px;
+}
 
-    .coin {
-      font-size: 56px;
-    }
+.subtitle{
+margin-top:7px;
+color:#9994a2;
+font-style:italic;
+line-height:1.5;
+}
 
-    #balance {
-      font-size: 66px;
-      line-height: 1;
-    }
+.wallet-card{
+margin-top:28px;
+padding:28px 24px;
+border-radius:26px;
+background:
+radial-gradient(circle at left,rgba(194,67,255,.48),transparent 62%),
+linear-gradient(135deg,#6d19b6,#31103f);
+border:1px solid rgba(223,99,255,.65);
+box-shadow:0 10px 35px rgba(109,25,182,.18);
+}
 
-    .buy-button {
-      width: 100%;
-      border: none;
-      border-radius: 20px;
-      padding: 19px 20px;
-      margin-bottom: 38px;
-      font-family: inherit;
-      font-size: 22px;
-      font-weight: 700;
-      cursor: pointer;
-      color: white;
-      background: linear-gradient(90deg, #8a20df, #d943ff);
-      box-shadow: 0 8px 24px rgba(174, 46, 255, 0.25);
-    }
+.wallet-label{
+font-family:"Cinzel",serif;
+font-size:13px;
+color:#e8d8ef;
+}
 
-    .section-title {
-      font-size: 30px;
-      text-transform: uppercase;
-      margin-bottom: 22px;
-    }
+.wallet-row{
+display:flex;
+align-items:center;
+gap:14px;
+margin-top:10px;
+}
 
-    .reward-card {
-      background: #131219;
-      border: 1px solid rgba(255, 255, 255, 0.09);
-      border-radius: 28px;
-      padding: 24px;
-      margin-bottom: 20px;
-    }
+.coin-icon{
+font-size:46px;
+}
 
-    .reward-top {
-      display: flex;
-      gap: 18px;
-      align-items: center;
-    }
+.balance{
+font-family:"Cinzel",serif;
+font-size:48px;
+font-weight:700;
+}
 
-    .reward-icon {
-      width: 72px;
-      height: 72px;
-      border-radius: 22px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: #281143;
-      font-size: 38px;
-      flex-shrink: 0;
-    }
+.wallet-note{
+margin-top:9px;
+font-family:Arial,sans-serif;
+font-size:13px;
+color:#d8cadf;
+}
 
-    .reward-name {
-      font-size: 27px;
-    }
+.section-title{
+margin-top:34px;
+margin-bottom:15px;
+font-family:"Cinzel",serif;
+font-size:20px;
+}
 
-    .reward-description {
-      margin-top: 8px;
-      color: #aaa4ae;
-      font-size: 18px;
-      line-height: 1.4;
-    }
+.reward-card{
+padding:22px;
+margin-bottom:16px;
+border-radius:24px;
+background:#141319;
+border:1px solid rgba(255,255,255,.08);
+}
 
-    .claim-button {
-      width: 100%;
-      margin-top: 22px;
-      border: 0;
-      border-radius: 18px;
-      padding: 17px;
-      background: linear-gradient(90deg, #8f21df, #d648ff);
-      color: white;
-      font-family: inherit;
-      font-size: 19px;
-      font-weight: 700;
-      cursor: pointer;
-    }
+.reward-head{
+display:flex;
+align-items:center;
+gap:15px;
+}
 
-    .claim-button:disabled {
-      opacity: 0.45;
-      cursor: not-allowed;
-    }
+.reward-icon{
+width:54px;
+height:54px;
+border-radius:18px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:27px;
+background:rgba(151,55,235,.17);
+border:1px solid rgba(183,78,255,.25);
+}
 
-    .login-box {
-      display: none;
-      margin-top: 25px;
-      padding: 22px;
-      text-align: center;
-      border-radius: 22px;
-      background: #21131f;
-      border: 1px solid rgba(255, 92, 168, 0.35);
-    }
+.reward-info{
+flex:1;
+}
 
-    .login-box a {
-      display: inline-block;
-      margin-top: 12px;
-      color: #df63ff;
-      font-weight: 700;
-      text-decoration: none;
-    }
+.reward-title{
+font-family:"Cinzel",serif;
+font-size:15px;
+}
 
-    .bottom-nav {
-      position: fixed;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      height: 92px;
-      background: #101016;
-      border-top: 1px solid rgba(177, 74, 255, 0.3);
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      z-index: 10;
-    }
+.reward-desc{
+margin-top:6px;
+font-family:Arial,sans-serif;
+font-size:13px;
+color:#96919c;
+line-height:1.45;
+}
 
-    .nav-item {
-      color: #77717f;
-      text-decoration: none;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 7px;
-      font-size: 14px;
-    }
+.reward-amount{
+color:#ffd75c;
+font-family:"Cinzel",serif;
+font-size:13px;
+white-space:nowrap;
+}
 
-    .nav-icon {
-      font-size: 24px;
-    }
+.reward-button{
+width:100%;
+margin-top:18px;
+padding:17px;
+border:none;
+border-radius:17px;
+background:linear-gradient(90deg,#8e27dc,#d24bff);
+color:white;
+font-family:"Cinzel",serif;
+font-weight:700;
+font-size:13px;
+cursor:pointer;
+}
 
-    .nav-item.active {
-      color: #c74dff;
-    }
+.reward-button:disabled{
+opacity:.45;
+cursor:not-allowed;
+}
 
-    @media (max-width: 520px) {
-      h1 {
-        font-size: 42px;
-      }
+.ad-button{
+background:linear-gradient(90deg,#6925bb,#a94cff);
+}
 
-      .wallet-card {
-        padding: 24px;
-      }
+.buy-button{
+width:100%;
+margin-top:10px;
+padding:19px;
+border:none;
+border-radius:19px;
+background:linear-gradient(90deg,#9a32e6,#db57ff);
+color:white;
+font-family:"Cinzel",serif;
+font-size:14px;
+font-weight:700;
+cursor:pointer;
+box-shadow:0 8px 28px rgba(168,62,239,.17);
+}
 
-      #balance {
-        font-size: 58px;
-      }
-    }
-  </style>
+.limit-box{
+margin-top:13px;
+padding:12px 14px;
+border-radius:14px;
+background:#0d0c12;
+font-family:Arial,sans-serif;
+font-size:12px;
+color:#aaa4b0;
+text-align:center;
+}
+
+.status{
+display:none;
+margin-top:20px;
+padding:16px;
+border-radius:17px;
+background:#131218;
+border:1px solid rgba(178,75,255,.18);
+color:#cfc7d4;
+font-family:Arial,sans-serif;
+font-size:14px;
+line-height:1.5;
+}
+
+.login-box{
+display:none;
+margin-top:20px;
+padding:20px;
+border-radius:20px;
+background:#17121c;
+text-align:center;
+font-family:Arial,sans-serif;
+color:#bbb3c1;
+}
+
+.login-box a{
+color:#d961ff;
+font-weight:bold;
+text-decoration:none;
+}
+
+.test-note{
+margin-top:14px;
+font-family:Arial,sans-serif;
+font-size:11px;
+line-height:1.5;
+color:#7f7986;
+text-align:center;
+}
+
+.bottom-nav{
+position:fixed;
+left:0;
+right:0;
+bottom:0;
+height:90px;
+background:#111016;
+display:grid;
+grid-template-columns:repeat(5,1fr);
+border-top:1px solid rgba(173,77,255,.2);
+z-index:50;
+}
+
+.nav-item{
+text-decoration:none;
+color:#777582;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+gap:5px;
+font-family:"Cinzel",serif;
+font-size:9px;
+}
+
+.nav-icon{
+font-size:21px;
+}
+
+.nav-item.active{
+color:#a94dff;
+}
+
+
+/* AD OVERLAY */
+
+.ad-overlay{
+position:fixed;
+inset:0;
+background:rgba(3,3,7,.96);
+z-index:1000;
+display:none;
+align-items:center;
+justify-content:center;
+padding:22px;
+}
+
+.ad-box{
+width:100%;
+max-width:480px;
+min-height:430px;
+border-radius:28px;
+background:
+radial-gradient(circle at top,#321047,#111018 58%);
+border:1px solid rgba(192,78,255,.35);
+padding:27px 22px;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+text-align:center;
+}
+
+.ad-label{
+font-family:"Cinzel",serif;
+font-size:12px;
+color:#9e94a4;
+letter-spacing:1px;
+}
+
+.ad-screen{
+width:100%;
+height:210px;
+margin-top:18px;
+border-radius:20px;
+display:flex;
+align-items:center;
+justify-content:center;
+background:
+linear-gradient(135deg,#321044,#671aa4);
+font-size:60px;
+}
+
+.ad-title{
+margin-top:22px;
+font-family:"Cinzel",serif;
+font-size:18px;
+}
+
+.ad-countdown{
+margin-top:12px;
+font-family:Arial,sans-serif;
+color:#aaa3ae;
+}
+
+.ad-countdown strong{
+color:#ffd75c;
+font-size:22px;
+}
+
+</style>
 </head>
 
 <body>
 
-  <header class="topbar">
-    <div class="logo">ZYNORA</div>
-  </header>
+<header>
 
-  <main class="page">
+<div class="logo">
+Zynora
+</div>
 
-    <h1>Rewards</h1>
+<div class="coin-top">
+🪙 <span id="topCoins">0</span>
+</div>
 
-    <div class="subtitle">
-      Earn Zynora Coins and unlock episodes.
-    </div>
+</header>
 
-    <div id="message" class="message"></div>
 
-    <section class="wallet-card">
-      <div class="wallet-label">
-        Your Zynora Coins
-      </div>
+<main>
 
-      <div class="wallet-balance">
-        <div class="coin">🪙</div>
-        <div id="balance">0</div>
-      </div>
-    </section>
+<h1>Rewards</h1>
 
-    <button id="buyCoinsButton" class="buy-button">
-      BUY ZYNORA COINS
-    </button>
+<p class="subtitle">
+Earn Zynora Coins and use them to unlock episodes and experiences across Zynora.
+</p>
 
-    <div class="section-title">
-      Available Rewards
-    </div>
 
-    <section class="reward-card">
+<section class="wallet-card">
 
-      <div class="reward-top">
+<div class="wallet-label">
+YOUR ZYNORA WALLET
+</div>
 
-        <div class="reward-icon">
-          🎁
-        </div>
+<div class="wallet-row">
 
-        <div>
-          <div class="reward-name">
-            Daily Check-In
-          </div>
+<div class="coin-icon">
+🪙
+</div>
 
-          <div class="reward-description">
-            Claim 20 coins once every day.
-          </div>
-        </div>
+<div class="balance" id="walletBalance">
+0
+</div>
 
-      </div>
+</div>
 
-      <button id="claimDailyButton" class="claim-button">
-        CLAIM 20 COINS
-      </button>
+<div class="wallet-note">
+Your real Zynora coin balance
+</div>
 
-    </section>
+</section>
 
-    <div id="loginBox" class="login-box">
-      You must be logged into Zynora to use Rewards.
-      <br />
-      <a href="login.html">LOGIN TO ZYNORA</a>
-    </div>
 
-  </main>
+<div class="section-title">
+Earn Coins
+</div>
 
-  <nav class="bottom-nav">
 
-    <a class="nav-item" href="index.html">
-      <div class="nav-icon">⌂</div>
-      <div>HOME</div>
-    </a>
+<section class="reward-card">
 
-    <a class="nav-item" href="discover.html">
-      <div class="nav-icon">◉</div>
-      <div>DISCOVER</div>
-    </a>
+<div class="reward-head">
 
-    <a class="nav-item active" href="rewards.html">
-      <div class="nav-icon">🎁</div>
-      <div>REWARDS</div>
-    </a>
+<div class="reward-icon">
+🎁
+</div>
 
-    <a class="nav-item" href="library.html">
-      <div class="nav-icon">▣</div>
-      <div>LIBRARY</div>
-    </a>
+<div class="reward-info">
 
-    <a class="nav-item" href="profile.html">
-      <div class="nav-icon">●</div>
-      <div>PROFILE</div>
-    </a>
+<div class="reward-title">
+Daily Check-In
+</div>
 
-  </nav>
+<div class="reward-desc">
+Claim your daily Zynora reward.
+</div>
+
+</div>
+
+<div class="reward-amount">
++20 🪙
+</div>
+
+</div>
+
+<button
+class="reward-button"
+id="dailyButton">
+CLAIM 20 COINS
+</button>
+
+</section>
+
+
+<section class="reward-card">
+
+<div class="reward-head">
+
+<div class="reward-icon">
+🎬
+</div>
+
+<div class="reward-info">
+
+<div class="reward-title">
+Watch & Earn
+</div>
+
+<div class="reward-desc">
+Watch a rewarded ad and receive Zynora Coins.
+</div>
+
+</div>
+
+<div class="reward-amount">
++10 🪙
+</div>
+
+</div>
+
+<button
+class="reward-button ad-button"
+id="watchAdButton">
+WATCH AD — EARN 10 COINS
+</button>
+
+<div class="limit-box">
+Ads remaining today:
+<strong id="adsRemaining">5</strong> / 5
+</div>
+
+<div class="test-note">
+Rewarded-ad test mode. A live advertising provider will be connected before production launch.
+</div>
+
+</section>
+
+
+<div class="section-title">
+Get More Coins
+</div>
+
+<button
+class="buy-button"
+id="buyCoinsButton">
+BUY ZYNORA COINS
+</button>
+
+
+<div
+id="loginBox"
+class="login-box">
+
+You must be logged into Zynora to earn rewards.
+
+<br><br>
+
+<a href="login.html">
+LOGIN
+</a>
+
+</div>
+
+
+<div
+id="status"
+class="status">
+</div>
+
+</main>
+
+
+<nav class="bottom-nav">
+
+<a href="index.html" class="nav-item">
+<span class="nav-icon">⌂</span>
+Home
+</a>
+
+<a href="discover.html" class="nav-item">
+<span class="nav-icon">◉</span>
+Discover
+</a>
+
+<a href="rewards.html" class="nav-item active">
+<span class="nav-icon">🎁</span>
+Rewards
+</a>
+
+<a href="library.html" class="nav-item">
+<span class="nav-icon">▣</span>
+Library
+</a>
+
+<a href="profile.html" class="nav-item">
+<span class="nav-icon">●</span>
+Profile
+</a>
+
+</nav>
+
+
+<div
+class="ad-overlay"
+id="adOverlay">
+
+<div class="ad-box">
+
+<div class="ad-label">
+ZYNORA REWARDED AD
+</div>
+
+<div class="ad-screen">
+▶
+</div>
+
+<div class="ad-title">
+Rewarded Ad Playing
+</div>
+
+<div class="ad-countdown">
+Reward available in
+<strong id="adTimer">15</strong>
+seconds
+</div>
+
+</div>
+
+</div>
 
 
 <script>
 
 const SUPABASE_URL =
-  "https://ozshekxpuvganemaajms.supabase.co";
+"https://ozshekxpuvganemaajms.supabase.co";
 
 const SUPABASE_KEY =
-  "sb_publishable__GsW9RahFD_XDWJTFzh9eQ_dNBZfa32";
-
-const supabaseClient =
-  window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-  );
+"sb_publishable__GsW9RahFD_XDWJTFzh9eQ_dNBZfa32";
 
 
-let currentSession = null;
+const client =
+supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+);
+
+
+let user = null;
+
+let adRunning = false;
+
+
+const walletBalance =
+document.getElementById(
+"walletBalance"
+);
+
+const topCoins =
+document.getElementById(
+"topCoins"
+);
+
+const dailyButton =
+document.getElementById(
+"dailyButton"
+);
+
+const watchAdButton =
+document.getElementById(
+"watchAdButton"
+);
+
+const adsRemaining =
+document.getElementById(
+"adsRemaining"
+);
+
+const statusBox =
+document.getElementById(
+"status"
+);
+
+const loginBox =
+document.getElementById(
+"loginBox"
+);
+
+const adOverlay =
+document.getElementById(
+"adOverlay"
+);
+
+const adTimer =
+document.getElementById(
+"adTimer"
+);
+
+
+/* ============================
+   STATUS
+============================ */
+
+function showStatus(message){
+
+statusBox.style.display =
+"block";
+
+statusBox.textContent =
+message;
+
+}
+
+
+function hideStatus(){
+
+statusBox.style.display =
+"none";
+
+}
+
+
+/* ============================
+   WALLET
+============================ */
+
+async function loadWallet(){
+
+if(!user){
+return;
+}
+
+const {
+data,
+error
+} =
+await client
+.from("wallets")
+.select("balance")
+.eq("user_id",user.id)
+.maybeSingle();
+
+
+if(error){
+
+console.error(error);
+
+showStatus(
+"Unable to load your Zynora wallet."
+);
+
+return;
+
+}
 
 
 const balance =
-  document.getElementById("balance");
-
-const message =
-  document.getElementById("message");
-
-const loginBox =
-  document.getElementById("loginBox");
-
-const claimDailyButton =
-  document.getElementById("claimDailyButton");
-
-const buyCoinsButton =
-  document.getElementById("buyCoinsButton");
+Number(
+data?.balance || 0
+);
 
 
-function showMessage(text) {
+walletBalance.textContent =
+balance.toLocaleString();
 
-  message.style.display =
-    "block";
-
-  message.textContent =
-    text;
+topCoins.textContent =
+balance.toLocaleString();
 
 }
 
 
-function hideMessage() {
+/* ============================
+   COUNT AD REWARDS
+============================ */
 
-  message.style.display =
-    "none";
+async function loadAdCount(){
+
+if(!user){
+return;
+}
+
+
+const now =
+new Date();
+
+
+const year =
+now.getUTCFullYear();
+
+const month =
+String(
+now.getUTCMonth()+1
+).padStart(2,"0");
+
+const day =
+String(
+now.getUTCDate()
+).padStart(2,"0");
+
+
+const todayUTC =
+`${year}-${month}-${day}T00:00:00.000Z`;
+
+
+const {
+count,
+error
+} =
+await client
+.from("coin_transactions")
+.select(
+"id",
+{
+count:"exact",
+head:true
+}
+)
+.eq(
+"user_id",
+user.id
+)
+.eq(
+"transaction_type",
+"AD_REWARD"
+)
+.gte(
+"created_at",
+todayUTC
+);
+
+
+if(error){
+
+console.error(
+"Ad count error:",
+error
+);
+
+return;
 
 }
 
 
-/* ============================================================
-   LOAD ZYNORA LOGIN SESSION
-============================================================ */
+const used =
+count || 0;
 
-async function loadSession() {
-
-  const {
-    data,
-    error
-  } =
-    await supabaseClient
-      .auth
-      .getSession();
+const remaining =
+Math.max(
+0,
+5-used
+);
 
 
-  if (error) {
-
-    console.error(error);
-
-    showMessage(
-      "Unable to load your Zynora account."
-    );
-
-    return false;
-  }
+adsRemaining.textContent =
+remaining;
 
 
-  currentSession =
-    data.session;
+if(remaining <= 0){
 
+watchAdButton.disabled =
+true;
 
-  if (!currentSession) {
+watchAdButton.textContent =
+"DAILY AD LIMIT REACHED";
 
-    loginBox.style.display =
-      "block";
+}else{
 
-    claimDailyButton.disabled =
-      true;
+watchAdButton.disabled =
+false;
 
-    buyCoinsButton.disabled =
-      true;
+watchAdButton.textContent =
+"WATCH AD — EARN 10 COINS";
 
-    showMessage(
-      "Please log into Zynora to use Rewards."
-    );
-
-    return false;
-  }
-
-
-  loginBox.style.display =
-    "none";
-
-  claimDailyButton.disabled =
-    false;
-
-  buyCoinsButton.disabled =
-    false;
-
-
-  return true;
+}
 
 }
 
 
-/* ============================================================
-   LOAD REAL WALLET BALANCE
-============================================================ */
+/* ============================
+   DAILY CHECK-IN
+============================ */
 
-async function loadBalance() {
+dailyButton.addEventListener(
+"click",
+async()=>{
 
-  if (!currentSession) {
-    return;
-  }
+if(!user){
 
+showStatus(
+"Please log in first."
+);
 
-  const {
-    data,
-    error
-  } =
-    await supabaseClient
-      .from("wallets")
-      .select("balance")
-      .eq(
-        "user_id",
-        currentSession.user.id
-      )
-      .single();
-
-
-  if (error) {
-
-    console.error(
-      "Wallet load error:",
-      error
-    );
-
-    showMessage(
-      "Unable to load your Zynora coin balance."
-    );
-
-    return;
-  }
-
-
-  balance.textContent =
-    Number(
-      data.balance
-    ).toLocaleString();
+return;
 
 }
 
 
-/* ============================================================
-   CLAIM SECURE DAILY REWARD
-============================================================ */
+dailyButton.disabled =
+true;
 
-async function claimDailyReward() {
-
-  const loggedIn =
-    await loadSession();
+dailyButton.textContent =
+"CLAIMING...";
 
 
-  if (!loggedIn) {
-    return;
-  }
+const {
+data,
+error
+} =
+await client.rpc(
+"claim_daily_reward"
+);
 
 
-  claimDailyButton.disabled =
-    true;
+if(error){
 
-  claimDailyButton.textContent =
-    "CLAIMING...";
+showStatus(
+error.message
+);
 
+dailyButton.disabled =
+false;
 
-  hideMessage();
+dailyButton.textContent =
+"CLAIM 20 COINS";
 
-
-  const {
-    data,
-    error
-  } =
-    await supabaseClient
-      .rpc(
-        "claim_daily_reward"
-      );
-
-
-  if (error) {
-
-    console.error(
-      "Daily reward error:",
-      error
-    );
-
-    showMessage(
-      error.message ||
-      "Unable to claim daily reward."
-    );
-
-    claimDailyButton.disabled =
-      false;
-
-    claimDailyButton.textContent =
-      "CLAIM 20 COINS";
-
-    return;
-  }
-
-
-  const result =
-    Array.isArray(data)
-      ? data[0]
-      : data;
-
-
-  if (!result) {
-
-    showMessage(
-      "Zynora could not process the reward."
-    );
-
-    claimDailyButton.disabled =
-      false;
-
-    claimDailyButton.textContent =
-      "CLAIM 20 COINS";
-
-    return;
-  }
-
-
-  if (
-    result.new_balance !==
-      null &&
-    result.new_balance !==
-      undefined
-  ) {
-
-    balance.textContent =
-      Number(
-        result.new_balance
-      ).toLocaleString();
-
-  } else {
-
-    await loadBalance();
-
-  }
-
-
-  if (
-    result.already_claimed
-  ) {
-
-    showMessage(
-      "You already claimed today's 20-coin reward. Come back tomorrow."
-    );
-
-    claimDailyButton.textContent =
-      "CLAIMED TODAY";
-
-    claimDailyButton.disabled =
-      true;
-
-    return;
-  }
-
-
-  showMessage(
-    "20 Zynora Coins added to your account successfully!"
-  );
-
-
-  claimDailyButton.textContent =
-    "CLAIMED TODAY";
-
-  claimDailyButton.disabled =
-    true;
+return;
 
 }
 
 
-/* ============================================================
+const result =
+Array.isArray(data)
+? data[0]
+: data;
+
+
+if(!result){
+
+showStatus(
+"Unable to claim reward."
+);
+
+dailyButton.disabled =
+false;
+
+dailyButton.textContent =
+"CLAIM 20 COINS";
+
+return;
+
+}
+
+
+if(result.already_claimed){
+
+showStatus(
+"Your daily reward has already been claimed today."
+);
+
+dailyButton.textContent =
+"CLAIMED TODAY";
+
+dailyButton.disabled =
+true;
+
+}else{
+
+showStatus(
+result.message ||
+"20 Zynora Coins added."
+);
+
+walletBalance.textContent =
+Number(
+result.new_balance || 0
+).toLocaleString();
+
+topCoins.textContent =
+Number(
+result.new_balance || 0
+).toLocaleString();
+
+dailyButton.textContent =
+"CLAIMED TODAY";
+
+dailyButton.disabled =
+true;
+
+}
+
+await loadWallet();
+
+}
+);
+
+
+/* ============================
+   WATCH AD
+============================ */
+
+watchAdButton.addEventListener(
+"click",
+async()=>{
+
+if(adRunning){
+return;
+}
+
+
+if(!user){
+
+showStatus(
+"Please log in first."
+);
+
+return;
+
+}
+
+
+if(
+Number(
+adsRemaining.textContent
+) <= 0
+){
+
+showStatus(
+"You have reached today's ad reward limit."
+);
+
+return;
+
+}
+
+
+adRunning =
+true;
+
+hideStatus();
+
+
+watchAdButton.disabled =
+true;
+
+
+adOverlay.style.display =
+"flex";
+
+
+let seconds =
+15;
+
+
+adTimer.textContent =
+seconds;
+
+
+const countdown =
+setInterval(
+async()=>{
+
+seconds--;
+
+adTimer.textContent =
+seconds;
+
+
+if(seconds <= 0){
+
+clearInterval(
+countdown
+);
+
+
+adOverlay.style.display =
+"none";
+
+
+await claimAdReward();
+
+
+adRunning =
+false;
+
+}
+
+},
+1000
+);
+
+}
+);
+
+
+/* ============================
+   CLAIM AD REWARD
+============================ */
+
+async function claimAdReward(){
+
+showStatus(
+"Processing your ad reward..."
+);
+
+
+const {
+data,
+error
+} =
+await client.rpc(
+"claim_ad_reward"
+);
+
+
+if(error){
+
+showStatus(
+error.message
+);
+
+watchAdButton.disabled =
+false;
+
+return;
+
+}
+
+
+const result =
+Array.isArray(data)
+? data[0]
+: data;
+
+
+if(!result){
+
+showStatus(
+"Unable to process the reward."
+);
+
+watchAdButton.disabled =
+false;
+
+return;
+
+}
+
+
+if(result.success){
+
+showStatus(
+result.message ||
+"10 Zynora Coins earned."
+);
+
+
+walletBalance.textContent =
+Number(
+result.new_balance || 0
+).toLocaleString();
+
+
+topCoins.textContent =
+Number(
+result.new_balance || 0
+).toLocaleString();
+
+
+adsRemaining.textContent =
+result.ads_remaining;
+
+
+if(
+Number(
+result.ads_remaining
+) <= 0
+){
+
+watchAdButton.disabled =
+true;
+
+watchAdButton.textContent =
+"DAILY AD LIMIT REACHED";
+
+}else{
+
+watchAdButton.disabled =
+false;
+
+watchAdButton.textContent =
+"WATCH AD — EARN 10 COINS";
+
+}
+
+}else{
+
+showStatus(
+result.message ||
+"Reward unavailable."
+);
+
+
+adsRemaining.textContent =
+result.ads_remaining;
+
+
+if(
+Number(
+result.ads_remaining
+) <= 0
+){
+
+watchAdButton.disabled =
+true;
+
+watchAdButton.textContent =
+"DAILY AD LIMIT REACHED";
+
+}else{
+
+watchAdButton.disabled =
+false;
+
+}
+
+}
+
+
+await loadWallet();
+
+await loadAdCount();
+
+}
+
+
+/* ============================
    BUY COINS
-============================================================ */
+============================ */
 
-buyCoinsButton.addEventListener(
-  "click",
-  async () => {
+document
+.getElementById(
+"buyCoinsButton"
+)
+.addEventListener(
+"click",
+()=>{
 
-    const loggedIn =
-      await loadSession();
+window.location.href =
+"buy-coins.html";
 
-
-    if (!loggedIn) {
-      return;
-    }
-
-
-    window.location.href =
-      "buy-coins.html";
-
-  }
+}
 );
 
 
-/* ============================================================
-   DAILY BUTTON
-============================================================ */
+/* ============================
+   START
+============================ */
 
-claimDailyButton.addEventListener(
-  "click",
-  claimDailyReward
+async function start(){
+
+const {
+data,
+error
+} =
+await client.auth.getUser();
+
+
+if(error){
+
+showStatus(
+"Unable to load your Zynora account."
 );
 
-
-/* ============================================================
-   START PAGE
-============================================================ */
-
-async function startRewardsPage() {
-
-  const loggedIn =
-    await loadSession();
-
-
-  if (!loggedIn) {
-    return;
-  }
-
-
-  await loadBalance();
-
-
-  hideMessage();
+return;
 
 }
 
 
-startRewardsPage();
+user =
+data.user;
+
+
+if(!user){
+
+loginBox.style.display =
+"block";
+
+dailyButton.disabled =
+true;
+
+watchAdButton.disabled =
+true;
+
+return;
+
+}
+
+
+loginBox.style.display =
+"none";
+
+
+await loadWallet();
+
+await loadAdCount();
+
+}
+
+
+/* ============================
+   REFRESH WHEN RETURNING
+============================ */
+
+document.addEventListener(
+"visibilitychange",
+async()=>{
+
+if(
+document.visibilityState ===
+"visible" &&
+user
+){
+
+await loadWallet();
+
+await loadAdCount();
+
+}
+
+}
+);
+
+
+start();
 
 </script>
 
