@@ -365,7 +365,6 @@ body {
 
 </section>
 
-
 <section class="edit-panel" id="editPanel">
 
   <input
@@ -387,7 +386,6 @@ body {
   </button>
 
 </section>
-
 
 <section class="wallet-card">
 
@@ -413,16 +411,13 @@ body {
 
 </section>
 
-
 <button class="buy-button" id="buyCoinsButton">
   BUY ZYNORA COINS
 </button>
 
-
 <div class="section-title">
   Account
 </div>
-
 
 <div class="menu">
 
@@ -448,7 +443,6 @@ body {
 
 </div>
 
-
 <div id="loginBox" class="login-box">
   You are not logged into Zynora.
   <br><br>
@@ -458,7 +452,6 @@ body {
 <div id="status"></div>
 
 </main>
-
 
 <nav class="bottom-nav">
 
@@ -489,7 +482,6 @@ body {
 
 </nav>
 
-
 <script>
 
 const SUPABASE_URL =
@@ -498,14 +490,8 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
 "sb_publishable__GsW9RahFD_XDWJTFzh9eQ_dNBZfa32";
 
-
-/*
-Dedicated profile-photo bucket.
-*/
-
 const AVATAR_BUCKET =
 "avatars";
-
 
 const supabaseClient =
 window.supabase.createClient(
@@ -513,10 +499,8 @@ window.supabase.createClient(
   SUPABASE_KEY
 );
 
-
 let currentSession = null;
 let selectedPhoto = null;
-
 
 const coinBalance =
 document.getElementById("coinBalance");
@@ -557,17 +541,14 @@ document.getElementById("editButton");
 const saveProfileButton =
 document.getElementById("saveProfileButton");
 
-
 function showStatus(text) {
   statusBox.style.display = "block";
   statusBox.textContent = text;
 }
 
-
 function hideStatus() {
   statusBox.style.display = "none";
 }
-
 
 function showAvatar(name, photoUrl) {
 
@@ -592,11 +573,6 @@ function showAvatar(name, photoUrl) {
 
 }
 
-
-/* =========================
-   LOAD USER
-========================= */
-
 async function loadUser() {
 
   const {
@@ -606,7 +582,6 @@ async function loadUser() {
   await supabaseClient
     .auth
     .getSession();
-
 
   if (error) {
 
@@ -618,10 +593,8 @@ async function loadUser() {
 
   }
 
-
   currentSession =
     data.session;
-
 
   if (!currentSession) {
 
@@ -641,28 +614,23 @@ async function loadUser() {
 
   }
 
-
   loginBox.style.display =
     "none";
 
   editButton.disabled =
     false;
 
-
   const user =
     currentSession.user;
-
 
   const savedName =
     user.user_metadata?.display_name ||
     user.user_metadata?.name ||
     "Zynora User";
 
-
   const savedAvatar =
     user.user_metadata?.avatar_url ||
     "";
-
 
   profileName.textContent =
     savedName;
@@ -673,28 +641,20 @@ async function loadUser() {
   nameInput.value =
     savedName;
 
-
   showAvatar(
     savedName,
     savedAvatar
   );
 
-
   return true;
 
 }
-
-
-/* =========================
-   WALLET
-========================= */
 
 async function loadWallet() {
 
   if (!currentSession) {
     return;
   }
-
 
   const {
     data,
@@ -708,7 +668,6 @@ async function loadWallet() {
       currentSession.user.id
     )
     .maybeSingle();
-
 
   if (error) {
 
@@ -725,18 +684,12 @@ async function loadWallet() {
 
   }
 
-
   coinBalance.textContent =
     Number(
       data?.balance || 0
     ).toLocaleString();
 
 }
-
-
-/* =========================
-   OPEN / CLOSE EDIT PROFILE
-========================= */
 
 editButton.addEventListener(
 "click",
@@ -752,11 +705,9 @@ editButton.addEventListener(
 
   }
 
-
   const isOpen =
     editPanel.style.display ===
     "block";
-
 
   if (isOpen) {
 
@@ -784,7 +735,6 @@ editButton.addEventListener(
 
 });
 
-
 cameraButton.addEventListener(
 "click",
 () => {
@@ -803,11 +753,6 @@ cameraButton.addEventListener(
 
 });
 
-
-/* =========================
-   PHOTO PREVIEW
-========================= */
-
 photoInput.addEventListener(
 "change",
 () => {
@@ -815,11 +760,9 @@ photoInput.addEventListener(
   const file =
     photoInput.files?.[0];
 
-
   if (!file) {
     return;
   }
-
 
   if (!file.type.startsWith("image/")) {
 
@@ -834,7 +777,6 @@ photoInput.addEventListener(
 
   }
 
-
   if (file.size > 5 * 1024 * 1024) {
 
     showStatus(
@@ -848,14 +790,11 @@ photoInput.addEventListener(
 
   }
 
-
   selectedPhoto =
     file;
 
-
   const previewUrl =
     URL.createObjectURL(file);
-
 
   avatarImage.src =
     previewUrl;
@@ -866,17 +805,11 @@ photoInput.addEventListener(
   avatarLetter.style.display =
     "none";
 
-
   showStatus(
     "Photo selected. Tap SAVE PROFILE."
   );
 
 });
-
-
-/* =========================
-   UPLOAD PROFILE PHOTO
-========================= */
 
 async function uploadProfilePhoto() {
 
@@ -893,10 +826,8 @@ async function uploadProfilePhoto() {
 
   }
 
-
   const userId =
     currentSession.user.id;
-
 
   let extension =
     selectedPhoto.name
@@ -904,15 +835,12 @@ async function uploadProfilePhoto() {
       .pop()
       .toLowerCase();
 
-
   if (!extension || extension.length > 5) {
     extension = "jpg";
   }
 
-
   const filePath =
     `${userId}/profile-${Date.now()}.${extension}`;
-
 
   const {
     error: uploadError
@@ -925,15 +853,13 @@ async function uploadProfilePhoto() {
       selectedPhoto,
       {
         cacheControl: "3600",
-        upsert: true
+        upsert: false
       }
     );
-
 
   if (uploadError) {
     throw uploadError;
   }
-
 
   const {
     data
@@ -943,7 +869,6 @@ async function uploadProfilePhoto() {
     .from(AVATAR_BUCKET)
     .getPublicUrl(filePath);
 
-
   if (!data || !data.publicUrl) {
 
     throw new Error(
@@ -952,15 +877,9 @@ async function uploadProfilePhoto() {
 
   }
 
-
   return data.publicUrl;
 
 }
-
-
-/* =========================
-   SAVE PROFILE
-========================= */
 
 saveProfileButton.addEventListener(
 "click",
@@ -976,10 +895,8 @@ async () => {
 
   }
 
-
   const newName =
     nameInput.value.trim();
-
 
   if (!newName) {
 
@@ -991,19 +908,16 @@ async () => {
 
   }
 
-
   saveProfileButton.disabled =
     true;
 
   saveProfileButton.textContent =
     "SAVING...";
 
-
   try {
 
     const avatarUrl =
       await uploadProfilePhoto();
-
 
     const {
       data,
@@ -1020,26 +934,21 @@ async () => {
         }
       );
 
-
     if (error) {
       throw error;
     }
 
-
     profileName.textContent =
       newName;
-
 
     showAvatar(
       newName,
       avatarUrl
     );
 
-
     if (data?.user) {
       currentSession.user = data.user;
     }
-
 
     selectedPhoto =
       null;
@@ -1056,11 +965,9 @@ async () => {
     editButton.textContent =
       "EDIT PROFILE";
 
-
     showStatus(
       "Profile updated successfully."
     );
-
 
   } catch (error) {
 
@@ -1083,11 +990,6 @@ async () => {
 
 });
 
-
-/* =========================
-   BUTTONS
-========================= */
-
 document
 .getElementById("buyCoinsButton")
 .addEventListener(
@@ -1098,7 +1000,6 @@ document
     "buy-coins.html";
 
 });
-
 
 document
 .getElementById("rewardsButton")
@@ -1111,7 +1012,6 @@ document
 
 });
 
-
 document
 .getElementById("libraryButton")
 .addEventListener(
@@ -1122,7 +1022,6 @@ document
     "library.html";
 
 });
-
 
 document
 .getElementById("settingsButton")
@@ -1135,7 +1034,6 @@ document
   );
 
 });
-
 
 document
 .getElementById("logoutButton")
@@ -1152,11 +1050,6 @@ async () => {
 
 });
 
-
-/* =========================
-   REFRESH
-========================= */
-
 document.addEventListener(
 "visibilitychange",
 async () => {
@@ -1169,7 +1062,6 @@ async () => {
     if (loggedIn) {
       await loadWallet();
     }
-
 
     editPanel.style.display =
       "none";
@@ -1184,24 +1076,16 @@ async () => {
 
 });
 
-
-/* =========================
-   START
-========================= */
-
 async function startProfile() {
 
   const loggedIn =
     await loadUser();
 
-
   if (!loggedIn) {
     return;
   }
 
-
   await loadWallet();
-
 
   cameraButton.style.display =
     "none";
@@ -1212,11 +1096,9 @@ async function startProfile() {
   editButton.textContent =
     "EDIT PROFILE";
 
-
   hideStatus();
 
 }
-
 
 startProfile();
 
