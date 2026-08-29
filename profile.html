@@ -18,574 +18,309 @@ body {
   margin: 0;
   min-height: 100vh;
   padding-bottom: 105px;
-
   background:
-    radial-gradient(
-      circle at top,
-      #311146 0%,
-      #12051f 38%,
-      #08080d 72%
-    );
-
+    radial-gradient(circle at top, #311146 0%, #12051f 38%, #08080d 72%);
   color: white;
-
-  font-family:
-    Georgia,
-    "Times New Roman",
-    serif;
+  font-family: Georgia, "Times New Roman", serif;
 }
-
-
-/* =========================
-   HEADER
-========================= */
 
 .topbar {
   padding: 32px 26px 24px;
-
   background: #0d0d13;
-
-  border-bottom:
-    1px solid rgba(190,78,255,.25);
+  border-bottom: 1px solid rgba(190,78,255,.25);
 }
 
 .logo {
   font-size: 46px;
   font-weight: bold;
   letter-spacing: -2px;
-
-  background:
-    linear-gradient(
-      90deg,
-      #ffffff,
-      #e989ff,
-      #8d2cff
-    );
-
+  background: linear-gradient(90deg,#ffffff,#e989ff,#8d2cff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-
-/* =========================
-   PAGE
-========================= */
-
 .page {
   width: 100%;
   max-width: 700px;
-
   margin: auto;
-
   padding: 36px 24px;
 }
 
-
-/* =========================
-   PROFILE
-========================= */
-
 .profile-card {
   background: #121119;
-
-  border:
-    1px solid rgba(208,84,255,.25);
-
+  border: 1px solid rgba(208,84,255,.25);
   border-radius: 30px;
-
   padding: 28px;
-
   text-align: center;
 }
 
-
 .avatar-wrap {
   position: relative;
-
   width: 110px;
   height: 110px;
-
   margin: auto;
 }
-
 
 .avatar {
   width: 110px;
   height: 110px;
-
   border-radius: 50%;
-
   overflow: hidden;
-
   display: flex;
-
   align-items: center;
   justify-content: center;
-
-  background:
-    linear-gradient(
-      135deg,
-      #8c20df,
-      #e04cff
-    );
-
-  font-family: Arial, sans-serif;
-
+  background: linear-gradient(135deg,#8c20df,#e04cff);
+  font-family: Arial,sans-serif;
   font-size: 42px;
   font-weight: 900;
-
-  box-shadow:
-    0 0 28px rgba(198,66,255,.3);
-
-  border:
-    2px solid rgba(223,103,255,.7);
+  box-shadow: 0 0 28px rgba(198,66,255,.3);
+  border: 2px solid rgba(223,103,255,.7);
 }
-
 
 .avatar img {
   width: 100%;
   height: 100%;
-
   object-fit: cover;
-
   display: none;
 }
-
 
 .camera-button {
   display: none;
-
   position: absolute;
-
   right: -4px;
   bottom: -1px;
-
   width: 38px;
   height: 38px;
-
   border-radius: 50%;
-
-  border:
-    2px solid #121119;
-
+  border: 2px solid #121119;
   background: #b134ee;
-
   color: white;
-
   font-size: 18px;
-
   cursor: pointer;
 }
-
 
 #profileName {
   font-size: 30px;
-
   margin-top: 18px;
 }
 
-
 #profileEmail {
   color: #aaa4af;
-
-  font-family:
-    Arial,
-    sans-serif;
-
+  font-family: Arial,sans-serif;
   margin-top: 7px;
-
   word-break: break-word;
 }
 
-
 .edit-button {
   margin-top: 20px;
-
-  padding:
-    13px 28px;
-
-  border:
-    1px solid #c84cff;
-
+  padding: 13px 28px;
+  border: 1px solid #c84cff;
   border-radius: 18px;
-
   background: transparent;
-
   color: #df7cff;
-
   font-family: inherit;
-
   font-size: 17px;
-
   cursor: pointer;
 }
-
-
-/* =========================
-   EDIT PROFILE
-========================= */
 
 .edit-panel {
   margin-top: 22px;
-
   padding: 22px;
-
   border-radius: 22px;
-
   background: #121119;
-
   display: none;
 }
 
-
 .edit-panel input[type="text"] {
   width: 100%;
-
   padding: 16px;
-
-  border:
-    1px solid rgba(207,77,255,.35);
-
+  border: 1px solid rgba(207,77,255,.35);
   border-radius: 15px;
-
   background: #09090e;
-
   color: white;
-
   font-size: 17px;
-
   outline: none;
 }
 
-
 .photo-label {
   display: block;
-
   margin-top: 15px;
-
   padding: 16px;
-
-  border:
-    1px solid rgba(207,77,255,.35);
-
+  border: 1px solid rgba(207,77,255,.35);
   border-radius: 15px;
-
   text-align: center;
-
   color: #e08aff;
-
   background: #0d0c12;
-
   cursor: pointer;
-
-  font-family:
-    Arial,
-    sans-serif;
-
+  font-family: Arial,sans-serif;
   font-weight: bold;
 }
-
 
 #photoInput {
   display: none;
 }
 
-
 .save-button {
   width: 100%;
-
   margin-top: 14px;
-
   padding: 16px;
-
   border: 0;
-
   border-radius: 15px;
-
   background: #ac2be5;
-
   color: white;
-
   font-weight: bold;
-
   font-size: 17px;
-
   cursor: pointer;
 }
 
-
 .save-button:disabled {
   opacity: .5;
-
   cursor: not-allowed;
 }
 
-
-/* =========================
-   WALLET
-========================= */
-
 .wallet-card {
   margin-top: 26px;
-
   padding: 27px;
-
   border-radius: 30px;
-
   background:
-    radial-gradient(
-      circle at left,
-      rgba(189,47,255,.55),
-      transparent 60%
-    ),
-    linear-gradient(
-      135deg,
-      #7717c7,
-      #321047
-    );
-
-  border:
-    2px solid rgba(224,99,255,.7);
+    radial-gradient(circle at left, rgba(189,47,255,.55), transparent 60%),
+    linear-gradient(135deg,#7717c7,#321047);
+  border: 2px solid rgba(224,99,255,.7);
 }
-
 
 .wallet-label {
   color: #eee5f4;
-
   font-size: 18px;
-
   text-transform: uppercase;
 }
 
-
 .wallet-row {
   display: flex;
-
   align-items: center;
-
   gap: 15px;
-
   margin-top: 14px;
 }
-
 
 .coin-icon {
   font-size: 52px;
 }
 
-
 #coinBalance {
   font-size: 60px;
 }
 
-
 .wallet-note {
   margin-top: 14px;
-
   color: #e3d9e8;
-
-  font-family:
-    Arial,
-    sans-serif;
-
+  font-family: Arial,sans-serif;
   font-size: 14px;
 }
 
-
 .buy-button {
   width: 100%;
-
   margin-top: 20px;
-
   padding: 18px;
-
   border: none;
-
   border-radius: 18px;
-
-  background:
-    linear-gradient(
-      90deg,
-      #8d20df,
-      #db47ff
-    );
-
+  background: linear-gradient(90deg,#8d20df,#db47ff);
   color: white;
-
   font-family: inherit;
-
   font-weight: bold;
-
   font-size: 20px;
-
   cursor: pointer;
 }
-
-
-/* =========================
-   ACCOUNT MENU
-========================= */
 
 .section-title {
   margin-top: 38px;
-
   margin-bottom: 18px;
-
   font-size: 27px;
-
   text-transform: uppercase;
 }
 
-
 .menu {
   overflow: hidden;
-
   background: #121119;
-
-  border:
-    1px solid rgba(255,255,255,.08);
-
+  border: 1px solid rgba(255,255,255,.08);
   border-radius: 25px;
 }
 
-
 .menu-item {
   width: 100%;
-
   padding: 21px;
-
   border: 0;
-
-  border-bottom:
-    1px solid rgba(255,255,255,.07);
-
+  border-bottom: 1px solid rgba(255,255,255,.07);
   background: transparent;
-
   color: white;
-
   display: flex;
-
   justify-content: space-between;
   align-items: center;
-
   font-family: inherit;
-
   font-size: 19px;
-
   text-align: left;
-
   cursor: pointer;
 }
-
 
 .menu-item:last-child {
   border-bottom: 0;
 }
 
-
 .arrow {
   color: #b44cff;
 }
 
-
-/* =========================
-   STATUS
-========================= */
-
 #status {
   margin-top: 24px;
-
   padding: 17px;
-
   border-radius: 18px;
-
   background: #101017;
-
   color: #c2bbc8;
-
-  font-family:
-    Arial,
-    sans-serif;
-
+  font-family: Arial,sans-serif;
   display: none;
-
   line-height: 1.5;
 }
 
-
 .login-box {
   display: none;
-
   margin-top: 25px;
-
   padding: 22px;
-
   background: #22131f;
-
   border-radius: 20px;
-
   text-align: center;
 }
 
-
 .login-box a {
   color: #df67ff;
-
   text-decoration: none;
-
   font-weight: bold;
 }
 
-
-/* =========================
-   NAVIGATION
-========================= */
-
 .bottom-nav {
   position: fixed;
-
   bottom: 0;
   left: 0;
   right: 0;
-
   height: 92px;
-
   background: #101016;
-
-  border-top:
-    1px solid rgba(177,74,255,.3);
-
+  border-top: 1px solid rgba(177,74,255,.3);
   display: grid;
-
-  grid-template-columns:
-    repeat(5,1fr);
-
+  grid-template-columns: repeat(5,1fr);
   z-index: 50;
 }
 
-
 .nav-item {
   text-decoration: none;
-
   color: #77717f;
-
   display: flex;
-
   flex-direction: column;
-
   justify-content: center;
   align-items: center;
-
   gap: 6px;
-
   font-size: 13px;
 }
-
 
 .nav-icon {
   font-size: 24px;
 }
-
 
 .nav-item.active {
   color: #c94dff;
@@ -594,378 +329,182 @@ body {
 </style>
 </head>
 
-
 <body>
 
-
 <header class="topbar">
-
-  <div class="logo">
-    ZYNORA
-  </div>
-
+  <div class="logo">ZYNORA</div>
 </header>
-
 
 <main class="page">
 
-
 <section class="profile-card">
-
 
   <div class="avatar-wrap">
 
-
-    <div
-      class="avatar"
-      id="avatar">
-
-
-      <span id="avatarLetter">
-        Z
-      </span>
-
-
-      <img
-        id="avatarImage"
-        alt="Profile picture">
-
-
+    <div class="avatar" id="avatar">
+      <span id="avatarLetter">Z</span>
+      <img id="avatarImage" alt="Profile picture">
     </div>
-
 
     <button
       class="camera-button"
       id="cameraButton"
       type="button">
-
       📷
-
     </button>
 
-
   </div>
 
+  <div id="profileName">Zynora User</div>
 
-  <div id="profileName">
+  <div id="profileEmail">Loading account...</div>
 
-    Zynora User
-
-  </div>
-
-
-  <div id="profileEmail">
-
-    Loading account...
-
-  </div>
-
-
-  <button
-    class="edit-button"
-    id="editButton">
-
+  <button class="edit-button" id="editButton">
     EDIT PROFILE
-
   </button>
-
 
 </section>
 
 
-
-<section
-  class="edit-panel"
-  id="editPanel">
-
+<section class="edit-panel" id="editPanel">
 
   <input
     id="nameInput"
     type="text"
     placeholder="Your display name">
 
-
-  <label
-    class="photo-label"
-    for="photoInput">
-
+  <label class="photo-label" for="photoInput">
     📷 CHOOSE PROFILE PHOTO
-
   </label>
-
 
   <input
     id="photoInput"
     type="file"
     accept="image/*">
 
-
-  <button
-    class="save-button"
-    id="saveProfileButton">
-
+  <button class="save-button" id="saveProfileButton">
     SAVE PROFILE
-
   </button>
 
-
 </section>
-
 
 
 <section class="wallet-card">
 
-
   <div class="wallet-label">
-
     Your Zynora Coins
-
   </div>
-
 
   <div class="wallet-row">
 
-
     <div class="coin-icon">
-
       🪙
-
     </div>
-
 
     <div id="coinBalance">
-
       0
-
     </div>
 
-
   </div>
-
 
   <div class="wallet-note">
-
     Your real Zynora wallet balance
-
   </div>
-
 
 </section>
 
 
-
-<button
-  class="buy-button"
-  id="buyCoinsButton">
-
+<button class="buy-button" id="buyCoinsButton">
   BUY ZYNORA COINS
-
 </button>
 
 
-
 <div class="section-title">
-
   Account
-
 </div>
 
 
 <div class="menu">
 
-
-  <button
-    class="menu-item"
-    id="rewardsButton">
-
-    <span>
-      🎁 Rewards
-    </span>
-
-    <span class="arrow">
-      ›
-    </span>
-
+  <button class="menu-item" id="rewardsButton">
+    <span>🎁 Rewards</span>
+    <span class="arrow">›</span>
   </button>
 
-
-  <button
-    class="menu-item"
-    id="libraryButton">
-
-    <span>
-      ▣ My Library
-    </span>
-
-    <span class="arrow">
-      ›
-    </span>
-
+  <button class="menu-item" id="libraryButton">
+    <span>▣ My Library</span>
+    <span class="arrow">›</span>
   </button>
 
-
-  <button
-    class="menu-item"
-    id="settingsButton">
-
-    <span>
-      ⚙ Settings
-    </span>
-
-    <span class="arrow">
-      ›
-    </span>
-
+  <button class="menu-item" id="settingsButton">
+    <span>⚙ Settings</span>
+    <span class="arrow">›</span>
   </button>
 
-
-  <button
-    class="menu-item"
-    id="logoutButton">
-
-    <span>
-      ↪ Log Out
-    </span>
-
-    <span class="arrow">
-      ›
-    </span>
-
+  <button class="menu-item" id="logoutButton">
+    <span>↪ Log Out</span>
+    <span class="arrow">›</span>
   </button>
-
 
 </div>
 
 
-
-<div
-  id="loginBox"
-  class="login-box">
-
+<div id="loginBox" class="login-box">
   You are not logged into Zynora.
-
   <br><br>
-
-  <a href="login.html">
-
-    LOGIN
-
-  </a>
-
+  <a href="login.html">LOGIN</a>
 </div>
-
 
 <div id="status"></div>
-
 
 </main>
 
 
-
 <nav class="bottom-nav">
 
-
-<a
-  href="index.html"
-  class="nav-item">
-
-  <div class="nav-icon">
-    ⌂
-  </div>
-
-  <div>
-    HOME
-  </div>
-
+<a href="index.html" class="nav-item">
+  <div class="nav-icon">⌂</div>
+  <div>HOME</div>
 </a>
 
-
-<a
-  href="discover.html"
-  class="nav-item">
-
-  <div class="nav-icon">
-    ◉
-  </div>
-
-  <div>
-    DISCOVER
-  </div>
-
+<a href="discover.html" class="nav-item">
+  <div class="nav-icon">◉</div>
+  <div>DISCOVER</div>
 </a>
 
-
-<a
-  href="rewards.html"
-  class="nav-item">
-
-  <div class="nav-icon">
-    🎁
-  </div>
-
-  <div>
-    REWARDS
-  </div>
-
+<a href="rewards.html" class="nav-item">
+  <div class="nav-icon">🎁</div>
+  <div>REWARDS</div>
 </a>
 
-
-<a
-  href="library.html"
-  class="nav-item">
-
-  <div class="nav-icon">
-    ▣
-  </div>
-
-  <div>
-    LIBRARY
-  </div>
-
+<a href="library.html" class="nav-item">
+  <div class="nav-icon">▣</div>
+  <div>LIBRARY</div>
 </a>
 
-
-<a
-  href="profile.html"
-  class="nav-item active">
-
-  <div class="nav-icon">
-    ●
-  </div>
-
-  <div>
-    PROFILE
-  </div>
-
+<a href="profile.html" class="nav-item active">
+  <div class="nav-icon">●</div>
+  <div>PROFILE</div>
 </a>
-
 
 </nav>
 
 
-
 <script>
-
-
-/* =========================
-   SUPABASE
-========================= */
 
 const SUPABASE_URL =
 "https://ozshekxpuvganemaajms.supabase.co";
-
 
 const SUPABASE_KEY =
 "sb_publishable__GsW9RahFD_XDWJTFzh9eQ_dNBZfa32";
 
 
 /*
-  Uses your existing Supabase
-  Storage bucket.
+Dedicated profile-photo bucket.
 */
 
 const AVATAR_BUCKET =
-"Media";
+"avatars";
 
 
 const supabaseClient =
@@ -976,161 +515,78 @@ window.supabase.createClient(
 
 
 let currentSession = null;
-
 let selectedPhoto = null;
 
 
-/* =========================
-   ELEMENTS
-========================= */
-
 const coinBalance =
-document.getElementById(
-  "coinBalance"
-);
-
+document.getElementById("coinBalance");
 
 const profileName =
-document.getElementById(
-  "profileName"
-);
-
+document.getElementById("profileName");
 
 const profileEmail =
-document.getElementById(
-  "profileEmail"
-);
-
+document.getElementById("profileEmail");
 
 const avatarLetter =
-document.getElementById(
-  "avatarLetter"
-);
-
+document.getElementById("avatarLetter");
 
 const avatarImage =
-document.getElementById(
-  "avatarImage"
-);
-
+document.getElementById("avatarImage");
 
 const statusBox =
-document.getElementById(
-  "status"
-);
-
+document.getElementById("status");
 
 const loginBox =
-document.getElementById(
-  "loginBox"
-);
-
+document.getElementById("loginBox");
 
 const editPanel =
-document.getElementById(
-  "editPanel"
-);
-
+document.getElementById("editPanel");
 
 const nameInput =
-document.getElementById(
-  "nameInput"
-);
-
+document.getElementById("nameInput");
 
 const photoInput =
-document.getElementById(
-  "photoInput"
-);
-
+document.getElementById("photoInput");
 
 const cameraButton =
-document.getElementById(
-  "cameraButton"
-);
-
+document.getElementById("cameraButton");
 
 const editButton =
-document.getElementById(
-  "editButton"
-);
-
+document.getElementById("editButton");
 
 const saveProfileButton =
-document.getElementById(
-  "saveProfileButton"
-);
+document.getElementById("saveProfileButton");
 
-
-/* =========================
-   STATUS
-========================= */
 
 function showStatus(text) {
-
-  statusBox.style.display =
-    "block";
-
-  statusBox.textContent =
-    text;
-
+  statusBox.style.display = "block";
+  statusBox.textContent = text;
 }
 
 
 function hideStatus() {
-
-  statusBox.style.display =
-    "none";
-
+  statusBox.style.display = "none";
 }
 
 
-/* =========================
-   AVATAR DISPLAY
-========================= */
-
-function showAvatar(
-  name,
-  photoUrl
-) {
-
+function showAvatar(name, photoUrl) {
 
   if (photoUrl) {
 
-
-    avatarImage.src =
-      photoUrl;
-
-
-    avatarImage.style.display =
-      "block";
-
-
-    avatarLetter.style.display =
-      "none";
-
+    avatarImage.src = photoUrl;
+    avatarImage.style.display = "block";
+    avatarLetter.style.display = "none";
 
   } else {
 
-
-    avatarImage.removeAttribute(
-      "src"
-    );
-
-
-    avatarImage.style.display =
-      "none";
-
-
-    avatarLetter.style.display =
-      "block";
-
+    avatarImage.removeAttribute("src");
+    avatarImage.style.display = "none";
+    avatarLetter.style.display = "block";
 
     avatarLetter.textContent =
       (name || "Z")
         .charAt(0)
         .toUpperCase();
-
 
   }
 
@@ -1143,7 +599,6 @@ function showAvatar(
 
 async function loadUser() {
 
-
   const {
     data,
     error
@@ -1155,11 +610,9 @@ async function loadUser() {
 
   if (error) {
 
-
     showStatus(
       "Unable to load your account."
     );
-
 
     return false;
 
@@ -1172,22 +625,17 @@ async function loadUser() {
 
   if (!currentSession) {
 
-
     loginBox.style.display =
       "block";
-
 
     profileEmail.textContent =
       "Not logged in";
 
-
     editButton.disabled =
       true;
 
-
     cameraButton.style.display =
       "none";
-
 
     return false;
 
@@ -1196,7 +644,6 @@ async function loadUser() {
 
   loginBox.style.display =
     "none";
-
 
   editButton.disabled =
     false;
@@ -1207,29 +654,21 @@ async function loadUser() {
 
 
   const savedName =
-    user.user_metadata
-      ?.display_name
-    ||
-    user.user_metadata
-      ?.name
-    ||
+    user.user_metadata?.display_name ||
+    user.user_metadata?.name ||
     "Zynora User";
 
 
   const savedAvatar =
-    user.user_metadata
-      ?.avatar_url
-    ||
+    user.user_metadata?.avatar_url ||
     "";
 
 
   profileName.textContent =
     savedName;
 
-
   profileEmail.textContent =
     user.email || "";
-
 
   nameInput.value =
     savedName;
@@ -1252,11 +691,8 @@ async function loadUser() {
 
 async function loadWallet() {
 
-
   if (!currentSession) {
-
     return;
-
   }
 
 
@@ -1276,17 +712,14 @@ async function loadWallet() {
 
   if (error) {
 
-
     console.error(
       "Wallet error:",
       error
     );
 
-
     showStatus(
       "Unable to load your Zynora wallet."
     );
-
 
     return;
 
@@ -1309,7 +742,6 @@ editButton.addEventListener(
 "click",
 () => {
 
-
   if (!currentSession) {
 
     showStatus(
@@ -1328,47 +760,34 @@ editButton.addEventListener(
 
   if (isOpen) {
 
-
     editPanel.style.display =
       "none";
 
-
     cameraButton.style.display =
       "none";
-
 
     editButton.textContent =
       "EDIT PROFILE";
 
-
   } else {
-
 
     editPanel.style.display =
       "block";
 
-
     cameraButton.style.display =
       "block";
 
-
     editButton.textContent =
       "CLOSE EDIT";
-
 
   }
 
 });
 
 
-/* =========================
-   CAMERA BUTTON
-========================= */
-
 cameraButton.addEventListener(
 "click",
 () => {
-
 
   if (!currentSession) {
 
@@ -1379,7 +798,6 @@ cameraButton.addEventListener(
     return;
 
   }
-
 
   photoInput.click();
 
@@ -1394,53 +812,37 @@ photoInput.addEventListener(
 "change",
 () => {
 
-
   const file =
     photoInput.files?.[0];
 
 
   if (!file) {
-
     return;
-
   }
 
 
-  if (
-    !file.type.startsWith(
-      "image/"
-    )
-  ) {
-
+  if (!file.type.startsWith("image/")) {
 
     showStatus(
       "Please choose an image file."
     );
 
-
     photoInput.value =
       "";
-
 
     return;
 
   }
 
 
-  if (
-    file.size >
-    5 * 1024 * 1024
-  ) {
-
+  if (file.size > 5 * 1024 * 1024) {
 
     showStatus(
       "Profile photo must be smaller than 5 MB."
     );
 
-
     photoInput.value =
       "";
-
 
     return;
 
@@ -1452,18 +854,14 @@ photoInput.addEventListener(
 
 
   const previewUrl =
-    URL.createObjectURL(
-      file
-    );
+    URL.createObjectURL(file);
 
 
   avatarImage.src =
     previewUrl;
 
-
   avatarImage.style.display =
     "block";
-
 
   avatarLetter.style.display =
     "none";
@@ -1482,9 +880,7 @@ photoInput.addEventListener(
 
 async function uploadProfilePhoto() {
 
-
   if (!selectedPhoto) {
-
 
     return (
       currentSession
@@ -1509,23 +905,13 @@ async function uploadProfilePhoto() {
       .toLowerCase();
 
 
-  if (
-    !extension ||
-    extension.length > 5
-  ) {
-
+  if (!extension || extension.length > 5) {
     extension = "jpg";
-
   }
 
 
-  /*
-    Every user gets their own
-    profile-photo folder.
-  */
-
   const filePath =
-    `profile-photos/${userId}/profile-${Date.now()}.${extension}`;
+    `${userId}/profile-${Date.now()}.${extension}`;
 
 
   const {
@@ -1533,26 +919,19 @@ async function uploadProfilePhoto() {
   } =
   await supabaseClient
     .storage
-    .from(
-      AVATAR_BUCKET
-    )
+    .from(AVATAR_BUCKET)
     .upload(
       filePath,
       selectedPhoto,
       {
-        cacheControl:
-          "3600",
-
-        upsert:
-          true
+        cacheControl: "3600",
+        upsert: true
       }
     );
 
 
   if (uploadError) {
-
     throw uploadError;
-
   }
 
 
@@ -1561,18 +940,11 @@ async function uploadProfilePhoto() {
   } =
   supabaseClient
     .storage
-    .from(
-      AVATAR_BUCKET
-    )
-    .getPublicUrl(
-      filePath
-    );
+    .from(AVATAR_BUCKET)
+    .getPublicUrl(filePath);
 
 
-  if (
-    !data ||
-    !data.publicUrl
-  ) {
+  if (!data || !data.publicUrl) {
 
     throw new Error(
       "Unable to create profile photo URL."
@@ -1590,19 +962,15 @@ async function uploadProfilePhoto() {
    SAVE PROFILE
 ========================= */
 
-saveProfileButton
-.addEventListener(
+saveProfileButton.addEventListener(
 "click",
 async () => {
 
-
   if (!currentSession) {
-
 
     showStatus(
       "Please log in first."
     );
-
 
     return;
 
@@ -1615,11 +983,9 @@ async () => {
 
   if (!newName) {
 
-
     showStatus(
       "Please enter a name."
     );
-
 
     return;
 
@@ -1629,13 +995,11 @@ async () => {
   saveProfileButton.disabled =
     true;
 
-
   saveProfileButton.textContent =
     "SAVING...";
 
 
   try {
-
 
     const avatarUrl =
       await uploadProfilePhoto();
@@ -1650,22 +1014,15 @@ async () => {
       .updateUser(
         {
           data: {
-
-            display_name:
-              newName,
-
-            avatar_url:
-              avatarUrl
-
+            display_name: newName,
+            avatar_url: avatarUrl
           }
         }
       );
 
 
     if (error) {
-
       throw error;
-
     }
 
 
@@ -1680,28 +1037,21 @@ async () => {
 
 
     if (data?.user) {
-
-      currentSession.user =
-        data.user;
-
+      currentSession.user = data.user;
     }
 
 
     selectedPhoto =
       null;
 
-
     photoInput.value =
       "";
-
 
     editPanel.style.display =
       "none";
 
-
     cameraButton.style.display =
       "none";
-
 
     editButton.textContent =
       "EDIT PROFILE";
@@ -1714,29 +1064,20 @@ async () => {
 
   } catch (error) {
 
-
-    console.error(
-      error
-    );
-
+    console.error(error);
 
     showStatus(
-      error.message
-      ||
+      error.message ||
       "Unable to update profile."
     );
 
-
   } finally {
-
 
     saveProfileButton.disabled =
       false;
 
-
     saveProfileButton.textContent =
       "SAVE PROFILE";
-
 
   }
 
@@ -1744,148 +1085,100 @@ async () => {
 
 
 /* =========================
-   BUY COINS
+   BUTTONS
 ========================= */
 
 document
-.getElementById(
-  "buyCoinsButton"
-)
+.getElementById("buyCoinsButton")
 .addEventListener(
 "click",
 () => {
-
 
   window.location.href =
     "buy-coins.html";
 
-
 });
 
 
-/* =========================
-   REWARDS
-========================= */
-
 document
-.getElementById(
-  "rewardsButton"
-)
+.getElementById("rewardsButton")
 .addEventListener(
 "click",
 () => {
-
 
   window.location.href =
     "rewards.html";
 
-
 });
 
 
-/* =========================
-   LIBRARY
-========================= */
-
 document
-.getElementById(
-  "libraryButton"
-)
+.getElementById("libraryButton")
 .addEventListener(
 "click",
 () => {
-
 
   window.location.href =
     "library.html";
 
-
 });
 
 
-/* =========================
-   SETTINGS
-========================= */
-
 document
-.getElementById(
-  "settingsButton"
-)
+.getElementById("settingsButton")
 .addEventListener(
 "click",
 () => {
-
 
   showStatus(
     "Zynora Settings are coming next."
   );
 
-
 });
 
 
-/* =========================
-   LOGOUT
-========================= */
-
 document
-.getElementById(
-  "logoutButton"
-)
+.getElementById("logoutButton")
 .addEventListener(
 "click",
 async () => {
-
 
   await supabaseClient
     .auth
     .signOut();
 
-
   window.location.href =
     "login.html";
-
 
 });
 
 
 /* =========================
-   PAGE REFRESH
+   REFRESH
 ========================= */
 
 document.addEventListener(
 "visibilitychange",
 async () => {
 
-
-  if (
-    document.visibilityState ===
-    "visible"
-  ) {
-
+  if (document.visibilityState === "visible") {
 
     const loggedIn =
       await loadUser();
 
-
     if (loggedIn) {
-
       await loadWallet();
-
     }
 
 
     editPanel.style.display =
       "none";
 
-
     cameraButton.style.display =
       "none";
 
-
     editButton.textContent =
       "EDIT PROFILE";
-
 
   }
 
@@ -1898,15 +1191,12 @@ async () => {
 
 async function startProfile() {
 
-
   const loggedIn =
     await loadUser();
 
 
   if (!loggedIn) {
-
     return;
-
   }
 
 
@@ -1916,10 +1206,8 @@ async function startProfile() {
   cameraButton.style.display =
     "none";
 
-
   editPanel.style.display =
     "none";
-
 
   editButton.textContent =
     "EDIT PROFILE";
@@ -1931,7 +1219,6 @@ async function startProfile() {
 
 
 startProfile();
-
 
 </script>
 
