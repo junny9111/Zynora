@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Zynora PayPal SDK Test</title>
+  <title>Zynora PayPal Checkout Test</title>
 
   <style>
     * {
@@ -73,17 +73,9 @@
       color: #d0d0db;
     }
 
-    #paypal-button {
-      width: 100%;
-      border: none;
-      border-radius: 18px;
-      padding: 18px;
-      font-size: 20px;
-      font-weight: 800;
-      background: #ffc439;
-      color: #111;
-      cursor: pointer;
-      display: none;
+    #paypal-button-container {
+      margin-top: 24px;
+      min-height: 50px;
     }
 
     .status {
@@ -92,22 +84,24 @@
       border-radius: 18px;
       background: #090910;
       text-align: left;
-      display: none;
       word-break: break-word;
     }
 
-    .status.show {
-      display: block;
+    .status strong {
+      color: #d35cff;
     }
 
     pre {
       white-space: pre-wrap;
       font-size: 14px;
       line-height: 1.5;
+      margin: 8px 0 0;
     }
   </style>
 
-  <script src="https://www.sandbox.paypal.com/web-sdk/v6/core"></script>
+  <script
+    src="https://www.paypal.com/sdk/js?client-id=BAAeTbA4gFzDnagIyOa3B7bzhbTVYCjWx5zYovX4PXqFF4OeYAGxfzW8E_BBiO_-YsSMSnmMd6qOSMRgJ8&currency=USD&intent=capture">
+  </script>
 </head>
 
 <body>
@@ -119,7 +113,7 @@
     <h1>PayPal Checkout Test</h1>
 
     <div class="info">
-      Testing Zynora's official PayPal Sandbox checkout flow.
+      Testing Zynora's PayPal Sandbox checkout.
     </div>
 
     <div class="package">
@@ -127,17 +121,263 @@
       <div class="price">$4.99 USD</div>
     </div>
 
-    <button id="paypal-button">
-      Pay with PayPal
-    </button>
+    <div id="paypal-button-container"></div>
 
-    <div id="status" class="status">
-      <pre id="statusText"></pre>
+    <div class="status">
+      <strong>Status</strong>
+      <pre id="statusText">Loading PayPal button...</pre>
     </div>
 
   </div>
 
+
 <script>
 
 const FUNCTION_URL =
- 
+  "https://ozshekxpuvganemaajms.supabase.co/functions/v1/zynora-paypal";
+
+const statusText =
+  document.getElementById("statusText");
+
+
+function showStatus(message) {
+
+  if (typeof message === "string") {
+    statusText.textContent = message;
+  } else {
+    statusText.textContent =
+      JSON.stringify(message, null, 2);
+  }
+}
+
+
+async function createZynoraOrder() {
+
+  showStatus("Creating Zynora PayPal order...");
+
+  const response =
+    await fetch(
+      FUNCTION_URL,
+      {
+        method: "POST",
+
+        headers: {
+          "Content-Type":
+            "application/json"
+        },
+
+        body: JSON.stringify({
+          action: "create-order",
+          packageId: "coins_250"
+        })
+      }
+    );
+
+  const data =
+    await response.json();
+
+  if (!response.ok) {
+
+    showStatus({
+      error:
+        data.error ||
+        "Order creation failed.",
+      details:
+        data
+    });
+
+    throw new Error(
+      data.error ||
+      "Unable to create order."
+    );
+  }
+
+  if (!data.orderId) {
+
+    showStatus(data);
+
+    throw new Error(
+      "No PayPal order ID returned."
+    );
+  }
+
+  showStatus({
+    message:
+      "Order created successfully.",
+    orderId:
+      data.orderId,
+    status:
+      data.status
+  });
+
+  return data.orderId;
+}
+
+
+async function captureZynoraOrder(orderId) {
+
+  showStatus(
+    "Payment approved. Capturing payment..."
+  );
+
+  const response =
+    await fetch(
+      FUNCTION_URL,
+      {
+        method: "POST",
+
+        headers: {
+          "Content-Type":
+            "application/json"
+        },
+
+        body: JSON.stringify({
+          action: "capture-order",
+          orderId: orderId
+        })
+      }
+    );
+
+  const data =
+    await response.json();
+
+  if (!response.ok) {
+
+    showStatus({
+      error:
+        data.error ||
+        "Capture failed.",
+      details:
+        data
+    });
+
+    throw new Error(
+      data.error ||
+      "Unable to capture payment."
+    );
+  }
+
+  return data;
+}
+
+
+if (typeof paypal === "undefined") {
+
+  showStatus(
+    "PayPal SDK did not load."
+  );
+
+} else {
+
+  paypal.Buttons({
+
+    style: {
+      layout: "vertical",
+      shape: "rect",
+      label: "paypal"
+    },
+
+
+    createOrder: async function() {
+
+      return await createZynoraOrder();
+
+    },
+
+
+    onApprove: async function(data) {
+
+      try {
+
+        const capture =
+          await captureZynoraOrder(
+            data.orderID
+          );
+
+        showStatus({
+          message:
+            "PAYMENT COMPLETED ✅",
+
+          status:
+            capture.status,
+
+          orderId:
+            capture.orderId,
+
+          captureId:
+            capture.captureId,
+
+          coins:
+            capture.coins,
+
+          amount:
+            capture.amount,
+
+          currency:
+            capture.currency
+        });
+
+      } catch (error) {
+
+        showStatus({
+          message:
+            "Payment was approved but capture failed.",
+          error:
+            error.message
+        });
+      }
+
+    },
+
+
+    onCancel: function(data) {
+
+      showStatus({
+        message:
+          "Payment cancelled.",
+        orderId:
+          data.orderID || null
+      });
+
+    },
+
+
+    onError: function(error) {
+
+      showStatus({
+        message:
+          "PayPal checkout error.",
+        error:
+          error?.message ||
+          String(error)
+      });
+
+    }
+
+  })
+  .render("#paypal-button-container")
+  .then(function() {
+
+    showStatus(
+      "PayPal button loaded successfully. Tap it to test."
+    );
+
+  })
+  .catch(function(error) {
+
+    showStatus({
+      message:
+        "Could not render PayPal button.",
+      error:
+        error?.message ||
+        String(error)
+    });
+
+  });
+
+}
+
+</script>
+
+</body>
+</html>
