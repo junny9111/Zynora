@@ -93,6 +93,23 @@
       border-color: #9b4dff;
     }
 
+    .forgot-row {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 10px;
+    }
+
+    .forgot-link {
+      color: #b978ff;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .forgot-link:hover {
+      text-decoration: underline;
+    }
+
     .submit {
       width: 100%;
       margin-top: 25px;
@@ -207,6 +224,18 @@
       required
     >
 
+    <div
+      id="forgotRow"
+      class="forgot-row">
+
+      <a
+        href="forgot-password.html"
+        class="forgot-link">
+        Forgot password?
+      </a>
+
+    </div>
+
     <button
       id="submitButton"
       class="submit"
@@ -282,6 +311,9 @@
   const message =
     document.getElementById("message");
 
+  const forgotRow =
+    document.getElementById("forgotRow");
+
 
   function setMessage(text, type = "") {
 
@@ -329,6 +361,7 @@
     signupTab.classList.remove("active");
 
     nameField.style.display = "none";
+    forgotRow.style.display = "flex";
 
     nameInput.required = false;
 
@@ -355,6 +388,7 @@
     loginTab.classList.remove("active");
 
     nameField.style.display = "block";
+    forgotRow.style.display = "none";
 
     nameInput.required = true;
 
@@ -431,12 +465,6 @@
             }
 
 
-            /*
-              If email confirmation is enabled,
-              Supabase usually creates the user
-              but does not create a live session yet.
-            */
-
             if (!data.session) {
 
               localStorage.setItem(
@@ -457,11 +485,6 @@
 
             }
 
-
-            /*
-              If Supabase automatically creates
-              a session, signup is already complete.
-            */
 
             localStorage.setItem(
               "zynora_signup_success_seen",
@@ -509,11 +532,6 @@
 
             }
 
-
-            /*
-              Check whether this login belongs
-              to a newly created account.
-            */
 
             const pendingSignup =
               localStorage.getItem(
@@ -581,9 +599,23 @@
 
           console.error(error);
 
-          setMessage(
+          let errorText =
             error.message ||
-            "Something went wrong. Please try again.",
+            "Something went wrong. Please try again.";
+
+          if (
+            errorText
+              .toLowerCase()
+              .includes("invalid login credentials")
+          ) {
+
+            errorText =
+              "Incorrect email or password. Tap Forgot password? if you need to reset it.";
+
+          }
+
+          setMessage(
+            errorText,
             "error"
           );
 
