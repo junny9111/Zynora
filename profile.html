@@ -6,324 +6,408 @@
 
 <title>Zynora Profile</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 
-* {
-  box-sizing: border-box;
+*{
+box-sizing:border-box;
 }
 
-body {
-  margin: 0;
-  min-height: 100vh;
-  padding-bottom: 105px;
-  background:
-    radial-gradient(circle at top, #311146 0%, #12051f 38%, #08080d 72%);
-  color: white;
-  font-family: Georgia, "Times New Roman", serif;
+body{
+margin:0;
+min-height:100vh;
+padding-bottom:110px;
+background:
+radial-gradient(circle at top,#311146 0%,#12051f 38%,#08080d 72%);
+color:white;
+font-family:"Playfair Display",Georgia,"Times New Roman",serif;
 }
 
-.topbar {
-  padding: 32px 26px 24px;
-  background: #0d0d13;
-  border-bottom: 1px solid rgba(190,78,255,.25);
+.topbar{
+padding:32px 26px 24px;
+background:#0d0d13;
+border-bottom:1px solid rgba(190,78,255,.25);
 }
 
-.logo {
-  font-size: 46px;
-  font-weight: bold;
-  letter-spacing: -2px;
-  background: linear-gradient(90deg,#ffffff,#e989ff,#8d2cff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.logo{
+font-family:"Cinzel",serif;
+font-size:46px;
+font-weight:700;
+letter-spacing:-2px;
+background:linear-gradient(90deg,#ffffff,#e989ff,#8d2cff);
+-webkit-background-clip:text;
+background-clip:text;
+-webkit-text-fill-color:transparent;
+color:transparent;
 }
 
-.page {
-  width: 100%;
-  max-width: 700px;
-  margin: auto;
-  padding: 36px 24px;
+.page{
+width:100%;
+max-width:700px;
+margin:auto;
+padding:36px 24px;
 }
 
-.profile-card {
-  background: #121119;
-  border: 1px solid rgba(208,84,255,.25);
-  border-radius: 30px;
-  padding: 28px;
-  text-align: center;
+.profile-card{
+background:#121119;
+border:1px solid rgba(208,84,255,.25);
+border-radius:30px;
+padding:28px;
+text-align:center;
 }
 
-.avatar-wrap {
-  position: relative;
-  width: 110px;
-  height: 110px;
-  margin: auto;
+.avatar-wrap{
+position:relative;
+width:110px;
+height:110px;
+margin:auto;
 }
 
-.avatar {
-  width: 110px;
-  height: 110px;
-  border-radius: 50%;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg,#8c20df,#e04cff);
-  font-family: Arial,sans-serif;
-  font-size: 42px;
-  font-weight: 900;
-  box-shadow: 0 0 28px rgba(198,66,255,.3);
-  border: 2px solid rgba(223,103,255,.7);
+.avatar{
+width:110px;
+height:110px;
+border-radius:50%;
+overflow:hidden;
+display:flex;
+align-items:center;
+justify-content:center;
+background:linear-gradient(135deg,#8c20df,#e04cff);
+font-family:Arial,sans-serif;
+font-size:42px;
+font-weight:900;
+box-shadow:0 0 28px rgba(198,66,255,.3);
+border:2px solid rgba(223,103,255,.7);
 }
 
-.avatar img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: none;
+.avatar img{
+width:100%;
+height:100%;
+object-fit:cover;
+display:none;
 }
 
-.camera-button {
-  display: none;
-  position: absolute;
-  right: -4px;
-  bottom: -1px;
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  border: 2px solid #121119;
-  background: #b134ee;
-  color: white;
-  font-size: 18px;
-  cursor: pointer;
+.camera-button{
+display:none;
+position:absolute;
+right:-4px;
+bottom:-1px;
+width:38px;
+height:38px;
+border-radius:50%;
+border:2px solid #121119;
+background:#b134ee;
+color:white;
+font-size:18px;
+cursor:pointer;
 }
 
-#profileName {
-  font-size: 30px;
-  margin-top: 18px;
+#profileName{
+font-family:"Cinzel",serif;
+font-size:30px;
+margin-top:18px;
 }
 
-#profileEmail {
-  color: #aaa4af;
-  font-family: Arial,sans-serif;
-  margin-top: 7px;
-  word-break: break-word;
+#profileEmail{
+color:#aaa4af;
+font-family:Arial,sans-serif;
+margin-top:7px;
+word-break:break-word;
 }
 
-.edit-button {
-  margin-top: 20px;
-  padding: 13px 28px;
-  border: 1px solid #c84cff;
-  border-radius: 18px;
-  background: transparent;
-  color: #df7cff;
-  font-family: inherit;
-  font-size: 17px;
-  cursor: pointer;
+.edit-button{
+margin-top:20px;
+padding:13px 28px;
+border:1px solid #c84cff;
+border-radius:18px;
+background:transparent;
+color:#df7cff;
+font-family:"Cinzel",serif;
+font-size:14px;
+cursor:pointer;
 }
 
-.edit-panel {
-  margin-top: 22px;
-  padding: 22px;
-  border-radius: 22px;
-  background: #121119;
-  display: none;
+.edit-panel{
+margin-top:22px;
+padding:22px;
+border-radius:22px;
+background:#121119;
+display:none;
 }
 
-.edit-panel input[type="text"] {
-  width: 100%;
-  padding: 16px;
-  border: 1px solid rgba(207,77,255,.35);
-  border-radius: 15px;
-  background: #09090e;
-  color: white;
-  font-size: 17px;
-  outline: none;
+.edit-panel input[type="text"]{
+width:100%;
+padding:16px;
+border:1px solid rgba(207,77,255,.35);
+border-radius:15px;
+background:#09090e;
+color:white;
+font-family:"Playfair Display",serif;
+font-size:17px;
+outline:none;
 }
 
-.photo-label {
-  display: block;
-  margin-top: 15px;
-  padding: 16px;
-  border: 1px solid rgba(207,77,255,.35);
-  border-radius: 15px;
-  text-align: center;
-  color: #e08aff;
-  background: #0d0c12;
-  cursor: pointer;
-  font-family: Arial,sans-serif;
-  font-weight: bold;
+.photo-label{
+display:block;
+margin-top:15px;
+padding:16px;
+border:1px solid rgba(207,77,255,.35);
+border-radius:15px;
+text-align:center;
+color:#e08aff;
+background:#0d0c12;
+cursor:pointer;
+font-family:"Cinzel",serif;
+font-size:12px;
+font-weight:bold;
 }
 
-#photoInput {
-  display: none;
+#photoInput{
+display:none;
 }
 
-.save-button {
-  width: 100%;
-  margin-top: 14px;
-  padding: 16px;
-  border: 0;
-  border-radius: 15px;
-  background: #ac2be5;
-  color: white;
-  font-weight: bold;
-  font-size: 17px;
-  cursor: pointer;
+.save-button{
+width:100%;
+margin-top:14px;
+padding:16px;
+border:0;
+border-radius:15px;
+background:#ac2be5;
+color:white;
+font-family:"Cinzel",serif;
+font-weight:bold;
+font-size:13px;
+cursor:pointer;
 }
 
-.save-button:disabled {
-  opacity: .5;
-  cursor: not-allowed;
+.save-button:disabled{
+opacity:.5;
+cursor:not-allowed;
 }
 
-.wallet-card {
-  margin-top: 26px;
-  padding: 27px;
-  border-radius: 30px;
-  background:
-    radial-gradient(circle at left, rgba(189,47,255,.55), transparent 60%),
-    linear-gradient(135deg,#7717c7,#321047);
-  border: 2px solid rgba(224,99,255,.7);
+.wallet-card{
+margin-top:26px;
+padding:27px;
+border-radius:30px;
+background:
+radial-gradient(circle at left,rgba(189,47,255,.55),transparent 60%),
+linear-gradient(135deg,#7717c7,#321047);
+border:2px solid rgba(224,99,255,.7);
 }
 
-.wallet-label {
-  color: #eee5f4;
-  font-size: 18px;
-  text-transform: uppercase;
+.wallet-label{
+color:#eee5f4;
+font-family:"Cinzel",serif;
+font-size:15px;
+text-transform:uppercase;
 }
 
-.wallet-row {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  margin-top: 14px;
+.wallet-row{
+display:flex;
+align-items:center;
+gap:15px;
+margin-top:14px;
 }
 
-.coin-icon {
-  font-size: 52px;
+.coin-icon{
+font-size:52px;
 }
 
-#coinBalance {
-  font-size: 60px;
+#coinBalance{
+font-family:"Cinzel",serif;
+font-size:60px;
 }
 
-.wallet-note {
-  margin-top: 14px;
-  color: #e3d9e8;
-  font-family: Arial,sans-serif;
-  font-size: 14px;
+.wallet-note{
+margin-top:14px;
+color:#e3d9e8;
+font-family:Arial,sans-serif;
+font-size:14px;
 }
 
-.buy-button {
-  width: 100%;
-  margin-top: 20px;
-  padding: 18px;
-  border: none;
-  border-radius: 18px;
-  background: linear-gradient(90deg,#8d20df,#db47ff);
-  color: white;
-  font-family: inherit;
-  font-weight: bold;
-  font-size: 20px;
-  cursor: pointer;
+.buy-button{
+width:100%;
+margin-top:20px;
+padding:18px;
+border:none;
+border-radius:18px;
+background:linear-gradient(90deg,#8d20df,#db47ff);
+color:white;
+font-family:"Cinzel",serif;
+font-weight:bold;
+font-size:14px;
+cursor:pointer;
 }
 
-.section-title {
-  margin-top: 38px;
-  margin-bottom: 18px;
-  font-size: 27px;
-  text-transform: uppercase;
+.section-title{
+margin-top:38px;
+margin-bottom:18px;
+font-family:"Cinzel",serif;
+font-size:27px;
+text-transform:uppercase;
 }
 
-.menu {
-  overflow: hidden;
-  background: #121119;
-  border: 1px solid rgba(255,255,255,.08);
-  border-radius: 25px;
+.menu{
+overflow:hidden;
+background:#121119;
+border:1px solid rgba(255,255,255,.08);
+border-radius:25px;
 }
 
-.menu-item {
-  width: 100%;
-  padding: 21px;
-  border: 0;
-  border-bottom: 1px solid rgba(255,255,255,.07);
-  background: transparent;
-  color: white;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-family: inherit;
-  font-size: 19px;
-  text-align: left;
-  cursor: pointer;
+.menu-item{
+width:100%;
+padding:21px;
+border:0;
+border-bottom:1px solid rgba(255,255,255,.07);
+background:transparent;
+color:white;
+display:flex;
+justify-content:space-between;
+align-items:center;
+font-family:"Playfair Display",serif;
+font-size:19px;
+text-align:left;
+cursor:pointer;
 }
 
-.menu-item:last-child {
-  border-bottom: 0;
+.menu-item:last-child{
+border-bottom:0;
 }
 
-.arrow {
-  color: #b44cff;
+.arrow{
+color:#b44cff;
 }
 
-#status {
-  margin-top: 24px;
-  padding: 17px;
-  border-radius: 18px;
-  background: #101017;
-  color: #c2bbc8;
-  font-family: Arial,sans-serif;
-  display: none;
-  line-height: 1.5;
+#status{
+margin-top:24px;
+padding:17px;
+border-radius:18px;
+background:#101017;
+color:#c2bbc8;
+font-family:Arial,sans-serif;
+display:none;
+line-height:1.5;
 }
 
-.login-box {
-  display: none;
-  margin-top: 25px;
-  padding: 22px;
-  background: #22131f;
-  border-radius: 20px;
-  text-align: center;
+.login-box{
+display:none;
+margin-top:25px;
+padding:22px;
+background:#22131f;
+border-radius:20px;
+text-align:center;
 }
 
-.login-box a {
-  color: #df67ff;
-  text-decoration: none;
-  font-weight: bold;
+.login-box a{
+color:#df67ff;
+text-decoration:none;
+font-weight:bold;
 }
 
-.bottom-nav {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 92px;
-  background: #101016;
-  border-top: 1px solid rgba(177,74,255,.3);
-  display: grid;
-  grid-template-columns: repeat(5,1fr);
-  z-index: 50;
+
+/* ========================================
+   ZYNORA MASTER 6-BUTTON NAVIGATION
+======================================== */
+
+.bottom-nav{
+position:fixed;
+left:0;
+right:0;
+bottom:0;
+height:90px;
+background:rgba(17,16,22,.98);
+display:grid;
+grid-template-columns:repeat(6,1fr);
+border-top:1px solid rgba(173,77,255,.2);
+z-index:100;
+backdrop-filter:blur(12px);
+-webkit-backdrop-filter:blur(12px);
 }
 
-.nav-item {
-  text-decoration: none;
-  color: #77717f;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 6px;
-  font-size: 13px;
+.nav-item{
+text-decoration:none;
+color:#777582;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+gap:5px;
+font-family:"Cinzel",serif;
+font-size:8px;
+transition:.2s ease;
+min-width:0;
 }
 
-.nav-icon {
-  font-size: 24px;
+.nav-icon-wrap{
+width:37px;
+height:37px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:12px;
+transition:.2s ease;
 }
 
-.nav-item.active {
-  color: #c94dff;
+.nav-icon-wrap svg{
+width:22px;
+height:22px;
+fill:none;
+stroke:currentColor;
+stroke-width:1.9;
+stroke-linecap:round;
+stroke-linejoin:round;
+}
+
+.nav-item.active{
+color:#b45cff;
+text-shadow:0 0 15px rgba(169,77,255,.5);
+}
+
+.nav-item.active .nav-icon-wrap{
+background:linear-gradient(
+135deg,
+rgba(169,77,255,.28),
+rgba(116,27,232,.18)
+);
+box-shadow:
+0 0 0 1px rgba(169,77,255,.32),
+0 0 18px rgba(169,77,255,.24);
+}
+
+.nav-item:active{
+transform:scale(.96);
+}
+
+@media(max-width:390px){
+
+.page{
+padding-left:18px;
+padding-right:18px;
+}
+
+.logo{
+font-size:38px;
+}
+
+.nav-item{
+font-size:7px;
+}
+
+.nav-icon-wrap{
+width:35px;
+height:35px;
+}
+
+.nav-icon-wrap svg{
+width:21px;
+height:21px;
+}
+
 }
 
 </style>
@@ -332,155 +416,385 @@ body {
 <body>
 
 <header class="topbar">
-  <div class="logo">ZYNORA</div>
+<div class="logo">ZYNORA</div>
 </header>
 
 <main class="page">
 
 <section class="profile-card">
 
-  <div class="avatar-wrap">
+<div class="avatar-wrap">
 
-    <div class="avatar" id="avatar">
-      <span id="avatarLetter">Z</span>
-      <img id="avatarImage" alt="Profile picture">
-    </div>
+<div class="avatar" id="avatar">
 
-    <button
-      class="camera-button"
-      id="cameraButton"
-      type="button">
-      📷
-    </button>
+<span id="avatarLetter">
+Z
+</span>
 
-  </div>
+<img
+id="avatarImage"
+alt="Profile picture">
 
-  <div id="profileName">Zynora User</div>
+</div>
 
-  <div id="profileEmail">Loading account...</div>
+<button
+class="camera-button"
+id="cameraButton"
+type="button">
+📷
+</button>
 
-  <button class="edit-button" id="editButton">
-    EDIT PROFILE
-  </button>
+</div>
+
+<div id="profileName">
+Zynora User
+</div>
+
+<div id="profileEmail">
+Loading account...
+</div>
+
+<button
+class="edit-button"
+id="editButton">
+EDIT PROFILE
+</button>
+
+</section>
+
+
+<!-- EDIT PROFILE -->
+
+<section
+class="edit-panel"
+id="editPanel">
+
+<input
+id="nameInput"
+type="text"
+placeholder="Your display name">
+
+<label
+class="photo-label"
+for="photoInput">
+📷 CHOOSE PROFILE PHOTO
+</label>
+
+<input
+id="photoInput"
+type="file"
+accept="image/*">
+
+<button
+class="save-button"
+id="saveProfileButton">
+SAVE PROFILE
+</button>
 
 </section>
 
-<section class="edit-panel" id="editPanel">
 
-  <input
-    id="nameInput"
-    type="text"
-    placeholder="Your display name">
-
-  <label class="photo-label" for="photoInput">
-    📷 CHOOSE PROFILE PHOTO
-  </label>
-
-  <input
-    id="photoInput"
-    type="file"
-    accept="image/*">
-
-  <button class="save-button" id="saveProfileButton">
-    SAVE PROFILE
-  </button>
-
-</section>
+<!-- WALLET -->
 
 <section class="wallet-card">
 
-  <div class="wallet-label">
-    Your Zynora Coins
-  </div>
+<div class="wallet-label">
+Your Zynora Coins
+</div>
 
-  <div class="wallet-row">
+<div class="wallet-row">
 
-    <div class="coin-icon">
-      🪙
-    </div>
+<div class="coin-icon">
+🪙
+</div>
 
-    <div id="coinBalance">
-      0
-    </div>
+<div id="coinBalance">
+0
+</div>
 
-  </div>
+</div>
 
-  <div class="wallet-note">
-    Your real Zynora wallet balance
-  </div>
+<div class="wallet-note">
+Your real Zynora wallet balance
+</div>
 
 </section>
 
-<button class="buy-button" id="buyCoinsButton">
-  BUY ZYNORA COINS
+
+<button
+class="buy-button"
+id="buyCoinsButton">
+BUY ZYNORA COINS
 </button>
 
+
+<!-- ACCOUNT -->
+
 <div class="section-title">
-  Account
+Account
 </div>
 
 <div class="menu">
 
-  <button class="menu-item" id="rewardsButton">
-    <span>🎁 Rewards</span>
-    <span class="arrow">›</span>
-  </button>
+<button
+class="menu-item"
+id="rewardsButton">
 
-  <button class="menu-item" id="libraryButton">
-    <span>▣ My Library</span>
-    <span class="arrow">›</span>
-  </button>
+<span>
+🎁 Rewards
+</span>
 
-  <button class="menu-item" id="settingsButton">
-    <span>⚙ Settings</span>
-    <span class="arrow">›</span>
-  </button>
+<span class="arrow">
+›
+</span>
 
-  <button class="menu-item" id="logoutButton">
-    <span>↪ Log Out</span>
-    <span class="arrow">›</span>
-  </button>
+</button>
+
+
+<button
+class="menu-item"
+id="libraryButton">
+
+<span>
+▣ My Library
+</span>
+
+<span class="arrow">
+›
+</span>
+
+</button>
+
+
+<button
+class="menu-item"
+id="settingsButton">
+
+<span>
+⚙ Settings
+</span>
+
+<span class="arrow">
+›
+</span>
+
+</button>
+
+
+<button
+class="menu-item"
+id="logoutButton">
+
+<span>
+↪ Log Out
+</span>
+
+<span class="arrow">
+›
+</span>
+
+</button>
 
 </div>
 
-<div id="loginBox" class="login-box">
-  You are not logged into Zynora.
-  <br><br>
-  <a href="login.html">LOGIN</a>
+
+<div
+id="loginBox"
+class="login-box">
+
+You are not logged into Zynora.
+
+<br><br>
+
+<a href="login.html">
+LOGIN
+</a>
+
 </div>
 
 <div id="status"></div>
 
 </main>
 
+
+<!-- ========================================
+     MASTER 6-BUTTON ZYNORA NAVIGATION
+========================================= -->
+
 <nav class="bottom-nav">
 
+
+<!-- HOME -->
+
 <a href="index.html" class="nav-item">
-  <div class="nav-icon">⌂</div>
-  <div>HOME</div>
+
+<span class="nav-icon-wrap">
+
+<svg viewBox="0 0 24 24">
+
+<path d="M3 10.5 12 3l9 7.5"></path>
+
+<path d="M5 9.5V21h14V9.5"></path>
+
+<path d="M9 21v-6h6v6"></path>
+
+</svg>
+
+</span>
+
+Home
+
 </a>
+
+
+<!-- DISCOVER -->
 
 <a href="discover.html" class="nav-item">
-  <div class="nav-icon">◉</div>
-  <div>DISCOVER</div>
+
+<span class="nav-icon-wrap">
+
+<svg viewBox="0 0 24 24">
+
+<circle
+cx="12"
+cy="12"
+r="9">
+</circle>
+
+<path d="m15.5 8.5-2.2 4.8-4.8 2.2 2.2-4.8 4.8-2.2z"></path>
+
+</svg>
+
+</span>
+
+Discover
+
 </a>
+
+
+<!-- REWARDS -->
 
 <a href="rewards.html" class="nav-item">
-  <div class="nav-icon">🎁</div>
-  <div>REWARDS</div>
+
+<span class="nav-icon-wrap">
+
+<svg viewBox="0 0 24 24">
+
+<path d="M4 9h16v11H4z"></path>
+
+<path d="M3 9h18V5H3z"></path>
+
+<path d="M12 5v15"></path>
+
+<path d="M12 5H8.5C7.1 5 6 4.1 6 3s1-2 2.3-2C10.4 1 12 5 12 5z"></path>
+
+<path d="M12 5h3.5C16.9 5 18 4.1 18 3s-1-2-2.3-2C13.6 1 12 5 12 5z"></path>
+
+</svg>
+
+</span>
+
+Rewards
+
 </a>
+
+
+<!-- AI STUDIO -->
+
+<a
+href="ai-series-studio.html"
+class="nav-item">
+
+<span class="nav-icon-wrap">
+
+<svg viewBox="0 0 24 24">
+
+<circle
+cx="12"
+cy="12"
+r="4">
+</circle>
+
+<path d="M12 2v3"></path>
+
+<path d="M12 19v3"></path>
+
+<path d="M2 12h3"></path>
+
+<path d="M19 12h3"></path>
+
+<path d="m4.9 4.9 2.1 2.1"></path>
+
+<path d="m17 17 2.1 2.1"></path>
+
+<path d="m19.1 4.9-2.1 2.1"></path>
+
+<path d="m7 17-2.1 2.1"></path>
+
+</svg>
+
+</span>
+
+AI Studio
+
+</a>
+
+
+<!-- LIBRARY -->
 
 <a href="library.html" class="nav-item">
-  <div class="nav-icon">▣</div>
-  <div>LIBRARY</div>
+
+<span class="nav-icon-wrap">
+
+<svg viewBox="0 0 24 24">
+
+<rect
+x="4"
+y="4"
+width="16"
+height="16"
+rx="2">
+</rect>
+
+<path d="m10 8 6 4-6 4z"></path>
+
+</svg>
+
+</span>
+
+Library
+
 </a>
 
-<a href="profile.html" class="nav-item active">
-  <div class="nav-icon">●</div>
-  <div>PROFILE</div>
+
+<!-- PROFILE -->
+
+<a
+href="profile.html"
+class="nav-item active">
+
+<span class="nav-icon-wrap">
+
+<svg viewBox="0 0 24 24">
+
+<circle
+cx="12"
+cy="8"
+r="4">
+</circle>
+
+<path d="M4.5 21c.8-4 3.4-6 7.5-6s6.7 2 7.5 6"></path>
+
+</svg>
+
+</span>
+
+Profile
+
 </a>
 
 </nav>
+
 
 <script>
 
@@ -495,8 +809,8 @@ const AVATAR_BUCKET =
 
 const supabaseClient =
 window.supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
+SUPABASE_URL,
+SUPABASE_KEY
 );
 
 let currentSession = null;
@@ -541,562 +855,700 @@ document.getElementById("editButton");
 const saveProfileButton =
 document.getElementById("saveProfileButton");
 
-function showStatus(text) {
-  statusBox.style.display = "block";
-  statusBox.textContent = text;
-}
 
-function hideStatus() {
-  statusBox.style.display = "none";
-}
+/* ========================================
+   STATUS
+======================================== */
 
-function showAvatar(name, photoUrl) {
+function showStatus(text){
 
-  if (photoUrl) {
+statusBox.style.display =
+"block";
 
-    avatarImage.src = photoUrl;
-    avatarImage.style.display = "block";
-    avatarLetter.style.display = "none";
-
-  } else {
-
-    avatarImage.removeAttribute("src");
-    avatarImage.style.display = "none";
-    avatarLetter.style.display = "block";
-
-    avatarLetter.textContent =
-      (name || "Z")
-        .charAt(0)
-        .toUpperCase();
-
-  }
+statusBox.textContent =
+text;
 
 }
 
-async function loadUser() {
+function hideStatus(){
 
-  const {
-    data,
-    error
-  } =
-  await supabaseClient
-    .auth
-    .getSession();
-
-  if (error) {
-
-    showStatus(
-      "Unable to load your account."
-    );
-
-    return false;
-
-  }
-
-  currentSession =
-    data.session;
-
-  if (!currentSession) {
-
-    loginBox.style.display =
-      "block";
-
-    profileEmail.textContent =
-      "Not logged in";
-
-    editButton.disabled =
-      true;
-
-    cameraButton.style.display =
-      "none";
-
-    return false;
-
-  }
-
-  loginBox.style.display =
-    "none";
-
-  editButton.disabled =
-    false;
-
-  const user =
-    currentSession.user;
-
-  const savedName =
-    user.user_metadata?.display_name ||
-    user.user_metadata?.name ||
-    "Zynora User";
-
-  const savedAvatar =
-    user.user_metadata?.avatar_url ||
-    "";
-
-  profileName.textContent =
-    savedName;
-
-  profileEmail.textContent =
-    user.email || "";
-
-  nameInput.value =
-    savedName;
-
-  showAvatar(
-    savedName,
-    savedAvatar
-  );
-
-  return true;
+statusBox.style.display =
+"none";
 
 }
 
-async function loadWallet() {
 
-  if (!currentSession) {
-    return;
-  }
+/* ========================================
+   AVATAR
+======================================== */
 
-  const {
-    data,
-    error
-  } =
-  await supabaseClient
-    .from("wallets")
-    .select("balance")
-    .eq(
-      "user_id",
-      currentSession.user.id
-    )
-    .maybeSingle();
+function showAvatar(name,photoUrl){
 
-  if (error) {
+if(photoUrl){
 
-    console.error(
-      "Wallet error:",
-      error
-    );
+avatarImage.src =
+photoUrl;
 
-    showStatus(
-      "Unable to load your Zynora wallet."
-    );
+avatarImage.style.display =
+"block";
 
-    return;
+avatarLetter.style.display =
+"none";
 
-  }
+}else{
 
-  coinBalance.textContent =
-    Number(
-      data?.balance || 0
-    ).toLocaleString();
+avatarImage.removeAttribute(
+"src"
+);
+
+avatarImage.style.display =
+"none";
+
+avatarLetter.style.display =
+"block";
+
+avatarLetter.textContent =
+(name || "Z")
+.charAt(0)
+.toUpperCase();
 
 }
+
+}
+
+
+/* ========================================
+   USER
+======================================== */
+
+async function loadUser(){
+
+const {
+data,
+error
+} =
+await supabaseClient
+.auth
+.getSession();
+
+if(error){
+
+showStatus(
+"Unable to load your account."
+);
+
+return false;
+
+}
+
+currentSession =
+data.session;
+
+if(!currentSession){
+
+loginBox.style.display =
+"block";
+
+profileEmail.textContent =
+"Not logged in";
+
+editButton.disabled =
+true;
+
+cameraButton.style.display =
+"none";
+
+return false;
+
+}
+
+loginBox.style.display =
+"none";
+
+editButton.disabled =
+false;
+
+const user =
+currentSession.user;
+
+const savedName =
+user.user_metadata?.display_name ||
+user.user_metadata?.name ||
+"Zynora User";
+
+const savedAvatar =
+user.user_metadata?.avatar_url ||
+"";
+
+profileName.textContent =
+savedName;
+
+profileEmail.textContent =
+user.email || "";
+
+nameInput.value =
+savedName;
+
+showAvatar(
+savedName,
+savedAvatar
+);
+
+return true;
+
+}
+
+
+/* ========================================
+   WALLET
+======================================== */
+
+async function loadWallet(){
+
+if(!currentSession){
+return;
+}
+
+const {
+data,
+error
+} =
+await supabaseClient
+.from("wallets")
+.select("balance")
+.eq(
+"user_id",
+currentSession.user.id
+)
+.maybeSingle();
+
+if(error){
+
+console.error(
+"Wallet error:",
+error
+);
+
+showStatus(
+"Unable to load your Zynora wallet."
+);
+
+return;
+
+}
+
+coinBalance.textContent =
+Number(
+data?.balance || 0
+).toLocaleString();
+
+}
+
+
+/* ========================================
+   EDIT PROFILE
+======================================== */
 
 editButton.addEventListener(
 "click",
-() => {
+()=>{
 
-  if (!currentSession) {
+if(!currentSession){
 
-    showStatus(
-      "Please log in first."
-    );
+showStatus(
+"Please log in first."
+);
 
-    return;
-
-  }
-
-  const isOpen =
-    editPanel.style.display ===
-    "block";
-
-  if (isOpen) {
-
-    editPanel.style.display =
-      "none";
-
-    cameraButton.style.display =
-      "none";
-
-    editButton.textContent =
-      "EDIT PROFILE";
-
-  } else {
-
-    editPanel.style.display =
-      "block";
-
-    cameraButton.style.display =
-      "block";
-
-    editButton.textContent =
-      "CLOSE EDIT";
-
-  }
-
-});
-
-cameraButton.addEventListener(
-"click",
-() => {
-
-  if (!currentSession) {
-
-    showStatus(
-      "Please log in first."
-    );
-
-    return;
-
-  }
-
-  photoInput.click();
-
-});
-
-photoInput.addEventListener(
-"change",
-() => {
-
-  const file =
-    photoInput.files?.[0];
-
-  if (!file) {
-    return;
-  }
-
-  if (!file.type.startsWith("image/")) {
-
-    showStatus(
-      "Please choose an image file."
-    );
-
-    photoInput.value =
-      "";
-
-    return;
-
-  }
-
-  if (file.size > 5 * 1024 * 1024) {
-
-    showStatus(
-      "Profile photo must be smaller than 5 MB."
-    );
-
-    photoInput.value =
-      "";
-
-    return;
-
-  }
-
-  selectedPhoto =
-    file;
-
-  const previewUrl =
-    URL.createObjectURL(file);
-
-  avatarImage.src =
-    previewUrl;
-
-  avatarImage.style.display =
-    "block";
-
-  avatarLetter.style.display =
-    "none";
-
-  showStatus(
-    "Photo selected. Tap SAVE PROFILE."
-  );
-
-});
-
-async function uploadProfilePhoto() {
-
-  if (!selectedPhoto) {
-
-    return (
-      currentSession
-        ?.user
-        ?.user_metadata
-        ?.avatar_url
-      ||
-      ""
-    );
-
-  }
-
-  const userId =
-    currentSession.user.id;
-
-  let extension =
-    selectedPhoto.name
-      .split(".")
-      .pop()
-      .toLowerCase();
-
-  if (!extension || extension.length > 5) {
-    extension = "jpg";
-  }
-
-  const filePath =
-    `${userId}/profile-${Date.now()}.${extension}`;
-
-  const {
-    error: uploadError
-  } =
-  await supabaseClient
-    .storage
-    .from(AVATAR_BUCKET)
-    .upload(
-      filePath,
-      selectedPhoto,
-      {
-        cacheControl: "3600",
-        upsert: false
-      }
-    );
-
-  if (uploadError) {
-    throw uploadError;
-  }
-
-  const {
-    data
-  } =
-  supabaseClient
-    .storage
-    .from(AVATAR_BUCKET)
-    .getPublicUrl(filePath);
-
-  if (!data || !data.publicUrl) {
-
-    throw new Error(
-      "Unable to create profile photo URL."
-    );
-
-  }
-
-  return data.publicUrl;
+return;
 
 }
 
+const isOpen =
+editPanel.style.display ===
+"block";
+
+if(isOpen){
+
+editPanel.style.display =
+"none";
+
+cameraButton.style.display =
+"none";
+
+editButton.textContent =
+"EDIT PROFILE";
+
+}else{
+
+editPanel.style.display =
+"block";
+
+cameraButton.style.display =
+"block";
+
+editButton.textContent =
+"CLOSE EDIT";
+
+}
+
+}
+);
+
+
+/* ========================================
+   CAMERA BUTTON
+======================================== */
+
+cameraButton.addEventListener(
+"click",
+()=>{
+
+if(!currentSession){
+
+showStatus(
+"Please log in first."
+);
+
+return;
+
+}
+
+photoInput.click();
+
+}
+);
+
+
+/* ========================================
+   PHOTO SELECTION
+======================================== */
+
+photoInput.addEventListener(
+"change",
+()=>{
+
+const file =
+photoInput.files?.[0];
+
+if(!file){
+return;
+}
+
+if(!file.type.startsWith("image/")){
+
+showStatus(
+"Please choose an image file."
+);
+
+photoInput.value =
+"";
+
+return;
+
+}
+
+if(file.size > 5 * 1024 * 1024){
+
+showStatus(
+"Profile photo must be smaller than 5 MB."
+);
+
+photoInput.value =
+"";
+
+return;
+
+}
+
+selectedPhoto =
+file;
+
+const previewUrl =
+URL.createObjectURL(file);
+
+avatarImage.src =
+previewUrl;
+
+avatarImage.style.display =
+"block";
+
+avatarLetter.style.display =
+"none";
+
+showStatus(
+"Photo selected. Tap SAVE PROFILE."
+);
+
+}
+);
+
+
+/* ========================================
+   UPLOAD PROFILE PHOTO
+======================================== */
+
+async function uploadProfilePhoto(){
+
+if(!selectedPhoto){
+
+return (
+currentSession
+?.user
+?.user_metadata
+?.avatar_url
+||
+""
+);
+
+}
+
+const userId =
+currentSession.user.id;
+
+let extension =
+selectedPhoto.name
+.split(".")
+.pop()
+.toLowerCase();
+
+if(!extension || extension.length > 5){
+
+extension =
+"jpg";
+
+}
+
+const filePath =
+`${userId}/profile-${Date.now()}.${extension}`;
+
+const {
+error:uploadError
+} =
+await supabaseClient
+.storage
+.from(AVATAR_BUCKET)
+.upload(
+filePath,
+selectedPhoto,
+{
+cacheControl:"3600",
+upsert:false
+}
+);
+
+if(uploadError){
+
+throw uploadError;
+
+}
+
+const {
+data
+} =
+supabaseClient
+.storage
+.from(AVATAR_BUCKET)
+.getPublicUrl(
+filePath
+);
+
+if(!data || !data.publicUrl){
+
+throw new Error(
+"Unable to create profile photo URL."
+);
+
+}
+
+return data.publicUrl;
+
+}
+
+
+/* ========================================
+   SAVE PROFILE
+======================================== */
+
 saveProfileButton.addEventListener(
 "click",
-async () => {
+async()=>{
 
-  if (!currentSession) {
+if(!currentSession){
 
-    showStatus(
-      "Please log in first."
-    );
+showStatus(
+"Please log in first."
+);
 
-    return;
+return;
 
-  }
+}
 
-  const newName =
-    nameInput.value.trim();
+const newName =
+nameInput.value.trim();
 
-  if (!newName) {
+if(!newName){
 
-    showStatus(
-      "Please enter a name."
-    );
+showStatus(
+"Please enter a name."
+);
 
-    return;
+return;
 
-  }
+}
 
-  saveProfileButton.disabled =
-    true;
+saveProfileButton.disabled =
+true;
 
-  saveProfileButton.textContent =
-    "SAVING...";
+saveProfileButton.textContent =
+"SAVING...";
 
-  try {
+try{
 
-    const avatarUrl =
-      await uploadProfilePhoto();
+const avatarUrl =
+await uploadProfilePhoto();
 
-    const {
-      data,
-      error
-    } =
-    await supabaseClient
-      .auth
-      .updateUser(
-        {
-          data: {
-            display_name: newName,
-            avatar_url: avatarUrl
-          }
-        }
-      );
+const {
+data,
+error
+} =
+await supabaseClient
+.auth
+.updateUser(
+{
+data:{
+display_name:newName,
+avatar_url:avatarUrl
+}
+}
+);
 
-    if (error) {
-      throw error;
-    }
+if(error){
 
-    profileName.textContent =
-      newName;
+throw error;
 
-    showAvatar(
-      newName,
-      avatarUrl
-    );
+}
 
-    if (data?.user) {
-      currentSession.user = data.user;
-    }
+profileName.textContent =
+newName;
 
-    selectedPhoto =
-      null;
+showAvatar(
+newName,
+avatarUrl
+);
 
-    photoInput.value =
-      "";
+if(data?.user){
 
-    editPanel.style.display =
-      "none";
+currentSession.user =
+data.user;
 
-    cameraButton.style.display =
-      "none";
+}
 
-    editButton.textContent =
-      "EDIT PROFILE";
+selectedPhoto =
+null;
 
-    showStatus(
-      "Profile updated successfully."
-    );
+photoInput.value =
+"";
 
-  } catch (error) {
+editPanel.style.display =
+"none";
 
-    console.error(error);
+cameraButton.style.display =
+"none";
 
-    showStatus(
-      error.message ||
-      "Unable to update profile."
-    );
+editButton.textContent =
+"EDIT PROFILE";
 
-  } finally {
+showStatus(
+"Profile updated successfully."
+);
 
-    saveProfileButton.disabled =
-      false;
+}
+catch(error){
 
-    saveProfileButton.textContent =
-      "SAVE PROFILE";
+console.error(error);
 
-  }
+showStatus(
+error.message ||
+"Unable to update profile."
+);
 
-});
+}
+finally{
 
-document
-.getElementById("buyCoinsButton")
-.addEventListener(
-"click",
-() => {
+saveProfileButton.disabled =
+false;
 
-  window.location.href =
-    "buy-coins.html";
+saveProfileButton.textContent =
+"SAVE PROFILE";
 
-});
+}
 
-document
-.getElementById("rewardsButton")
-.addEventListener(
-"click",
-() => {
+}
+);
 
-  window.location.href =
-    "rewards.html";
 
-});
+/* ========================================
+   BUY COINS
+======================================== */
 
 document
-.getElementById("libraryButton")
+.getElementById(
+"buyCoinsButton"
+)
 .addEventListener(
 "click",
-() => {
+()=>{
 
-  window.location.href =
-    "library.html";
+window.location.href =
+"buy-coins.html";
 
-});
+}
+);
+
+
+/* ========================================
+   REWARDS
+======================================== */
 
 document
-.getElementById("settingsButton")
+.getElementById(
+"rewardsButton"
+)
 .addEventListener(
 "click",
-() => {
+()=>{
 
-  showStatus(
-    "Zynora Settings are coming next."
-  );
+window.location.href =
+"rewards.html";
 
-});
+}
+);
+
+
+/* ========================================
+   LIBRARY
+======================================== */
 
 document
-.getElementById("logoutButton")
+.getElementById(
+"libraryButton"
+)
 .addEventListener(
 "click",
-async () => {
+()=>{
 
-  await supabaseClient
-    .auth
-    .signOut();
+window.location.href =
+"library.html";
 
-  window.location.href =
-    "login.html";
+}
+);
 
-});
+
+/* ========================================
+   SETTINGS
+======================================== */
+
+document
+.getElementById(
+"settingsButton"
+)
+.addEventListener(
+"click",
+()=>{
+
+showStatus(
+"Zynora Settings are coming next."
+);
+
+}
+);
+
+
+/* ========================================
+   LOG OUT
+======================================== */
+
+document
+.getElementById(
+"logoutButton"
+)
+.addEventListener(
+"click",
+async()=>{
+
+await supabaseClient
+.auth
+.signOut();
+
+window.location.href =
+"login.html";
+
+}
+);
+
+
+/* ========================================
+   REFRESH
+======================================== */
 
 document.addEventListener(
 "visibilitychange",
-async () => {
+async()=>{
 
-  if (document.visibilityState === "visible") {
+if(
+document.visibilityState ===
+"visible"
+){
 
-    const loggedIn =
-      await loadUser();
+const loggedIn =
+await loadUser();
 
-    if (loggedIn) {
-      await loadWallet();
-    }
+if(loggedIn){
 
-    editPanel.style.display =
-      "none";
+await loadWallet();
 
-    cameraButton.style.display =
-      "none";
+}
 
-    editButton.textContent =
-      "EDIT PROFILE";
+editPanel.style.display =
+"none";
 
-  }
+cameraButton.style.display =
+"none";
 
-});
+editButton.textContent =
+"EDIT PROFILE";
 
-async function startProfile() {
+}
 
-  const loggedIn =
-    await loadUser();
+}
+);
 
-  if (!loggedIn) {
-    return;
-  }
 
-  await loadWallet();
+/* ========================================
+   START PROFILE
+======================================== */
 
-  cameraButton.style.display =
-    "none";
+async function startProfile(){
 
-  editPanel.style.display =
-    "none";
+const loggedIn =
+await loadUser();
 
-  editButton.textContent =
-    "EDIT PROFILE";
+if(!loggedIn){
+return;
+}
 
-  hideStatus();
+await loadWallet();
+
+cameraButton.style.display =
+"none";
+
+editPanel.style.display =
+"none";
+
+editButton.textContent =
+"EDIT PROFILE";
+
+hideStatus();
 
 }
 
