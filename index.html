@@ -304,11 +304,12 @@ left:0;
 right:0;
 bottom:0;
 height:90px;
-background:#111016;
+background:rgba(17,16,22,.98);
 display:grid;
 grid-template-columns:repeat(5,1fr);
 border-top:1px solid rgba(173,77,255,.2);
 z-index:50;
+backdrop-filter:blur(12px);
 }
 
 .nav-item{
@@ -321,15 +322,43 @@ justify-content:center;
 gap:5px;
 font-family:"Cinzel",serif;
 font-size:9px;
+transition:.2s ease;
 }
 
-.nav-icon{
-font-size:21px;
+.nav-icon-wrap{
+width:37px;
+height:37px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:12px;
+transition:.2s ease;
+}
+
+.nav-icon-wrap svg{
+width:22px;
+height:22px;
+fill:none;
+stroke:currentColor;
+stroke-width:1.9;
+stroke-linecap:round;
+stroke-linejoin:round;
 }
 
 .nav-item.active{
-color:#a94dff;
+color:#b45cff;
 text-shadow:0 0 15px rgba(169,77,255,.5);
+}
+
+.nav-item.active .nav-icon-wrap{
+background:rgba(169,77,255,.12);
+box-shadow:
+0 0 0 1px rgba(169,77,255,.22),
+0 0 18px rgba(169,77,255,.16);
+}
+
+.nav-item:active{
+transform:scale(.96);
 }
 
 @media(max-width:600px){
@@ -595,56 +624,89 @@ Episode 1 • Continue watching
 href="index.html"
 class="nav-item active">
 
-<span class="nav-icon">
-⌂
+<span class="nav-icon-wrap">
+
+<svg viewBox="0 0 24 24">
+<path d="M3 10.5 12 3l9 7.5"></path>
+<path d="M5 9.5V21h14V9.5"></path>
+<path d="M9 21v-6h6v6"></path>
+</svg>
+
 </span>
 
 Home
 
 </a>
 
+
 <a
 href="discover.html"
 class="nav-item">
 
-<span class="nav-icon">
-◉
+<span class="nav-icon-wrap">
+
+<svg viewBox="0 0 24 24">
+<circle cx="12" cy="12" r="9"></circle>
+<path d="m15.5 8.5-2.2 4.8-4.8 2.2 2.2-4.8 4.8-2.2z"></path>
+</svg>
+
 </span>
 
 Discover
 
 </a>
 
+
 <a
 href="rewards.html"
 class="nav-item">
 
-<span class="nav-icon">
-🎁
+<span class="nav-icon-wrap">
+
+<svg viewBox="0 0 24 24">
+<path d="M4 9h16v11H4z"></path>
+<path d="M3 9h18V5H3z"></path>
+<path d="M12 5v15"></path>
+<path d="M12 5H8.5C7.1 5 6 4.1 6 3s1-2 2.3-2C10.4 1 12 5 12 5z"></path>
+<path d="M12 5h3.5C16.9 5 18 4.1 18 3s-1-2-2.3-2C13.6 1 12 5 12 5z"></path>
+</svg>
+
 </span>
 
 Rewards
 
 </a>
 
+
 <a
 href="library.html"
 class="nav-item">
 
-<span class="nav-icon">
-▣
+<span class="nav-icon-wrap">
+
+<svg viewBox="0 0 24 24">
+<rect x="4" y="4" width="16" height="16" rx="2"></rect>
+<path d="m10 8 6 4-6 4z"></path>
+</svg>
+
 </span>
 
 Library
 
 </a>
 
+
 <a
 href="profile.html"
 class="nav-item">
 
-<span class="nav-icon">
-●
+<span class="nav-icon-wrap">
+
+<svg viewBox="0 0 24 24">
+<circle cx="12" cy="8" r="4"></circle>
+<path d="M4.5 21c.8-4 3.4-6 7.5-6s6.7 2 7.5 6"></path>
+</svg>
+
 </span>
 
 Profile
