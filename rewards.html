@@ -268,7 +268,7 @@ text-align:center;
 }
 
 /* ========================================
-   SIX BUTTON BOTTOM NAVIGATION
+   ZYNORA MASTER 6-BUTTON NAVIGATION
 ======================================== */
 
 .bottom-nav{
@@ -281,8 +281,9 @@ background:rgba(17,16,22,.98);
 display:grid;
 grid-template-columns:repeat(6,1fr);
 border-top:1px solid rgba(173,77,255,.2);
-z-index:50;
+z-index:100;
 backdrop-filter:blur(12px);
+-webkit-backdrop-filter:blur(12px);
 }
 
 .nav-item{
@@ -300,8 +301,8 @@ min-width:0;
 }
 
 .nav-icon-wrap{
-width:35px;
-height:35px;
+width:37px;
+height:37px;
 display:flex;
 align-items:center;
 justify-content:center;
@@ -310,8 +311,8 @@ transition:.2s ease;
 }
 
 .nav-icon-wrap svg{
-width:21px;
-height:21px;
+width:22px;
+height:22px;
 fill:none;
 stroke:currentColor;
 stroke-width:1.9;
@@ -325,26 +326,18 @@ text-shadow:0 0 15px rgba(169,77,255,.5);
 }
 
 .nav-item.active .nav-icon-wrap{
-background:rgba(169,77,255,.12);
+background:linear-gradient(
+135deg,
+rgba(169,77,255,.28),
+rgba(116,27,232,.18)
+);
 box-shadow:
-0 0 0 1px rgba(169,77,255,.22),
-0 0 18px rgba(169,77,255,.16);
+0 0 0 1px rgba(169,77,255,.32),
+0 0 18px rgba(169,77,255,.24);
 }
 
 .nav-item:active{
 transform:scale(.96);
-}
-
-/* AI STUDIO */
-
-.nav-item.ai-nav{
-color:#c98cff;
-}
-
-.nav-item.ai-nav .nav-icon-wrap{
-background:linear-gradient(135deg,#a84fff,#7521e4);
-color:white;
-box-shadow:0 0 18px rgba(168,79,255,.35);
 }
 
 @media(max-width:390px){
@@ -354,17 +347,16 @@ font-size:7px;
 }
 
 .nav-icon-wrap{
-width:32px;
-height:32px;
+width:35px;
+height:35px;
 }
 
 .nav-icon-wrap svg{
-width:19px;
-height:19px;
+width:21px;
+height:21px;
 }
 
 }
-
 
 /* AD OVERLAY */
 
@@ -449,7 +441,6 @@ Zynora
 
 </header>
 
-
 <main>
 
 <h1>Rewards</h1>
@@ -457,7 +448,6 @@ Zynora
 <p class="subtitle">
 Earn Zynora Coins and use them to unlock episodes and experiences across Zynora.
 </p>
-
 
 <section class="wallet-card">
 
@@ -483,11 +473,9 @@ Your real Zynora coin balance
 
 </section>
 
-
 <div class="section-title">
 Earn Coins
 </div>
-
 
 <section class="reward-card">
 
@@ -522,7 +510,6 @@ CLAIM 20 COINS
 </button>
 
 </section>
-
 
 <section class="reward-card">
 
@@ -567,7 +554,6 @@ Rewarded-ad test mode. A live advertising provider will be connected before prod
 
 </section>
 
-
 <div class="section-title">
 Get More Coins
 </div>
@@ -577,7 +563,6 @@ class="buy-button"
 id="buyCoinsButton">
 BUY ZYNORA COINS
 </button>
-
 
 <div
 id="loginBox"
@@ -593,7 +578,6 @@ LOGIN
 
 </div>
 
-
 <div
 id="status"
 class="status">
@@ -601,57 +585,48 @@ class="status">
 
 </main>
 
-
 <!-- ========================================
-     BOTTOM NAVIGATION
+     MASTER 6-BUTTON ZYNORA NAVIGATION
 ========================================= -->
 
 <nav class="bottom-nav">
-
 
 <!-- HOME -->
 
 <a href="index.html" class="nav-item">
 
 <span class="nav-icon-wrap">
-
 <svg viewBox="0 0 24 24">
 <path d="M3 10.5 12 3l9 7.5"></path>
 <path d="M5 9.5V21h14V9.5"></path>
 <path d="M9 21v-6h6v6"></path>
 </svg>
-
 </span>
 
 Home
 
 </a>
 
-
 <!-- DISCOVER -->
 
 <a href="discover.html" class="nav-item">
 
 <span class="nav-icon-wrap">
-
 <svg viewBox="0 0 24 24">
 <circle cx="12" cy="12" r="9"></circle>
 <path d="m15.5 8.5-2.2 4.8-4.8 2.2 2.2-4.8 4.8-2.2z"></path>
 </svg>
-
 </span>
 
 Discover
 
 </a>
 
-
 <!-- REWARDS -->
 
 <a href="rewards.html" class="nav-item active">
 
 <span class="nav-icon-wrap">
-
 <svg viewBox="0 0 24 24">
 <path d="M4 9h16v11H4z"></path>
 <path d="M3 9h18V5H3z"></path>
@@ -659,68 +634,63 @@ Discover
 <path d="M12 5H8.5C7.1 5 6 4.1 6 3s1-2 2.3-2C10.4 1 12 5 12 5z"></path>
 <path d="M12 5h3.5C16.9 5 18 4.1 18 3s-1-2-2.3-2C13.6 1 12 5 12 5z"></path>
 </svg>
-
 </span>
 
 Rewards
 
 </a>
 
-
 <!-- AI STUDIO -->
 
-<a href="ai-series-studio.html" class="nav-item ai-nav">
+<a href="ai-series-studio.html" class="nav-item">
 
 <span class="nav-icon-wrap">
-
 <svg viewBox="0 0 24 24">
-<path d="M12 3v3"></path>
-<path d="M12 18v3"></path>
-<path d="M3 12h3"></path>
-<path d="M18 12h3"></path>
-<path d="m5.6 5.6 2.1 2.1"></path>
-<path d="m16.3 16.3 2.1 2.1"></path>
-<path d="m18.4 5.6-2.1 2.1"></path>
-<path d="m7.7 16.3-2.1 2.1"></path>
-<circle cx="12" cy="12" r="4"></circle>
-</svg>
 
+<circle cx="12" cy="12" r="4"></circle>
+
+<path d="M12 2v3"></path>
+<path d="M12 19v3"></path>
+<path d="M2 12h3"></path>
+<path d="M19 12h3"></path>
+
+<path d="m4.9 4.9 2.1 2.1"></path>
+<path d="m17 17 2.1 2.1"></path>
+
+<path d="m19.1 4.9-2.1 2.1"></path>
+<path d="m7 17-2.1 2.1"></path>
+
+</svg>
 </span>
 
 AI Studio
 
 </a>
 
-
 <!-- LIBRARY -->
 
 <a href="library.html" class="nav-item">
 
 <span class="nav-icon-wrap">
-
 <svg viewBox="0 0 24 24">
 <rect x="4" y="4" width="16" height="16" rx="2"></rect>
 <path d="m10 8 6 4-6 4z"></path>
 </svg>
-
 </span>
 
 Library
 
 </a>
 
-
 <!-- PROFILE -->
 
 <a href="profile.html" class="nav-item">
 
 <span class="nav-icon-wrap">
-
 <svg viewBox="0 0 24 24">
 <circle cx="12" cy="8" r="4"></circle>
 <path d="M4.5 21c.8-4 3.4-6 7.5-6s6.7 2 7.5 6"></path>
 </svg>
-
 </span>
 
 Profile
@@ -729,6 +699,7 @@ Profile
 
 </nav>
 
+<!-- AD OVERLAY -->
 
 <div
 class="ad-overlay"
@@ -758,7 +729,6 @@ seconds
 
 </div>
 
-
 <script>
 
 const SUPABASE_URL =
@@ -767,18 +737,14 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
 "sb_publishable__GsW9RahFD_XDWJTFzh9eQ_dNBZfa32";
 
-
 const client =
 supabase.createClient(
 SUPABASE_URL,
 SUPABASE_KEY
 );
 
-
 let user = null;
-
 let adRunning = false;
-
 
 const walletBalance =
 document.getElementById(
@@ -825,7 +791,6 @@ document.getElementById(
 "adTimer"
 );
 
-
 /* ============================
    STATUS
 ============================ */
@@ -840,14 +805,12 @@ message;
 
 }
 
-
 function hideStatus(){
 
 statusBox.style.display =
 "none";
 
 }
-
 
 /* ============================
    WALLET
@@ -869,7 +832,6 @@ await client
 .eq("user_id",user.id)
 .maybeSingle();
 
-
 if(error){
 
 console.error(error);
@@ -882,12 +844,10 @@ return;
 
 }
 
-
 const balance =
 Number(
 data?.balance || 0
 );
-
 
 walletBalance.textContent =
 balance.toLocaleString();
@@ -896,7 +856,6 @@ topCoins.textContent =
 balance.toLocaleString();
 
 }
-
 
 /* ============================
    COUNT AD REWARDS
@@ -908,10 +867,8 @@ if(!user){
 return;
 }
 
-
 const now =
 new Date();
-
 
 const year =
 now.getUTCFullYear();
@@ -926,10 +883,8 @@ String(
 now.getUTCDate()
 ).padStart(2,"0");
 
-
 const todayUTC =
 `${year}-${month}-${day}T00:00:00.000Z`;
-
 
 const {
 count,
@@ -957,7 +912,6 @@ user.id
 todayUTC
 );
 
-
 if(error){
 
 console.error(
@@ -969,7 +923,6 @@ return;
 
 }
 
-
 const used =
 count || 0;
 
@@ -979,10 +932,8 @@ Math.max(
 5-used
 );
 
-
 adsRemaining.textContent =
 remaining;
-
 
 if(remaining <= 0){
 
@@ -1004,7 +955,6 @@ watchAdButton.textContent =
 
 }
 
-
 /* ============================
    DAILY CHECK-IN
 ============================ */
@@ -1023,13 +973,11 @@ return;
 
 }
 
-
 dailyButton.disabled =
 true;
 
 dailyButton.textContent =
 "CLAIMING...";
-
 
 const {
 data,
@@ -1038,7 +986,6 @@ error
 await client.rpc(
 "claim_daily_reward"
 );
-
 
 if(error){
 
@@ -1056,12 +1003,10 @@ return;
 
 }
 
-
 const result =
 Array.isArray(data)
 ? data[0]
 : data;
-
 
 if(!result){
 
@@ -1078,7 +1023,6 @@ dailyButton.textContent =
 return;
 
 }
-
 
 if(result.already_claimed){
 
@@ -1122,7 +1066,6 @@ await loadWallet();
 }
 );
 
-
 /* ============================
    WATCH AD
 ============================ */
@@ -1135,7 +1078,6 @@ if(adRunning){
 return;
 }
 
-
 if(!user){
 
 showStatus(
@@ -1145,7 +1087,6 @@ showStatus(
 return;
 
 }
-
 
 if(
 Number(
@@ -1161,28 +1102,22 @@ return;
 
 }
 
-
 adRunning =
 true;
 
 hideStatus();
 
-
 watchAdButton.disabled =
 true;
-
 
 adOverlay.style.display =
 "flex";
 
-
 let seconds =
 15;
 
-
 adTimer.textContent =
 seconds;
-
 
 const countdown =
 setInterval(
@@ -1193,20 +1128,16 @@ seconds--;
 adTimer.textContent =
 seconds;
 
-
 if(seconds <= 0){
 
 clearInterval(
 countdown
 );
 
-
 adOverlay.style.display =
 "none";
 
-
 await claimAdReward();
-
 
 adRunning =
 false;
@@ -1220,7 +1151,6 @@ false;
 }
 );
 
-
 /* ============================
    CLAIM AD REWARD
 ============================ */
@@ -1231,7 +1161,6 @@ showStatus(
 "Processing your ad reward..."
 );
 
-
 const {
 data,
 error
@@ -1239,7 +1168,6 @@ error
 await client.rpc(
 "claim_ad_reward"
 );
-
 
 if(error){
 
@@ -1254,12 +1182,10 @@ return;
 
 }
 
-
 const result =
 Array.isArray(data)
 ? data[0]
 : data;
-
 
 if(!result){
 
@@ -1274,7 +1200,6 @@ return;
 
 }
 
-
 if(result.success){
 
 showStatus(
@@ -1282,22 +1207,18 @@ result.message ||
 "10 Zynora Coins earned."
 );
 
-
 walletBalance.textContent =
 Number(
 result.new_balance || 0
 ).toLocaleString();
-
 
 topCoins.textContent =
 Number(
 result.new_balance || 0
 ).toLocaleString();
 
-
 adsRemaining.textContent =
 result.ads_remaining;
-
 
 if(
 Number(
@@ -1328,10 +1249,8 @@ result.message ||
 "Reward unavailable."
 );
 
-
 adsRemaining.textContent =
 result.ads_remaining;
-
 
 if(
 Number(
@@ -1354,13 +1273,11 @@ false;
 
 }
 
-
 await loadWallet();
 
 await loadAdCount();
 
 }
-
 
 /* ============================
    BUY COINS
@@ -1380,7 +1297,6 @@ window.location.href =
 }
 );
 
-
 /* ============================
    START
 ============================ */
@@ -1393,7 +1309,6 @@ error
 } =
 await client.auth.getUser();
 
-
 if(error){
 
 showStatus(
@@ -1404,10 +1319,8 @@ return;
 
 }
 
-
 user =
 data.user;
-
 
 if(!user){
 
@@ -1424,17 +1337,14 @@ return;
 
 }
 
-
 loginBox.style.display =
 "none";
-
 
 await loadWallet();
 
 await loadAdCount();
 
 }
-
 
 /* ============================
    REFRESH WHEN RETURNING
@@ -1458,7 +1368,6 @@ await loadAdCount();
 
 }
 );
-
 
 start();
 
