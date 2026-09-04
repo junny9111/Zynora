@@ -29,7 +29,7 @@ radial-gradient(circle at 50% 8%,rgba(145,55,255,.18),transparent 32%),
 #08070c;
 color:white;
 font-family:"Playfair Display",Georgia,serif;
-padding-bottom:105px;
+padding-bottom:110px;
 }
 
 header{
@@ -223,17 +223,24 @@ color:#938b9d;
 font-style:italic;
 }
 
+
+/* ========================================
+   ZYNORA MASTER 6-BUTTON NAVIGATION
+======================================== */
+
 .bottom-nav{
 position:fixed;
 left:0;
 right:0;
 bottom:0;
 height:90px;
-background:#111016;
+background:rgba(17,16,22,.98);
 display:grid;
-grid-template-columns:repeat(5,1fr);
+grid-template-columns:repeat(6,1fr);
 border-top:1px solid rgba(173,77,255,.2);
-z-index:50;
+z-index:100;
+backdrop-filter:blur(12px);
+-webkit-backdrop-filter:blur(12px);
 }
 
 .nav-item{
@@ -245,15 +252,49 @@ align-items:center;
 justify-content:center;
 gap:5px;
 font-family:"Cinzel",serif;
-font-size:9px;
+font-size:8px;
+transition:.2s ease;
+min-width:0;
 }
 
-.nav-icon{
-font-size:21px;
+.nav-icon-wrap{
+width:37px;
+height:37px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:12px;
+transition:.2s ease;
+}
+
+.nav-icon-wrap svg{
+width:22px;
+height:22px;
+fill:none;
+stroke:currentColor;
+stroke-width:1.9;
+stroke-linecap:round;
+stroke-linejoin:round;
 }
 
 .nav-item.active{
-color:#a94dff;
+color:#b45cff;
+text-shadow:0 0 15px rgba(169,77,255,.5);
+}
+
+.nav-item.active .nav-icon-wrap{
+background:linear-gradient(
+135deg,
+rgba(169,77,255,.28),
+rgba(116,27,232,.18)
+);
+box-shadow:
+0 0 0 1px rgba(169,77,255,.32),
+0 0 18px rgba(169,77,255,.24);
+}
+
+.nav-item:active{
+transform:scale(.96);
 }
 
 @media(max-width:400px){
@@ -275,6 +316,20 @@ padding:12px;
 width:72px;
 height:98px;
 flex-basis:72px;
+}
+
+.nav-item{
+font-size:7px;
+}
+
+.nav-icon-wrap{
+width:35px;
+height:35px;
+}
+
+.nav-icon-wrap svg{
+width:21px;
+height:21px;
 }
 
 }
@@ -332,34 +387,121 @@ Unlocked
 
 </main>
 
+
+<!-- ========================================
+     MASTER 6-BUTTON ZYNORA NAVIGATION
+========================================= -->
+
 <nav class="bottom-nav">
 
+<!-- HOME -->
+
 <a href="index.html" class="nav-item">
-<span class="nav-icon">⌂</span>
+
+<span class="nav-icon-wrap">
+<svg viewBox="0 0 24 24">
+<path d="M3 10.5 12 3l9 7.5"></path>
+<path d="M5 9.5V21h14V9.5"></path>
+<path d="M9 21v-6h6v6"></path>
+</svg>
+</span>
+
 Home
+
 </a>
+
+
+<!-- DISCOVER -->
 
 <a href="discover.html" class="nav-item">
-<span class="nav-icon">◉</span>
+
+<span class="nav-icon-wrap">
+<svg viewBox="0 0 24 24">
+<circle cx="12" cy="12" r="9"></circle>
+<path d="m15.5 8.5-2.2 4.8-4.8 2.2 2.2-4.8 4.8-2.2z"></path>
+</svg>
+</span>
+
 Discover
+
 </a>
+
+
+<!-- REWARDS -->
 
 <a href="rewards.html" class="nav-item">
-<span class="nav-icon">🎁</span>
+
+<span class="nav-icon-wrap">
+<svg viewBox="0 0 24 24">
+<path d="M4 9h16v11H4z"></path>
+<path d="M3 9h18V5H3z"></path>
+<path d="M12 5v15"></path>
+<path d="M12 5H8.5C7.1 5 6 4.1 6 3s1-2 2.3-2C10.4 1 12 5 12 5z"></path>
+<path d="M12 5h3.5C16.9 5 18 4.1 18 3s-1-2-2.3-2C13.6 1 12 5 12 5z"></path>
+</svg>
+</span>
+
 Rewards
+
 </a>
+
+
+<!-- AI STUDIO -->
+
+<a href="ai-series-studio.html" class="nav-item">
+
+<span class="nav-icon-wrap">
+<svg viewBox="0 0 24 24">
+<circle cx="12" cy="12" r="4"></circle>
+<path d="M12 2v3"></path>
+<path d="M12 19v3"></path>
+<path d="M2 12h3"></path>
+<path d="M19 12h3"></path>
+<path d="m4.9 4.9 2.1 2.1"></path>
+<path d="m17 17 2.1 2.1"></path>
+<path d="m19.1 4.9-2.1 2.1"></path>
+<path d="m7 17-2.1 2.1"></path>
+</svg>
+</span>
+
+AI Studio
+
+</a>
+
+
+<!-- LIBRARY -->
 
 <a href="library.html" class="nav-item active">
-<span class="nav-icon">▣</span>
+
+<span class="nav-icon-wrap">
+<svg viewBox="0 0 24 24">
+<rect x="4" y="4" width="16" height="16" rx="2"></rect>
+<path d="m10 8 6 4-6 4z"></path>
+</svg>
+</span>
+
 Library
+
 </a>
 
+
+<!-- PROFILE -->
+
 <a href="profile.html" class="nav-item">
-<span class="nav-icon">●</span>
+
+<span class="nav-icon-wrap">
+<svg viewBox="0 0 24 24">
+<circle cx="12" cy="8" r="4"></circle>
+<path d="M4.5 21c.8-4 3.4-6 7.5-6s6.7 2 7.5 6"></path>
+</svg>
+</span>
+
 Profile
+
 </a>
 
 </nav>
+
 
 <script>
 
@@ -377,6 +519,11 @@ const unlockedTab = document.getElementById("unlockedTab");
 const savedPanel = document.getElementById("savedPanel");
 const historyPanel = document.getElementById("historyPanel");
 const unlockedPanel = document.getElementById("unlockedPanel");
+
+
+/* ========================================
+   TABS
+======================================== */
 
 function showPanel(panel,button){
 
@@ -405,6 +552,11 @@ unlockedTab.onclick=()=>{
 showPanel(unlockedPanel,unlockedTab);
 };
 
+
+/* ========================================
+   SAFE TEXT
+======================================== */
+
 function escapeHTML(value){
 
 return String(value ?? "")
@@ -415,6 +567,11 @@ return String(value ?? "")
 .replaceAll("'","&#039;");
 
 }
+
+
+/* ========================================
+   PLAYER URL
+======================================== */
 
 function makePlayerURL(dramaId,dramaTitle,episodeNumber){
 
@@ -436,6 +593,11 @@ return "player.html?" + params.toString();
 
 }
 
+
+/* ========================================
+   POSTER
+======================================== */
+
 function posterStyle(url){
 
 if(!url){
@@ -445,6 +607,11 @@ return "";
 return `style="background-image:url('${escapeHTML(url)}')"`;
 
 }
+
+
+/* ========================================
+   START
+======================================== */
 
 async function start(){
 
@@ -491,6 +658,11 @@ loadUnlocked()
 
 }
 
+
+/* ========================================
+   WALLET
+======================================== */
+
 async function loadCoins(){
 
 const result=await client
@@ -521,6 +693,11 @@ document.getElementById("coins").textContent="0";
 }
 
 }
+
+
+/* ========================================
+   SAVED
+======================================== */
 
 async function loadSaved(){
 
@@ -642,6 +819,11 @@ Remove
 
 }
 
+
+/* ========================================
+   REMOVE SAVED
+======================================== */
+
 async function removeSaved(id){
 
 if(!user || !id){
@@ -676,6 +858,11 @@ return;
 await loadSaved();
 
 }
+
+
+/* ========================================
+   HISTORY
+======================================== */
 
 async function loadHistory(){
 
@@ -799,31 +986,33 @@ href="${continueURL}">
 
 }
 
+
+/* ========================================
+   UNLOCKED
+======================================== */
+
 async function loadUnlocked(){
 
 unlockedPanel.innerHTML=
 '<div class="loading">Loading unlocked episodes...</div>';
 
-const result=await client
+const unlockResult=await client
 .from("unlocked_episodes")
-.select("*")
+.select("id,episode_id,unlocked_at")
 .eq("user_id",user.id)
-.order("created_at",{ascending:false});
+.order("unlocked_at",{ascending:false});
 
-if(result.error){
+if(unlockResult.error){
 
 console.error(
 "Unlocked episodes error:",
-result.error
+unlockResult.error
 );
 
 unlockedPanel.innerHTML=`
 <div class="empty">
-<h2>Unlocked episodes are not connected yet</h2>
-
-<p>
-${escapeHTML(result.error.message)}
-</p>
+<h2>Unable to load Unlocked</h2>
+<p>${escapeHTML(unlockResult.error.message)}</p>
 </div>
 `;
 
@@ -831,7 +1020,10 @@ return;
 
 }
 
-if(!result.data || !result.data.length){
+const unlocked=
+unlockResult.data || [];
+
+if(!unlocked.length){
 
 unlockedPanel.innerHTML=`
 <div class="empty">
@@ -849,13 +1041,88 @@ return;
 
 }
 
+
+/* COLLECT EPISODE IDS */
+
+const episodeIds=[
+...new Set(
+unlocked
+.map(item=>item.episode_id)
+.filter(Boolean)
+)
+];
+
+if(!episodeIds.length){
+
+unlockedPanel.innerHTML=`
+<div class="empty">
+<h2>No episode information found</h2>
+<p>Your unlocked episode records do not contain episode IDs.</p>
+</div>
+`;
+
+return;
+
+}
+
+
+/* LOAD EPISODE INFORMATION */
+
+const episodeResult=await client
+.from("episodes")
+.select("*")
+.in("id",episodeIds);
+
+if(episodeResult.error){
+
+console.error(
+"Episode information error:",
+episodeResult.error
+);
+
+unlockedPanel.innerHTML=`
+<div class="empty">
+<h2>Unable to load episode information</h2>
+<p>${escapeHTML(episodeResult.error.message)}</p>
+</div>
+`;
+
+return;
+
+}
+
+
+const episodeMap=new Map();
+
+(episodeResult.data || []).forEach(
+episode=>{
+
+episodeMap.set(
+episode.id,
+episode
+);
+
+}
+);
+
+
 unlockedPanel.innerHTML="";
 
-result.data.forEach(item=>{
+
+unlocked.forEach(unlock=>{
+
+const item=
+episodeMap.get(
+unlock.episode_id
+);
+
+if(!item){
+return;
+}
 
 const title=
 item.drama_title ||
-item.title ||
+item.series_title ||
 "Zynora Drama";
 
 const dramaId=
@@ -864,12 +1131,9 @@ item.drama_id ||
 
 const episode=
 item.episode_number ||
-item.episode ||
 1;
 
 const poster=
-item.poster_url ||
-item.image_url ||
 item.thumbnail_url ||
 "";
 
@@ -884,7 +1148,10 @@ unlockedPanel.innerHTML+=`
 
 <div class="card">
 
-<div class="poster" ${posterStyle(poster)}></div>
+<div
+class="poster"
+${posterStyle(poster)}>
+</div>
 
 <div class="content">
 
@@ -914,7 +1181,24 @@ href="${watchURL}">
 
 });
 
+
+if(!unlockedPanel.innerHTML.trim()){
+
+unlockedPanel.innerHTML=`
+<div class="empty">
+<h2>No episode information found</h2>
+<p>The unlocked records could not be matched to episodes.</p>
+</div>
+`;
+
 }
+
+}
+
+
+/* ========================================
+   REFRESH
+======================================== */
 
 document.addEventListener(
 "visibilitychange",
@@ -937,6 +1221,7 @@ loadUnlocked()
 }
 );
 
+
 window.addEventListener(
 "pageshow",
 async()=>{
@@ -954,6 +1239,7 @@ loadUnlocked()
 
 }
 );
+
 
 start();
 
