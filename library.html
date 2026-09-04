@@ -12,6 +12,8 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet">
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <style>
 
 *{
@@ -38,6 +40,9 @@ justify-content:space-between;
 padding:0 22px;
 background:#111016;
 border-bottom:1px solid rgba(173,77,255,.25);
+position:sticky;
+top:0;
+z-index:20;
 }
 
 .logo{
@@ -86,6 +91,7 @@ padding:5px;
 background:#121117;
 border-radius:18px;
 margin-bottom:26px;
+border:1px solid rgba(255,255,255,.03);
 }
 
 .tab{
@@ -95,11 +101,14 @@ border-radius:14px;
 background:transparent;
 color:#777582;
 font-family:"Cinzel",serif;
+cursor:pointer;
+transition:.2s ease;
 }
 
 .tab.active{
 background:linear-gradient(135deg,#a84fff,#7521e4);
 color:white;
+box-shadow:0 6px 18px rgba(132,39,222,.25);
 }
 
 .panel{
@@ -118,6 +127,7 @@ margin-bottom:13px;
 border-radius:19px;
 background:#15141b;
 border:1px solid rgba(255,255,255,.07);
+box-shadow:0 8px 25px rgba(0,0,0,.18);
 }
 
 .poster{
@@ -125,27 +135,41 @@ width:80px;
 height:105px;
 flex:0 0 80px;
 border-radius:13px;
-background:linear-gradient(145deg,#a84fff,#24102f);
+background:
+linear-gradient(145deg,rgba(168,79,255,.85),rgba(36,16,47,.95));
+background-size:cover;
+background-position:center;
+border:1px solid rgba(255,255,255,.06);
 }
 
 .content{
 flex:1;
+min-width:0;
 }
 
 .title2{
 font-family:"Cinzel",serif;
 font-size:14px;
 margin-bottom:7px;
+line-height:1.35;
 }
 
 .info{
 color:#918c98;
 font-size:12px;
+line-height:1.5;
+}
+
+.action-row{
+display:flex;
+align-items:center;
+gap:8px;
+margin-top:12px;
+flex-wrap:wrap;
 }
 
 .action{
 display:inline-block;
-margin-top:12px;
 padding:9px 14px;
 border-radius:12px;
 background:rgba(155,60,245,.18);
@@ -154,6 +178,21 @@ color:#d3a4ff;
 text-decoration:none;
 font-family:"Cinzel",serif;
 font-size:10px;
+}
+
+.action:hover{
+background:rgba(155,60,245,.28);
+}
+
+.remove-btn{
+padding:9px 12px;
+border-radius:12px;
+background:rgba(255,75,100,.08);
+border:1px solid rgba(255,90,110,.2);
+color:#d58c99;
+font-family:"Cinzel",serif;
+font-size:9px;
+cursor:pointer;
 }
 
 .empty{
@@ -169,6 +208,19 @@ color:#9994a2;
 font-family:"Cinzel",serif;
 color:white;
 margin-bottom:10px;
+font-size:18px;
+}
+
+.empty p{
+line-height:1.55;
+font-size:14px;
+}
+
+.loading{
+padding:35px 20px;
+text-align:center;
+color:#938b9d;
+font-style:italic;
 }
 
 .bottom-nav{
@@ -181,6 +233,7 @@ background:#111016;
 display:grid;
 grid-template-columns:repeat(5,1fr);
 border-top:1px solid rgba(173,77,255,.2);
+z-index:50;
 }
 
 .nav-item{
@@ -201,6 +254,29 @@ font-size:21px;
 
 .nav-item.active{
 color:#a94dff;
+}
+
+@media(max-width:400px){
+
+.logo{
+font-size:31px;
+}
+
+main{
+padding-left:15px;
+padding-right:15px;
+}
+
+.card{
+padding:12px;
+}
+
+.poster{
+width:72px;
+height:98px;
+flex-basis:72px;
+}
+
 }
 
 </style>
@@ -242,22 +318,16 @@ Unlocked
 
 </div>
 
-<div id="savedPanel" class="panel active"></div>
-
-<div id="historyPanel" class="panel"></div>
-
-<div id="unlockedPanel" class="panel">
-
-<div class="empty">
-
-<h2>No unlocked episodes yet</h2>
-
-<p>
-Episodes purchased with Zynora Coins will appear here.
-</p>
-
+<div id="savedPanel" class="panel active">
+<div class="loading">Loading saved dramas...</div>
 </div>
 
+<div id="historyPanel" class="panel">
+<div class="loading">Loading watch history...</div>
+</div>
+
+<div id="unlockedPanel" class="panel">
+<div class="loading">Loading unlocked episodes...</div>
 </div>
 
 </main>
@@ -291,8 +361,6 @@ Profile
 
 </nav>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <script>
 
 const client = supabase.createClient(
@@ -312,12 +380,12 @@ const unlockedPanel = document.getElementById("unlockedPanel");
 
 function showPanel(panel,button){
 
-document.querySelectorAll(".panel").forEach(p=>{
-p.classList.remove("active");
+document.querySelectorAll(".panel").forEach(panelItem=>{
+panelItem.classList.remove("active");
 });
 
-document.querySelectorAll(".tab").forEach(t=>{
-t.classList.remove("active");
+document.querySelectorAll(".tab").forEach(tabItem=>{
+tabItem.classList.remove("active");
 });
 
 panel.classList.add("active");
@@ -337,19 +405,72 @@ unlockedTab.onclick=()=>{
 showPanel(unlockedPanel,unlockedTab);
 };
 
+function escapeHTML(value){
+
+return String(value ?? "")
+.replaceAll("&","&amp;")
+.replaceAll("<","&lt;")
+.replaceAll(">","&gt;")
+.replaceAll('"',"&quot;")
+.replaceAll("'","&#039;");
+
+}
+
+function makePlayerURL(dramaTitle,episodeNumber){
+
+const params = new URLSearchParams();
+
+if(dramaTitle){
+params.set("drama",dramaTitle);
+}
+
+if(episodeNumber){
+params.set("episode",episodeNumber);
+}
+
+return "player.html?" + params.toString();
+
+}
+
+function posterStyle(url){
+
+if(!url){
+return "";
+}
+
+return `style="background-image:url('${escapeHTML(url)}')"`;
+
+}
+
 async function start(){
 
-const result=await client.auth.getUser();
+const {
+data:{
+user:currentUser
+},
+error
+} = await client.auth.getUser();
 
-user=result.data.user;
+if(error){
+
+console.error("Authentication error:",error);
+
+}
+
+user=currentUser;
 
 if(!user){
 
-savedPanel.innerHTML=
-'<div class="empty"><h2>Please log in</h2><p>Your saved dramas require a Zynora account.</p></div>';
+const loginMessage=`
+<div class="empty">
+<h2>Please log in</h2>
+<p>Your Zynora Library is connected to your account.</p>
+</div>
+`;
 
-historyPanel.innerHTML=
-'<div class="empty"><h2>Please log in</h2></div>';
+savedPanel.innerHTML=loginMessage;
+historyPanel.innerHTML=loginMessage;
+unlockedPanel.innerHTML=loginMessage;
 
 document.getElementById("coins").textContent="0";
 
@@ -357,9 +478,12 @@ return;
 
 }
 
-await loadCoins();
-await loadSaved();
-await loadHistory();
+await Promise.all([
+loadCoins(),
+loadSaved(),
+loadHistory(),
+loadUnlocked()
+]);
 
 }
 
@@ -396,6 +520,9 @@ document.getElementById("coins").textContent="0";
 
 async function loadSaved(){
 
+savedPanel.innerHTML=
+'<div class="loading">Loading saved dramas...</div>';
+
 const result=await client
 .from("saved_dramas")
 .select("*")
@@ -404,19 +531,27 @@ const result=await client
 
 if(result.error){
 
-savedPanel.innerHTML=
-'<div class="empty"><h2>Unable to load Saved</h2><p>'+
-result.error.message+
-'</p></div>';
+console.error("Saved dramas error:",result.error);
+
+savedPanel.innerHTML=`
+<div class="empty">
+<h2>Unable to load Saved</h2>
+<p>${escapeHTML(result.error.message)}</p>
+</div>
+`;
 
 return;
 
 }
 
-if(!result.data.length){
+if(!result.data || !result.data.length){
 
-savedPanel.innerHTML=
-'<div class="empty"><h2>No saved dramas yet</h2><p>Save a drama from Discover and it will appear here.</p></div>';
+savedPanel.innerHTML=`
+<div class="empty">
+<h2>No saved dramas yet</h2>
+<p>Save a drama from Discover and it will appear here.</p>
+</div>
+`;
 
 return;
 
@@ -426,25 +561,64 @@ savedPanel.innerHTML="";
 
 result.data.forEach(item=>{
 
+const title=
+item.drama_title ||
+item.title ||
+"Zynora Drama";
+
+const episode=
+item.episode_number ||
+item.last_episode ||
+1;
+
+const poster=
+item.poster_url ||
+item.image_url ||
+item.thumbnail_url ||
+"";
+
+const recordId=item.id;
+
+const watchURL=
+makePlayerURL(title,episode);
+
 savedPanel.innerHTML+=`
 
 <div class="card">
 
-<div class="poster"></div>
+<div class="poster" ${posterStyle(poster)}></div>
 
 <div class="content">
 
 <div class="title2">
-${item.drama_title}
+${escapeHTML(title)}
 </div>
 
 <div class="info">
 Saved to your Zynora Library
 </div>
 
-<a class="action" href="player.html">
+<div class="action-row">
+
+<a
+class="action"
+href="${watchURL}">
 ▶ Watch
 </a>
+
+${
+recordId
+?
+`<button
+class="remove-btn"
+onclick="removeSaved('${escapeHTML(recordId)}')">
+Remove
+</button>`
+:
+""
+}
+
+</div>
 
 </div>
 
@@ -456,7 +630,45 @@ Saved to your Zynora Library
 
 }
 
+async function removeSaved(id){
+
+if(!user || !id){
+return;
+}
+
+const confirmed=confirm(
+"Remove this drama from your Saved Library?"
+);
+
+if(!confirmed){
+return;
+}
+
+const result=await client
+.from("saved_dramas")
+.delete()
+.eq("id",id)
+.eq("user_id",user.id);
+
+if(result.error){
+
+alert(
+"Unable to remove drama: " +
+result.error.message
+);
+
+return;
+
+}
+
+await loadSaved();
+
+}
+
 async function loadHistory(){
+
+historyPanel.innerHTML=
+'<div class="loading">Loading watch history...</div>';
 
 const result=await client
 .from("watch_history")
@@ -466,19 +678,27 @@ const result=await client
 
 if(result.error){
 
-historyPanel.innerHTML=
-'<div class="empty"><h2>Unable to load History</h2><p>'+
-result.error.message+
-'</p></div>';
+console.error("History error:",result.error);
+
+historyPanel.innerHTML=`
+<div class="empty">
+<h2>Unable to load History</h2>
+<p>${escapeHTML(result.error.message)}</p>
+</div>
+`;
 
 return;
 
 }
 
-if(!result.data.length){
+if(!result.data || !result.data.length){
 
-historyPanel.innerHTML=
-'<div class="empty"><h2>No watch history yet</h2><p>Your watched episodes will appear here.</p></div>';
+historyPanel.innerHTML=`
+<div class="empty">
+<h2>No watch history yet</h2>
+<p>Your watched episodes will appear here automatically.</p>
+</div>
+`;
 
 return;
 
@@ -488,25 +708,66 @@ historyPanel.innerHTML="";
 
 result.data.forEach(item=>{
 
+const title=
+item.drama_title ||
+item.title ||
+"Zynora Drama";
+
+const episode=
+item.episode_number ||
+1;
+
+const poster=
+item.poster_url ||
+item.image_url ||
+item.thumbnail_url ||
+"";
+
+const progress=
+Number(
+item.progress_percent ??
+item.progress ??
+0
+);
+
+let infoText=
+`Episode ${escapeHTML(episode)}`;
+
+if(progress > 0){
+
+infoText+=
+` · ${Math.min(100,Math.round(progress))}% watched`;
+
+}
+
+const continueURL=
+makePlayerURL(title,episode);
+
 historyPanel.innerHTML+=`
 
 <div class="card">
 
-<div class="poster"></div>
+<div class="poster" ${posterStyle(poster)}></div>
 
 <div class="content">
 
 <div class="title2">
-${item.drama_title}
+${escapeHTML(title)}
 </div>
 
 <div class="info">
-Episode ${item.episode_number}
+${infoText}
 </div>
 
-<a class="action" href="player.html">
+<div class="action-row">
+
+<a
+class="action"
+href="${continueURL}">
 ▶ Continue
 </a>
+
+</div>
 
 </div>
 
@@ -518,15 +779,153 @@ Episode ${item.episode_number}
 
 }
 
-document.addEventListener("visibilitychange",async()=>{
+async function loadUnlocked(){
 
-if(document.visibilityState==="visible" && user){
+unlockedPanel.innerHTML=
+'<div class="loading">Loading unlocked episodes...</div>';
 
-await loadCoins();
+const result=await client
+.from("unlocked_episodes")
+.select("*")
+.eq("user_id",user.id)
+.order("created_at",{ascending:false});
+
+if(result.error){
+
+console.error(
+"Unlocked episodes error:",
+result.error
+);
+
+unlockedPanel.innerHTML=`
+<div class="empty">
+<h2>Unlocked episodes are not connected yet</h2>
+
+<p>
+${escapeHTML(result.error.message)}
+</p>
+</div>
+`;
+
+return;
 
 }
 
+if(!result.data || !result.data.length){
+
+unlockedPanel.innerHTML=`
+<div class="empty">
+
+<h2>No unlocked episodes yet</h2>
+
+<p>
+Episodes purchased with Zynora Coins or unlocked through rewards will appear here.
+</p>
+
+</div>
+`;
+
+return;
+
+}
+
+unlockedPanel.innerHTML="";
+
+result.data.forEach(item=>{
+
+const title=
+item.drama_title ||
+item.title ||
+"Zynora Drama";
+
+const episode=
+item.episode_number ||
+item.episode ||
+1;
+
+const poster=
+item.poster_url ||
+item.image_url ||
+item.thumbnail_url ||
+"";
+
+const watchURL=
+makePlayerURL(title,episode);
+
+unlockedPanel.innerHTML+=`
+
+<div class="card">
+
+<div class="poster" ${posterStyle(poster)}></div>
+
+<div class="content">
+
+<div class="title2">
+${escapeHTML(title)}
+</div>
+
+<div class="info">
+Episode ${escapeHTML(episode)} · Unlocked
+</div>
+
+<div class="action-row">
+
+<a
+class="action"
+href="${watchURL}">
+▶ Watch Episode
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
 });
+
+}
+
+document.addEventListener(
+"visibilitychange",
+async()=>{
+
+if(
+document.visibilityState==="visible" &&
+user
+){
+
+await Promise.all([
+loadCoins(),
+loadSaved(),
+loadHistory(),
+loadUnlocked()
+]);
+
+}
+
+}
+);
+
+window.addEventListener(
+"pageshow",
+async()=>{
+
+if(user){
+
+await Promise.all([
+loadCoins(),
+loadSaved(),
+loadHistory(),
+loadUnlocked()
+]);
+
+}
+
+}
+);
 
 start();
 
