@@ -23,7 +23,7 @@ background:
 radial-gradient(circle at top,#24102f,#08070c 42%);
 color:#fff;
 font-family:"Playfair Display",serif;
-padding-bottom:70px;
+padding-bottom:115px;
 min-height:100vh;
 }
 
@@ -393,6 +393,57 @@ height:1px;
 background:#2b2630;
 margin:18px 0;
 }
+
+
+/* =========================================
+   ZYNORA PERMANENT BOTTOM NAVIGATION
+========================================= */
+
+.bottom-nav{
+position:fixed;
+left:0;
+right:0;
+bottom:0;
+height:90px;
+background:rgba(17,16,22,.98);
+display:grid;
+grid-template-columns:repeat(5,1fr);
+border-top:1px solid rgba(173,77,255,.22);
+z-index:1000;
+backdrop-filter:blur(12px);
+padding-bottom:env(safe-area-inset-bottom);
+}
+
+.nav-item{
+text-decoration:none;
+color:#777582;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+gap:5px;
+font-family:"Cinzel",serif;
+font-size:9px;
+min-width:0;
+}
+
+.nav-icon{
+font-size:21px;
+line-height:1;
+}
+
+.nav-item:hover{
+color:#a94dff;
+}
+
+.nav-item.studio-active{
+color:#c47aff;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
 
 @media(max-width:560px){
 
@@ -821,6 +872,41 @@ Build an episode first.
 </section>
 
 </main>
+
+
+<!-- =========================================
+     PERMANENT ZYNORA NAVIGATION
+========================================= -->
+
+<nav class="bottom-nav">
+
+<a href="index.html" class="nav-item">
+<span class="nav-icon">⌂</span>
+<span>Home</span>
+</a>
+
+<a href="discover.html" class="nav-item">
+<span class="nav-icon">◉</span>
+<span>Discover</span>
+</a>
+
+<a href="rewards.html" class="nav-item">
+<span class="nav-icon">🎁</span>
+<span>Rewards</span>
+</a>
+
+<a href="library.html" class="nav-item">
+<span class="nav-icon">▣</span>
+<span>Library</span>
+</a>
+
+<a href="profile.html" class="nav-item">
+<span class="nav-icon">●</span>
+<span>Profile</span>
+</a>
+
+</nav>
+
 
 <script
 src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
