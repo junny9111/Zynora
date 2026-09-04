@@ -14,316 +14,324 @@
 <style>
 
 *{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
+box-sizing:border-box;
+margin:0;
+padding:0;
 }
 
 body{
-  min-height:100vh;
-  background:
-  radial-gradient(circle at 50% 8%,rgba(145,55,255,.18),transparent 34%),
-  #08070c;
-  color:white;
-  font-family:"Playfair Display",Georgia,serif;
-  padding-bottom:100px;
+min-height:100vh;
+background:
+radial-gradient(circle at 50% 8%,rgba(145,55,255,.18),transparent 34%),
+#08070c;
+color:white;
+font-family:"Playfair Display",Georgia,serif;
+padding-bottom:100px;
 }
 
 header{
-  height:92px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 20px;
-  background:#111016;
-  border-bottom:1px solid rgba(173,77,255,.25);
+height:92px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 20px;
+background:#111016;
+border-bottom:1px solid rgba(173,77,255,.25);
+position:sticky;
+top:0;
+z-index:30;
 }
 
 .logo{
-  font-family:"Cinzel",serif;
-  font-size:35px;
-  font-weight:700;
-  letter-spacing:-2px;
-  background:linear-gradient(90deg,#fff,#d19aff,#8e38ff);
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent;
+font-family:"Cinzel",serif;
+font-size:35px;
+font-weight:700;
+letter-spacing:-2px;
+background:linear-gradient(90deg,#fff,#d19aff,#8e38ff);
+-webkit-background-clip:text;
+background-clip:text;
+color:transparent;
 }
 
 .back{
-  color:white;
-  text-decoration:none;
-  font-size:28px;
+color:white;
+text-decoration:none;
+font-size:28px;
+width:35px;
+}
+
+.header-space{
+width:35px;
 }
 
 main{
-  max-width:760px;
-  margin:auto;
-  padding:22px 18px 120px;
+max-width:760px;
+margin:auto;
+padding:22px 18px 120px;
 }
 
 .player{
-  background:#000;
-  border-radius:22px;
-  overflow:hidden;
-  border:1px solid rgba(173,77,255,.25);
-  box-shadow:0 0 35px rgba(120,35,220,.18);
-  position:relative;
+background:#000;
+border-radius:22px;
+overflow:hidden;
+border:1px solid rgba(173,77,255,.25);
+box-shadow:0 0 35px rgba(120,35,220,.18);
+position:relative;
 }
 
 video{
-  width:100%;
-  display:block;
-  background:black;
-  min-height:200px;
+width:100%;
+display:block;
+background:black;
+min-height:200px;
 }
 
 .player-empty{
-  min-height:210px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding:25px;
-  color:#8f8998;
+min-height:210px;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:25px;
+color:#8f8998;
 }
 
 .title{
-  font-family:"Cinzel",serif;
-  font-size:28px;
-  margin-top:22px;
+font-family:"Cinzel",serif;
+font-size:28px;
+margin-top:22px;
 }
 
 .meta{
-  color:#9994a2;
-  margin-top:7px;
-  font-style:italic;
+color:#9994a2;
+margin-top:7px;
+font-style:italic;
 }
 
 .wallet-row{
-  margin-top:20px;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
+margin-top:20px;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
 }
 
 .wallet-box{
-  padding:14px 16px;
-  border-radius:18px;
-  background:rgba(130,45,220,.15);
-  border:1px solid rgba(173,77,255,.25);
+padding:14px 16px;
+border-radius:18px;
+background:rgba(130,45,220,.15);
+border:1px solid rgba(173,77,255,.25);
 }
 
 .wallet-label{
-  font-size:11px;
-  color:#9a95a2;
+font-size:11px;
+color:#9a95a2;
 }
 
 .wallet-value{
-  margin-top:5px;
-  font-family:"Cinzel",serif;
-  font-size:17px;
+margin-top:5px;
+font-family:"Cinzel",serif;
+font-size:17px;
 }
 
 .coins{
-  color:#ffd75c;
+color:#ffd75c;
 }
 
 .ads{
-  color:#d29cff;
+color:#d29cff;
 }
 
 .auth-message{
-  margin-top:16px;
-  padding:13px 15px;
-  border-radius:14px;
-  background:#18131f;
-  border:1px solid rgba(173,77,255,.2);
-  color:#bbb4c5;
-  display:none;
+margin-top:16px;
+padding:13px 15px;
+border-radius:14px;
+background:#18131f;
+border:1px solid rgba(173,77,255,.2);
+color:#bbb4c5;
+display:none;
 }
 
 .auth-message a{
-  color:#d29cff;
-  font-weight:700;
+color:#d29cff;
+font-weight:700;
 }
 
 .section-title{
-  font-family:"Cinzel",serif;
-  font-size:21px;
-  margin:28px 0 14px;
+font-family:"Cinzel",serif;
+font-size:21px;
+margin:28px 0 14px;
 }
 
 .episode-list{
-  display:flex;
-  flex-direction:column;
-  gap:12px;
+display:flex;
+flex-direction:column;
+gap:12px;
 }
 
 .episode{
-  background:#15141b;
-  border:1px solid rgba(255,255,255,.07);
-  border-radius:18px;
-  padding:16px;
-  transition:.2s ease;
+background:#15141b;
+border:1px solid rgba(255,255,255,.07);
+border-radius:18px;
+padding:16px;
+transition:.2s ease;
 }
 
 .episode.playing{
-  border-color:rgba(173,77,255,.7);
-  box-shadow:0 0 20px rgba(130,45,220,.15);
+border-color:rgba(173,77,255,.7);
+box-shadow:0 0 20px rgba(130,45,220,.15);
 }
 
 .episode-top{
-  display:flex;
-  align-items:center;
-  gap:14px;
+display:flex;
+align-items:center;
+gap:14px;
 }
 
 .ep-number{
-  width:52px;
-  height:52px;
-  border-radius:15px;
-  background:rgba(150,60,240,.18);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-family:"Cinzel",serif;
-  font-size:13px;
-  flex-shrink:0;
+width:52px;
+height:52px;
+border-radius:15px;
+background:rgba(150,60,240,.18);
+display:flex;
+align-items:center;
+justify-content:center;
+font-family:"Cinzel",serif;
+font-size:13px;
+flex-shrink:0;
 }
 
 .ep-info{
-  flex:1;
+flex:1;
 }
 
 .ep-title{
-  font-family:"Cinzel",serif;
-  font-size:14px;
+font-family:"Cinzel",serif;
+font-size:14px;
 }
 
 .ep-cost{
-  color:#9a95a2;
-  font-size:12px;
-  margin-top:5px;
+color:#9a95a2;
+font-size:12px;
+margin-top:5px;
 }
 
 .free-label{
-  color:#8cffb3;
+color:#8cffb3;
 }
 
 .locked-label{
-  color:#d1c8da;
+color:#d1c8da;
 }
 
 .action-row{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px;
-  margin-top:14px;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px;
+margin-top:14px;
 }
 
 .action{
-  border:0;
-  border-radius:12px;
-  padding:12px 8px;
-  font-family:"Cinzel",serif;
-  font-size:10px;
-  font-weight:600;
-  cursor:pointer;
+border:0;
+border-radius:12px;
+padding:12px 8px;
+font-family:"Cinzel",serif;
+font-size:10px;
+font-weight:600;
+cursor:pointer;
 }
 
 .action:disabled{
-  opacity:.55;
-  cursor:not-allowed;
+opacity:.55;
+cursor:not-allowed;
 }
 
 .watch-btn{
-  background:linear-gradient(135deg,#a84fff,#7521e4);
-  color:white;
-  grid-column:1 / -1;
+background:linear-gradient(135deg,#a84fff,#7521e4);
+color:white;
+grid-column:1 / -1;
 }
 
 .coin-btn{
-  background:#241b2e;
-  color:#ffd75c;
-  border:1px solid rgba(255,215,92,.2);
+background:#241b2e;
+color:#ffd75c;
+border:1px solid rgba(255,215,92,.2);
 }
 
 .ad-btn{
-  background:#21172c;
-  color:#d39cff;
-  border:1px solid rgba(173,77,255,.3);
+background:#21172c;
+color:#d39cff;
+border:1px solid rgba(173,77,255,.3);
 }
 
 #message{
-  margin-top:18px;
-  padding:13px;
-  border-radius:14px;
-  background:#17131e;
-  border:1px solid rgba(173,77,255,.2);
-  color:#c9c3d0;
-  display:none;
-  text-align:center;
+margin-top:18px;
+padding:13px;
+border-radius:14px;
+background:#17131e;
+border:1px solid rgba(173,77,255,.2);
+color:#c9c3d0;
+display:none;
+text-align:center;
 }
 
 #message.success{
-  color:#aaffc3;
-  border-color:rgba(70,220,120,.35);
+color:#aaffc3;
+border-color:rgba(70,220,120,.35);
 }
 
 #message.error{
-  color:#ffb0ba;
-  border-color:rgba(255,75,100,.35);
+color:#ffb0ba;
+border-color:rgba(255,75,100,.35);
 }
 
 .loading{
-  text-align:center;
-  padding:25px;
-  color:#98919f;
+text-align:center;
+padding:25px;
+color:#98919f;
 }
 
 .bottom-nav{
-  position:fixed;
-  left:0;
-  right:0;
-  bottom:0;
-  height:90px;
-  background:#111016;
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  border-top:1px solid rgba(173,77,255,.2);
-  z-index:50;
+position:fixed;
+left:0;
+right:0;
+bottom:0;
+height:90px;
+background:#111016;
+display:grid;
+grid-template-columns:repeat(5,1fr);
+border-top:1px solid rgba(173,77,255,.2);
+z-index:50;
 }
 
 .nav-item{
-  text-decoration:none;
-  color:#777582;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  gap:5px;
-  font-family:"Cinzel",serif;
-  font-size:9px;
+text-decoration:none;
+color:#777582;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+gap:5px;
+font-family:"Cinzel",serif;
+font-size:9px;
 }
 
 .nav-icon{
-  font-size:21px;
+font-size:21px;
 }
 
 @media(max-width:520px){
 
-  header{
-    height:80px;
-  }
+header{
+height:80px;
+}
 
-  .logo{
-    font-size:29px;
-  }
+.logo{
+font-size:29px;
+}
 
-  .title{
-    font-size:23px;
-  }
+.title{
+font-size:23px;
+}
 
 }
 
@@ -334,11 +342,13 @@ video{
 
 <header>
 
-<a href="discover.html" class="back">‹</a>
+<a href="library.html" class="back">‹</a>
 
 <div class="logo">
 Zynora
 </div>
+
+<div class="header-space"></div>
 
 </header>
 
@@ -360,30 +370,18 @@ type="video/mp4">
 
 </video>
 
-<div
-id="playerEmpty"
-class="player-empty">
-
+<div id="playerEmpty" class="player-empty">
 Select an unlocked episode below to begin watching.
-
 </div>
 
 </div>
 
-<h1
-class="title"
-id="dramaTitle">
-
+<h1 class="title" id="dramaTitle">
 Loading drama...
-
 </h1>
 
-<div
-class="meta"
-id="episodeMeta">
-
+<div class="meta" id="episodeMeta">
 Select an episode below
-
 </div>
 
 <div class="wallet-row">
@@ -397,9 +395,7 @@ ZYNORA COINS
 <div class="wallet-value coins">
 
 🪙
-<span id="coinBalance">
-0
-</span>
+<span id="coinBalance">0</span>
 
 </div>
 
@@ -414,9 +410,7 @@ AD UNLOCKS LEFT TODAY
 <div class="wallet-value ads">
 
 📺
-<span id="adRemaining">
-20
-</span>
+<span id="adRemaining">20</span>
 
 </div>
 
@@ -424,9 +418,7 @@ AD UNLOCKS LEFT TODAY
 
 </div>
 
-<div
-id="authMessage"
-class="auth-message">
+<div id="authMessage" class="auth-message">
 
 Please
 <a href="login.html">log in</a>
@@ -440,9 +432,7 @@ to unlock paid episodes and save your progress.
 Episodes
 </h2>
 
-<div
-id="episodeList"
-class="episode-list">
+<div id="episodeList" class="episode-list">
 
 <div class="loading">
 Loading episodes...
@@ -485,24 +475,94 @@ Profile
 
 <script>
 
-const client =
-supabase.createClient(
-  "https://ozshekxpuvganemaajms.supabase.co",
-  "sb_publishable__GsW9RahFD_XDWJTFzh9eQ_dNBZfa32"
+const client = supabase.createClient(
+"https://ozshekxpuvganemaajms.supabase.co",
+"sb_publishable__GsW9RahFD_XDWJTFzh9eQ_dNBZfa32"
 );
 
 let user = null;
+
 let episodes = [];
+
 let unlockedIds = new Set();
+
 let currentEpisodeId = null;
 
-const dramaId =
-localStorage.getItem("zynoraCurrentDramaId")
-|| "billionaire-secret";
+let currentEpisode = null;
 
-const dramaTitle =
-localStorage.getItem("zynoraCurrentDramaTitle")
-|| "The Billionaire's Secret";
+let autoEpisodeNumber = null;
+
+
+/* ==========================================
+   READ LIBRARY / DISCOVER URL
+========================================== */
+
+const urlParams =
+new URLSearchParams(
+window.location.search
+);
+
+const urlDramaTitle =
+urlParams.get("drama");
+
+const urlDramaId =
+urlParams.get("drama_id");
+
+const urlEpisode =
+urlParams.get("episode");
+
+
+if(urlEpisode){
+
+autoEpisodeNumber =
+Number(urlEpisode);
+
+}
+
+
+/* ==========================================
+   CURRENT DRAMA
+========================================== */
+
+let dramaId =
+urlDramaId
+||
+localStorage.getItem(
+"zynoraCurrentDramaId"
+)
+||
+"billionaire-secret";
+
+
+let dramaTitle =
+urlDramaTitle
+||
+localStorage.getItem(
+"zynoraCurrentDramaTitle"
+)
+||
+"The Billionaire's Secret";
+
+
+if(urlDramaId){
+
+localStorage.setItem(
+"zynoraCurrentDramaId",
+urlDramaId
+);
+
+}
+
+
+if(urlDramaTitle){
+
+localStorage.setItem(
+"zynoraCurrentDramaTitle",
+urlDramaTitle
+);
+
+}
+
 
 document
 .getElementById("dramaTitle")
@@ -510,788 +570,1073 @@ document
 dramaTitle;
 
 
-/* =========================
-   START
-========================= */
+/* ==========================================
+   START PLAYER
+========================================== */
 
 async function start(){
 
-  try{
+try{
 
-    const auth =
-    await client.auth.getUser();
+const auth =
+await client.auth.getUser();
 
-    user =
-    auth?.data?.user || null;
+user =
+auth?.data?.user || null;
 
-    if(!user){
 
-      document
-      .getElementById("authMessage")
-      .style.display =
-      "block";
+if(!user){
 
-    }
-
-    await loadEpisodes();
-
-    if(user){
-
-      await Promise.all([
-        loadCoins(),
-        loadUnlocked(),
-        loadRemainingAds()
-      ]);
-
-    }
-
-    renderEpisodes();
-
-  }
-
-  catch(error){
-
-    showMessage(
-      "Player could not start: " +
-      error.message,
-      "error"
-    );
-
-  }
+document
+.getElementById("authMessage")
+.style.display =
+"block";
 
 }
 
 
-/* =========================
+await loadEpisodes();
+
+
+if(user){
+
+await Promise.all([
+
+loadCoins(),
+
+loadUnlocked(),
+
+loadRemainingAds()
+
+]);
+
+}
+
+
+renderEpisodes();
+
+
+await openRequestedEpisode();
+
+}
+
+catch(error){
+
+console.error(error);
+
+showMessage(
+"Player could not start: " +
+error.message,
+"error"
+);
+
+}
+
+}
+
+
+/* ==========================================
    LOAD EPISODES
-========================= */
+========================================== */
 
 async function loadEpisodes(){
 
-  const result =
-  await client
-  .from("episodes")
-  .select("*")
-  .eq(
-    "drama_id",
-    dramaId
-  )
-  .order(
-    "episode_number",
-    {ascending:true}
-  );
+const result =
+await client
+.from("episodes")
+.select("*")
+.eq(
+"drama_id",
+dramaId
+)
+.order(
+"episode_number",
+{
+ascending:true
+}
+);
 
-  if(result.error){
 
-    showMessage(
-      result.error.message,
-      "error"
-    );
+if(result.error){
 
-    episodes = [];
+console.error(
+"Episode error:",
+result.error
+);
 
-    return;
+episodes=[];
 
-  }
+showMessage(
+result.error.message,
+"error"
+);
 
-  episodes =
-  result.data || [];
+return;
 
 }
 
 
-/* =========================
+episodes =
+result.data || [];
+
+
+if(episodes.length){
+
+const first =
+episodes[0];
+
+
+if(first.drama_title){
+
+dramaTitle =
+first.drama_title;
+
+document
+.getElementById("dramaTitle")
+.textContent =
+dramaTitle;
+
+localStorage.setItem(
+"zynoraCurrentDramaTitle",
+dramaTitle
+);
+
+}
+
+
+if(first.drama_id){
+
+dramaId =
+first.drama_id;
+
+localStorage.setItem(
+"zynoraCurrentDramaId",
+dramaId
+);
+
+}
+
+}
+
+}
+
+
+/* ==========================================
    LOAD COINS
-========================= */
+
+   SAME WALLET USED BY LIBRARY,
+   PROFILE AND REWARDS
+========================================== */
 
 async function loadCoins(){
 
-  const result =
-  await client
-  .from("coin_wallets")
-  .select("balance")
-  .eq(
-    "user_id",
-    user.id
-  )
-  .maybeSingle();
+if(!user){
+return;
+}
 
-  if(result.error){
 
-    console.error(
-      "Wallet error:",
-      result.error
-    );
+const result =
+await client
+.from("wallets")
+.select("balance")
+.eq(
+"user_id",
+user.id
+)
+.maybeSingle();
 
-    return;
 
-  }
+if(result.error){
 
-  document
-  .getElementById("coinBalance")
-  .textContent =
-  Number(result.data?.balance || 0);
+console.error(
+"Wallet error:",
+result.error
+);
+
+document
+.getElementById("coinBalance")
+.textContent =
+"0";
+
+return;
 
 }
 
 
-/* =========================
+document
+.getElementById("coinBalance")
+.textContent =
+Number(
+result.data?.balance || 0
+).toLocaleString();
+
+}
+
+
+/* ==========================================
    LOAD UNLOCKED EPISODES
-========================= */
+========================================== */
 
 async function loadUnlocked(){
 
-  unlockedIds.clear();
+if(!user){
+return;
+}
 
-  const result =
-  await client
-  .from("unlocked_episodes")
-  .select("episode_id")
-  .eq(
-    "user_id",
-    user.id
-  );
 
-  if(result.error){
+unlockedIds.clear();
 
-    console.error(
-      "Unlocked episodes error:",
-      result.error
-    );
 
-    return;
+const result =
+await client
+.from("unlocked_episodes")
+.select("episode_id")
+.eq(
+"user_id",
+user.id
+);
 
-  }
 
-  (result.data || [])
-  .forEach(function(item){
+if(result.error){
 
-    unlockedIds.add(
-      item.episode_id
-    );
+console.error(
+"Unlocked episodes error:",
+result.error
+);
 
-  });
+return;
 
 }
 
 
-/* =========================
+(result.data || [])
+.forEach(function(item){
+
+unlockedIds.add(
+String(item.episode_id)
+);
+
+});
+
+}
+
+
+/* ==========================================
    ADS REMAINING
-========================= */
+========================================== */
 
 async function loadRemainingAds(){
 
-  const result =
-  await client.rpc(
-    "get_remaining_ad_unlocks"
-  );
+if(!user){
+return;
+}
 
-  if(result.error){
 
-    console.warn(
-      "Ad count error:",
-      result.error
-    );
+const result =
+await client.rpc(
+"get_remaining_ad_unlocks"
+);
 
-    return;
 
-  }
+if(result.error){
 
-  const remaining =
-  Number(result.data ?? 20);
+console.warn(
+"Ad count error:",
+result.error
+);
 
-  document
-  .getElementById("adRemaining")
-  .textContent =
-  Math.max(
-    0,
-    remaining
-  );
+document
+.getElementById("adRemaining")
+.textContent =
+"20";
+
+return;
 
 }
 
 
-/* =========================
-   IS EPISODE UNLOCKED
-========================= */
+const remaining =
+Number(
+result.data ?? 20
+);
+
+
+document
+.getElementById("adRemaining")
+.textContent =
+Math.max(
+0,
+remaining
+);
+
+}
+
+
+/* ==========================================
+   CHECK IF EPISODE IS UNLOCKED
+========================================== */
 
 function episodeIsUnlocked(ep){
 
-  return (
-    ep.is_free === true
-    ||
-    Number(ep.coin_cost || 0) === 0
-    ||
-    unlockedIds.has(ep.id)
-  );
+return (
+
+ep.is_free === true
+
+||
+
+Number(
+ep.coin_cost || 0
+) === 0
+
+||
+
+unlockedIds.has(
+String(ep.id)
+)
+
+);
 
 }
 
 
-/* =========================
+/* ==========================================
    RENDER EPISODES
-========================= */
+========================================== */
 
 function renderEpisodes(){
 
-  const list =
-  document.getElementById(
-    "episodeList"
-  );
+const list =
+document.getElementById(
+"episodeList"
+);
 
-  list.innerHTML = "";
 
-  if(!episodes.length){
+list.innerHTML="";
 
-    list.innerHTML =
-    '<div class="loading">No episodes are available for this drama yet.</div>';
 
-    return;
+if(!episodes.length){
 
-  }
+list.innerHTML=`
 
-  episodes.forEach(function(ep){
+<div class="loading">
 
-    const isUnlocked =
-    episodeIsUnlocked(ep);
+No episodes are available for this drama yet.
 
-    const container =
-    document.createElement("div");
+</div>
 
-    container.className =
-    "episode";
+`;
 
-    container.dataset.episodeId =
-    ep.id;
-
-    if(
-      currentEpisodeId === ep.id
-    ){
-
-      container.classList.add(
-        "playing"
-      );
-
-    }
-
-
-    const top =
-    document.createElement("div");
-
-    top.className =
-    "episode-top";
-
-
-    const number =
-    document.createElement("div");
-
-    number.className =
-    "ep-number";
-
-    number.textContent =
-    "EP " +
-    ep.episode_number;
-
-
-    const info =
-    document.createElement("div");
-
-    info.className =
-    "ep-info";
-
-
-    const title =
-    document.createElement("div");
-
-    title.className =
-    "ep-title";
-
-    title.textContent =
-    ep.episode_title
-    ||
-    (
-      "Episode " +
-      ep.episode_number
-    );
-
-
-    const cost =
-    document.createElement("div");
-
-    cost.className =
-    "ep-cost";
-
-
-    if(isUnlocked){
-
-      cost.textContent =
-      ep.is_free ||
-      Number(ep.coin_cost || 0) === 0
-      ? "Free • Unlocked"
-      : "Unlocked";
-
-      cost.classList.add(
-        "free-label"
-      );
-
-    }
-
-    else{
-
-      cost.textContent =
-      "Locked • 🪙 " +
-      Number(ep.coin_cost || 0) +
-      " or 1 rewarded ad";
-
-      cost.classList.add(
-        "locked-label"
-      );
-
-    }
-
-
-    info.appendChild(
-      title
-    );
-
-    info.appendChild(
-      cost
-    );
-
-    top.appendChild(
-      number
-    );
-
-    top.appendChild(
-      info
-    );
-
-    container.appendChild(
-      top
-    );
-
-
-    const actions =
-    document.createElement("div");
-
-    actions.className =
-    "action-row";
-
-
-    if(isUnlocked){
-
-      const watch =
-      document.createElement(
-        "button"
-      );
-
-      watch.className =
-      "action watch-btn";
-
-      watch.textContent =
-      currentEpisodeId === ep.id
-      ? "▶ Playing"
-      : "▶ Watch Episode";
-
-      watch.onclick =
-      function(){
-
-        playEpisode(ep);
-
-      };
-
-      actions.appendChild(
-        watch
-      );
-
-    }
-
-    else{
-
-      const coin =
-      document.createElement(
-        "button"
-      );
-
-      coin.className =
-      "action coin-btn";
-
-      coin.textContent =
-      "🪙 " +
-      Number(ep.coin_cost || 0) +
-      " Coins";
-
-      coin.onclick =
-      function(){
-
-        unlockWithCoins(
-          ep,
-          coin
-        );
-
-      };
-
-
-      const ad =
-      document.createElement(
-        "button"
-      );
-
-      ad.className =
-      "action ad-btn";
-
-      ad.textContent =
-      "📺 Watch Ad";
-
-      ad.onclick =
-      function(){
-
-        unlockWithAd(
-          ep,
-          ad
-        );
-
-      };
-
-
-      actions.appendChild(
-        coin
-      );
-
-      actions.appendChild(
-        ad
-      );
-
-    }
-
-
-    container.appendChild(
-      actions
-    );
-
-    list.appendChild(
-      container
-    );
-
-  });
+return;
 
 }
 
 
-/* =========================
+episodes.forEach(function(ep){
+
+const isUnlocked =
+episodeIsUnlocked(ep);
+
+
+const container =
+document.createElement(
+"div"
+);
+
+container.className =
+"episode";
+
+container.dataset.episodeId =
+ep.id;
+
+
+if(
+String(currentEpisodeId)
+===
+String(ep.id)
+){
+
+container.classList.add(
+"playing"
+);
+
+}
+
+
+/* EPISODE TOP */
+
+const top =
+document.createElement(
+"div"
+);
+
+top.className =
+"episode-top";
+
+
+const number =
+document.createElement(
+"div"
+);
+
+number.className =
+"ep-number";
+
+number.textContent =
+"EP " +
+ep.episode_number;
+
+
+const info =
+document.createElement(
+"div"
+);
+
+info.className =
+"ep-info";
+
+
+const title =
+document.createElement(
+"div"
+);
+
+title.className =
+"ep-title";
+
+title.textContent =
+ep.episode_title
+||
+(
+"Episode " +
+ep.episode_number
+);
+
+
+const cost =
+document.createElement(
+"div"
+);
+
+cost.className =
+"ep-cost";
+
+
+if(isUnlocked){
+
+if(
+ep.is_free === true
+||
+Number(
+ep.coin_cost || 0
+) === 0
+){
+
+cost.textContent =
+"Free • Unlocked";
+
+}
+
+else{
+
+cost.textContent =
+"Unlocked";
+
+}
+
+cost.classList.add(
+"free-label"
+);
+
+}
+
+else{
+
+cost.textContent =
+"Locked • 🪙 " +
+Number(
+ep.coin_cost || 0
+) +
+" or 1 rewarded ad";
+
+cost.classList.add(
+"locked-label"
+);
+
+}
+
+
+info.appendChild(
+title
+);
+
+info.appendChild(
+cost
+);
+
+top.appendChild(
+number
+);
+
+top.appendChild(
+info
+);
+
+container.appendChild(
+top
+);
+
+
+/* ACTION BUTTONS */
+
+const actions =
+document.createElement(
+"div"
+);
+
+actions.className =
+"action-row";
+
+
+if(isUnlocked){
+
+const watch =
+document.createElement(
+"button"
+);
+
+watch.className =
+"action watch-btn";
+
+
+watch.textContent =
+String(currentEpisodeId)
+===
+String(ep.id)
+?
+"▶ Playing"
+:
+"▶ Watch Episode";
+
+
+watch.onclick =
+function(){
+
+playEpisode(
+ep
+);
+
+};
+
+
+actions.appendChild(
+watch
+);
+
+}
+
+else{
+
+const coin =
+document.createElement(
+"button"
+);
+
+coin.className =
+"action coin-btn";
+
+coin.textContent =
+"🪙 " +
+Number(
+ep.coin_cost || 0
+) +
+" Coins";
+
+
+coin.onclick =
+function(){
+
+unlockWithCoins(
+ep,
+coin
+);
+
+};
+
+
+const ad =
+document.createElement(
+"button"
+);
+
+ad.className =
+"action ad-btn";
+
+ad.textContent =
+"📺 Watch Ad";
+
+
+ad.onclick =
+function(){
+
+unlockWithAd(
+ep,
+ad
+);
+
+};
+
+
+actions.appendChild(
+coin
+);
+
+actions.appendChild(
+ad
+);
+
+}
+
+
+container.appendChild(
+actions
+);
+
+list.appendChild(
+container
+);
+
+});
+
+}
+
+
+/* ==========================================
+   OPEN EPISODE REQUESTED BY LIBRARY
+========================================== */
+
+async function openRequestedEpisode(){
+
+if(
+!autoEpisodeNumber
+||
+!episodes.length
+){
+
+return;
+
+}
+
+
+const requestedEpisode =
+episodes.find(function(ep){
+
+return Number(
+ep.episode_number
+)
+===
+Number(
+autoEpisodeNumber
+);
+
+});
+
+
+if(!requestedEpisode){
+
+showMessage(
+"Episode " +
+autoEpisodeNumber +
+" could not be found.",
+"error"
+);
+
+return;
+
+}
+
+
+if(
+episodeIsUnlocked(
+requestedEpisode
+)
+){
+
+await playEpisode(
+requestedEpisode
+);
+
+}
+
+else{
+
+document
+.getElementById(
+"episodeMeta"
+)
+.textContent =
+"Episode " +
+requestedEpisode.episode_number +
+" • Locked";
+
+
+showMessage(
+"Episode " +
+requestedEpisode.episode_number +
+" is locked. Unlock it with coins or a rewarded ad.",
+"error"
+);
+
+
+const card =
+document.querySelector(
+'[data-episode-id="' +
+requestedEpisode.id +
+'"]'
+);
+
+
+if(card){
+
+card.scrollIntoView({
+behavior:"smooth",
+block:"center"
+});
+
+}
+
+}
+
+}
+
+
+/* ==========================================
    UNLOCK WITH COINS
-========================= */
+========================================== */
 
 async function unlockWithCoins(
-  ep,
-  button
+ep,
+button
 ){
 
-  if(!user){
+if(!user){
 
-    showMessage(
-      "Please log in before unlocking episodes.",
-      "error"
-    );
+showMessage(
+"Please log in before unlocking episodes.",
+"error"
+);
 
-    return;
-
-  }
-
-  const balance =
-  Number(
-    document
-    .getElementById("coinBalance")
-    .textContent
-  ) || 0;
-
-  const cost =
-  Number(ep.coin_cost || 0);
-
-  if(balance < cost){
-
-    showMessage(
-      "You need " +
-      cost +
-      " coins to unlock this episode. Your balance is " +
-      balance +
-      ".",
-      "error"
-    );
-
-    return;
-
-  }
-
-  button.disabled =
-  true;
-
-  button.textContent =
-  "Unlocking...";
-
-
-  const result =
-  await client.rpc(
-    "unlock_episode",
-    {
-      p_episode_id:
-      ep.id
-    }
-  );
-
-
-  if(result.error){
-
-    showMessage(
-      result.error.message,
-      "error"
-    );
-
-    button.disabled =
-    false;
-
-    button.textContent =
-    "🪙 " +
-    cost +
-    " Coins";
-
-    return;
-
-  }
-
-
-  unlockedIds.add(
-    ep.id
-  );
-
-
-  if(
-    result.data !== null
-    &&
-    result.data !== undefined
-  ){
-
-    document
-    .getElementById("coinBalance")
-    .textContent =
-    Number(result.data);
-
-  }
-
-  else{
-
-    await loadCoins();
-
-  }
-
-
-  showMessage(
-    "Episode " +
-    ep.episode_number +
-    " unlocked successfully.",
-    "success"
-  );
-
-
-  renderEpisodes();
+return;
 
 }
 
 
-/* =========================
-   REWARDED AD BUTTON
-========================= */
+const balance =
+Number(
+String(
+document
+.getElementById(
+"coinBalance"
+)
+.textContent
+)
+.replaceAll(",","")
+) || 0;
+
+
+const cost =
+Number(
+ep.coin_cost || 0
+);
+
+
+if(balance < cost){
+
+showMessage(
+"You need " +
+cost +
+" coins to unlock this episode. Your balance is " +
+balance +
+".",
+"error"
+);
+
+return;
+
+}
+
+
+button.disabled =
+true;
+
+button.textContent =
+"Unlocking...";
+
+
+const result =
+await client.rpc(
+"unlock_episode",
+{
+p_episode_id:
+ep.id
+}
+);
+
+
+if(result.error){
+
+showMessage(
+result.error.message,
+"error"
+);
+
+button.disabled =
+false;
+
+button.textContent =
+"🪙 " +
+cost +
+" Coins";
+
+return;
+
+}
+
+
+unlockedIds.add(
+String(ep.id)
+);
+
+
+/*
+Reload the wallet from Supabase instead
+of trusting a value returned by the RPC.
+
+This keeps Player, Rewards, Library
+and Profile synchronized.
+*/
+
+await loadCoins();
+
+
+showMessage(
+"Episode " +
+ep.episode_number +
+" unlocked successfully.",
+"success"
+);
+
+
+renderEpisodes();
+
+
+await playEpisode(
+ep
+);
+
+}
+
+
+/* ==========================================
+   REWARDED AD
+========================================== */
 
 async function unlockWithAd(
-  ep,
-  button
+ep,
+button
 ){
 
-  if(!user){
+if(!user){
 
-    showMessage(
-      "Please log in before using rewarded ads.",
-      "error"
-    );
+showMessage(
+"Please log in before using rewarded ads.",
+"error"
+);
 
-    return;
-
-  }
-
-
-  const remaining =
-  Number(
-    document
-    .getElementById("adRemaining")
-    .textContent
-  ) || 0;
-
-
-  if(remaining <= 0){
-
-    showMessage(
-      "You have used all 20 rewarded-ad unlocks for today.",
-      "error"
-    );
-
-    return;
-
-  }
-
-
-  /*
-  IMPORTANT
-
-  We do NOT unlock the episode here.
-
-  This button is ready for the real
-  rewarded-ad provider.
-
-  Only after the provider confirms
-  the user watched the complete ad
-  should confirmRewardedAd() run.
-  */
-
-
-  button.disabled =
-  true;
-
-  button.textContent =
-  "Ad unavailable";
-
-
-  showMessage(
-    "Rewarded ads will become available after Zynora's ad provider is approved and connected. No ad unlock was charged.",
-    "error"
-  );
-
-
-  setTimeout(
-    function(){
-
-      button.disabled =
-      false;
-
-      button.textContent =
-      "📺 Watch Ad";
-
-    },
-    1800
-  );
+return;
 
 }
 
 
-/* =========================
-   CONFIRM REAL AD COMPLETION
-========================= */
-
-async function confirmRewardedAd(
-  episodeId,
-  provider,
-  eventId
-){
-
-  if(!user){
-
-    showMessage(
-      "Please log in first.",
-      "error"
-    );
-
-    return;
-  }
+const remaining =
+Number(
+document
+.getElementById(
+"adRemaining"
+)
+.textContent
+) || 0;
 
 
-  if(
-    !episodeId ||
-    !provider ||
-    !eventId
-  ){
+if(remaining <= 0){
 
-    showMessage(
-      "Invalid rewarded-ad confirmation.",
-      "error"
-    );
+showMessage(
+"You have used all 20 rewarded-ad unlocks for today.",
+"error"
+);
 
-    return;
-
-  }
-
-
-  const result =
-  await client.rpc(
-    "unlock_episode_with_ad",
-    {
-
-      p_episode_id:
-      episodeId,
-
-      p_ad_provider:
-      provider,
-
-      p_ad_event_id:
-      eventId
-
-    }
-  );
-
-
-  if(result.error){
-
-    showMessage(
-      result.error.message,
-      "error"
-    );
-
-    return;
-
-  }
-
-
-  unlockedIds.add(
-    episodeId
-  );
-
-
-  if(
-    result.data !== null
-    &&
-    result.data !== undefined
-  ){
-
-    document
-    .getElementById("adRemaining")
-    .textContent =
-    Number(result.data);
-
-  }
-
-  else{
-
-    await loadRemainingAds();
-
-  }
-
-
-  showMessage(
-    "Rewarded ad completed. Episode unlocked.",
-    "success"
-  );
-
-
-  renderEpisodes();
+return;
 
 }
 
 
 /*
-The future ad provider can call:
+IMPORTANT:
+
+The episode must NOT be unlocked
+until the real advertising provider
+confirms that the rewarded ad
+was completed.
+*/
+
+
+button.disabled =
+true;
+
+button.textContent =
+"Ad unavailable";
+
+
+showMessage(
+"Rewarded ads will become available after Zynora's rewarded-ad provider is connected. No unlock was charged.",
+"error"
+);
+
+
+setTimeout(
+function(){
+
+button.disabled =
+false;
+
+button.textContent =
+"📺 Watch Ad";
+
+},
+1800
+);
+
+}
+
+
+/* ==========================================
+   CONFIRM REAL REWARDED AD
+========================================== */
+
+async function confirmRewardedAd(
+episodeId,
+provider,
+eventId
+){
+
+if(!user){
+
+showMessage(
+"Please log in first.",
+"error"
+);
+
+return;
+
+}
+
+
+if(
+!episodeId
+||
+!provider
+||
+!eventId
+){
+
+showMessage(
+"Invalid rewarded-ad confirmation.",
+"error"
+);
+
+return;
+
+}
+
+
+const result =
+await client.rpc(
+"unlock_episode_with_ad",
+{
+
+p_episode_id:
+episodeId,
+
+p_ad_provider:
+provider,
+
+p_ad_event_id:
+eventId
+
+}
+);
+
+
+if(result.error){
+
+showMessage(
+result.error.message,
+"error"
+);
+
+return;
+
+}
+
+
+unlockedIds.add(
+String(episodeId)
+);
+
+
+await loadRemainingAds();
+
+
+showMessage(
+"Rewarded ad completed. Episode unlocked.",
+"success"
+);
+
+
+renderEpisodes();
+
+
+const ep =
+episodes.find(function(item){
+
+return String(item.id)
+===
+String(episodeId);
+
+});
+
+
+if(ep){
+
+await playEpisode(
+ep
+);
+
+}
+
+}
+
+
+/*
+Future ad provider example:
 
 window.zynoraRewardedAdCompleted({
-  episodeId: "EPISODE-ID",
-  provider: "PROVIDER-NAME",
-  eventId: "UNIQUE-AD-EVENT-ID"
+
+episodeId:"EPISODE-ID",
+
+provider:"GOOGLE",
+
+eventId:"UNIQUE-EVENT-ID"
+
 });
 
 */
@@ -1299,211 +1644,525 @@ window.zynoraRewardedAdCompleted({
 window.zynoraRewardedAdCompleted =
 async function(data){
 
-  if(!data){
+if(!data){
+return;
+}
 
-    return;
 
-  }
+await confirmRewardedAd(
 
-  await confirmRewardedAd(
-    data.episodeId,
-    data.provider,
-    data.eventId
-  );
+data.episodeId,
+
+data.provider,
+
+data.eventId
+
+);
 
 };
 
 
-/* =========================
+/* ==========================================
    PLAY EPISODE
-========================= */
+========================================== */
 
 async function playEpisode(ep){
 
-  if(
-    !episodeIsUnlocked(ep)
-  ){
+if(
+!episodeIsUnlocked(ep)
+){
 
-    showMessage(
-      "This episode is still locked.",
-      "error"
-    );
+showMessage(
+"This episode is still locked.",
+"error"
+);
 
-    return;
-
-  }
-
-
-  if(!ep.video_url){
-
-    showMessage(
-      "This episode does not have a video uploaded yet.",
-      "error"
-    );
-
-    return;
-
-  }
-
-
-  const source =
-  document.getElementById(
-    "videoSource"
-  );
-
-  const player =
-  document.getElementById(
-    "videoPlayer"
-  );
-
-  const empty =
-  document.getElementById(
-    "playerEmpty"
-  );
-
-
-  source.src =
-  ep.video_url;
-
-  player.style.display =
-  "block";
-
-  empty.style.display =
-  "none";
-
-  player.load();
-
-
-  currentEpisodeId =
-  ep.id;
-
-
-  document
-  .getElementById("episodeMeta")
-  .textContent =
-  "Episode " +
-  ep.episode_number +
-  " • " +
-  (
-    ep.episode_title ||
-    "Zynora"
-  );
-
-
-  renderEpisodes();
-
-
-  player.scrollIntoView({
-    behavior:"smooth",
-    block:"center"
-  });
-
-
-  try{
-
-    await player.play();
-
-  }
-
-  catch(error){
-
-    console.log(
-      "Browser waiting for play interaction."
-    );
-
-  }
-
-
-  if(user){
-
-    const historyData = {
-
-      user_id:
-      user.id,
-
-      drama_id:
-      ep.drama_id,
-
-      drama_title:
-      ep.drama_title
-      ||
-      dramaTitle,
-
-      episode_number:
-      ep.episode_number
-
-    };
-
-
-    const historyResult =
-    await client
-    .from("watch_history")
-    .insert(
-      historyData
-    );
-
-
-    if(historyResult.error){
-
-      console.warn(
-        "Watch history:",
-        historyResult.error
-      );
-
-    }
-
-  }
+return;
 
 }
 
 
-/* =========================
-   MESSAGE
-========================= */
+if(!ep.video_url){
 
-function showMessage(
-  text,
-  type = ""
+showMessage(
+"This episode does not have a video uploaded yet.",
+"error"
+);
+
+return;
+
+}
+
+
+const source =
+document.getElementById(
+"videoSource"
+);
+
+
+const player =
+document.getElementById(
+"videoPlayer"
+);
+
+
+const empty =
+document.getElementById(
+"playerEmpty"
+);
+
+
+source.src =
+ep.video_url;
+
+
+player.style.display =
+"block";
+
+
+empty.style.display =
+"none";
+
+
+player.load();
+
+
+currentEpisodeId =
+ep.id;
+
+
+currentEpisode =
+ep;
+
+
+/* REMEMBER CURRENT DRAMA */
+
+if(ep.drama_id){
+
+dramaId =
+ep.drama_id;
+
+localStorage.setItem(
+"zynoraCurrentDramaId",
+ep.drama_id
+);
+
+}
+
+
+if(ep.drama_title){
+
+dramaTitle =
+ep.drama_title;
+
+localStorage.setItem(
+"zynoraCurrentDramaTitle",
+ep.drama_title
+);
+
+document
+.getElementById(
+"dramaTitle"
+)
+.textContent =
+ep.drama_title;
+
+}
+
+
+/* REMEMBER LAST EPISODE */
+
+localStorage.setItem(
+"zynoraLastEpisode",
+String(
+ep.episode_number
+)
+);
+
+
+document
+.getElementById(
+"episodeMeta"
+)
+.textContent =
+"Episode " +
+ep.episode_number +
+" • " +
+(
+ep.episode_title ||
+"Zynora"
+);
+
+
+renderEpisodes();
+
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+
+try{
+
+await player.play();
+
+}
+
+catch(error){
+
+console.log(
+"Browser waiting for play interaction."
+);
+
+}
+
+
+/* SAVE HISTORY */
+
+if(user){
+
+await saveWatchHistory(
+ep
+);
+
+}
+
+}
+
+
+/* ==========================================
+   SAVE / UPDATE WATCH HISTORY
+
+   Keeps one recent history record
+   per drama instead of making a
+   new duplicate every time Play
+   is pressed.
+========================================== */
+
+async function saveWatchHistory(ep){
+
+if(
+!user
+||
+!ep
 ){
 
-  const box =
-  document.getElementById(
-    "message"
-  );
+return;
 
-  box.textContent =
-  text;
-
-  box.className =
-  "";
-
-  if(type){
-
-    box.classList.add(
-      type
-    );
-
-  }
-
-  box.style.display =
-  "block";
+}
 
 
-  clearTimeout(
-    window.zynoraPlayerTimer
-  );
+try{
+
+const existing =
+await client
+.from("watch_history")
+.select("id")
+.eq(
+"user_id",
+user.id
+)
+.eq(
+"drama_id",
+ep.drama_id
+)
+.order(
+"watched_at",
+{
+ascending:false
+}
+)
+.limit(1);
 
 
-  window.zynoraPlayerTimer =
-  setTimeout(
-    function(){
+if(existing.error){
 
-      box.style.display =
-      "none";
+console.warn(
+"History lookup:",
+existing.error
+);
 
-    },
-    4200
-  );
+return;
+
+}
+
+
+const historyData = {
+
+user_id:
+user.id,
+
+drama_id:
+ep.drama_id,
+
+drama_title:
+ep.drama_title
+||
+dramaTitle,
+
+episode_number:
+ep.episode_number,
+
+watched_at:
+new Date().toISOString()
+
+};
+
+
+if(
+existing.data
+&&
+existing.data.length
+){
+
+const updateResult =
+await client
+.from("watch_history")
+.update(
+historyData
+)
+.eq(
+"id",
+existing.data[0].id
+)
+.eq(
+"user_id",
+user.id
+);
+
+
+if(updateResult.error){
+
+console.warn(
+"History update:",
+updateResult.error
+);
+
+}
+
+}
+
+else{
+
+const insertResult =
+await client
+.from("watch_history")
+.insert(
+historyData
+);
+
+
+if(insertResult.error){
+
+console.warn(
+"History insert:",
+insertResult.error
+);
+
+}
+
+}
+
+}
+
+catch(error){
+
+console.warn(
+"History save error:",
+error
+);
+
+}
+
+}
+
+
+/* ==========================================
+   PLAYER EVENTS
+========================================== */
+
+const videoPlayer =
+document.getElementById(
+"videoPlayer"
+);
+
+
+videoPlayer.addEventListener(
+"ended",
+async function(){
+
+if(!currentEpisode){
+
+return;
+
+}
+
+
+const nextEpisodeNumber =
+Number(
+currentEpisode.episode_number
+) + 1;
+
+
+const nextEpisode =
+episodes.find(function(ep){
+
+return Number(
+ep.episode_number
+)
+===
+nextEpisodeNumber;
+
+});
+
+
+if(!nextEpisode){
+
+showMessage(
+"You have reached the latest episode.",
+"success"
+);
+
+return;
+
+}
+
+
+if(
+episodeIsUnlocked(
+nextEpisode
+)
+){
+
+showMessage(
+"Episode " +
+nextEpisodeNumber +
+" is ready to watch.",
+"success"
+);
+
+}
+
+else{
+
+showMessage(
+"Episode " +
+nextEpisodeNumber +
+" is locked. Unlock it below to continue.",
+"error"
+);
+
+}
+
+
+const nextCard =
+document.querySelector(
+'[data-episode-id="' +
+nextEpisode.id +
+'"]'
+);
+
+
+if(nextCard){
+
+nextCard.scrollIntoView({
+behavior:"smooth",
+block:"center"
+});
+
+}
+
+}
+);
+
+
+/* ==========================================
+   REFRESH BALANCES WHEN USER RETURNS
+========================================== */
+
+document.addEventListener(
+"visibilitychange",
+async function(){
+
+if(
+document.visibilityState
+===
+"visible"
+&&
+user
+){
+
+await Promise.all([
+
+loadCoins(),
+
+loadUnlocked(),
+
+loadRemainingAds()
+
+]);
+
+
+renderEpisodes();
+
+}
+
+}
+);
+
+
+/* ==========================================
+   MESSAGE
+========================================== */
+
+function showMessage(
+text,
+type=""
+){
+
+const box =
+document.getElementById(
+"message"
+);
+
+
+box.textContent =
+text;
+
+
+box.className =
+"";
+
+
+if(type){
+
+box.classList.add(
+type
+);
+
+}
+
+
+box.style.display =
+"block";
+
+
+clearTimeout(
+window.zynoraPlayerTimer
+);
+
+
+window.zynoraPlayerTimer =
+setTimeout(
+function(){
+
+box.style.display =
+"none";
+
+},
+4200
+);
 
 }
 
