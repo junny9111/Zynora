@@ -296,7 +296,9 @@ margin-top:8px;
 color:#9994a2;
 }
 
-/* FIVE BUTTON NAV */
+/* =========================================
+   ZYNORA MASTER 6-BUTTON NAVIGATION
+========================================= */
 
 .bottom-nav{
 position:fixed;
@@ -306,10 +308,11 @@ bottom:0;
 height:90px;
 background:rgba(17,16,22,.98);
 display:grid;
-grid-template-columns:repeat(5,1fr);
+grid-template-columns:repeat(6,1fr);
 border-top:1px solid rgba(173,77,255,.2);
-z-index:50;
+z-index:100;
 backdrop-filter:blur(12px);
+-webkit-backdrop-filter:blur(12px);
 }
 
 .nav-item{
@@ -321,8 +324,9 @@ align-items:center;
 justify-content:center;
 gap:5px;
 font-family:"Cinzel",serif;
-font-size:9px;
+font-size:8px;
 transition:.2s ease;
+min-width:0;
 }
 
 .nav-icon-wrap{
@@ -351,10 +355,15 @@ text-shadow:0 0 15px rgba(169,77,255,.5);
 }
 
 .nav-item.active .nav-icon-wrap{
-background:rgba(169,77,255,.12);
+background:linear-gradient(
+135deg,
+rgba(169,77,255,.28),
+rgba(116,27,232,.18)
+);
+
 box-shadow:
-0 0 0 1px rgba(169,77,255,.22),
-0 0 18px rgba(169,77,255,.16);
+0 0 0 1px rgba(169,77,255,.32),
+0 0 18px rgba(169,77,255,.24);
 }
 
 .nav-item:active{
@@ -369,6 +378,20 @@ font-size:39px;
 
 .hero{
 min-height:480px;
+}
+
+.nav-item{
+font-size:7px;
+}
+
+.nav-icon-wrap{
+width:35px;
+height:35px;
+}
+
+.nav-icon-wrap svg{
+width:21px;
+height:21px;
 }
 
 }
@@ -616,9 +639,13 @@ Episode 1 • Continue watching
 
 </section>
 
-<!-- FIVE BUTTON NAVIGATION -->
+<!-- =========================================
+     MASTER 6-BUTTON ZYNORA NAVIGATION
+========================================= -->
 
 <nav class="bottom-nav">
+
+<!-- HOME -->
 
 <a
 href="index.html"
@@ -639,6 +666,8 @@ Home
 </a>
 
 
+<!-- DISCOVER -->
+
 <a
 href="discover.html"
 class="nav-item">
@@ -656,6 +685,8 @@ Discover
 
 </a>
 
+
+<!-- REWARDS -->
 
 <a
 href="rewards.html"
@@ -678,6 +709,40 @@ Rewards
 </a>
 
 
+<!-- AI STUDIO -->
+
+<a
+href="ai-series-studio.html"
+class="nav-item">
+
+<span class="nav-icon-wrap">
+
+<svg viewBox="0 0 24 24">
+
+<circle cx="12" cy="12" r="4"></circle>
+
+<path d="M12 2v3"></path>
+<path d="M12 19v3"></path>
+<path d="M2 12h3"></path>
+<path d="M19 12h3"></path>
+
+<path d="m4.9 4.9 2.1 2.1"></path>
+<path d="m17 17 2.1 2.1"></path>
+
+<path d="m19.1 4.9-2.1 2.1"></path>
+<path d="m7 17-2.1 2.1"></path>
+
+</svg>
+
+</span>
+
+AI Studio
+
+</a>
+
+
+<!-- LIBRARY -->
+
 <a
 href="library.html"
 class="nav-item">
@@ -695,6 +760,8 @@ Library
 
 </a>
 
+
+<!-- PROFILE -->
 
 <a
 href="profile.html"
