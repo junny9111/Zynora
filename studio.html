@@ -3,34 +3,54 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Zynora AI Studio</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+<title>Zynora AI Series Studio</title>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Playfair+Display:wght@500;600&display=swap"
+rel="stylesheet">
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
 
 body{
-background:#08070c;
+background:
+radial-gradient(circle at top,#24102f,#08070c 42%);
 color:#fff;
 font-family:"Playfair Display",serif;
-padding-bottom:50px;
+padding-bottom:70px;
+min-height:100vh;
 }
 
 header{
-height:82px;
+min-height:82px;
 display:flex;
 align-items:center;
 justify-content:space-between;
+gap:12px;
 padding:0 18px;
-background:#111016;
+background:rgba(17,16,22,.96);
 border-bottom:1px solid #382345;
+position:sticky;
+top:0;
+z-index:50;
+backdrop-filter:blur(10px);
 }
 
 .logo{
 font-family:"Cinzel",serif;
-font-size:24px;
-background:linear-gradient(90deg,#fff,#d19aff,#8e38ff);
+font-size:22px;
+background:linear-gradient(
+90deg,
+#fff,
+#d19aff,
+#8e38ff
+);
 -webkit-background-clip:text;
 background-clip:text;
 color:transparent;
@@ -40,15 +60,18 @@ header a{
 color:#bd75ff;
 text-decoration:none;
 font-size:12px;
+white-space:nowrap;
 }
 
 main{
-max-width:650px;
+max-width:760px;
 margin:auto;
 padding:24px 18px;
 }
 
-h1,h2{
+h1,
+h2,
+h3{
 font-family:"Cinzel",serif;
 }
 
@@ -63,21 +86,33 @@ margin-bottom:12px;
 }
 
 .sub{
-color:#9993a1;
+color:#aaa2b0;
 margin-bottom:20px;
+line-height:1.5;
 }
 
 .box{
-background:#15141b;
+background:rgba(21,20,27,.97);
 border:1px solid #2c2732;
 border-radius:20px;
 padding:18px;
 margin-bottom:18px;
+box-shadow:0 15px 35px rgba(0,0,0,.25);
 }
 
 .hero{
-background:linear-gradient(135deg,#491270,#201027);
+background:
+linear-gradient(
+135deg,
+#491270,
+#201027
+);
 border-color:#6c3295;
+}
+
+.hero p{
+color:#e2d7e8;
+line-height:1.5;
 }
 
 label{
@@ -88,6 +123,7 @@ color:#b9a7c4;
 margin:15px 0 7px;
 }
 
+input,
 textarea,
 select{
 width:100%;
@@ -98,10 +134,19 @@ border-radius:13px;
 color:#fff;
 font-family:"Playfair Display",serif;
 font-size:15px;
+outline:none;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+border-color:#9c4cdb;
+box-shadow:0 0 0 2px rgba(156,76,219,.14);
 }
 
 textarea{
-min-height:160px;
+min-height:140px;
+resize:vertical;
 }
 
 button{
@@ -110,15 +155,37 @@ border:0;
 border-radius:14px;
 padding:14px;
 margin-top:15px;
-background:linear-gradient(135deg,#ad50ff,#741be8);
+background:
+linear-gradient(
+135deg,
+#ad50ff,
+#741be8
+);
 color:#fff;
 font-family:"Cinzel",serif;
 font-weight:700;
 cursor:pointer;
 }
 
+button.secondary{
+background:#24202b;
+border:1px solid #43384c;
+}
+
+button.danger{
+background:#3b1827;
+border:1px solid #6b2943;
+}
+
+button.small{
+padding:10px;
+font-size:11px;
+margin-top:8px;
+}
+
 button:disabled{
 opacity:.5;
+cursor:not-allowed;
 }
 
 #status{
@@ -130,11 +197,45 @@ border-radius:13px;
 margin-bottom:16px;
 text-align:center;
 color:#cec2d5;
+line-height:1.45;
 }
 
-#plan,
-#production{
+.tabs{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:7px;
+margin-bottom:18px;
+}
+
+.tab{
+background:#15131a;
+border:1px solid #302a36;
+border-radius:12px;
+padding:11px 5px;
+font-family:"Cinzel",serif;
+font-size:9px;
+text-align:center;
+color:#a99daf;
+cursor:pointer;
+}
+
+.tab.active{
+background:
+linear-gradient(
+135deg,
+#6c1fa2,
+#35124d
+);
+border-color:#9d4ce0;
+color:#fff;
+}
+
+.section{
 display:none;
+}
+
+.section.active{
+display:block;
 }
 
 .planBlock{
@@ -152,6 +253,12 @@ font-size:11px;
 margin-bottom:7px;
 }
 
+.grid2{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+}
+
 .cast-grid{
 display:grid;
 grid-template-columns:1fr;
@@ -164,11 +271,12 @@ background:#101015;
 border:1px solid #2a2430;
 border-radius:14px;
 padding:13px;
+position:relative;
 }
 
 .cast-name{
 font-family:"Cinzel",serif;
-font-size:12px;
+font-size:13px;
 color:#d9b3ff;
 margin-bottom:5px;
 }
@@ -176,10 +284,18 @@ margin-bottom:5px;
 .cast-role{
 font-size:12px;
 color:#aaa3b0;
-line-height:1.45;
+line-height:1.5;
 }
 
-.scene{
+.cast-meta{
+margin-top:9px;
+font-size:11px;
+color:#756d7a;
+}
+
+.scene,
+.episodeCard,
+.seriesCard{
 background:#111016;
 border:1px solid #302a35;
 border-radius:17px;
@@ -187,13 +303,17 @@ padding:16px;
 margin-top:14px;
 }
 
-.scene h3{
+.scene h3,
+.episodeCard h3,
+.seriesCard h3{
 font-family:"Cinzel",serif;
 font-size:14px;
 margin:7px 0;
 }
 
-.scene p{
+.scene p,
+.episodeCard p,
+.seriesCard p{
 color:#aaa3b0;
 font-size:13px;
 line-height:1.5;
@@ -207,6 +327,7 @@ border-radius:11px;
 font-size:12px;
 color:#cbbfd2;
 line-height:1.5;
+white-space:pre-wrap;
 }
 
 .renderStatus{
@@ -222,133 +343,538 @@ border-radius:13px;
 background:#000;
 display:none;
 }
+
+.mini{
+font-size:12px;
+color:#8f8795;
+line-height:1.5;
+margin-top:8px;
+}
+
+.badge{
+display:inline-block;
+padding:5px 8px;
+border-radius:20px;
+background:#27172f;
+border:1px solid #533066;
+color:#ce95ff;
+font-size:9px;
+font-family:"Cinzel",serif;
+margin-top:7px;
+}
+
+.priceBox{
+background:#0d0c11;
+border:1px solid #3d3048;
+border-radius:13px;
+padding:13px;
+margin-top:14px;
+}
+
+.priceRow{
+display:flex;
+justify-content:space-between;
+gap:12px;
+padding:5px 0;
+font-size:12px;
+color:#afa6b4;
+}
+
+.priceRow strong{
+color:#fff;
+}
+
+.empty{
+text-align:center;
+padding:24px 10px;
+color:#776f7b;
+font-size:13px;
+}
+
+.divider{
+height:1px;
+background:#2b2630;
+margin:18px 0;
+}
+
+@media(max-width:560px){
+
+.grid2{
+grid-template-columns:1fr;
+}
+
+.tabs{
+grid-template-columns:repeat(2,1fr);
+}
+
+.logo{
+font-size:18px;
+}
+
+}
+
 </style>
 </head>
 
 <body>
 
 <header>
-<div class="logo">Zynora AI Studio</div>
-<a href="creator.html">← Creator</a>
+
+<div class="logo">
+Zynora AI Series Studio
+</div>
+
+<a href="creator.html">
+← Creator
+</a>
+
 </header>
 
 <main>
 
-<h1>Create AI Drama</h1>
+<h1>
+Create AI Series
+</h1>
 
 <div class="sub">
-Story → cast → scenes → real AI video.
+One story idea → permanent characters → episodes → scenes → real AI video.
 </div>
 
 <div id="status"></div>
 
+
 <div class="box hero">
 
-<h2>From Story to Video</h2>
+<h2>
+Zynora AI Director
+</h2>
 
 <p>
-Build your drama, create the cast and scenes, then generate real AI video.
+Create an entire drama universe once. Zynora keeps your characters,
+episodes and production information connected throughout the series.
 </p>
 
 </div>
 
+
+<div class="tabs">
+
+<div
+class="tab active"
+onclick="openTab('series',this)">
+SERIES
+</div>
+
+<div
+class="tab"
+onclick="openTab('charactersTab',this)">
+CHARACTERS
+</div>
+
+<div
+class="tab"
+onclick="openTab('episodesTab',this)">
+EPISODES
+</div>
+
+<div
+class="tab"
+onclick="openTab('productionTab',this)">
+PRODUCTION
+</div>
+
+</div>
+
+
+<!-- ====================================== -->
+<!-- SERIES -->
+<!-- ====================================== -->
+
+<section
+id="series"
+class="section active">
+
 <div class="box">
 
-<h2>Drama Project</h2>
+<h2>
+Create New Series
+</h2>
 
-<label>Drama Idea</label>
+<label>
+Series Title
+</label>
 
-<textarea id="idea">A poor young woman named Aria discovers she is the missing heir to a hidden kingdom. Her parents were murdered, the throne was stolen, and she must return secretly to the palace. She falls in love with Commander Kael, the same man ordered to hunt down the missing princess.</textarea>
+<input
+id="seriesTitle"
+placeholder="Example: The Billionaire's Secret">
 
-<label>Genre</label>
+<label>
+Story Idea
+</label>
+
+<textarea
+id="idea"
+placeholder="Describe your series...">A hardworking young woman unexpectedly meets a mysterious billionaire who hides his true identity. Their relationship grows while family secrets, jealousy and a dangerous corporate conspiracy threaten to pull them apart.</textarea>
+
+<div class="grid2">
+
+<div>
+
+<label>
+Genre
+</label>
 
 <select id="genre">
-<option>Fantasy</option>
 <option>Romance</option>
 <option>Drama</option>
+<option>Fantasy</option>
 <option>Thriller</option>
 <option>Crime</option>
 <option>Action</option>
+<option>Mystery</option>
+<option>Comedy</option>
 </select>
 
-<label>Episode Length</label>
+</div>
+
+<div>
+
+<label>
+Episode Length
+</label>
 
 <select id="length">
-<option value="5">5 Minutes</option>
-<option value="10" selected>10 Minutes</option>
+<option value="3">3 Minutes</option>
+<option value="5" selected>5 Minutes</option>
+<option value="10">10 Minutes</option>
 <option value="20">20 Minutes</option>
 </select>
 
-<label>Episodes</label>
+</div>
+
+</div>
+
+
+<label>
+Number of Episodes
+</label>
 
 <select id="episodes">
 <option value="10">10 Episodes</option>
-<option value="20" selected>20 Episodes</option>
+<option value="20">20 Episodes</option>
 <option value="30">30 Episodes</option>
+<option value="50" selected>50 Episodes</option>
+<option value="80">80 Episodes</option>
+<option value="100">100 Episodes</option>
 </select>
 
-<button onclick="generatePlan()">
-GENERATE DRAMA
+
+<button onclick="createSeries()">
+CREATE SERIES
 </button>
 
 </div>
 
 
-<div id="plan" class="box">
+<div class="box">
 
-<h2>Your Drama</h2>
+<h2>
+My AI Series
+</h2>
 
-<div class="planBlock">
-<div class="purple">TITLE</div>
-<div id="title"></div>
+<div id="seriesList">
+
+<div class="empty">
+Your saved series will appear here.
 </div>
 
-<div class="planBlock">
-<div class="purple">STORY</div>
-<div id="summary"></div>
 </div>
+
+</div>
+
+</section>
+
+
+<!-- ====================================== -->
+<!-- CHARACTERS -->
+<!-- ====================================== -->
+
+<section
+id="charactersTab"
+class="section">
+
+<div class="box">
+
+<h2>
+Permanent Series Characters
+</h2>
+
+<div class="mini">
+Characters created here belong to the selected series and can be reused
+throughout every episode.
+</div>
+
+<div id="selectedSeriesCharacterInfo"
+class="planBlock">
+
+<div class="purple">
+SELECTED SERIES
+</div>
+
+<div id="characterSeriesName">
+No series selected.
+</div>
+
+</div>
+
+
+<label>
+Character Name
+</label>
+
+<input
+id="characterName"
+placeholder="Example: Maya Bennett">
+
+
+<label>
+Character Role
+</label>
+
+<input
+id="characterRole"
+placeholder="Example: Female Lead">
+
+
+<label>
+Appearance
+</label>
+
+<textarea
+id="characterAppearance"
+placeholder="Hair, face, age, clothing, body appearance..."></textarea>
+
+
+<label>
+Personality
+</label>
+
+<textarea
+id="characterPersonality"
+placeholder="Describe personality, behavior, speech style and emotional traits..."></textarea>
+
+
+<label>
+Reference Image URL
+</label>
+
+<input
+id="characterImage"
+placeholder="Optional image URL">
+
+
+<label>
+Voice ID
+</label>
+
+<input
+id="characterVoice"
+placeholder="Optional provider voice ID">
+
+
+<label>
+Runway Character ID
+</label>
+
+<input
+id="providerCharacterId"
+placeholder="Optional Runway character ID">
+
+
+<button onclick="addCharacter()">
+ADD CHARACTER
+</button>
+
+
+<div class="divider"></div>
+
+<div id="characters">
+
+<div class="empty">
+Select a series to view its characters.
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ====================================== -->
+<!-- EPISODES -->
+<!-- ====================================== -->
+
+<section
+id="episodesTab"
+class="section">
+
+<div class="box">
+
+<h2>
+Episode Generator
+</h2>
 
 <div class="planBlock">
 
 <div class="purple">
-14 CHARACTER CAST
+SELECTED SERIES
 </div>
 
-<div id="characters" class="cast-grid"></div>
+<div id="episodeSeriesName">
+No series selected.
+</div>
 
 </div>
 
-<button onclick="buildScenes()">
-BUILD EPISODE 1
+
+<label>
+Episode Number
+</label>
+
+<input
+id="episodeNumber"
+type="number"
+min="1"
+value="1">
+
+
+<label>
+Episode Title
+</label>
+
+<input
+id="episodeTitle"
+placeholder="Example: The Stranger in the Rain">
+
+
+<label>
+Episode Synopsis
+</label>
+
+<textarea
+id="episodeSynopsis"
+placeholder="What happens in this episode?"></textarea>
+
+
+<label>
+Episode Script
+</label>
+
+<textarea
+id="episodeScript"
+placeholder="Zynora's future AI writer will generate this automatically. For now it can be entered or saved here."></textarea>
+
+
+<button onclick="saveEpisode()">
+SAVE EPISODE
 </button>
 
+
+<button
+class="secondary"
+onclick="buildEpisodeOne()">
+BUILD EPISODE 1 SAMPLE SCENES
+</button>
+
+
+<div class="divider"></div>
+
+<div id="episodeList">
+
+<div class="empty">
+Select a series to view its episodes.
 </div>
 
-
-<div id="production" class="box">
-
-<h2>Episode 1 Production</h2>
-
-<div id="scenes"></div>
+</div>
 
 </div>
+
+</section>
+
+
+<!-- ====================================== -->
+<!-- PRODUCTION -->
+<!-- ====================================== -->
+
+<section
+id="productionTab"
+class="section">
+
+<div class="box">
+
+<h2>
+AI Production Queue
+</h2>
+
+<div class="mini">
+Scenes created here can continue using your existing Zynora Runway
+generation function.
+</div>
+
+<div id="productionSeriesName"
+class="planBlock">
+
+<div class="purple">
+SELECTED SERIES
+</div>
+
+<div id="productionSeriesText">
+No series selected.
+</div>
+
+</div>
+
+<div id="scenes">
+
+<div class="empty">
+Build an episode first.
+</div>
+
+</div>
+
+</div>
+
+</section>
 
 </main>
 
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script
+src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
+</script>
+
 
 <script>
+
+
+/* =========================================
+   SUPABASE
+========================================= */
+
 
 const SUPABASE_URL =
 "https://ozshekxpuvganemaajms.supabase.co";
 
+
 const SUPABASE_KEY =
 "sb_publishable__GsW9RahFD_XDWJTFzh9eQ_dNBZfa32";
+
 
 const FUNCTION_URL =
 SUPABASE_URL +
 "/functions/v1/zynora-video";
+
 
 const client =
 supabase.createClient(
@@ -356,112 +882,69 @@ SUPABASE_URL,
 SUPABASE_KEY
 );
 
+
 let currentUser = null;
+
+let currentSeries = null;
+
+let currentSeriesCharacters = [];
+
+let currentEpisodes = [];
 
 const scenes = [];
 
 
-/* 14 CHARACTERS */
+/* =========================================
+   START
+========================================= */
 
-const cast = [
-
-{
-name:"Aria Vale",
-profile:"21-year-old hidden princess. Long dark wavy hair, expressive brown eyes, elegant features. Brave, intelligent and compassionate."
-},
-
-{
-name:"Commander Kael Varyn",
-profile:"31-year-old royal commander. Tall athletic build, dark hair, strong features, black royal armor and dark cloak."
-},
-
-{
-name:"King Victor Vale",
-profile:"52-year-old ruler and Aria's uncle. Silver-streaked dark hair, sharp features and regal black-and-gold clothing."
-},
-
-{
-name:"Queen Selene Vale",
-profile:"46-year-old queen. Long black hair, elegant dark gowns and jeweled crowns. Intelligent and secretly manipulative."
-},
-
-{
-name:"Prince Lucian Vale",
-profile:"25-year-old royal heir. Dark blond hair, refined features and richly decorated royal clothing."
-},
-
-{
-name:"Mira Elwyn",
-profile:"22-year-old palace servant and Aria's closest friend. Curly chestnut hair, warm brown skin and simple palace clothing."
-},
-
-{
-name:"Darius Kane",
-profile:"58-year-old former royal guard. Grey beard, weathered face and worn leather armor. He knows the truth about Aria's parents."
-},
-
-{
-name:"Lady Elara Moon",
-profile:"39-year-old mysterious noblewoman. Long silver-blond hair and elegant blue gowns."
-},
-
-{
-name:"Rowan Thane",
-profile:"29-year-old elite soldier and Kael's closest friend. Short brown hair, athletic build and dark royal uniform."
-},
-
-{
-name:"Seraphine Dray",
-profile:"34-year-old royal sorceress. Long white hair, pale violet eyes and dark embroidered robes."
-},
-
-{
-name:"Lord Cassian Roake",
-profile:"41-year-old powerful nobleman. Black hair, trimmed beard and dark red royal clothing."
-},
-
-{
-name:"Nyla Voss",
-profile:"27-year-old palace spy. Shoulder-length black hair, sharp eyes and understated dark clothing."
-},
-
-{
-name:"General Thorne Blackwell",
-profile:"49-year-old military leader loyal to Victor. Large build, shaved head, facial scar and heavy black armor."
-},
-
-{
-name:"Elias Crowe",
-profile:"33-year-old mysterious outsider. Dark curly hair, green eyes and rugged clothing. He knows what happened the night Aria's parents died."
-}
-
-];
-
-
-/* LOGIN */
 
 async function start(){
+
+try{
 
 const result =
 await client.auth.getUser();
 
+
 currentUser =
 result.data.user || null;
+
 
 if(!currentUser){
 
 show(
-"Please log in before generating real videos."
+"Please log in to create and save AI series."
+);
+
+return;
+
+}
+
+
+await loadSeries();
+
+
+}
+catch(error){
+
+show(
+"Unable to start AI Studio: " +
+error.message
 );
 
 }
 
 }
 
+
 start();
 
 
-/* STATUS */
+/* =========================================
+   STATUS
+========================================= */
+
 
 function show(text){
 
@@ -474,12 +957,84 @@ text;
 box.style.display =
 "block";
 
+
+setTimeout(
+function(){
+
+box.style.display =
+"none";
+
+},
+6000
+);
+
 }
 
 
-/* GENERATE DRAMA */
+/* =========================================
+   TABS
+========================================= */
 
-function generatePlan(){
+
+function openTab(id,button){
+
+document
+.querySelectorAll(".section")
+.forEach(
+function(section){
+
+section.classList.remove("active");
+
+}
+);
+
+
+document
+.querySelectorAll(".tab")
+.forEach(
+function(tab){
+
+tab.classList.remove("active");
+
+}
+);
+
+
+document
+.getElementById(id)
+.classList.add("active");
+
+
+button
+.classList.add("active");
+
+}
+
+
+/* =========================================
+   CREATE SERIES
+========================================= */
+
+
+async function createSeries(){
+
+if(!currentUser){
+
+show(
+"Please log in first."
+);
+
+return;
+
+}
+
+
+const title =
+document
+.getElementById("seriesTitle")
+.value
+.trim();
+
 
 const idea =
 document
@@ -487,76 +1042,261 @@ document
 .value
 .trim();
 
-if(!idea){
+
+const genre =
+document
+.getElementById("genre")
+.value;
+
+
+const episodeLength =
+parseInt(
+document
+.getElementById("length")
+.value
+);
+
+
+const episodeCount =
+parseInt(
+document
+.getElementById("episodes")
+.value
+);
+
+
+if(!title){
 
 show(
-"Enter your drama idea."
+"Enter a series title."
 );
 
 return;
 
 }
 
-document
-.getElementById("title")
-.textContent =
-"The Kingdom Beyond Midnight";
 
-document
-.getElementById("summary")
-.textContent =
-idea +
-" Aria must enter the royal court, uncover the conspiracy behind her parents' deaths, discover who among the people surrounding the throne can be trusted, and decide whether Commander Kael is her enemy or her greatest ally.";
-
-renderCast();
-
-document
-.getElementById("plan")
-.style.display =
-"block";
-
-document
-.getElementById("plan")
-.scrollIntoView({
-behavior:"smooth"
-});
+if(!idea){
 
 show(
-"Your drama and 14-character cast are ready."
+"Enter your story idea."
+);
+
+return;
+
+}
+
+
+show(
+"Creating your AI series..."
+);
+
+
+const summary =
+`${title} is a ${genre.toLowerCase()} series built from this story idea: ${idea}`;
+
+
+const result =
+await client
+.from("ai_series")
+.insert({
+
+user_id:
+currentUser.id,
+
+title:
+title,
+
+genre:
+genre,
+
+story_idea:
+idea,
+
+series_summary:
+summary,
+
+episode_count:
+episodeCount,
+
+episode_length:
+episodeLength,
+
+status:
+"draft"
+
+})
+.select()
+.single();
+
+
+if(result.error){
+
+show(
+"Unable to create series: " +
+result.error.message
+);
+
+return;
+
+}
+
+
+currentSeries =
+result.data;
+
+
+show(
+title +
+" created successfully."
+);
+
+
+document
+.getElementById("seriesTitle")
+.value =
+"";
+
+
+await loadSeries();
+
+
+await selectSeries(
+currentSeries.id
 );
 
 }
 
 
-/* SHOW CAST */
+/* =========================================
+   LOAD SERIES
+========================================= */
 
-function renderCast(){
+
+async function loadSeries(){
+
+if(!currentUser){
+return;
+}
+
+
+const result =
+await client
+.from("ai_series")
+.select("*")
+.eq(
+"user_id",
+currentUser.id
+)
+.order(
+"created_at",
+{
+ascending:false
+}
+);
+
+
+if(result.error){
+
+show(
+"Unable to load series: " +
+result.error.message
+);
+
+return;
+
+}
+
+
+renderSeriesList(
+result.data || []
+);
+
+}
+
+
+/* =========================================
+   RENDER SERIES
+========================================= */
+
+
+function renderSeriesList(list){
 
 const area =
-document.getElementById("characters");
+document.getElementById(
+"seriesList"
+);
+
 
 area.innerHTML =
 "";
 
-cast.forEach(
-function(person,index){
+
+if(!list.length){
+
+area.innerHTML =
+`
+<div class="empty">
+No AI series created yet.
+</div>
+`;
+
+return;
+
+}
+
+
+list.forEach(
+function(series){
 
 const card =
 document.createElement("div");
 
+
 card.className =
-"cast-card";
+"seriesCard";
+
 
 card.innerHTML =
 `
-<div class="cast-name">
-${index + 1}. ${person.name}
+
+<div class="purple">
+AI SERIES
 </div>
 
-<div class="cast-role">
-${person.profile}
+<h3>
+${escapeHtml(series.title)}
+</h3>
+
+<p>
+${escapeHtml(
+series.series_summary ||
+series.story_idea ||
+""
+)}
+</p>
+
+<div class="badge">
+${escapeHtml(series.genre || "Drama")}
 </div>
+
+<div class="badge">
+${series.episode_count} Episodes
+</div>
+
+<div class="badge">
+${series.episode_length} Min
+</div>
+
+<button
+class="small"
+onclick="selectSeries('${series.id}')">
+
+OPEN SERIES
+
+</button>
 `;
+
 
 area.appendChild(card);
 
@@ -565,107 +1305,975 @@ area.appendChild(card);
 }
 
 
-/* BUILD EPISODE */
+/* =========================================
+   SELECT SERIES
+========================================= */
 
-function buildScenes(){
+
+async function selectSeries(id){
+
+const result =
+await client
+.from("ai_series")
+.select("*")
+.eq(
+"id",
+id
+)
+.single();
+
+
+if(result.error){
+
+show(
+"Unable to open series."
+);
+
+return;
+
+}
+
+
+currentSeries =
+result.data;
+
+
+document
+.getElementById(
+"characterSeriesName"
+)
+.textContent =
+currentSeries.title;
+
+
+document
+.getElementById(
+"episodeSeriesName"
+)
+.textContent =
+currentSeries.title;
+
+
+document
+.getElementById(
+"productionSeriesText"
+)
+.textContent =
+currentSeries.title;
+
+
+await loadCharacters();
+
+await loadEpisodes();
+
+
+show(
+currentSeries.title +
+" is now selected."
+);
+
+}
+
+
+/* =========================================
+   ADD CHARACTER
+========================================= */
+
+
+async function addCharacter(){
+
+if(!currentUser){
+
+show(
+"Please log in."
+);
+
+return;
+
+}
+
+
+if(!currentSeries){
+
+show(
+"Select a series first."
+);
+
+return;
+
+}
+
+
+const name =
+document
+.getElementById("characterName")
+.value
+.trim();
+
+
+const role =
+document
+.getElementById("characterRole")
+.value
+.trim();
+
+
+const appearance =
+document
+.getElementById("characterAppearance")
+.value
+.trim();
+
+
+const personality =
+document
+.getElementById("characterPersonality")
+.value
+.trim();
+
+
+const image =
+document
+.getElementById("characterImage")
+.value
+.trim();
+
+
+const voice =
+document
+.getElementById("characterVoice")
+.value
+.trim();
+
+
+const providerCharacterId =
+document
+.getElementById("providerCharacterId")
+.value
+.trim();
+
+
+if(!name){
+
+show(
+"Enter the character's name."
+);
+
+return;
+
+}
+
+
+const description =
+[
+role,
+appearance
+]
+.filter(Boolean)
+.join(". ");
+
+
+const result =
+await client
+.from("ai_series_characters")
+.insert({
+
+series_id:
+currentSeries.id,
+
+user_id:
+currentUser.id,
+
+name:
+name,
+
+role:
+role || null,
+
+description:
+description || null,
+
+personality:
+personality || null,
+
+appearance:
+appearance || null,
+
+reference_image_url:
+image || null,
+
+voice_id:
+voice || null,
+
+provider:
+providerCharacterId
+? "runway"
+: null,
+
+provider_character_id:
+providerCharacterId || null
+
+});
+
+
+if(result.error){
+
+show(
+"Unable to save character: " +
+result.error.message
+);
+
+return;
+
+}
+
+
+clearCharacterForm();
+
+
+await loadCharacters();
+
+
+show(
+name +
+" added to " +
+currentSeries.title +
+"."
+);
+
+}
+
+
+/* =========================================
+   CLEAR CHARACTER FORM
+========================================= */
+
+
+function clearCharacterForm(){
+
+document
+.getElementById(
+"characterName"
+)
+.value =
+"";
+
+
+document
+.getElementById(
+"characterRole"
+)
+.value =
+"";
+
+
+document
+.getElementById(
+"characterAppearance"
+)
+.value =
+"";
+
+
+document
+.getElementById(
+"characterPersonality"
+)
+.value =
+"";
+
+
+document
+.getElementById(
+"characterImage"
+)
+.value =
+"";
+
+
+document
+.getElementById(
+"characterVoice"
+)
+.value =
+"";
+
+
+document
+.getElementById(
+"providerCharacterId"
+)
+.value =
+"";
+
+}
+
+
+/* =========================================
+   LOAD CHARACTERS
+========================================= */
+
+
+async function loadCharacters(){
+
+if(!currentSeries){
+return;
+}
+
+
+const result =
+await client
+.from(
+"ai_series_characters"
+)
+.select("*")
+.eq(
+"series_id",
+currentSeries.id
+)
+.order(
+"created_at",
+{
+ascending:true
+}
+);
+
+
+if(result.error){
+
+show(
+"Unable to load characters."
+);
+
+return;
+
+}
+
+
+currentSeriesCharacters =
+result.data || [];
+
+
+renderCharacters();
+
+}
+
+
+/* =========================================
+   RENDER CHARACTERS
+========================================= */
+
+
+function renderCharacters(){
+
+const area =
+document.getElementById(
+"characters"
+);
+
+
+area.innerHTML =
+"";
+
+
+if(
+!currentSeriesCharacters.length
+){
+
+area.innerHTML =
+`
+<div class="empty">
+No characters yet. Add your first permanent character above.
+</div>
+`;
+
+return;
+
+}
+
+
+const grid =
+document.createElement("div");
+
+
+grid.className =
+"cast-grid";
+
+
+currentSeriesCharacters
+.forEach(
+function(person,index){
+
+const card =
+document.createElement("div");
+
+
+card.className =
+"cast-card";
+
+
+card.innerHTML =
+`
+
+<div class="cast-name">
+${index + 1}. ${escapeHtml(person.name)}
+</div>
+
+<div class="cast-role">
+
+<strong>
+${escapeHtml(person.role || "Series Character")}
+</strong>
+
+<br><br>
+
+${escapeHtml(
+person.appearance ||
+person.description ||
+"Appearance not added yet."
+)}
+
+<br><br>
+
+${escapeHtml(
+person.personality ||
+"Personality not added yet."
+)}
+
+</div>
+
+<div class="cast-meta">
+
+${person.provider_character_id
+?
+"Runway Character linked ✓"
+:
+"No provider character linked yet"}
+
+</div>
+
+<button
+class="small danger"
+onclick="deleteCharacter('${person.id}')">
+
+REMOVE CHARACTER
+
+</button>
+`;
+
+
+grid.appendChild(card);
+
+});
+
+
+area.appendChild(grid);
+
+}
+
+
+/* =========================================
+   DELETE CHARACTER
+========================================= */
+
+
+async function deleteCharacter(id){
+
+if(!confirm(
+"Remove this character from the series?"
+)){
+return;
+}
+
+
+const result =
+await client
+.from(
+"ai_series_characters"
+)
+.delete()
+.eq(
+"id",
+id
+);
+
+
+if(result.error){
+
+show(
+"Unable to remove character."
+);
+
+return;
+
+}
+
+
+await loadCharacters();
+
+
+show(
+"Character removed."
+);
+
+}
+
+
+/* =========================================
+   SAVE EPISODE
+========================================= */
+
+
+async function saveEpisode(){
+
+if(!currentUser){
+
+show(
+"Please log in first."
+);
+
+return;
+
+}
+
+
+if(!currentSeries){
+
+show(
+"Select a series first."
+);
+
+return;
+
+}
+
+
+const number =
+parseInt(
+document
+.getElementById(
+"episodeNumber"
+)
+.value
+);
+
+
+const title =
+document
+.getElementById(
+"episodeTitle"
+)
+.value
+.trim();
+
+
+const synopsis =
+document
+.getElementById(
+"episodeSynopsis"
+)
+.value
+.trim();
+
+
+const script =
+document
+.getElementById(
+"episodeScript"
+)
+.value
+.trim();
+
+
+if(!number || number < 1){
+
+show(
+"Enter a valid episode number."
+);
+
+return;
+
+}
+
+
+const result =
+await client
+.from(
+"ai_series_episodes"
+)
+.upsert(
+{
+
+series_id:
+currentSeries.id,
+
+user_id:
+currentUser.id,
+
+episode_number:
+number,
+
+title:
+title ||
+`Episode ${number}`,
+
+synopsis:
+synopsis || null,
+
+script:
+script || null,
+
+status:
+"planned"
+
+},
+{
+onConflict:
+"series_id,episode_number"
+}
+);
+
+
+if(result.error){
+
+show(
+"Unable to save episode: " +
+result.error.message
+);
+
+return;
+
+}
+
+
+await loadEpisodes();
+
+
+show(
+`Episode ${number} saved.`
+);
+
+}
+
+
+/* =========================================
+   LOAD EPISODES
+========================================= */
+
+
+async function loadEpisodes(){
+
+if(!currentSeries){
+return;
+}
+
+
+const result =
+await client
+.from(
+"ai_series_episodes"
+)
+.select("*")
+.eq(
+"series_id",
+currentSeries.id
+)
+.order(
+"episode_number",
+{
+ascending:true
+}
+);
+
+
+if(result.error){
+
+show(
+"Unable to load episodes."
+);
+
+return;
+
+}
+
+
+currentEpisodes =
+result.data || [];
+
+
+renderEpisodes();
+
+}
+
+
+/* =========================================
+   RENDER EPISODES
+========================================= */
+
+
+function renderEpisodes(){
+
+const area =
+document.getElementById(
+"episodeList"
+);
+
+
+area.innerHTML =
+"";
+
+
+if(!currentEpisodes.length){
+
+area.innerHTML =
+`
+<div class="empty">
+No episodes saved yet.
+</div>
+`;
+
+return;
+
+}
+
+
+currentEpisodes
+.forEach(
+function(episode){
+
+const card =
+document.createElement("div");
+
+
+card.className =
+"episodeCard";
+
+
+card.innerHTML =
+`
+
+<div class="purple">
+EPISODE ${episode.episode_number}
+</div>
+
+<h3>
+${escapeHtml(
+episode.title ||
+`Episode ${episode.episode_number}`
+)}
+</h3>
+
+<p>
+${escapeHtml(
+episode.synopsis ||
+"No synopsis yet."
+)}
+</p>
+
+<div class="badge">
+${escapeHtml(
+episode.status ||
+"planned"
+)}
+</div>
+`;
+
+
+area.appendChild(card);
+
+});
+
+}
+
+
+/* =========================================
+   SAMPLE EPISODE BUILDER
+========================================= */
+
+
+async function buildEpisodeOne(){
+
+if(!currentSeries){
+
+show(
+"Select a series first."
+);
+
+return;
+
+}
+
 
 scenes.length =
 0;
 
-const aria =
-"Aria Vale, 21 years old, long dark wavy hair, expressive brown eyes and elegant features";
 
-const kael =
-"Commander Kael Varyn, 31 years old, tall athletic build, dark hair, strong facial features, black royal armor and dark cloak";
+const castNames =
+currentSeriesCharacters
+.map(
+person => person.name
+)
+.join(", ");
+
+
+const heroOne =
+currentSeriesCharacters[0]
+? currentSeriesCharacters[0].name
+: "Lead Character";
+
+
+const heroTwo =
+currentSeriesCharacters[1]
+? currentSeriesCharacters[1].name
+: "Second Lead";
 
 
 scenes.push(
 
 {
-title:"Aria's Village",
+
+title:
+"Opening",
 
 text:
-"Aria walks through her village at dusk and senses someone watching her.",
+`Introduce ${heroOne} and establish the world of the series.`,
 
 prompt:
-`Epic cinematic fantasy television drama. ${aria}. She wears simple medieval village clothing and walks through a misty stone village at dusk. Warm lanterns glow around her. She senses someone watching her and turns. Realistic human actor, premium streaming-series cinematography, cinematic lighting and natural camera movement.`
+`Premium cinematic vertical short drama. Opening scene for the series "${currentSeries.title}". Introduce ${heroOne}. Maintain exact saved character identity and appearance. Establish the story world described as: ${currentSeries.story_idea}. Natural human acting, realistic physical movement, cinematic lighting, premium streaming-series cinematography, 9:16 vertical composition.`
+
 },
 
 
 {
-title:"The Attack",
+
+title:
+"First Encounter",
 
 text:
-"A masked attacker follows Aria into a narrow alley.",
+`${heroOne} encounters ${heroTwo}.`,
 
 prompt:
-`Premium cinematic fantasy drama. Same ${aria}. Maintain the same face, hair and clothing. A masked attacker appears behind her in a narrow lantern-lit stone alley. Aria realizes she is in danger and runs. Realistic acting and dramatic cinematic lighting.`
+`Premium cinematic short drama from "${currentSeries.title}". ${heroOne} encounters ${heroTwo} for an important story moment. Use the established permanent character appearances. Maintain facial identity, hairstyle, wardrobe and age continuity. Natural eye movement, physical acting, body language and cinematic camera movement.`
+
 },
 
 
 {
-title:"Kael Arrives",
+
+title:
+"Conflict",
 
 text:
-"Commander Kael arrives and protects Aria.",
+"A problem changes the direction of the episode.",
 
 prompt:
-`Epic cinematic fantasy drama. ${kael}. He protects the same ${aria} from a masked attacker. Maintain exact character appearance continuity. Controlled sword action, realistic human actors and premium television cinematography.`
+`Cinematic dramatic sequence from "${currentSeries.title}". The central conflict becomes clear. Characters involved: ${castNames || heroOne}. Preserve established character identities and continuity. Realistic acting, emotional reactions, natural movement, premium television-drama cinematography.`
+
 },
 
 
 {
-title:"The Royal Mark",
+
+title:
+"Emotional Turn",
 
 text:
-"Kael discovers the ancient royal symbol on Aria's necklace.",
+"The lead characters experience an emotional turning point.",
 
 prompt:
-`Intimate cinematic fantasy drama. Same ${aria} and same ${kael}. Kael examines an ancient royal symbol on Aria's necklace beneath warm lantern light. He becomes disturbed while Aria looks confused. Maintain exact character appearance continuity. Realistic acting and slow cinematic camera movement.`
+`Emotional premium streaming drama scene from "${currentSeries.title}". ${heroOne} and ${heroTwo} experience a meaningful emotional turning point. Maintain the same actors and character appearance. Natural facial emotion, believable body language, subtle cinematic movement and realistic lighting.`
+
 },
 
 
 {
-title:"The Revelation",
+
+title:
+"Cliffhanger",
 
 text:
-"Kael realizes Aria may be the missing princess.",
+"The episode ends with a reason to watch the next episode.",
 
 prompt:
-`Fantasy television drama cliffhanger. Same ${kael} stands inside a dark royal chamber holding Aria's necklace. He recognizes the forgotten royal crest and realizes ${aria} may be the missing princess. Moonlight enters through palace windows. Maintain Kael's exact appearance. Dramatic slow cinematic camera push.`
+`Powerful vertical short-drama cliffhanger for "${currentSeries.title}". End Episode 1 with a major revelation, danger, mystery or emotional surprise related to: ${currentSeries.story_idea}. Maintain exact character continuity. Dramatic cinematic camera movement and premium streaming-series quality.`
+
 }
 
 );
+
 
 renderScenes();
 
-document
-.getElementById("production")
-.style.display =
-"block";
 
-document
-.getElementById("production")
-.scrollIntoView({
-behavior:"smooth"
-});
+openProductionTab();
+
 
 show(
-"Episode 1 is ready for video generation."
+"Episode 1 production scenes are ready."
 );
 
 }
 
 
-/* DISPLAY SCENES */
+/* =========================================
+   OPEN PRODUCTION TAB
+========================================= */
+
+
+function openProductionTab(){
+
+document
+.querySelectorAll(".section")
+.forEach(
+section =>
+section.classList.remove("active")
+);
+
+
+document
+.querySelectorAll(".tab")
+.forEach(
+tab =>
+tab.classList.remove("active")
+);
+
+
+document
+.getElementById(
+"productionTab"
+)
+.classList.add("active");
+
+
+document
+.querySelectorAll(".tab")[3]
+.classList.add("active");
+
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+}
+
+
+/* =========================================
+   DISPLAY SCENES
+========================================= */
+
 
 function renderScenes(){
 
 const area =
-document.getElementById("scenes");
+document.getElementById(
+"scenes"
+);
+
 
 area.innerHTML =
 "";
+
 
 scenes.forEach(
 function(scene,index){
@@ -673,21 +2281,24 @@ function(scene,index){
 const div =
 document.createElement("div");
 
+
 div.className =
 "scene";
 
+
 div.innerHTML =
 `
+
 <div class="purple">
 SCENE ${index + 1}
 </div>
 
 <h3>
-${scene.title}
+${escapeHtml(scene.title)}
 </h3>
 
 <p>
-${scene.text}
+${escapeHtml(scene.text)}
 </p>
 
 <div class="prompt">
@@ -698,9 +2309,35 @@ AI VIDEO PROMPT
 
 <br><br>
 
-${scene.prompt}
+${escapeHtml(scene.prompt)}
 
 </div>
+
+
+<div class="priceBox">
+
+<div class="priceRow">
+<span>Provider</span>
+<strong>Runway</strong>
+</div>
+
+<div class="priceRow">
+<span>Model</span>
+<strong>Gen-4.5</strong>
+</div>
+
+<div class="priceRow">
+<span>Clip Duration</span>
+<strong>5 seconds</strong>
+</div>
+
+<div class="priceRow">
+<span>Zynora Service Fee</span>
+<strong>$0.59</strong>
+</div>
+
+</div>
+
 
 <button
 id="btn${index}"
@@ -710,10 +2347,12 @@ onclick="generateVideo(${index})">
 
 </button>
 
+
 <div
 id="status${index}"
 class="renderStatus">
 </div>
+
 
 <video
 id="video${index}"
@@ -722,6 +2361,7 @@ playsinline>
 </video>
 `;
 
+
 area.appendChild(div);
 
 });
@@ -729,7 +2369,10 @@ area.appendChild(div);
 }
 
 
-/* REAL VIDEO */
+/* =========================================
+   REAL RUNWAY VIDEO
+========================================= */
+
 
 async function generateVideo(index){
 
@@ -743,21 +2386,26 @@ return;
 
 }
 
+
 const button =
 document.getElementById(
 "btn" + index
 );
+
 
 const message =
 document.getElementById(
 "status" + index
 );
 
+
 button.disabled =
 true;
 
+
 button.textContent =
 "STARTING...";
+
 
 message.textContent =
 "Sending scene to Zynora AI...";
@@ -765,11 +2413,14 @@ message.textContent =
 
 try{
 
+
 const sessionResult =
 await client.auth.getSession();
 
+
 const session =
 sessionResult.data.session;
+
 
 if(!session){
 
@@ -785,7 +2436,8 @@ await fetch(
 FUNCTION_URL,
 {
 
-method:"POST",
+method:
+"POST",
 
 headers:{
 
@@ -804,7 +2456,8 @@ session.access_token
 body:
 JSON.stringify({
 
-action:"generate",
+action:
+"generate",
 
 prompt:
 scenes[index].prompt,
@@ -851,8 +2504,15 @@ throw new Error(
 button.textContent =
 "GENERATING...";
 
+
 message.textContent =
 "AI video started...";
+
+
+await createGenerationJob(
+index,
+data.taskId
+);
 
 
 await checkVideo(
@@ -868,8 +2528,10 @@ message.textContent =
 "Error: " +
 error.message;
 
+
 button.disabled =
 false;
+
 
 button.textContent =
 "TRY AGAIN";
@@ -879,7 +2541,78 @@ button.textContent =
 }
 
 
-/* CHECK VIDEO */
+/* =========================================
+   SAVE GENERATION JOB
+========================================= */
+
+
+async function createGenerationJob(
+index,
+taskId
+){
+
+if(
+!currentUser ||
+!currentSeries
+){
+return;
+}
+
+
+try{
+
+await client
+.from(
+"ai_generation_jobs"
+)
+.insert({
+
+user_id:
+currentUser.id,
+
+series_id:
+currentSeries.id,
+
+provider:
+"runway",
+
+model:
+"gen4.5",
+
+provider_task_id:
+taskId,
+
+prompt:
+scenes[index].prompt,
+
+duration_seconds:
+5,
+
+zynora_fee_usd:
+0.59,
+
+status:
+"processing"
+
+});
+
+}
+catch(error){
+
+console.log(
+"Generation job logging skipped:",
+error
+);
+
+}
+
+}
+
+
+/* =========================================
+   CHECK VIDEO
+========================================= */
+
 
 async function checkVideo(
 index,
@@ -890,6 +2623,7 @@ const message =
 document.getElementById(
 "status" + index
 );
+
 
 const button =
 document.getElementById(
@@ -915,6 +2649,7 @@ resolve,
 const sessionResult =
 await client.auth.getSession();
 
+
 const session =
 sessionResult.data.session;
 
@@ -933,7 +2668,8 @@ await fetch(
 FUNCTION_URL,
 {
 
-method:"POST",
+method:
+"POST",
 
 headers:{
 
@@ -952,7 +2688,8 @@ session.access_token
 body:
 JSON.stringify({
 
-action:"status",
+action:
+"status",
 
 taskId:
 taskId
@@ -1012,8 +2749,10 @@ document.getElementById(
 "video" + index
 );
 
+
 video.src =
 url;
+
 
 video.style.display =
 "block";
@@ -1026,8 +2765,17 @@ message.textContent =
 button.disabled =
 false;
 
+
 button.textContent =
 "GENERATE AGAIN";
+
+
+await updateGenerationJob(
+taskId,
+"completed",
+url,
+null
+);
 
 
 return;
@@ -1038,6 +2786,15 @@ return;
 if(
 state === "FAILED"
 ){
+
+await updateGenerationJob(
+taskId,
+"failed",
+null,
+data.failure ||
+"AI generation failed."
+);
+
 
 throw new Error(
 data.failure ||
@@ -1050,6 +2807,14 @@ data.failure ||
 if(
 state === "CANCELED"
 ){
+
+await updateGenerationJob(
+taskId,
+"canceled",
+null,
+"Generation canceled."
+);
+
 
 throw new Error(
 "Generation canceled."
@@ -1065,6 +2830,104 @@ throw new Error(
 );
 
 }
+
+
+/* =========================================
+   UPDATE GENERATION JOB
+========================================= */
+
+
+async function updateGenerationJob(
+taskId,
+status,
+url,
+error
+){
+
+try{
+
+const values =
+{
+status:
+status
+};
+
+
+if(url){
+
+values.output_url =
+url;
+
+values.completed_at =
+new Date().toISOString();
+
+}
+
+
+if(error){
+
+values.error_message =
+error;
+
+}
+
+
+await client
+.from(
+"ai_generation_jobs"
+)
+.update(values)
+.eq(
+"provider_task_id",
+taskId
+);
+
+}
+catch(e){
+
+console.log(
+"Unable to update generation history.",
+e
+);
+
+}
+
+}
+
+
+/* =========================================
+   SAFE TEXT
+========================================= */
+
+
+function escapeHtml(value){
+
+return String(
+value || ""
+)
+.replaceAll(
+"&",
+"&amp;"
+)
+.replaceAll(
+"<",
+"&lt;"
+)
+.replaceAll(
+">",
+"&gt;"
+)
+.replaceAll(
+'"',
+"&quot;"
+)
+.replaceAll(
+"'",
+"&#039;"
+);
+
+}
+
 
 </script>
 
