@@ -442,7 +442,6 @@ One story idea → permanent characters → episodes → scenes → real AI vide
 
 <div id="status"></div>
 
-
 <div class="box hero">
 
 <h2>
@@ -455,7 +454,6 @@ episodes and production information connected throughout the series.
 </p>
 
 </div>
-
 
 <div class="tabs">
 
@@ -485,10 +483,7 @@ PRODUCTION
 
 </div>
 
-
-<!-- ====================================== -->
 <!-- SERIES -->
-<!-- ====================================== -->
 
 <section
 id="series"
@@ -554,27 +549,27 @@ Episode Length
 
 </div>
 
-
 <label>
 Number of Episodes
 </label>
 
 <select id="episodes">
+<option value="1" selected>1 Episode — Test</option>
 <option value="10">10 Episodes</option>
 <option value="20">20 Episodes</option>
 <option value="30">30 Episodes</option>
-<option value="50" selected>50 Episodes</option>
+<option value="50">50 Episodes</option>
 <option value="80">80 Episodes</option>
 <option value="100">100 Episodes</option>
 </select>
 
-
-<button onclick="createSeries()">
+<button
+id="createSeriesButton"
+onclick="createSeries()">
 CREATE SERIES
 </button>
 
 </div>
-
 
 <div class="box">
 
@@ -594,10 +589,7 @@ Your saved series will appear here.
 
 </section>
 
-
-<!-- ====================================== -->
 <!-- CHARACTERS -->
-<!-- ====================================== -->
 
 <section
 id="charactersTab"
@@ -614,7 +606,8 @@ Characters created here belong to the selected series and can be reused
 throughout every episode.
 </div>
 
-<div id="selectedSeriesCharacterInfo"
+<div
+id="selectedSeriesCharacterInfo"
 class="planBlock">
 
 <div class="purple">
@@ -627,7 +620,6 @@ No series selected.
 
 </div>
 
-
 <label>
 Character Name
 </label>
@@ -635,7 +627,6 @@ Character Name
 <input
 id="characterName"
 placeholder="Example: Maya Bennett">
-
 
 <label>
 Character Role
@@ -645,7 +636,6 @@ Character Role
 id="characterRole"
 placeholder="Example: Female Lead">
 
-
 <label>
 Appearance
 </label>
@@ -653,7 +643,6 @@ Appearance
 <textarea
 id="characterAppearance"
 placeholder="Hair, face, age, clothing, body appearance..."></textarea>
-
 
 <label>
 Personality
@@ -663,7 +652,6 @@ Personality
 id="characterPersonality"
 placeholder="Describe personality, behavior, speech style and emotional traits..."></textarea>
 
-
 <label>
 Reference Image URL
 </label>
@@ -671,7 +659,6 @@ Reference Image URL
 <input
 id="characterImage"
 placeholder="Optional image URL">
-
 
 <label>
 Voice ID
@@ -681,7 +668,6 @@ Voice ID
 id="characterVoice"
 placeholder="Optional provider voice ID">
 
-
 <label>
 Runway Character ID
 </label>
@@ -690,11 +676,9 @@ Runway Character ID
 id="providerCharacterId"
 placeholder="Optional Runway character ID">
 
-
 <button onclick="addCharacter()">
 ADD CHARACTER
 </button>
-
 
 <div class="divider"></div>
 
@@ -710,10 +694,7 @@ Select a series to view its characters.
 
 </section>
 
-
-<!-- ====================================== -->
 <!-- EPISODES -->
-<!-- ====================================== -->
 
 <section
 id="episodesTab"
@@ -737,7 +718,6 @@ No series selected.
 
 </div>
 
-
 <label>
 Episode Number
 </label>
@@ -748,7 +728,6 @@ type="number"
 min="1"
 value="1">
 
-
 <label>
 Episode Title
 </label>
@@ -756,7 +735,6 @@ Episode Title
 <input
 id="episodeTitle"
 placeholder="Example: The Stranger in the Rain">
-
 
 <label>
 Episode Synopsis
@@ -766,27 +744,23 @@ Episode Synopsis
 id="episodeSynopsis"
 placeholder="What happens in this episode?"></textarea>
 
-
 <label>
 Episode Script
 </label>
 
 <textarea
 id="episodeScript"
-placeholder="Zynora's future AI writer will generate this automatically. For now it can be entered or saved here."></textarea>
-
+placeholder="Episode script can be stored here."></textarea>
 
 <button onclick="saveEpisode()">
 SAVE EPISODE
 </button>
-
 
 <button
 class="secondary"
 onclick="buildEpisodeOne()">
 BUILD EPISODE 1 SAMPLE SCENES
 </button>
-
 
 <div class="divider"></div>
 
@@ -802,10 +776,7 @@ Select a series to view its episodes.
 
 </section>
 
-
-<!-- ====================================== -->
 <!-- PRODUCTION -->
-<!-- ====================================== -->
 
 <section
 id="productionTab"
@@ -822,7 +793,8 @@ Scenes created here can continue using your existing Zynora Runway
 generation function.
 </div>
 
-<div id="productionSeriesName"
+<div
+id="productionSeriesName"
 class="planBlock">
 
 <div class="purple">
@@ -849,32 +821,29 @@ Build an episode first.
 
 </main>
 
-
 <script
 src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
 </script>
 
-
 <script>
-
 
 /* =========================================
    SUPABASE
 ========================================= */
 
-
 const SUPABASE_URL =
 "https://ozshekxpuvganemaajms.supabase.co";
 
-
 const SUPABASE_KEY =
 "sb_publishable__GsW9RahFD_XDWJTFzh9eQ_dNBZfa32";
-
 
 const FUNCTION_URL =
 SUPABASE_URL +
 "/functions/v1/zynora-video";
 
+const DIRECTOR_URL =
+SUPABASE_URL +
+"/functions/v1/zynora-director";
 
 const client =
 supabase.createClient(
@@ -882,13 +851,9 @@ SUPABASE_URL,
 SUPABASE_KEY
 );
 
-
 let currentUser = null;
-
 let currentSeries = null;
-
 let currentSeriesCharacters = [];
-
 let currentEpisodes = [];
 
 const scenes = [];
@@ -898,7 +863,6 @@ const scenes = [];
    START
 ========================================= */
 
-
 async function start(){
 
 try{
@@ -906,10 +870,8 @@ try{
 const result =
 await client.auth.getUser();
 
-
 currentUser =
 result.data.user || null;
-
 
 if(!currentUser){
 
@@ -921,9 +883,7 @@ return;
 
 }
 
-
 await loadSeries();
-
 
 }
 catch(error){
@@ -937,14 +897,12 @@ error.message
 
 }
 
-
 start();
 
 
 /* =========================================
    STATUS
 ========================================= */
-
 
 function show(text){
 
@@ -957,7 +915,6 @@ text;
 box.style.display =
 "block";
 
-
 setTimeout(
 function(){
 
@@ -965,7 +922,7 @@ box.style.display =
 "none";
 
 },
-6000
+8000
 );
 
 }
@@ -974,7 +931,6 @@ box.style.display =
 /* =========================================
    TABS
 ========================================= */
-
 
 function openTab(id,button){
 
@@ -988,7 +944,6 @@ section.classList.remove("active");
 }
 );
 
-
 document
 .querySelectorAll(".tab")
 .forEach(
@@ -999,11 +954,9 @@ tab.classList.remove("active");
 }
 );
 
-
 document
 .getElementById(id)
 .classList.add("active");
-
 
 button
 .classList.add("active");
@@ -1012,9 +965,8 @@ button
 
 
 /* =========================================
-   CREATE SERIES
+   CREATE SERIES WITH ZYNORA DIRECTOR
 ========================================= */
-
 
 async function createSeries(){
 
@@ -1028,13 +980,11 @@ return;
 
 }
 
-
 const title =
 document
 .getElementById("seriesTitle")
 .value
 .trim();
-
 
 const idea =
 document
@@ -1042,12 +992,10 @@ document
 .value
 .trim();
 
-
 const genre =
 document
 .getElementById("genre")
 .value;
-
 
 const episodeLength =
 parseInt(
@@ -1056,25 +1004,12 @@ document
 .value
 );
 
-
 const episodeCount =
 parseInt(
 document
 .getElementById("episodes")
 .value
 );
-
-
-if(!title){
-
-show(
-"Enter a series title."
-);
-
-return;
-
-}
-
 
 if(!idea){
 
@@ -1086,17 +1021,160 @@ return;
 
 }
 
-
-show(
-"Creating your AI series..."
+const createButton =
+document.getElementById(
+"createSeriesButton"
 );
 
+createButton.disabled = true;
 
-const summary =
-`${title} is a ${genre.toLowerCase()} series built from this story idea: ${idea}`;
+createButton.textContent =
+"AI DIRECTOR IS WRITING...";
+
+show(
+"Zynora AI Director is creating your series..."
+);
+
+try{
+
+const sessionResult =
+await client.auth.getSession();
+
+const session =
+sessionResult.data.session;
+
+if(!session){
+
+throw new Error(
+"Your login session expired. Please log in again."
+);
+
+}
+
+/* CALL ZYNORA DIRECTOR */
+
+const directorResponse =
+await fetch(
+DIRECTOR_URL,
+{
+
+method:
+"POST",
+
+headers:{
+
+"Content-Type":
+"application/json",
+
+"apikey":
+SUPABASE_KEY,
+
+"Authorization":
+"Bearer " +
+session.access_token
+
+},
+
+body:
+JSON.stringify({
+
+action:
+"series_plan",
+
+title:
+title,
+
+storyIdea:
+idea,
+
+genre:
+genre,
+
+episodeCount:
+episodeCount,
+
+episodeLength:
+episodeLength
+
+})
+
+}
+);
+
+let directorData;
+
+try{
+
+directorData =
+await directorResponse.json();
+
+}
+catch(error){
+
+throw new Error(
+"Zynora Director returned an unreadable response."
+);
+
+}
+
+if(!directorResponse.ok){
+
+console.error(
+"Director error:",
+directorData
+);
+
+throw new Error(
+directorData.details ||
+directorData.error ||
+"Zynora AI Director request failed."
+);
+
+}
+
+if(
+!directorData.success ||
+!directorData.director
+){
+
+throw new Error(
+"Zynora Director returned an invalid series plan."
+);
+
+}
+
+const plan =
+directorData.director;
+
+const generatedSeries =
+plan.series || {};
+
+const generatedCharacters =
+Array.isArray(plan.characters)
+? plan.characters
+: [];
+
+const generatedEpisodes =
+Array.isArray(plan.episodes)
+? plan.episodes
+: [];
 
 
-const result =
+/* =========================================
+   SAVE SERIES
+========================================= */
+
+const finalTitle =
+generatedSeries.title ||
+title ||
+"Untitled Zynora Series";
+
+const finalSummary =
+generatedSeries.summary ||
+generatedSeries.logline ||
+idea;
+
+const seriesResult =
 await client
 .from("ai_series")
 .insert({
@@ -1105,16 +1183,17 @@ user_id:
 currentUser.id,
 
 title:
-title,
+finalTitle,
 
 genre:
+generatedSeries.genre ||
 genre,
 
 story_idea:
 idea,
 
 series_summary:
-summary,
+finalSummary,
 
 episode_count:
 episodeCount,
@@ -1123,47 +1202,266 @@ episode_length:
 episodeLength,
 
 status:
-"draft"
+"planned"
 
 })
 .select()
 .single();
 
+if(seriesResult.error){
 
-if(result.error){
-
-show(
-"Unable to create series: " +
-result.error.message
+throw new Error(
+"AI created the plan, but Zynora could not save the series: " +
+seriesResult.error.message
 );
 
-return;
+}
+
+currentSeries =
+seriesResult.data;
+
+
+/* =========================================
+   SAVE AI CHARACTERS
+========================================= */
+
+if(generatedCharacters.length){
+
+const characterRows =
+generatedCharacters.map(
+function(character){
+
+const descriptionParts = [
+
+character.goal
+? "Goal: " + character.goal
+: "",
+
+character.secret
+? "Secret: " + character.secret
+: "",
+
+character.relationshipNotes
+? "Relationships: " +
+character.relationshipNotes
+: "",
+
+character.voiceStyle
+? "Voice style: " +
+character.voiceStyle
+: ""
+
+]
+.filter(Boolean);
+
+return {
+
+series_id:
+currentSeries.id,
+
+user_id:
+currentUser.id,
+
+name:
+character.name ||
+"Unnamed Character",
+
+role:
+character.role ||
+null,
+
+description:
+descriptionParts.join("\n\n") ||
+null,
+
+personality:
+character.personality ||
+null,
+
+appearance:
+character.appearance ||
+null,
+
+wardrobe:
+character.wardrobe ||
+null,
+
+provider:
+null,
+
+provider_character_id:
+null
+
+};
+
+}
+);
+
+const characterResult =
+await client
+.from(
+"ai_series_characters"
+)
+.insert(
+characterRows
+);
+
+if(characterResult.error){
+
+console.error(
+"Character save error:",
+characterResult.error
+);
+
+throw new Error(
+"Series was saved, but its AI characters could not be saved: " +
+characterResult.error.message
+);
+
+}
 
 }
 
 
-currentSeries =
-result.data;
+/* =========================================
+   SAVE AI EPISODE ROADMAP
+========================================= */
 
+if(generatedEpisodes.length){
 
-show(
-title +
-" created successfully."
+const episodeRows =
+generatedEpisodes.map(
+function(episode,index){
+
+const number =
+Number(
+episode.episodeNumber
+) ||
+(index + 1);
+
+const synopsisParts = [
+
+episode.synopsis ||
+"",
+
+episode.openingHook
+? "Opening Hook: " +
+episode.openingHook
+: "",
+
+episode.majorConflict
+? "Major Conflict: " +
+episode.majorConflict
+: "",
+
+episode.cliffhanger
+? "Cliffhanger: " +
+episode.cliffhanger
+: ""
+
+]
+.filter(Boolean);
+
+return {
+
+series_id:
+currentSeries.id,
+
+user_id:
+currentUser.id,
+
+episode_number:
+number,
+
+title:
+episode.title ||
+`Episode ${number}`,
+
+synopsis:
+synopsisParts.join("\n\n"),
+
+script:
+null,
+
+status:
+"planned"
+
+};
+
+}
 );
 
+const episodeResult =
+await client
+.from(
+"ai_series_episodes"
+)
+.insert(
+episodeRows
+);
 
-document
-.getElementById("seriesTitle")
-.value =
-"";
+if(episodeResult.error){
 
+console.error(
+"Episode save error:",
+episodeResult.error
+);
+
+throw new Error(
+"Series and characters were saved, but the episode roadmap could not be saved: " +
+episodeResult.error.message
+);
+
+}
+
+}
+
+
+/* =========================================
+   FINISH CREATE SERIES
+========================================= */
 
 await loadSeries();
-
 
 await selectSeries(
 currentSeries.id
 );
+
+document
+.getElementById(
+"seriesTitle"
+)
+.value =
+"";
+
+show(
+finalTitle +
+" was created by Zynora AI Director! 🎬"
+);
+
+}
+catch(error){
+
+console.error(
+"Create Series Error:",
+error
+);
+
+show(
+"Director error: " +
+error.message
+);
+
+}
+finally{
+
+createButton.disabled =
+false;
+
+createButton.textContent =
+"CREATE SERIES";
+
+}
 
 }
 
@@ -1172,13 +1470,11 @@ currentSeries.id
    LOAD SERIES
 ========================================= */
 
-
 async function loadSeries(){
 
 if(!currentUser){
 return;
 }
-
 
 const result =
 await client
@@ -1195,7 +1491,6 @@ ascending:false
 }
 );
 
-
 if(result.error){
 
 show(
@@ -1206,7 +1501,6 @@ result.error.message
 return;
 
 }
-
 
 renderSeriesList(
 result.data || []
@@ -1219,7 +1513,6 @@ result.data || []
    RENDER SERIES
 ========================================= */
 
-
 function renderSeriesList(list){
 
 const area =
@@ -1227,10 +1520,8 @@ document.getElementById(
 "seriesList"
 );
 
-
 area.innerHTML =
 "";
-
 
 if(!list.length){
 
@@ -1245,17 +1536,14 @@ return;
 
 }
 
-
 list.forEach(
 function(series){
 
 const card =
 document.createElement("div");
 
-
 card.className =
 "seriesCard";
-
 
 card.innerHTML =
 `
@@ -1297,7 +1585,6 @@ OPEN SERIES
 </button>
 `;
 
-
 area.appendChild(card);
 
 });
@@ -1308,7 +1595,6 @@ area.appendChild(card);
 /* =========================================
    SELECT SERIES
 ========================================= */
-
 
 async function selectSeries(id){
 
@@ -1322,7 +1608,6 @@ id
 )
 .single();
 
-
 if(result.error){
 
 show(
@@ -1333,10 +1618,8 @@ return;
 
 }
 
-
 currentSeries =
 result.data;
-
 
 document
 .getElementById(
@@ -1345,14 +1628,12 @@ document
 .textContent =
 currentSeries.title;
 
-
 document
 .getElementById(
 "episodeSeriesName"
 )
 .textContent =
 currentSeries.title;
-
 
 document
 .getElementById(
@@ -1361,11 +1642,9 @@ document
 .textContent =
 currentSeries.title;
 
-
 await loadCharacters();
 
 await loadEpisodes();
-
 
 show(
 currentSeries.title +
@@ -1379,7 +1658,6 @@ currentSeries.title +
    ADD CHARACTER
 ========================================= */
 
-
 async function addCharacter(){
 
 if(!currentUser){
@@ -1392,7 +1670,6 @@ return;
 
 }
 
-
 if(!currentSeries){
 
 show(
@@ -1403,13 +1680,11 @@ return;
 
 }
 
-
 const name =
 document
 .getElementById("characterName")
 .value
 .trim();
-
 
 const role =
 document
@@ -1417,13 +1692,11 @@ document
 .value
 .trim();
 
-
 const appearance =
 document
 .getElementById("characterAppearance")
 .value
 .trim();
-
 
 const personality =
 document
@@ -1431,13 +1704,11 @@ document
 .value
 .trim();
 
-
 const image =
 document
 .getElementById("characterImage")
 .value
 .trim();
-
 
 const voice =
 document
@@ -1445,13 +1716,11 @@ document
 .value
 .trim();
 
-
 const providerCharacterId =
 document
 .getElementById("providerCharacterId")
 .value
 .trim();
-
 
 if(!name){
 
@@ -1463,7 +1732,6 @@ return;
 
 }
 
-
 const description =
 [
 role,
@@ -1471,7 +1739,6 @@ appearance
 ]
 .filter(Boolean)
 .join(". ");
-
 
 const result =
 await client
@@ -1515,7 +1782,6 @@ providerCharacterId || null
 
 });
 
-
 if(result.error){
 
 show(
@@ -1527,12 +1793,9 @@ return;
 
 }
 
-
 clearCharacterForm();
 
-
 await loadCharacters();
-
 
 show(
 name +
@@ -1548,7 +1811,6 @@ currentSeries.title +
    CLEAR CHARACTER FORM
 ========================================= */
 
-
 function clearCharacterForm(){
 
 document
@@ -1558,14 +1820,12 @@ document
 .value =
 "";
 
-
 document
 .getElementById(
 "characterRole"
 )
 .value =
 "";
-
 
 document
 .getElementById(
@@ -1574,14 +1834,12 @@ document
 .value =
 "";
 
-
 document
 .getElementById(
 "characterPersonality"
 )
 .value =
 "";
-
 
 document
 .getElementById(
@@ -1590,14 +1848,12 @@ document
 .value =
 "";
 
-
 document
 .getElementById(
 "characterVoice"
 )
 .value =
 "";
-
 
 document
 .getElementById(
@@ -1613,13 +1869,11 @@ document
    LOAD CHARACTERS
 ========================================= */
 
-
 async function loadCharacters(){
 
 if(!currentSeries){
 return;
 }
-
 
 const result =
 await client
@@ -1638,7 +1892,6 @@ ascending:true
 }
 );
 
-
 if(result.error){
 
 show(
@@ -1649,10 +1902,8 @@ return;
 
 }
 
-
 currentSeriesCharacters =
 result.data || [];
-
 
 renderCharacters();
 
@@ -1663,7 +1914,6 @@ renderCharacters();
    RENDER CHARACTERS
 ========================================= */
 
-
 function renderCharacters(){
 
 const area =
@@ -1671,10 +1921,8 @@ document.getElementById(
 "characters"
 );
 
-
 area.innerHTML =
 "";
-
 
 if(
 !currentSeriesCharacters.length
@@ -1691,14 +1939,11 @@ return;
 
 }
 
-
 const grid =
 document.createElement("div");
 
-
 grid.className =
 "cast-grid";
-
 
 currentSeriesCharacters
 .forEach(
@@ -1707,10 +1952,8 @@ function(person,index){
 const card =
 document.createElement("div");
 
-
 card.className =
 "cast-card";
-
 
 card.innerHTML =
 `
@@ -1761,11 +2004,9 @@ REMOVE CHARACTER
 </button>
 `;
 
-
 grid.appendChild(card);
 
 });
-
 
 area.appendChild(grid);
 
@@ -1776,7 +2017,6 @@ area.appendChild(grid);
    DELETE CHARACTER
 ========================================= */
 
-
 async function deleteCharacter(id){
 
 if(!confirm(
@@ -1784,7 +2024,6 @@ if(!confirm(
 )){
 return;
 }
-
 
 const result =
 await client
@@ -1797,7 +2036,6 @@ await client
 id
 );
 
-
 if(result.error){
 
 show(
@@ -1808,9 +2046,7 @@ return;
 
 }
 
-
 await loadCharacters();
-
 
 show(
 "Character removed."
@@ -1822,7 +2058,6 @@ show(
 /* =========================================
    SAVE EPISODE
 ========================================= */
-
 
 async function saveEpisode(){
 
@@ -1836,7 +2071,6 @@ return;
 
 }
 
-
 if(!currentSeries){
 
 show(
@@ -1847,7 +2081,6 @@ return;
 
 }
 
-
 const number =
 parseInt(
 document
@@ -1857,7 +2090,6 @@ document
 .value
 );
 
-
 const title =
 document
 .getElementById(
@@ -1865,7 +2097,6 @@ document
 )
 .value
 .trim();
-
 
 const synopsis =
 document
@@ -1875,7 +2106,6 @@ document
 .value
 .trim();
 
-
 const script =
 document
 .getElementById(
@@ -1883,7 +2113,6 @@ document
 )
 .value
 .trim();
-
 
 if(!number || number < 1){
 
@@ -1894,7 +2123,6 @@ show(
 return;
 
 }
-
 
 const result =
 await client
@@ -1933,7 +2161,6 @@ onConflict:
 }
 );
 
-
 if(result.error){
 
 show(
@@ -1945,9 +2172,7 @@ return;
 
 }
 
-
 await loadEpisodes();
-
 
 show(
 `Episode ${number} saved.`
@@ -1960,13 +2185,11 @@ show(
    LOAD EPISODES
 ========================================= */
 
-
 async function loadEpisodes(){
 
 if(!currentSeries){
 return;
 }
-
 
 const result =
 await client
@@ -1985,7 +2208,6 @@ ascending:true
 }
 );
 
-
 if(result.error){
 
 show(
@@ -1996,10 +2218,8 @@ return;
 
 }
 
-
 currentEpisodes =
 result.data || [];
-
 
 renderEpisodes();
 
@@ -2010,7 +2230,6 @@ renderEpisodes();
    RENDER EPISODES
 ========================================= */
 
-
 function renderEpisodes(){
 
 const area =
@@ -2018,10 +2237,8 @@ document.getElementById(
 "episodeList"
 );
 
-
 area.innerHTML =
 "";
-
 
 if(!currentEpisodes.length){
 
@@ -2036,7 +2253,6 @@ return;
 
 }
 
-
 currentEpisodes
 .forEach(
 function(episode){
@@ -2044,10 +2260,8 @@ function(episode){
 const card =
 document.createElement("div");
 
-
 card.className =
 "episodeCard";
-
 
 card.innerHTML =
 `
@@ -2078,7 +2292,6 @@ episode.status ||
 </div>
 `;
 
-
 area.appendChild(card);
 
 });
@@ -2089,7 +2302,6 @@ area.appendChild(card);
 /* =========================================
    SAMPLE EPISODE BUILDER
 ========================================= */
-
 
 async function buildEpisodeOne(){
 
@@ -2103,10 +2315,8 @@ return;
 
 }
 
-
 scenes.length =
 0;
-
 
 const castNames =
 currentSeriesCharacters
@@ -2115,18 +2325,15 @@ person => person.name
 )
 .join(", ");
 
-
 const heroOne =
 currentSeriesCharacters[0]
 ? currentSeriesCharacters[0].name
 : "Lead Character";
 
-
 const heroTwo =
 currentSeriesCharacters[1]
 ? currentSeriesCharacters[1].name
 : "Second Lead";
-
 
 scenes.push(
 
@@ -2143,7 +2350,6 @@ prompt:
 
 },
 
-
 {
 
 title:
@@ -2156,7 +2362,6 @@ prompt:
 `Premium cinematic short drama from "${currentSeries.title}". ${heroOne} encounters ${heroTwo} for an important story moment. Use the established permanent character appearances. Maintain facial identity, hairstyle, wardrobe and age continuity. Natural eye movement, physical acting, body language and cinematic camera movement.`
 
 },
-
 
 {
 
@@ -2171,7 +2376,6 @@ prompt:
 
 },
 
-
 {
 
 title:
@@ -2184,7 +2388,6 @@ prompt:
 `Emotional premium streaming drama scene from "${currentSeries.title}". ${heroOne} and ${heroTwo} experience a meaningful emotional turning point. Maintain the same actors and character appearance. Natural facial emotion, believable body language, subtle cinematic movement and realistic lighting.`
 
 },
-
 
 {
 
@@ -2201,12 +2404,9 @@ prompt:
 
 );
 
-
 renderScenes();
 
-
 openProductionTab();
-
 
 show(
 "Episode 1 production scenes are ready."
@@ -2219,7 +2419,6 @@ show(
    OPEN PRODUCTION TAB
 ========================================= */
 
-
 function openProductionTab(){
 
 document
@@ -2229,7 +2428,6 @@ section =>
 section.classList.remove("active")
 );
 
-
 document
 .querySelectorAll(".tab")
 .forEach(
@@ -2237,18 +2435,15 @@ tab =>
 tab.classList.remove("active")
 );
 
-
 document
 .getElementById(
 "productionTab"
 )
 .classList.add("active");
 
-
 document
 .querySelectorAll(".tab")[3]
 .classList.add("active");
-
 
 window.scrollTo({
 top:0,
@@ -2262,7 +2457,6 @@ behavior:"smooth"
    DISPLAY SCENES
 ========================================= */
 
-
 function renderScenes(){
 
 const area =
@@ -2270,10 +2464,8 @@ document.getElementById(
 "scenes"
 );
 
-
 area.innerHTML =
 "";
-
 
 scenes.forEach(
 function(scene,index){
@@ -2281,10 +2473,8 @@ function(scene,index){
 const div =
 document.createElement("div");
 
-
 div.className =
 "scene";
-
 
 div.innerHTML =
 `
@@ -2313,7 +2503,6 @@ ${escapeHtml(scene.prompt)}
 
 </div>
 
-
 <div class="priceBox">
 
 <div class="priceRow">
@@ -2338,7 +2527,6 @@ ${escapeHtml(scene.prompt)}
 
 </div>
 
-
 <button
 id="btn${index}"
 onclick="generateVideo(${index})">
@@ -2347,12 +2535,10 @@ onclick="generateVideo(${index})">
 
 </button>
 
-
 <div
 id="status${index}"
 class="renderStatus">
 </div>
-
 
 <video
 id="video${index}"
@@ -2360,7 +2546,6 @@ controls
 playsinline>
 </video>
 `;
-
 
 area.appendChild(div);
 
@@ -2372,7 +2557,6 @@ area.appendChild(div);
 /* =========================================
    REAL RUNWAY VIDEO
 ========================================= */
-
 
 async function generateVideo(index){
 
@@ -2386,41 +2570,32 @@ return;
 
 }
 
-
 const button =
 document.getElementById(
 "btn" + index
 );
-
 
 const message =
 document.getElementById(
 "status" + index
 );
 
-
 button.disabled =
 true;
-
 
 button.textContent =
 "STARTING...";
 
-
 message.textContent =
 "Sending scene to Zynora AI...";
 
-
 try{
-
 
 const sessionResult =
 await client.auth.getSession();
 
-
 const session =
 sessionResult.data.session;
-
 
 if(!session){
 
@@ -2429,7 +2604,6 @@ throw new Error(
 );
 
 }
-
 
 const response =
 await fetch(
@@ -2476,10 +2650,8 @@ duration:
 }
 );
 
-
 const data =
 await response.json();
-
 
 if(!response.ok){
 
@@ -2491,7 +2663,6 @@ data.message ||
 
 }
 
-
 if(!data.taskId){
 
 throw new Error(
@@ -2500,26 +2671,21 @@ throw new Error(
 
 }
 
-
 button.textContent =
 "GENERATING...";
 
-
 message.textContent =
 "AI video started...";
-
 
 await createGenerationJob(
 index,
 data.taskId
 );
 
-
 await checkVideo(
 index,
 data.taskId
 );
-
 
 }
 catch(error){
@@ -2528,10 +2694,8 @@ message.textContent =
 "Error: " +
 error.message;
 
-
 button.disabled =
 false;
-
 
 button.textContent =
 "TRY AGAIN";
@@ -2545,7 +2709,6 @@ button.textContent =
    SAVE GENERATION JOB
 ========================================= */
 
-
 async function createGenerationJob(
 index,
 taskId
@@ -2557,7 +2720,6 @@ if(
 ){
 return;
 }
-
 
 try{
 
@@ -2613,7 +2775,6 @@ error
    CHECK VIDEO
 ========================================= */
 
-
 async function checkVideo(
 index,
 taskId
@@ -2624,12 +2785,10 @@ document.getElementById(
 "status" + index
 );
 
-
 const button =
 document.getElementById(
 "btn" + index
 );
-
 
 for(
 let i = 1;
@@ -2645,14 +2804,11 @@ resolve,
 )
 );
 
-
 const sessionResult =
 await client.auth.getSession();
 
-
 const session =
 sessionResult.data.session;
-
 
 if(!session){
 
@@ -2661,7 +2817,6 @@ throw new Error(
 );
 
 }
-
 
 const response =
 await fetch(
@@ -2699,10 +2854,8 @@ taskId
 }
 );
 
-
 const data =
 await response.json();
-
 
 if(!response.ok){
 
@@ -2713,18 +2866,15 @@ data.error ||
 
 }
 
-
 const state =
 String(
 data.status || ""
 )
 .toUpperCase();
 
-
 message.textContent =
 "AI generation: " +
 state;
-
 
 if(
 state === "SUCCEEDED"
@@ -2734,7 +2884,6 @@ const url =
 data.output &&
 data.output[0];
 
-
 if(!url){
 
 throw new Error(
@@ -2743,32 +2892,25 @@ throw new Error(
 
 }
 
-
 const video =
 document.getElementById(
 "video" + index
 );
 
-
 video.src =
 url;
-
 
 video.style.display =
 "block";
 
-
 message.textContent =
 "Scene complete! 🎬";
-
 
 button.disabled =
 false;
 
-
 button.textContent =
 "GENERATE AGAIN";
-
 
 await updateGenerationJob(
 taskId,
@@ -2777,11 +2919,9 @@ url,
 null
 );
 
-
 return;
 
 }
-
 
 if(
 state === "FAILED"
@@ -2795,14 +2935,12 @@ data.failure ||
 "AI generation failed."
 );
 
-
 throw new Error(
 data.failure ||
 "AI generation failed."
 );
 
 }
-
 
 if(
 state === "CANCELED"
@@ -2815,7 +2953,6 @@ null,
 "Generation canceled."
 );
 
-
 throw new Error(
 "Generation canceled."
 );
@@ -2823,7 +2960,6 @@ throw new Error(
 }
 
 }
-
 
 throw new Error(
 "Generation took too long."
@@ -2835,7 +2971,6 @@ throw new Error(
 /* =========================================
    UPDATE GENERATION JOB
 ========================================= */
-
 
 async function updateGenerationJob(
 taskId,
@@ -2852,7 +2987,6 @@ status:
 status
 };
 
-
 if(url){
 
 values.output_url =
@@ -2863,14 +2997,12 @@ new Date().toISOString();
 
 }
 
-
 if(error){
 
 values.error_message =
 error;
 
 }
-
 
 await client
 .from(
@@ -2899,7 +3031,6 @@ e
    SAFE TEXT
 ========================================= */
 
-
 function escapeHtml(value){
 
 return String(
@@ -2927,7 +3058,6 @@ value || ""
 );
 
 }
-
 
 </script>
 
