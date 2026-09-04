@@ -416,9 +416,13 @@ return String(value ?? "")
 
 }
 
-function makePlayerURL(dramaTitle,episodeNumber){
+function makePlayerURL(dramaId,dramaTitle,episodeNumber){
 
 const params = new URLSearchParams();
+
+if(dramaId){
+params.set("drama_id",dramaId);
+}
 
 if(dramaTitle){
 params.set("drama",dramaTitle);
@@ -566,6 +570,10 @@ item.drama_title ||
 item.title ||
 "Zynora Drama";
 
+const dramaId=
+item.drama_id ||
+"";
+
 const episode=
 item.episode_number ||
 item.last_episode ||
@@ -580,7 +588,11 @@ item.thumbnail_url ||
 const recordId=item.id;
 
 const watchURL=
-makePlayerURL(title,episode);
+makePlayerURL(
+dramaId,
+title,
+episode
+);
 
 savedPanel.innerHTML+=`
 
@@ -713,6 +725,10 @@ item.drama_title ||
 item.title ||
 "Zynora Drama";
 
+const dramaId=
+item.drama_id ||
+"";
+
 const episode=
 item.episode_number ||
 1;
@@ -741,7 +757,11 @@ infoText+=
 }
 
 const continueURL=
-makePlayerURL(title,episode);
+makePlayerURL(
+dramaId,
+title,
+episode
+);
 
 historyPanel.innerHTML+=`
 
@@ -838,6 +858,10 @@ item.drama_title ||
 item.title ||
 "Zynora Drama";
 
+const dramaId=
+item.drama_id ||
+"";
+
 const episode=
 item.episode_number ||
 item.episode ||
@@ -850,7 +874,11 @@ item.thumbnail_url ||
 "";
 
 const watchURL=
-makePlayerURL(title,episode);
+makePlayerURL(
+dramaId,
+title,
+episode
+);
 
 unlockedPanel.innerHTML+=`
 
