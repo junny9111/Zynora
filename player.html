@@ -26,7 +26,7 @@ radial-gradient(circle at 50% 8%,rgba(145,55,255,.18),transparent 34%),
 #08070c;
 color:white;
 font-family:"Playfair Display",Georgia,serif;
-padding-bottom:100px;
+padding-bottom:110px;
 }
 
 header{
@@ -290,17 +290,24 @@ padding:25px;
 color:#98919f;
 }
 
+
+/* ========================================
+   ZYNORA MASTER 6-BUTTON NAVIGATION
+======================================== */
+
 .bottom-nav{
 position:fixed;
 left:0;
 right:0;
 bottom:0;
 height:90px;
-background:#111016;
+background:rgba(17,16,22,.98);
 display:grid;
-grid-template-columns:repeat(5,1fr);
+grid-template-columns:repeat(6,1fr);
 border-top:1px solid rgba(173,77,255,.2);
-z-index:50;
+z-index:100;
+backdrop-filter:blur(12px);
+-webkit-backdrop-filter:blur(12px);
 }
 
 .nav-item{
@@ -312,11 +319,33 @@ align-items:center;
 justify-content:center;
 gap:5px;
 font-family:"Cinzel",serif;
-font-size:9px;
+font-size:8px;
+transition:.2s ease;
+min-width:0;
 }
 
-.nav-icon{
-font-size:21px;
+.nav-icon-wrap{
+width:37px;
+height:37px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:12px;
+transition:.2s ease;
+}
+
+.nav-icon-wrap svg{
+width:22px;
+height:22px;
+fill:none;
+stroke:currentColor;
+stroke-width:1.9;
+stroke-linecap:round;
+stroke-linejoin:round;
+}
+
+.nav-item:active{
+transform:scale(.96);
 }
 
 @media(max-width:520px){
@@ -331,6 +360,20 @@ font-size:29px;
 
 .title{
 font-size:23px;
+}
+
+.nav-item{
+font-size:7px;
+}
+
+.nav-icon-wrap{
+width:35px;
+height:35px;
+}
+
+.nav-icon-wrap svg{
+width:21px;
+height:21px;
 }
 
 }
@@ -442,34 +485,117 @@ Loading episodes...
 
 </main>
 
+
 <nav class="bottom-nav">
 
 <a href="index.html" class="nav-item">
-<span class="nav-icon">⌂</span>
+
+<span class="nav-icon-wrap">
+
+<svg viewBox="0 0 24 24">
+<path d="M3 10.5 12 3l9 7.5"></path>
+<path d="M5 9.5V21h14V9.5"></path>
+<path d="M9 21v-6h6v6"></path>
+</svg>
+
+</span>
+
 Home
+
 </a>
+
 
 <a href="discover.html" class="nav-item">
-<span class="nav-icon">◉</span>
+
+<span class="nav-icon-wrap">
+
+<svg viewBox="0 0 24 24">
+<circle cx="12" cy="12" r="9"></circle>
+<path d="m15.5 8.5-2.2 4.8-4.8 2.2 2.2-4.8 4.8-2.2z"></path>
+</svg>
+
+</span>
+
 Discover
+
 </a>
+
 
 <a href="rewards.html" class="nav-item">
-<span class="nav-icon">🎁</span>
+
+<span class="nav-icon-wrap">
+
+<svg viewBox="0 0 24 24">
+<path d="M4 9h16v11H4z"></path>
+<path d="M3 9h18V5H3z"></path>
+<path d="M12 5v15"></path>
+<path d="M12 5H8.5C7.1 5 6 4.1 6 3s1-2 2.3-2C10.4 1 12 5 12 5z"></path>
+<path d="M12 5h3.5C16.9 5 18 4.1 18 3s-1-2-2.3-2C13.6 1 12 5 12 5z"></path>
+</svg>
+
+</span>
+
 Rewards
+
 </a>
+
+
+<a href="ai-series-studio.html" class="nav-item">
+
+<span class="nav-icon-wrap">
+
+<svg viewBox="0 0 24 24">
+<circle cx="12" cy="12" r="4"></circle>
+<path d="M12 2v3"></path>
+<path d="M12 19v3"></path>
+<path d="M2 12h3"></path>
+<path d="M19 12h3"></path>
+<path d="m4.9 4.9 2.1 2.1"></path>
+<path d="m17 17 2.1 2.1"></path>
+<path d="m19.1 4.9-2.1 2.1"></path>
+<path d="m7 17-2.1 2.1"></path>
+</svg>
+
+</span>
+
+AI Studio
+
+</a>
+
 
 <a href="library.html" class="nav-item">
-<span class="nav-icon">▣</span>
+
+<span class="nav-icon-wrap">
+
+<svg viewBox="0 0 24 24">
+<rect x="4" y="4" width="16" height="16" rx="2"></rect>
+<path d="m10 8 6 4-6 4z"></path>
+</svg>
+
+</span>
+
 Library
+
 </a>
 
+
 <a href="profile.html" class="nav-item">
-<span class="nav-icon">●</span>
+
+<span class="nav-icon-wrap">
+
+<svg viewBox="0 0 24 24">
+<circle cx="12" cy="8" r="4"></circle>
+<path d="M4.5 21c.8-4 3.4-6 7.5-6s6.7 2 7.5 6"></path>
+</svg>
+
+</span>
+
 Profile
+
 </a>
 
 </nav>
+
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -723,9 +849,6 @@ dramaId
 
 /* ==========================================
    LOAD COINS
-
-   SAME WALLET USED BY LIBRARY,
-   PROFILE AND REWARDS
 ========================================== */
 
 async function loadCoins(){
@@ -1407,14 +1530,6 @@ String(ep.id)
 );
 
 
-/*
-Reload the wallet from Supabase instead
-of trusting a value returned by the RPC.
-
-This keeps Player, Rewards, Library
-and Profile synchronized.
-*/
-
 await loadCoins();
 
 
@@ -1477,16 +1592,6 @@ showMessage(
 return;
 
 }
-
-
-/*
-IMPORTANT:
-
-The episode must NOT be unlocked
-until the real advertising provider
-confirms that the rewarded ad
-was completed.
-*/
 
 
 button.disabled =
@@ -1626,21 +1731,6 @@ ep
 }
 
 
-/*
-Future ad provider example:
-
-window.zynoraRewardedAdCompleted({
-
-episodeId:"EPISODE-ID",
-
-provider:"GOOGLE",
-
-eventId:"UNIQUE-EVENT-ID"
-
-});
-
-*/
-
 window.zynoraRewardedAdCompleted =
 async function(data){
 
@@ -1735,8 +1825,6 @@ currentEpisode =
 ep;
 
 
-/* REMEMBER CURRENT DRAMA */
-
 if(ep.drama_id){
 
 dramaId =
@@ -1769,8 +1857,6 @@ ep.drama_title;
 
 }
 
-
-/* REMEMBER LAST EPISODE */
 
 localStorage.setItem(
 "zynoraLastEpisode",
@@ -1818,8 +1904,6 @@ console.log(
 }
 
 
-/* SAVE HISTORY */
-
 if(user){
 
 await saveWatchHistory(
@@ -1833,11 +1917,6 @@ ep
 
 /* ==========================================
    SAVE / UPDATE WATCH HISTORY
-
-   Keeps one recent history record
-   per drama instead of making a
-   new duplicate every time Play
-   is pressed.
 ========================================== */
 
 async function saveWatchHistory(ep){
@@ -2078,7 +2157,7 @@ block:"center"
 
 
 /* ==========================================
-   REFRESH BALANCES WHEN USER RETURNS
+   REFRESH
 ========================================== */
 
 document.addEventListener(
