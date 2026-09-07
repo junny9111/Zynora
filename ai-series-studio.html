@@ -395,9 +395,7 @@ margin:18px 0;
 }
 
 
-/* =========================================
-   ZYNORA MASTER 6-BUTTON NAVIGATION
-========================================= */
+/* MASTER NAV */
 
 .bottom-nav{
 position:fixed;
@@ -469,11 +467,6 @@ box-shadow:
 transform:scale(.96);
 }
 
-
-/* =========================================
-   MOBILE
-========================================= */
-
 @media(max-width:560px){
 
 .grid2{
@@ -523,9 +516,7 @@ Zynora AI Series Studio
 
 <main>
 
-<h1>
-Create AI Series
-</h1>
+<h1>Create AI Series</h1>
 
 <div class="sub">
 One story idea → permanent characters → episodes → scenes → real AI video.
@@ -535,9 +526,7 @@ One story idea → permanent characters → episodes → scenes → real AI vide
 
 <div class="box hero">
 
-<h2>
-Zynora AI Director
-</h2>
+<h2>Zynora AI Director</h2>
 
 <p>
 Create an entire drama universe once. Zynora keeps your characters,
@@ -567,27 +556,19 @@ PRODUCTION
 </div>
 
 
-<!-- SERIES -->
-
 <section id="series" class="section active">
 
 <div class="box">
 
-<h2>
-Create New Series
-</h2>
+<h2>Create New Series</h2>
 
-<label>
-Series Title
-</label>
+<label>Series Title</label>
 
 <input
 id="seriesTitle"
 placeholder="Example: The Billionaire's Secret">
 
-<label>
-Story Idea
-</label>
+<label>Story Idea</label>
 
 <textarea
 id="idea"
@@ -597,9 +578,7 @@ placeholder="Describe your series...">A hardworking young woman unexpectedly mee
 
 <div>
 
-<label>
-Genre
-</label>
+<label>Genre</label>
 
 <select id="genre">
 <option>Romance</option>
@@ -616,9 +595,7 @@ Genre
 
 <div>
 
-<label>
-Episode Length
-</label>
+<label>Episode Length</label>
 
 <select id="length">
 <option value="3">3 Minutes</option>
@@ -631,9 +608,7 @@ Episode Length
 
 </div>
 
-<label>
-Number of Episodes
-</label>
+<label>Number of Episodes</label>
 
 <select id="episodes">
 <option value="1" selected>1 Episode — Test</option>
@@ -655,16 +630,12 @@ CREATE SERIES
 
 <div class="box">
 
-<h2>
-My AI Series
-</h2>
+<h2>My AI Series</h2>
 
 <div id="seriesList">
-
 <div class="empty">
 Your saved series will appear here.
 </div>
-
 </div>
 
 </div>
@@ -672,26 +643,19 @@ Your saved series will appear here.
 </section>
 
 
-<!-- CHARACTERS -->
-
 <section id="charactersTab" class="section">
 
 <div class="box">
 
-<h2>
-Permanent Series Characters
-</h2>
+<h2>Permanent Series Characters</h2>
 
 <div class="mini">
-Characters created here belong to the selected series and can be reused
-throughout every episode.
+Characters created here belong to the selected series and can be reused throughout every episode.
 </div>
 
 <div id="selectedSeriesCharacterInfo" class="planBlock">
 
-<div class="purple">
-SELECTED SERIES
-</div>
+<div class="purple">SELECTED SERIES</div>
 
 <div id="characterSeriesName">
 No series selected.
@@ -699,57 +663,43 @@ No series selected.
 
 </div>
 
-<label>
-Character Name
-</label>
+<label>Character Name</label>
 
 <input
 id="characterName"
 placeholder="Example: Maya Bennett">
 
-<label>
-Character Role
-</label>
+<label>Character Role</label>
 
 <input
 id="characterRole"
 placeholder="Example: Female Lead">
 
-<label>
-Appearance
-</label>
+<label>Appearance</label>
 
 <textarea
 id="characterAppearance"
 placeholder="Hair, face, age, clothing, body appearance..."></textarea>
 
-<label>
-Personality
-</label>
+<label>Personality</label>
 
 <textarea
 id="characterPersonality"
 placeholder="Describe personality, behavior, speech style and emotional traits..."></textarea>
 
-<label>
-Reference Image URL
-</label>
+<label>Reference Image URL</label>
 
 <input
 id="characterImage"
 placeholder="Optional image URL">
 
-<label>
-Voice ID
-</label>
+<label>Voice ID</label>
 
 <input
 id="characterVoice"
 placeholder="Optional provider voice ID">
 
-<label>
-Runway Character ID
-</label>
+<label>Runway Character ID</label>
 
 <input
 id="providerCharacterId"
@@ -774,15 +724,11 @@ Select a series to view its characters.
 </section>
 
 
-<!-- EPISODES -->
-
 <section id="episodesTab" class="section">
 
 <div class="box">
 
-<h2>
-Episode Generator
-</h2>
+<h2>Episode Generator</h2>
 
 <div class="planBlock">
 
@@ -796,9 +742,7 @@ No series selected.
 
 </div>
 
-<label>
-Episode Number
-</label>
+<label>Episode Number</label>
 
 <input
 id="episodeNumber"
@@ -806,25 +750,19 @@ type="number"
 min="1"
 value="1">
 
-<label>
-Episode Title
-</label>
+<label>Episode Title</label>
 
 <input
 id="episodeTitle"
 placeholder="Example: The Stranger in the Rain">
 
-<label>
-Episode Synopsis
-</label>
+<label>Episode Synopsis</label>
 
 <textarea
 id="episodeSynopsis"
 placeholder="What happens in this episode?"></textarea>
 
-<label>
-Episode Script
-</label>
+<label>Episode Script</label>
 
 <textarea
 id="episodeScript"
@@ -855,19 +793,14 @@ Select a series to view its episodes.
 </section>
 
 
-<!-- PRODUCTION -->
-
 <section id="productionTab" class="section">
 
 <div class="box">
 
-<h2>
-AI Production Queue
-</h2>
+<h2>AI Production Queue</h2>
 
 <div class="mini">
-Scenes created here can continue using your existing Zynora Runway
-generation function.
+Scenes created here can continue using your existing Zynora Runway generation function.
 </div>
 
 <div id="productionSeriesName" class="planBlock">
@@ -897,16 +830,9 @@ Build an episode first.
 </main>
 
 
-<!-- =========================================
-     MASTER 6-BUTTON ZYNORA NAVIGATION
-========================================= -->
-
 <nav class="bottom-nav">
 
-<!-- HOME -->
-
 <a href="index.html" class="nav-item">
-
 <span class="nav-icon-wrap">
 <svg viewBox="0 0 24 24">
 <path d="M3 10.5 12 3l9 7.5"></path>
@@ -914,32 +840,20 @@ Build an episode first.
 <path d="M9 21v-6h6v6"></path>
 </svg>
 </span>
-
 Home
-
 </a>
 
-
-<!-- DISCOVER -->
-
 <a href="discover.html" class="nav-item">
-
 <span class="nav-icon-wrap">
 <svg viewBox="0 0 24 24">
 <circle cx="12" cy="12" r="9"></circle>
 <path d="m15.5 8.5-2.2 4.8-4.8 2.2 2.2-4.8 4.8-2.2z"></path>
 </svg>
 </span>
-
 Discover
-
 </a>
 
-
-<!-- REWARDS -->
-
 <a href="rewards.html" class="nav-item">
-
 <span class="nav-icon-wrap">
 <svg viewBox="0 0 24 24">
 <path d="M4 9h16v11H4z"></path>
@@ -949,83 +863,52 @@ Discover
 <path d="M12 5h3.5C16.9 5 18 4.1 18 3s-1-2-2.3-2C13.6 1 12 5 12 5z"></path>
 </svg>
 </span>
-
 Rewards
-
 </a>
 
-
-<!-- AI STUDIO -->
-
 <a href="ai-series-studio.html" class="nav-item active">
-
 <span class="nav-icon-wrap">
 <svg viewBox="0 0 24 24">
-
 <circle cx="12" cy="12" r="4"></circle>
-
 <path d="M12 2v3"></path>
 <path d="M12 19v3"></path>
 <path d="M2 12h3"></path>
 <path d="M19 12h3"></path>
-
 <path d="m4.9 4.9 2.1 2.1"></path>
 <path d="m17 17 2.1 2.1"></path>
-
 <path d="m19.1 4.9-2.1 2.1"></path>
 <path d="m7 17-2.1 2.1"></path>
-
 </svg>
 </span>
-
 AI Studio
-
 </a>
 
-
-<!-- LIBRARY -->
-
 <a href="library.html" class="nav-item">
-
 <span class="nav-icon-wrap">
 <svg viewBox="0 0 24 24">
 <rect x="4" y="4" width="16" height="16" rx="2"></rect>
 <path d="m10 8 6 4-6 4z"></path>
 </svg>
 </span>
-
 Library
-
 </a>
 
-
-<!-- PROFILE -->
-
 <a href="profile.html" class="nav-item">
-
 <span class="nav-icon-wrap">
 <svg viewBox="0 0 24 24">
 <circle cx="12" cy="8" r="4"></circle>
 <path d="M4.5 21c.8-4 3.4-6 7.5-6s6.7 2 7.5 6"></path>
 </svg>
 </span>
-
 Profile
-
 </a>
 
 </nav>
 
 
-<script
-src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
-</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
-
-/* =========================================
-   SUPABASE
-========================================= */
 
 const SUPABASE_URL =
 "https://ozshekxpuvganemaajms.supabase.co";
@@ -1055,9 +938,7 @@ let currentEpisodes = [];
 const scenes = [];
 
 
-/* =========================================
-   START
-========================================= */
+/* START */
 
 async function start(){
 
@@ -1096,9 +977,7 @@ error.message
 start();
 
 
-/* =========================================
-   STATUS
-========================================= */
+/* STATUS */
 
 function show(text){
 
@@ -1111,6 +990,11 @@ text;
 box.style.display =
 "block";
 
+clearTimeout(
+window.zynoraStatusTimer
+);
+
+window.zynoraStatusTimer =
 setTimeout(
 function(){
 
@@ -1124,9 +1008,7 @@ box.style.display =
 }
 
 
-/* =========================================
-   TABS
-========================================= */
+/* TABS */
 
 function openTab(id,button){
 
@@ -1150,68 +1032,81 @@ tab.classList.remove("active");
 }
 );
 
-document
-.getElementById(id)
-.classList.add("active");
+const section =
+document.getElementById(id);
 
-button
-.classList.add("active");
+if(section){
+
+section.classList.add("active");
+
+}
+
+if(button){
+
+button.classList.add("active");
+
+}
 
 }
 
 
-/* =========================================
-   CREATE SERIES WITH ZYNORA DIRECTOR
-========================================= */
+/* OPEN CHARACTER TAB */
+
+function openCharactersTab(){
+
+const characterTab =
+document.querySelectorAll(".tab")[1];
+
+openTab(
+"charactersTab",
+characterTab
+);
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+}
+
+
+/* CREATE SERIES */
 
 async function createSeries(){
 
 if(!currentUser){
 
-show(
-"Please log in first."
-);
+show("Please log in first.");
 
 return;
 
 }
 
 const title =
-document
-.getElementById("seriesTitle")
-.value
-.trim();
+document.getElementById("seriesTitle")
+.value.trim();
 
 const idea =
-document
-.getElementById("idea")
-.value
-.trim();
+document.getElementById("idea")
+.value.trim();
 
 const genre =
-document
-.getElementById("genre")
+document.getElementById("genre")
 .value;
 
 const episodeLength =
 parseInt(
-document
-.getElementById("length")
-.value
+document.getElementById("length").value
 );
 
 const episodeCount =
 parseInt(
-document
-.getElementById("episodes")
-.value
+document.getElementById("episodes").value
 );
 
 if(!idea){
 
-show(
-"Enter your story idea."
-);
+show("Enter your story idea.");
 
 return;
 
@@ -1251,44 +1146,30 @@ const directorResponse =
 await fetch(
 DIRECTOR_URL,
 {
-
-method:
-"POST",
+method:"POST",
 
 headers:{
-
-"Content-Type":
-"application/json",
-
-"apikey":
-SUPABASE_KEY,
-
+"Content-Type":"application/json",
+"apikey":SUPABASE_KEY,
 "Authorization":
 "Bearer " +
 session.access_token
-
 },
 
 body:
 JSON.stringify({
 
-action:
-"series_plan",
+action:"series_plan",
 
-title:
-title,
+title:title,
 
-storyIdea:
-idea,
+storyIdea:idea,
 
-genre:
-genre,
+genre:genre,
 
-episodeCount:
-episodeCount,
+episodeCount:episodeCount,
 
-episodeLength:
-episodeLength
+episodeLength:episodeLength
 
 })
 
@@ -1354,10 +1235,6 @@ Array.isArray(plan.episodes)
 : [];
 
 
-/* =========================================
-   SAVE SERIES
-========================================= */
-
 const finalTitle =
 generatedSeries.title ||
 title ||
@@ -1367,6 +1244,7 @@ const finalSummary =
 generatedSeries.summary ||
 generatedSeries.logline ||
 idea;
+
 
 const seriesResult =
 await client
@@ -1402,6 +1280,7 @@ status:
 .select()
 .single();
 
+
 if(seriesResult.error){
 
 throw new Error(
@@ -1415,9 +1294,7 @@ currentSeries =
 seriesResult.data;
 
 
-/* =========================================
-   SAVE AI CHARACTERS
-========================================= */
+/* SAVE CHARACTERS */
 
 if(generatedCharacters.length){
 
@@ -1502,11 +1379,6 @@ characterRows
 
 if(characterResult.error){
 
-console.error(
-"Character save error:",
-characterResult.error
-);
-
 throw new Error(
 "Series was saved, but its AI characters could not be saved: " +
 characterResult.error.message
@@ -1517,9 +1389,7 @@ characterResult.error.message
 }
 
 
-/* =========================================
-   SAVE AI EPISODE ROADMAP
-========================================= */
+/* SAVE EPISODE ROADMAP */
 
 if(generatedEpisodes.length){
 
@@ -1535,8 +1405,7 @@ episode.episodeNumber
 
 const synopsisParts = [
 
-episode.synopsis ||
-"",
+episode.synopsis || "",
 
 episode.openingHook
 ? "Opening Hook: " +
@@ -1596,11 +1465,6 @@ episodeRows
 
 if(episodeResult.error){
 
-console.error(
-"Episode save error:",
-episodeResult.error
-);
-
 throw new Error(
 "Series and characters were saved, but the episode roadmap could not be saved: " +
 episodeResult.error.message
@@ -1611,22 +1475,20 @@ episodeResult.error.message
 }
 
 
-/* =========================================
-   FINISH CREATE SERIES
-========================================= */
+const createdSeriesId =
+currentSeries.id;
 
 await loadSeries();
 
 await selectSeries(
-currentSeries.id
+createdSeriesId,
+true
 );
 
 document
 .getElementById(
 "seriesTitle"
-)
-.value =
-"";
+).value = "";
 
 show(
 finalTitle +
@@ -1660,9 +1522,7 @@ createButton.textContent =
 }
 
 
-/* =========================================
-   LOAD SERIES
-========================================= */
+/* LOAD SERIES */
 
 async function loadSeries(){
 
@@ -1703,9 +1563,7 @@ result.data || []
 }
 
 
-/* =========================================
-   RENDER SERIES
-========================================= */
+/* RENDER SERIES */
 
 function renderSeriesList(list){
 
@@ -1714,8 +1572,7 @@ document.getElementById(
 "seriesList"
 );
 
-area.innerHTML =
-"";
+area.innerHTML = "";
 
 if(!list.length){
 
@@ -1739,58 +1596,168 @@ document.createElement("div");
 card.className =
 "seriesCard";
 
-card.innerHTML =
-`
 
-<div class="purple">
-AI SERIES
-</div>
+const purple =
+document.createElement("div");
 
-<h3>
-${escapeHtml(series.title)}
-</h3>
+purple.className =
+"purple";
 
-<p>
-${escapeHtml(
+purple.textContent =
+"AI SERIES";
+
+
+const title =
+document.createElement("h3");
+
+title.textContent =
+series.title || "Untitled Series";
+
+
+const summary =
+document.createElement("p");
+
+summary.textContent =
 series.series_summary ||
 series.story_idea ||
-""
-)}
-</p>
+"";
 
-<div class="badge">
-${escapeHtml(series.genre || "Drama")}
-</div>
 
-<div class="badge">
-${series.episode_count} Episodes
-</div>
+const genre =
+document.createElement("div");
 
-<div class="badge">
-${series.episode_length} Min
-</div>
+genre.className =
+"badge";
 
-<button
-class="small"
-onclick="selectSeries('${series.id}')">
+genre.textContent =
+series.genre || "Drama";
 
-OPEN SERIES
 
-</button>
-`;
+const count =
+document.createElement("div");
 
-area.appendChild(card);
+count.className =
+"badge";
+
+count.textContent =
+(series.episode_count || 0) +
+" Episodes";
+
+
+const length =
+document.createElement("div");
+
+length.className =
+"badge";
+
+length.textContent =
+(series.episode_length || 0) +
+" Min";
+
+
+const openButton =
+document.createElement("button");
+
+openButton.className =
+"small";
+
+openButton.type =
+"button";
+
+openButton.textContent =
+"OPEN SERIES";
+
+
+openButton.addEventListener(
+"click",
+async function(){
+
+openButton.disabled =
+true;
+
+openButton.textContent =
+"OPENING...";
+
+try{
+
+await selectSeries(
+series.id,
+true
+);
+
+}
+finally{
+
+openButton.disabled =
+false;
+
+openButton.textContent =
+"OPEN SERIES";
+
+}
+
+}
+);
+
+
+card.appendChild(
+purple
+);
+
+card.appendChild(
+title
+);
+
+card.appendChild(
+summary
+);
+
+card.appendChild(
+genre
+);
+
+card.appendChild(
+count
+);
+
+card.appendChild(
+length
+);
+
+card.appendChild(
+openButton
+);
+
+area.appendChild(
+card
+);
 
 });
 
 }
 
 
-/* =========================================
-   SELECT SERIES
-========================================= */
+/* SELECT SERIES */
 
-async function selectSeries(id){
+async function selectSeries(
+id,
+openCharacters = false
+){
+
+if(!currentUser){
+
+show(
+"Please log in first."
+);
+
+return false;
+
+}
+
+show(
+"Opening series..."
+);
+
 
 const result =
 await client
@@ -1800,20 +1767,44 @@ await client
 "id",
 id
 )
-.single();
+.eq(
+"user_id",
+currentUser.id
+)
+.maybeSingle();
+
 
 if(result.error){
 
-show(
-"Unable to open series."
+console.error(
+"Open series error:",
+result.error
 );
 
-return;
+show(
+"Unable to open series: " +
+result.error.message
+);
+
+return false;
 
 }
 
+
+if(!result.data){
+
+show(
+"Series could not be found."
+);
+
+return false;
+
+}
+
+
 currentSeries =
 result.data;
+
 
 document
 .getElementById(
@@ -1822,12 +1813,14 @@ document
 .textContent =
 currentSeries.title;
 
+
 document
 .getElementById(
 "episodeSeriesName"
 )
 .textContent =
 currentSeries.title;
+
 
 document
 .getElementById(
@@ -1836,29 +1829,37 @@ document
 .textContent =
 currentSeries.title;
 
+
 await loadCharacters();
 
 await loadEpisodes();
+
+
+if(openCharacters){
+
+openCharactersTab();
+
+}
+
 
 show(
 currentSeries.title +
 " is now selected."
 );
 
+
+return true;
+
 }
 
 
-/* =========================================
-   ADD CHARACTER
-========================================= */
+/* ADD CHARACTER */
 
 async function addCharacter(){
 
 if(!currentUser){
 
-show(
-"Please log in."
-);
+show("Please log in.");
 
 return;
 
@@ -1866,55 +1867,46 @@ return;
 
 if(!currentSeries){
 
-show(
-"Select a series first."
-);
+show("Select a series first.");
 
 return;
 
 }
 
 const name =
-document
-.getElementById("characterName")
-.value
-.trim();
+document.getElementById(
+"characterName"
+).value.trim();
 
 const role =
-document
-.getElementById("characterRole")
-.value
-.trim();
+document.getElementById(
+"characterRole"
+).value.trim();
 
 const appearance =
-document
-.getElementById("characterAppearance")
-.value
-.trim();
+document.getElementById(
+"characterAppearance"
+).value.trim();
 
 const personality =
-document
-.getElementById("characterPersonality")
-.value
-.trim();
+document.getElementById(
+"characterPersonality"
+).value.trim();
 
 const image =
-document
-.getElementById("characterImage")
-.value
-.trim();
+document.getElementById(
+"characterImage"
+).value.trim();
 
 const voice =
-document
-.getElementById("characterVoice")
-.value
-.trim();
+document.getElementById(
+"characterVoice"
+).value.trim();
 
 const providerCharacterId =
-document
-.getElementById("providerCharacterId")
-.value
-.trim();
+document.getElementById(
+"providerCharacterId"
+).value.trim();
 
 if(!name){
 
@@ -1936,7 +1928,9 @@ appearance
 
 const result =
 await client
-.from("ai_series_characters")
+.from(
+"ai_series_characters"
+)
 .insert({
 
 series_id:
@@ -1972,9 +1966,11 @@ providerCharacterId
 : null,
 
 provider_character_id:
-providerCharacterId || null
+providerCharacterId ||
+null
 
 });
+
 
 if(result.error){
 
@@ -1986,6 +1982,7 @@ result.error.message
 return;
 
 }
+
 
 clearCharacterForm();
 
@@ -2001,26 +1998,22 @@ currentSeries.title +
 }
 
 
-/* =========================================
-   CLEAR CHARACTER FORM
-========================================= */
+/* CLEAR CHARACTER */
 
 function clearCharacterForm(){
 
-document.getElementById("characterName").value = "";
-document.getElementById("characterRole").value = "";
-document.getElementById("characterAppearance").value = "";
-document.getElementById("characterPersonality").value = "";
-document.getElementById("characterImage").value = "";
-document.getElementById("characterVoice").value = "";
-document.getElementById("providerCharacterId").value = "";
+document.getElementById("characterName").value="";
+document.getElementById("characterRole").value="";
+document.getElementById("characterAppearance").value="";
+document.getElementById("characterPersonality").value="";
+document.getElementById("characterImage").value="";
+document.getElementById("characterVoice").value="";
+document.getElementById("providerCharacterId").value="";
 
 }
 
 
-/* =========================================
-   LOAD CHARACTERS
-========================================= */
+/* LOAD CHARACTERS */
 
 async function loadCharacters(){
 
@@ -2045,15 +2038,23 @@ ascending:true
 }
 );
 
+
 if(result.error){
 
+console.error(
+"Character load error:",
+result.error
+);
+
 show(
-"Unable to load characters."
+"Unable to load characters: " +
+result.error.message
 );
 
 return;
 
 }
+
 
 currentSeriesCharacters =
 result.data || [];
@@ -2063,9 +2064,7 @@ renderCharacters();
 }
 
 
-/* =========================================
-   RENDER CHARACTERS
-========================================= */
+/* RENDER CHARACTERS */
 
 function renderCharacters(){
 
@@ -2074,8 +2073,7 @@ document.getElementById(
 "characters"
 );
 
-area.innerHTML =
-"";
+area.innerHTML = "";
 
 if(
 !currentSeriesCharacters.length
@@ -2092,14 +2090,15 @@ return;
 
 }
 
+
 const grid =
 document.createElement("div");
 
 grid.className =
 "cast-grid";
 
-currentSeriesCharacters
-.forEach(
+
+currentSeriesCharacters.forEach(
 function(person,index){
 
 const card =
@@ -2108,73 +2107,135 @@ document.createElement("div");
 card.className =
 "cast-card";
 
-card.innerHTML =
-`
 
-<div class="cast-name">
-${index + 1}. ${escapeHtml(person.name)}
-</div>
+const name =
+document.createElement("div");
 
-<div class="cast-role">
+name.className =
+"cast-name";
 
-<strong>
-${escapeHtml(person.role || "Series Character")}
-</strong>
+name.textContent =
+(index + 1) +
+". " +
+(person.name || "Unnamed Character");
 
-<br><br>
 
-${escapeHtml(
+const role =
+document.createElement("div");
+
+role.className =
+"cast-role";
+
+
+const roleTitle =
+document.createElement("strong");
+
+roleTitle.textContent =
+person.role ||
+"Series Character";
+
+
+const appearance =
+document.createElement("div");
+
+appearance.style.marginTop =
+"10px";
+
+appearance.textContent =
 person.appearance ||
 person.description ||
-"Appearance not added yet."
-)}
+"Appearance not added yet.";
 
-<br><br>
 
-${escapeHtml(
+const personality =
+document.createElement("div");
+
+personality.style.marginTop =
+"10px";
+
+personality.textContent =
 person.personality ||
-"Personality not added yet."
-)}
+"Personality not added yet.";
 
-</div>
 
-<div class="cast-meta">
+role.appendChild(
+roleTitle
+);
 
-${person.provider_character_id
+role.appendChild(
+appearance
+);
+
+role.appendChild(
+personality
+);
+
+
+const meta =
+document.createElement("div");
+
+meta.className =
+"cast-meta";
+
+meta.textContent =
+person.provider_character_id
 ?
 "Runway Character linked ✓"
 :
-"No provider character linked yet"}
+"No provider character linked yet";
 
-</div>
 
-<button
-class="small danger"
-onclick="deleteCharacter('${person.id}')">
+const remove =
+document.createElement("button");
 
-REMOVE CHARACTER
+remove.className =
+"small danger";
 
-</button>
-`;
+remove.type =
+"button";
+
+remove.textContent =
+"REMOVE CHARACTER";
+
+remove.addEventListener(
+"click",
+function(){
+
+deleteCharacter(
+person.id
+);
+
+}
+);
+
+
+card.appendChild(name);
+card.appendChild(role);
+card.appendChild(meta);
+card.appendChild(remove);
 
 grid.appendChild(card);
 
-});
+}
+);
 
-area.appendChild(grid);
+
+area.appendChild(
+grid
+);
 
 }
 
 
-/* =========================================
-   DELETE CHARACTER
-========================================= */
+/* DELETE CHARACTER */
 
 async function deleteCharacter(id){
 
-if(!confirm(
+if(
+!confirm(
 "Remove this character from the series?"
-)){
+)
+){
 return;
 }
 
@@ -2189,6 +2250,7 @@ await client
 id
 );
 
+
 if(result.error){
 
 show(
@@ -2199,6 +2261,7 @@ return;
 
 }
 
+
 await loadCharacters();
 
 show(
@@ -2208,9 +2271,7 @@ show(
 }
 
 
-/* =========================================
-   SAVE EPISODE
-========================================= */
+/* SAVE EPISODE */
 
 async function saveEpisode(){
 
@@ -2236,36 +2297,26 @@ return;
 
 const number =
 parseInt(
-document
-.getElementById(
+document.getElementById(
 "episodeNumber"
-)
-.value
+).value
 );
 
 const title =
-document
-.getElementById(
+document.getElementById(
 "episodeTitle"
-)
-.value
-.trim();
+).value.trim();
 
 const synopsis =
-document
-.getElementById(
+document.getElementById(
 "episodeSynopsis"
-)
-.value
-.trim();
+).value.trim();
 
 const script =
-document
-.getElementById(
+document.getElementById(
 "episodeScript"
-)
-.value
-.trim();
+).value.trim();
+
 
 if(!number || number < 1){
 
@@ -2276,6 +2327,7 @@ show(
 return;
 
 }
+
 
 const result =
 await client
@@ -2314,6 +2366,7 @@ onConflict:
 }
 );
 
+
 if(result.error){
 
 show(
@@ -2325,6 +2378,7 @@ return;
 
 }
 
+
 await loadEpisodes();
 
 show(
@@ -2334,9 +2388,7 @@ show(
 }
 
 
-/* =========================================
-   LOAD EPISODES
-========================================= */
+/* LOAD EPISODES */
 
 async function loadEpisodes(){
 
@@ -2361,15 +2413,23 @@ ascending:true
 }
 );
 
+
 if(result.error){
 
+console.error(
+"Episode load error:",
+result.error
+);
+
 show(
-"Unable to load episodes."
+"Unable to load episodes: " +
+result.error.message
 );
 
 return;
 
 }
+
 
 currentEpisodes =
 result.data || [];
@@ -2379,9 +2439,7 @@ renderEpisodes();
 }
 
 
-/* =========================================
-   RENDER EPISODES
-========================================= */
+/* RENDER EPISODES */
 
 function renderEpisodes(){
 
@@ -2390,8 +2448,8 @@ document.getElementById(
 "episodeList"
 );
 
-area.innerHTML =
-"";
+area.innerHTML = "";
+
 
 if(!currentEpisodes.length){
 
@@ -2406,8 +2464,8 @@ return;
 
 }
 
-currentEpisodes
-.forEach(
+
+currentEpisodes.forEach(
 function(episode){
 
 const card =
@@ -2416,45 +2474,72 @@ document.createElement("div");
 card.className =
 "episodeCard";
 
-card.innerHTML =
-`
 
-<div class="purple">
-EPISODE ${episode.episode_number}
-</div>
+const purple =
+document.createElement("div");
 
-<h3>
-${escapeHtml(
+purple.className =
+"purple";
+
+purple.textContent =
+"EPISODE " +
+episode.episode_number;
+
+
+const title =
+document.createElement("h3");
+
+title.textContent =
 episode.title ||
-`Episode ${episode.episode_number}`
-)}
-</h3>
+`Episode ${episode.episode_number}`;
 
-<p>
-${escapeHtml(
+
+const synopsis =
+document.createElement("p");
+
+synopsis.textContent =
 episode.synopsis ||
-"No synopsis yet."
-)}
-</p>
+"No synopsis yet.";
 
-<div class="badge">
-${escapeHtml(
+
+const status =
+document.createElement("div");
+
+status.className =
+"badge";
+
+status.textContent =
 episode.status ||
-"planned"
-)}
-</div>
-`;
+"planned";
 
-area.appendChild(card);
 
-});
+card.appendChild(
+purple
+);
+
+card.appendChild(
+title
+);
+
+card.appendChild(
+synopsis
+);
+
+card.appendChild(
+status
+);
+
+area.appendChild(
+card
+);
+
+}
+);
 
 }
 
 
-/* =========================================
-   SAMPLE EPISODE BUILDER
-========================================= */
+/* BUILD EPISODE ONE */
 
 async function buildEpisodeOne(){
 
@@ -2470,6 +2555,7 @@ return;
 
 scenes.length = 0;
 
+
 const castNames =
 currentSeriesCharacters
 .map(
@@ -2477,84 +2563,73 @@ person => person.name
 )
 .join(", ");
 
+
 const heroOne =
 currentSeriesCharacters[0]
 ? currentSeriesCharacters[0].name
 : "Lead Character";
+
 
 const heroTwo =
 currentSeriesCharacters[1]
 ? currentSeriesCharacters[1].name
 : "Second Lead";
 
+
 scenes.push(
 
 {
-
-title:
-"Opening",
+title:"Opening",
 
 text:
 `Introduce ${heroOne} and establish the world of the series.`,
 
 prompt:
 `Premium cinematic vertical short drama. Opening scene for the series "${currentSeries.title}". Introduce ${heroOne}. Maintain exact saved character identity and appearance. Establish the story world described as: ${currentSeries.story_idea}. Natural human acting, realistic physical movement, cinematic lighting, premium streaming-series cinematography, 9:16 vertical composition.`
-
 },
 
 {
-
-title:
-"First Encounter",
+title:"First Encounter",
 
 text:
 `${heroOne} encounters ${heroTwo}.`,
 
 prompt:
 `Premium cinematic short drama from "${currentSeries.title}". ${heroOne} encounters ${heroTwo} for an important story moment. Use the established permanent character appearances. Maintain facial identity, hairstyle, wardrobe and age continuity. Natural eye movement, physical acting, body language and cinematic camera movement.`
-
 },
 
 {
-
-title:
-"Conflict",
+title:"Conflict",
 
 text:
 "A problem changes the direction of the episode.",
 
 prompt:
 `Cinematic dramatic sequence from "${currentSeries.title}". The central conflict becomes clear. Characters involved: ${castNames || heroOne}. Preserve established character identities and continuity. Realistic acting, emotional reactions, natural movement, premium television-drama cinematography.`
-
 },
 
 {
-
-title:
-"Emotional Turn",
+title:"Emotional Turn",
 
 text:
 "The lead characters experience an emotional turning point.",
 
 prompt:
 `Emotional premium streaming drama scene from "${currentSeries.title}". ${heroOne} and ${heroTwo} experience a meaningful emotional turning point. Maintain the same actors and character appearance. Natural facial emotion, believable body language, subtle cinematic movement and realistic lighting.`
-
 },
 
 {
-
-title:
-"Cliffhanger",
+title:"Cliffhanger",
 
 text:
 "The episode ends with a reason to watch the next episode.",
 
 prompt:
 `Powerful vertical short-drama cliffhanger for "${currentSeries.title}". End Episode 1 with a major revelation, danger, mystery or emotional surprise related to: ${currentSeries.story_idea}. Maintain exact character continuity. Dramatic cinematic camera movement and premium streaming-series quality.`
-
 }
 
 );
+
 
 renderScenes();
 
@@ -2567,9 +2642,7 @@ show(
 }
 
 
-/* =========================================
-   OPEN PRODUCTION TAB
-========================================= */
+/* PRODUCTION TAB */
 
 function openProductionTab(){
 
@@ -2605,9 +2678,7 @@ behavior:"smooth"
 }
 
 
-/* =========================================
-   DISPLAY SCENES
-========================================= */
+/* RENDER SCENES */
 
 function renderScenes(){
 
@@ -2617,6 +2688,7 @@ document.getElementById(
 );
 
 area.innerHTML = "";
+
 
 scenes.forEach(
 function(scene,index){
@@ -2700,14 +2772,13 @@ playsinline>
 
 area.appendChild(div);
 
-});
+}
+);
 
 }
 
 
-/* =========================================
-   REAL RUNWAY VIDEO
-========================================= */
+/* GENERATE VIDEO */
 
 async function generateVideo(index){
 
@@ -2731,13 +2802,15 @@ document.getElementById(
 "status" + index
 );
 
-button.disabled = true;
+button.disabled =
+true;
 
 button.textContent =
 "STARTING...";
 
 message.textContent =
 "Sending scene to Zynora AI...";
+
 
 try{
 
@@ -2755,53 +2828,45 @@ throw new Error(
 
 }
 
+
 const response =
 await fetch(
 FUNCTION_URL,
 {
 
-method:
-"POST",
+method:"POST",
 
 headers:{
-
-"Content-Type":
-"application/json",
-
-"apikey":
-SUPABASE_KEY,
-
+"Content-Type":"application/json",
+"apikey":SUPABASE_KEY,
 "Authorization":
 "Bearer " +
 session.access_token
-
 },
 
 body:
 JSON.stringify({
 
-action:
-"generate",
+action:"generate",
 
 prompt:
 scenes[index].prompt,
 
-model:
-"gen4.5",
+model:"gen4.5",
 
-ratio:
-"720:1280",
+ratio:"720:1280",
 
-duration:
-5
+duration:5
 
 })
 
 }
 );
 
+
 const data =
 await response.json();
+
 
 if(!response.ok){
 
@@ -2813,6 +2878,7 @@ data.message ||
 
 }
 
+
 if(!data.taskId){
 
 throw new Error(
@@ -2821,16 +2887,19 @@ throw new Error(
 
 }
 
+
 button.textContent =
 "GENERATING...";
 
 message.textContent =
 "AI video started...";
 
+
 await createGenerationJob(
 index,
 data.taskId
 );
+
 
 await checkVideo(
 index,
@@ -2855,9 +2924,7 @@ button.textContent =
 }
 
 
-/* =========================================
-   SAVE GENERATION JOB
-========================================= */
+/* GENERATION JOB */
 
 async function createGenerationJob(
 index,
@@ -2870,6 +2937,7 @@ if(
 ){
 return;
 }
+
 
 try{
 
@@ -2885,11 +2953,9 @@ currentUser.id,
 series_id:
 currentSeries.id,
 
-provider:
-"runway",
+provider:"runway",
 
-model:
-"gen4.5",
+model:"gen4.5",
 
 provider_task_id:
 taskId,
@@ -2897,14 +2963,11 @@ taskId,
 prompt:
 scenes[index].prompt,
 
-duration_seconds:
-5,
+duration_seconds:5,
 
-zynora_fee_usd:
-0.59,
+zynora_fee_usd:0.59,
 
-status:
-"processing"
+status:"processing"
 
 });
 
@@ -2921,9 +2984,7 @@ error
 }
 
 
-/* =========================================
-   CHECK VIDEO
-========================================= */
+/* CHECK VIDEO */
 
 async function checkVideo(
 index,
@@ -2940,6 +3001,7 @@ document.getElementById(
 "btn" + index
 );
 
+
 for(
 let i = 1;
 i <= 120;
@@ -2954,11 +3016,13 @@ resolve,
 )
 );
 
+
 const sessionResult =
 await client.auth.getSession();
 
 const session =
 sessionResult.data.session;
+
 
 if(!session){
 
@@ -2968,33 +3032,26 @@ throw new Error(
 
 }
 
+
 const response =
 await fetch(
 FUNCTION_URL,
 {
 
-method:
-"POST",
+method:"POST",
 
 headers:{
-
-"Content-Type":
-"application/json",
-
-"apikey":
-SUPABASE_KEY,
-
+"Content-Type":"application/json",
+"apikey":SUPABASE_KEY,
 "Authorization":
 "Bearer " +
 session.access_token
-
 },
 
 body:
 JSON.stringify({
 
-action:
-"status",
+action:"status",
 
 taskId:
 taskId
@@ -3004,8 +3061,10 @@ taskId
 }
 );
 
+
 const data =
 await response.json();
+
 
 if(!response.ok){
 
@@ -3016,15 +3075,18 @@ data.error ||
 
 }
 
+
 const state =
 String(
 data.status || ""
 )
 .toUpperCase();
 
+
 message.textContent =
 "AI generation: " +
 state;
+
 
 if(
 state === "SUCCEEDED"
@@ -3034,6 +3096,7 @@ const url =
 data.output &&
 data.output[0];
 
+
 if(!url){
 
 throw new Error(
@@ -3042,10 +3105,12 @@ throw new Error(
 
 }
 
+
 const video =
 document.getElementById(
 "video" + index
 );
+
 
 video.src =
 url;
@@ -3053,14 +3118,17 @@ url;
 video.style.display =
 "block";
 
+
 message.textContent =
 "Scene complete! 🎬";
+
 
 button.disabled =
 false;
 
 button.textContent =
 "GENERATE AGAIN";
+
 
 await updateGenerationJob(
 taskId,
@@ -3069,9 +3137,11 @@ url,
 null
 );
 
+
 return;
 
 }
+
 
 if(
 state === "FAILED"
@@ -3085,12 +3155,14 @@ data.failure ||
 "AI generation failed."
 );
 
+
 throw new Error(
 data.failure ||
 "AI generation failed."
 );
 
 }
+
 
 if(
 state === "CANCELED"
@@ -3103,6 +3175,7 @@ null,
 "Generation canceled."
 );
 
+
 throw new Error(
 "Generation canceled."
 );
@@ -3111,6 +3184,7 @@ throw new Error(
 
 }
 
+
 throw new Error(
 "Generation took too long."
 );
@@ -3118,9 +3192,7 @@ throw new Error(
 }
 
 
-/* =========================================
-   UPDATE GENERATION JOB
-========================================= */
+/* UPDATE JOB */
 
 async function updateGenerationJob(
 taskId,
@@ -3137,6 +3209,7 @@ status:
 status
 };
 
+
 if(url){
 
 values.output_url =
@@ -3147,12 +3220,14 @@ new Date().toISOString();
 
 }
 
+
 if(error){
 
 values.error_message =
 error;
 
 }
+
 
 await client
 .from(
@@ -3177,35 +3252,18 @@ e
 }
 
 
-/* =========================================
-   SAFE TEXT
-========================================= */
+/* SAFE TEXT */
 
 function escapeHtml(value){
 
 return String(
 value || ""
 )
-.replaceAll(
-"&",
-"&amp;"
-)
-.replaceAll(
-"<",
-"&lt;"
-)
-.replaceAll(
-">",
-"&gt;"
-)
-.replaceAll(
-'"',
-"&quot;"
-)
-.replaceAll(
-"'",
-"&#039;"
-);
+.replaceAll("&","&amp;")
+.replaceAll("<","&lt;")
+.replaceAll(">","&gt;")
+.replaceAll('"',"&quot;")
+.replaceAll("'","&#039;");
 
 }
 
