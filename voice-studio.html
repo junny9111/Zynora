@@ -1,0 +1,1693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Zynora Voice Studio</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
+
+body{
+min-height:100vh;
+background:
+radial-gradient(circle at top,rgba(120,40,190,.28),transparent 32%),
+#08070c;
+color:#fff;
+font-family:"Playfair Display",serif;
+padding-bottom:110px;
+}
+
+header{
+min-height:82px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 18px;
+background:rgba(17,16,22,.96);
+border-bottom:1px solid #382345;
+position:sticky;
+top:0;
+z-index:40;
+backdrop-filter:blur(10px);
+}
+
+.logo{
+font-family:"Cinzel",serif;
+font-size:23px;
+font-weight:700;
+background:linear-gradient(90deg,#fff,#c26cff,#8d35ef);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.page-title{
+font-family:"Cinzel",serif;
+font-size:13px;
+color:#b678ec;
+}
+
+main{
+width:min(1100px,94%);
+margin:28px auto;
+}
+
+.hero{
+background:linear-gradient(
+135deg,
+rgba(169,77,255,.13),
+rgba(255,255,255,.02)
+);
+border:1px solid rgba(169,77,255,.22);
+border-radius:24px;
+padding:24px;
+margin-bottom:20px;
+}
+
+.hero h1{
+font-family:"Cinzel",serif;
+font-size:28px;
+margin-bottom:8px;
+}
+
+.hero p{
+color:#aaa6b2;
+line-height:1.55;
+}
+
+.status{
+margin-top:14px;
+font-size:13px;
+color:#c08cff;
+}
+
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:18px;
+}
+
+.panel{
+background:rgba(17,16,22,.96);
+border:1px solid #2f2638;
+border-radius:22px;
+padding:20px;
+box-shadow:0 15px 40px rgba(0,0,0,.25);
+}
+
+.panel h2{
+font-family:"Cinzel",serif;
+font-size:17px;
+margin-bottom:16px;
+color:#f4eff9;
+}
+
+.field{
+margin-bottom:15px;
+}
+
+label{
+display:block;
+font-family:"Cinzel",serif;
+font-size:10px;
+letter-spacing:.8px;
+margin-bottom:7px;
+color:#a8a2b2;
+}
+
+input,
+select,
+textarea{
+width:100%;
+border:1px solid #3b3144;
+background:#0d0c11;
+color:white;
+border-radius:13px;
+padding:12px 13px;
+font-family:"Playfair Display",serif;
+font-size:15px;
+outline:none;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+border-color:#9e4fe8;
+box-shadow:0 0 0 2px rgba(158,79,232,.08);
+}
+
+textarea{
+min-height:90px;
+resize:vertical;
+}
+
+.row{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:12px;
+}
+
+.actions{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+margin-top:8px;
+}
+
+button{
+border:none;
+border-radius:13px;
+padding:12px 16px;
+font-family:"Cinzel",serif;
+font-size:10px;
+letter-spacing:.5px;
+cursor:pointer;
+}
+
+.primary{
+background:linear-gradient(135deg,#a94dff,#7529df);
+color:#fff;
+}
+
+.secondary{
+background:#25212c;
+color:#ddd;
+border:1px solid #393342;
+}
+
+.danger{
+background:#321a23;
+color:#ffb5c0;
+border:1px solid #59303d;
+}
+
+button:disabled{
+opacity:.45;
+cursor:not-allowed;
+}
+
+.message{
+margin-top:12px;
+font-size:13px;
+min-height:18px;
+}
+
+.message.success{
+color:#87e8a8;
+}
+
+.message.error{
+color:#ff9da9;
+}
+
+.voice-card,
+.character-card{
+border:1px solid #322a3a;
+border-radius:17px;
+padding:15px;
+margin-bottom:12px;
+background:#0d0c11;
+}
+
+.voice-name,
+.character-name{
+font-family:"Cinzel",serif;
+font-size:14px;
+margin-bottom:6px;
+}
+
+.meta{
+color:#9995a0;
+font-size:13px;
+line-height:1.5;
+}
+
+.badge{
+display:inline-block;
+margin-top:8px;
+padding:5px 9px;
+border-radius:999px;
+background:rgba(169,77,255,.14);
+border:1px solid rgba(169,77,255,.24);
+color:#bd7bff;
+font-size:11px;
+}
+
+.card-actions{
+display:flex;
+gap:8px;
+flex-wrap:wrap;
+margin-top:12px;
+}
+
+.card-actions button{
+padding:9px 11px;
+font-size:9px;
+}
+
+.empty{
+color:#85818b;
+font-style:italic;
+font-size:14px;
+padding:6px 0;
+}
+
+.preview-box{
+border:1px dashed #4d3c5c;
+border-radius:16px;
+padding:15px;
+margin-top:15px;
+background:rgba(169,77,255,.04);
+}
+
+.preview-box p{
+color:#9c96a6;
+font-size:13px;
+line-height:1.5;
+}
+
+.test-text{
+margin-top:10px;
+}
+
+audio{
+width:100%;
+margin-top:12px;
+}
+
+.section-spacer{
+height:14px;
+}
+
+.bottom-nav{
+position:fixed;
+left:0;
+right:0;
+bottom:0;
+height:90px;
+background:rgba(17,16,22,.98);
+display:grid;
+grid-template-columns:repeat(6,1fr);
+border-top:1px solid rgba(173,77,255,.2);
+z-index:100;
+backdrop-filter:blur(12px);
+-webkit-backdrop-filter:blur(12px);
+}
+
+.nav-item{
+text-decoration:none;
+color:#777582;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+gap:5px;
+font-family:"Cinzel",serif;
+font-size:8px;
+transition:.2s ease;
+min-width:0;
+}
+
+.nav-icon-wrap{
+width:37px;
+height:37px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:12px;
+transition:.2s ease;
+}
+
+.nav-icon-wrap svg{
+width:22px;
+height:22px;
+fill:none;
+stroke:currentColor;
+stroke-width:1.9;
+stroke-linecap:round;
+stroke-linejoin:round;
+}
+
+.nav-item.active{
+color:#b45cff;
+text-shadow:0 0 15px rgba(169,77,255,.5);
+}
+
+.nav-item.active .nav-icon-wrap{
+background:linear-gradient(
+135deg,
+rgba(169,77,255,.28),
+rgba(116,27,232,.18)
+);
+box-shadow:
+0 0 0 1px rgba(169,77,255,.32),
+0 0 18px rgba(169,77,255,.24);
+}
+
+.nav-item:active{
+transform:scale(.96);
+}
+
+@media(max-width:780px){
+.grid{
+grid-template-columns:1fr;
+}
+
+.row{
+grid-template-columns:1fr;
+}
+}
+
+@media(max-width:390px){
+.nav-item{
+font-size:7px;
+}
+
+.nav-icon-wrap{
+width:35px;
+height:35px;
+}
+
+.nav-icon-wrap svg{
+width:21px;
+height:21px;
+}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="logo">Zynora</div>
+<div class="page-title">VOICE STUDIO</div>
+</header>
+
+<main>
+
+<section class="hero">
+<h1>Zynora Voice Studio</h1>
+<p>
+Create and save permanent character voices for your AI series.
+Each saved voice can be assigned to a recurring character and reused throughout future episodes.
+</p>
+
+<div class="status" id="authStatus">
+Checking account...
+</div>
+</section>
+
+<div class="grid">
+
+<section class="panel">
+
+<h2>Create Voice</h2>
+
+<div class="field">
+<label>VOICE NAME</label>
+<input
+id="voiceName"
+placeholder="Example: Maya Warm 01"
+>
+</div>
+
+<div class="field">
+<label>BASE VOICE</label>
+<select id="providerVoice">
+<option value="">Select a voice</option>
+
+<option value="af_heart">
+American Female — Heart
+</option>
+
+<option value="af_bella">
+American Female — Bella
+</option>
+
+<option value="af_nicole">
+American Female — Nicole
+</option>
+
+<option value="af_sarah">
+American Female — Sarah
+</option>
+
+<option value="af_sky">
+American Female — Sky
+</option>
+
+<option value="am_adam">
+American Male — Adam
+</option>
+
+<option value="am_michael">
+American Male — Michael
+</option>
+
+<option value="bf_emma">
+British Female — Emma
+</option>
+
+<option value="bf_isabella">
+British Female — Isabella
+</option>
+
+<option value="bm_george">
+British Male — George
+</option>
+
+<option value="bm_lewis">
+British Male — Lewis
+</option>
+
+</select>
+</div>
+
+<div class="row">
+
+<div class="field">
+<label>GENDER STYLE</label>
+<select id="gender">
+<option value="">Select</option>
+<option value="female">Female</option>
+<option value="male">Male</option>
+<option value="neutral">Neutral</option>
+</select>
+</div>
+
+<div class="field">
+<label>AGE STYLE</label>
+<select id="ageStyle">
+<option value="">Select</option>
+<option value="young adult">Young Adult</option>
+<option value="adult">Adult</option>
+<option value="mature">Mature</option>
+<option value="older">Older</option>
+</select>
+</div>
+
+</div>
+
+<div class="row">
+
+<div class="field">
+<label>ACCENT</label>
+<select id="accent">
+<option value="">Select</option>
+<option value="American">American</option>
+<option value="British">British</option>
+<option value="Neutral English">
+Neutral English
+</option>
+</select>
+</div>
+
+<div class="field">
+<label>SPEAKING STYLE</label>
+<select id="speakingStyle">
+<option value="">Select</option>
+<option value="warm">Warm</option>
+<option value="confident">Confident</option>
+<option value="calm">Calm</option>
+<option value="intense">Intense</option>
+<option value="elegant">Elegant</option>
+<option value="friendly">Friendly</option>
+<option value="authoritative">Authoritative</option>
+<option value="fatherly">Fatherly</option>
+<option value="motherly">Motherly</option>
+</select>
+</div>
+
+</div>
+
+<div class="field">
+<label>VOICE DESCRIPTION</label>
+<textarea
+id="voiceDescription"
+placeholder="Example: Warm, intelligent, emotionally controlled and confident."
+></textarea>
+</div>
+
+<div class="preview-box">
+
+<p>
+Real audio preview will be enabled after the Zynora voice backend is connected.
+You can save and assign permanent Voice IDs now.
+</p>
+
+<div class="field test-text">
+<label>TEST DIALOGUE</label>
+<textarea
+id="previewText"
+placeholder="Enter a line the character might say..."
+>Maya, there is something about this project that you need to know.</textarea>
+</div>
+
+<button
+class="secondary"
+id="previewBtn"
+disabled
+>
+Preview Voice
+</button>
+
+<audio
+id="previewAudio"
+controls
+style="display:none"
+></audio>
+
+</div>
+
+<div class="actions">
+
+<button
+class="primary"
+id="saveVoiceBtn"
+>
+Save Voice
+</button>
+
+<button
+class="secondary"
+id="cancelEditBtn"
+style="display:none"
+>
+Cancel Edit
+</button>
+
+</div>
+
+<div
+class="message"
+id="voiceMessage"
+></div>
+
+</section>
+
+
+<section class="panel">
+
+<h2>Voice Library</h2>
+
+<div id="voiceLibrary">
+<div class="empty">
+Loading saved voices...
+</div>
+</div>
+
+</section>
+
+</div>
+
+<div class="section-spacer"></div>
+
+<section class="panel">
+
+<h2>Assign Voice to Character</h2>
+
+<div class="row">
+
+<div class="field">
+<label>SERIES</label>
+<select id="seriesSelect">
+<option value="">
+Select a series
+</option>
+</select>
+</div>
+
+<div class="field">
+<label>CHARACTER</label>
+<select id="characterSelect">
+<option value="">
+Select a character
+</option>
+</select>
+</div>
+
+</div>
+
+<div class="field">
+<label>SAVED ZYNORA VOICE</label>
+<select id="voiceAssignSelect">
+<option value="">
+Select a voice
+</option>
+</select>
+</div>
+
+<div class="actions">
+
+<button
+class="primary"
+id="assignVoiceBtn"
+>
+Assign Permanent Voice
+</button>
+
+</div>
+
+<div
+class="message"
+id="assignMessage"
+></div>
+
+<div class="section-spacer"></div>
+
+<div id="characterVoiceList">
+<div class="empty">
+Select a series to view its characters.
+</div>
+</div>
+
+</section>
+
+</main>
+
+
+<nav class="bottom-nav">
+
+<a href="index.html" class="nav-item">
+<span class="nav-icon-wrap">
+<svg viewBox="0 0 24 24">
+<path d="M3 10.5 12 3l9 7.5"></path>
+<path d="M5 9.5V21h14V9.5"></path>
+<path d="M9 21v-6h6v6"></path>
+</svg>
+</span>
+Home
+</a>
+
+<a href="discover.html" class="nav-item">
+<span class="nav-icon-wrap">
+<svg viewBox="0 0 24 24">
+<circle cx="12" cy="12" r="9"></circle>
+<path d="m15.5 8.5-2.2 4.8-4.8 2.2 2.2-4.8 4.8-2.2z"></path>
+</svg>
+</span>
+Discover
+</a>
+
+<a href="rewards.html" class="nav-item">
+<span class="nav-icon-wrap">
+<svg viewBox="0 0 24 24">
+<path d="M4 9h16v11H4z"></path>
+<path d="M3 9h18V5H3z"></path>
+<path d="M12 5v15"></path>
+<path d="M12 5H8.5C7.1 5 6 4.1 6 3s1-2 2.3-2C10.4 1 12 5 12 5z"></path>
+<path d="M12 5h3.5C16.9 5 18 4.1 18 3s-1-2-2.3-2C13.6 1 12 5 12 5z"></path>
+</svg>
+</span>
+Rewards
+</a>
+
+<a href="ai-series-studio.html" class="nav-item active">
+<span class="nav-icon-wrap">
+<svg viewBox="0 0 24 24">
+<circle cx="12" cy="12" r="4"></circle>
+<path d="M12 2v3"></path>
+<path d="M12 19v3"></path>
+<path d="M2 12h3"></path>
+<path d="M19 12h3"></path>
+<path d="m4.9 4.9 2.1 2.1"></path>
+<path d="m17 17 2.1 2.1"></path>
+<path d="m19.1 4.9-2.1 2.1"></path>
+<path d="m7 17-2.1 2.1"></path>
+</svg>
+</span>
+AI Studio
+</a>
+
+<a href="library.html" class="nav-item">
+<span class="nav-icon-wrap">
+<svg viewBox="0 0 24 24">
+<rect x="4" y="4" width="16" height="16" rx="2"></rect>
+<path d="m10 8 6 4-6 4z"></path>
+</svg>
+</span>
+Library
+</a>
+
+<a href="profile.html" class="nav-item">
+<span class="nav-icon-wrap">
+<svg viewBox="0 0 24 24">
+<circle cx="12" cy="8" r="4"></circle>
+<path d="M4.5 21c.8-4 3.4-6 7.5-6s6.7 2 7.5 6"></path>
+</svg>
+</span>
+Profile
+</a>
+
+</nav>
+
+
+<script>
+
+const SUPABASE_URL =
+"https://ozshekxpuvganemaajms.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable__GsW9RahFD_XDWJTFzh9eQ_dNBZfa32";
+
+const client =
+supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+);
+
+
+let currentUser = null;
+
+let voices = [];
+
+let seriesList = [];
+
+let currentCharacters = [];
+
+let editingVoiceId = null;
+
+
+const voiceName =
+document.getElementById("voiceName");
+
+const providerVoice =
+document.getElementById("providerVoice");
+
+const gender =
+document.getElementById("gender");
+
+const ageStyle =
+document.getElementById("ageStyle");
+
+const accent =
+document.getElementById("accent");
+
+const speakingStyle =
+document.getElementById("speakingStyle");
+
+const voiceDescription =
+document.getElementById("voiceDescription");
+
+const voiceMessage =
+document.getElementById("voiceMessage");
+
+const assignMessage =
+document.getElementById("assignMessage");
+
+const authStatus =
+document.getElementById("authStatus");
+
+const seriesSelect =
+document.getElementById("seriesSelect");
+
+const characterSelect =
+document.getElementById("characterSelect");
+
+const voiceAssignSelect =
+document.getElementById("voiceAssignSelect");
+
+const voiceLibrary =
+document.getElementById("voiceLibrary");
+
+const characterVoiceList =
+document.getElementById("characterVoiceList");
+
+const cancelEditBtn =
+document.getElementById("cancelEditBtn");
+
+
+function setMessage(
+element,
+text,
+type=""
+){
+
+element.textContent = text;
+
+element.className =
+"message " + type;
+
+}
+
+
+async function init(){
+
+const {
+data:{
+user
+},
+error
+} =
+await client.auth.getUser();
+
+if(error || !user){
+
+authStatus.textContent =
+"Please log in to use Zynora Voice Studio.";
+
+document
+.getElementById("saveVoiceBtn")
+.disabled = true;
+
+document
+.getElementById("assignVoiceBtn")
+.disabled = true;
+
+return;
+
+}
+
+currentUser = user;
+
+authStatus.textContent =
+"Voice Studio connected ✓";
+
+await loadVoices();
+
+await loadSeries();
+
+}
+
+
+async function loadVoices(){
+
+if(!currentUser){
+return;
+}
+
+const {
+data,
+error
+} =
+await client
+.from("zynora_voices")
+.select("*")
+.eq(
+"user_id",
+currentUser.id
+)
+.order(
+"created_at",
+{
+ascending:false
+}
+);
+
+if(error){
+
+voiceLibrary.innerHTML =
+`<div class="empty">
+${escapeHtml(error.message)}
+</div>`;
+
+return;
+}
+
+voices = data || [];
+
+renderVoices();
+
+renderVoiceAssignmentOptions();
+
+}
+
+
+function renderVoices(){
+
+if(!voices.length){
+
+voiceLibrary.innerHTML =
+`
+<div class="empty">
+No Zynora voices saved yet.
+</div>
+`;
+
+return;
+}
+
+voiceLibrary.innerHTML =
+voices
+.map(
+voice => {
+
+const title =
+escapeHtml(
+voice.voice_name || "Unnamed Voice"
+);
+
+const providerId =
+escapeHtml(
+voice.provider_voice_id || ""
+);
+
+const details =
+[
+voice.gender,
+voice.age_style,
+voice.accent,
+voice.speaking_style
+]
+.filter(Boolean)
+.map(escapeHtml)
+.join(" • ");
+
+return `
+<div class="voice-card">
+
+<div class="voice-name">
+${title}
+</div>
+
+<div class="meta">
+${details || "No style details"}
+</div>
+
+<div class="badge">
+Voice ID: ${providerId}
+</div>
+
+${
+voice.description
+?
+`
+<div class="meta"
+style="margin-top:9px">
+${escapeHtml(
+voice.description
+)}
+</div>
+`
+:
+""
+}
+
+<div class="card-actions">
+
+<button
+class="secondary"
+onclick="editVoice('${voice.id}')"
+>
+Edit
+</button>
+
+<button
+class="danger"
+onclick="deleteVoice('${voice.id}')"
+>
+Delete
+</button>
+
+</div>
+
+</div>
+`;
+
+}
+)
+.join("");
+
+}
+
+
+function renderVoiceAssignmentOptions(){
+
+voiceAssignSelect.innerHTML =
+`
+<option value="">
+Select a voice
+</option>
+`;
+
+voices.forEach(
+voice => {
+
+const option =
+document.createElement("option");
+
+option.value =
+voice.provider_voice_id;
+
+option.textContent =
+`${voice.voice_name} — ${voice.provider_voice_id}`;
+
+voiceAssignSelect.appendChild(
+option
+);
+
+}
+);
+
+}
+
+
+async function saveVoice(){
+
+if(!currentUser){
+
+setMessage(
+voiceMessage,
+"Please log in first.",
+"error"
+);
+
+return;
+
+}
+
+const name =
+voiceName.value.trim();
+
+const providerId =
+providerVoice.value;
+
+if(!name){
+
+setMessage(
+voiceMessage,
+"Enter a voice name.",
+"error"
+);
+
+return;
+
+}
+
+if(!providerId){
+
+setMessage(
+voiceMessage,
+"Select a base voice.",
+"error"
+);
+
+return;
+
+}
+
+const payload = {
+
+user_id:
+currentUser.id,
+
+voice_name:
+name,
+
+provider:
+"kokoro",
+
+provider_voice_id:
+providerId,
+
+gender:
+gender.value || null,
+
+age_style:
+ageStyle.value || null,
+
+accent:
+accent.value || null,
+
+speaking_style:
+speakingStyle.value || null,
+
+description:
+voiceDescription.value.trim() || null,
+
+updated_at:
+new Date().toISOString()
+
+};
+
+
+let error;
+
+
+if(editingVoiceId){
+
+const result =
+await client
+.from("zynora_voices")
+.update(payload)
+.eq(
+"id",
+editingVoiceId
+)
+.eq(
+"user_id",
+currentUser.id
+);
+
+error =
+result.error;
+
+}
+else{
+
+payload.created_at =
+new Date().toISOString();
+
+const result =
+await client
+.from("zynora_voices")
+.insert(payload);
+
+error =
+result.error;
+
+}
+
+
+if(error){
+
+setMessage(
+voiceMessage,
+error.message,
+"error"
+);
+
+return;
+
+}
+
+
+setMessage(
+voiceMessage,
+editingVoiceId
+?
+"Voice updated ✓"
+:
+"Voice saved ✓",
+"success"
+);
+
+clearVoiceForm();
+
+await loadVoices();
+
+}
+
+
+function editVoice(id){
+
+const voice =
+voices.find(
+item => item.id === id
+);
+
+if(!voice){
+return;
+}
+
+editingVoiceId =
+voice.id;
+
+voiceName.value =
+voice.voice_name || "";
+
+providerVoice.value =
+voice.provider_voice_id || "";
+
+gender.value =
+voice.gender || "";
+
+ageStyle.value =
+voice.age_style || "";
+
+accent.value =
+voice.accent || "";
+
+speakingStyle.value =
+voice.speaking_style || "";
+
+voiceDescription.value =
+voice.description || "";
+
+cancelEditBtn.style.display =
+"inline-block";
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+setMessage(
+voiceMessage,
+"Editing saved voice.",
+""
+);
+
+}
+
+
+function clearVoiceForm(){
+
+editingVoiceId = null;
+
+voiceName.value = "";
+
+providerVoice.value = "";
+
+gender.value = "";
+
+ageStyle.value = "";
+
+accent.value = "";
+
+speakingStyle.value = "";
+
+voiceDescription.value = "";
+
+cancelEditBtn.style.display =
+"none";
+
+}
+
+
+async function deleteVoice(id){
+
+if(
+!confirm(
+"Delete this saved voice?"
+)
+){
+return;
+}
+
+const {
+error
+} =
+await client
+.from("zynora_voices")
+.delete()
+.eq(
+"id",
+id
+)
+.eq(
+"user_id",
+currentUser.id
+);
+
+if(error){
+
+setMessage(
+voiceMessage,
+error.message,
+"error"
+);
+
+return;
+
+}
+
+setMessage(
+voiceMessage,
+"Voice deleted.",
+"success"
+);
+
+await loadVoices();
+
+}
+
+
+async function loadSeries(){
+
+if(!currentUser){
+return;
+}
+
+const {
+data,
+error
+} =
+await client
+.from("ai_series")
+.select(
+"id,title"
+)
+.eq(
+"user_id",
+currentUser.id
+)
+.order(
+"created_at",
+{
+ascending:false
+}
+);
+
+if(error){
+
+setMessage(
+assignMessage,
+error.message,
+"error"
+);
+
+return;
+}
+
+seriesList =
+data || [];
+
+seriesSelect.innerHTML =
+`
+<option value="">
+Select a series
+</option>
+`;
+
+seriesList.forEach(
+series => {
+
+const option =
+document.createElement("option");
+
+option.value =
+series.id;
+
+option.textContent =
+series.title;
+
+seriesSelect.appendChild(
+option
+);
+
+}
+);
+
+}
+
+
+async function loadCharacters(){
+
+const seriesId =
+seriesSelect.value;
+
+characterSelect.innerHTML =
+`
+<option value="">
+Select a character
+</option>
+`;
+
+currentCharacters = [];
+
+if(!seriesId){
+
+characterVoiceList.innerHTML =
+`
+<div class="empty">
+Select a series to view its characters.
+</div>
+`;
+
+return;
+}
+
+const {
+data,
+error
+} =
+await client
+.from("ai_series_characters")
+.select(
+"id,name,role,voice_id,reference_image_url"
+)
+.eq(
+"series_id",
+seriesId
+)
+.eq(
+"user_id",
+currentUser.id
+)
+.order(
+"name",
+{
+ascending:true
+}
+);
+
+if(error){
+
+setMessage(
+assignMessage,
+error.message,
+"error"
+);
+
+return;
+}
+
+currentCharacters =
+data || [];
+
+currentCharacters.forEach(
+character => {
+
+const option =
+document.createElement("option");
+
+option.value =
+character.id;
+
+option.textContent =
+character.name;
+
+characterSelect.appendChild(
+option
+);
+
+}
+);
+
+renderCharacterVoices();
+
+}
+
+
+function renderCharacterVoices(){
+
+if(!currentCharacters.length){
+
+characterVoiceList.innerHTML =
+`
+<div class="empty">
+No characters found in this series.
+</div>
+`;
+
+return;
+}
+
+characterVoiceList.innerHTML =
+currentCharacters
+.map(
+character => {
+
+const voiceLabel =
+character.voice_id
+?
+escapeHtml(character.voice_id)
+:
+"No voice assigned";
+
+return `
+<div class="character-card">
+
+<div class="character-name">
+${escapeHtml(
+character.name || "Unnamed Character"
+)}
+</div>
+
+<div class="meta">
+${escapeHtml(
+character.role || ""
+)}
+</div>
+
+<div class="badge">
+${voiceLabel}
+</div>
+
+</div>
+`;
+
+}
+)
+.join("");
+
+}
+
+
+async function assignVoice(){
+
+const characterId =
+characterSelect.value;
+
+const selectedVoiceId =
+voiceAssignSelect.value;
+
+if(!characterId){
+
+setMessage(
+assignMessage,
+"Select a character.",
+"error"
+);
+
+return;
+
+}
+
+if(!selectedVoiceId){
+
+setMessage(
+assignMessage,
+"Select a saved Zynora voice.",
+"error"
+);
+
+return;
+
+}
+
+const {
+error
+} =
+await client
+.from(
+"ai_series_characters"
+)
+.update({
+voice_id:
+selectedVoiceId
+})
+.eq(
+"id",
+characterId
+)
+.eq(
+"user_id",
+currentUser.id
+);
+
+if(error){
+
+setMessage(
+assignMessage,
+error.message,
+"error"
+);
+
+return;
+
+}
+
+setMessage(
+assignMessage,
+"Permanent voice assigned ✓",
+"success"
+);
+
+await loadCharacters();
+
+}
+
+
+function escapeHtml(value){
+
+return String(
+value ?? ""
+)
+.replace(
+/&/g,
+"&amp;"
+)
+.replace(
+/</g,
+"&lt;"
+)
+.replace(
+/>/g,
+"&gt;"
+)
+.replace(
+/"/g,
+"&quot;"
+)
+.replace(
+/'/g,
+"&#039;"
+);
+
+}
+
+
+document
+.getElementById(
+"saveVoiceBtn"
+)
+.addEventListener(
+"click",
+saveVoice
+);
+
+
+cancelEditBtn
+.addEventListener(
+"click",
+() => {
+
+clearVoiceForm();
+
+setMessage(
+voiceMessage,
+"Edit cancelled.",
+""
+);
+
+}
+);
+
+
+seriesSelect
+.addEventListener(
+"change",
+loadCharacters
+);
+
+
+document
+.getElementById(
+"assignVoiceBtn"
+)
+.addEventListener(
+"click",
+assignVoice
+);
+
+
+init();
+
+</script>
+
+</body>
+</html>
