@@ -1,0 +1,7 @@
+Flask
+flask-cors
+gunicorn
+kokoro>=0.9.4
+soundfile
+numpy
+misaki[en]
