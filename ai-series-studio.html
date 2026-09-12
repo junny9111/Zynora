@@ -468,6 +468,88 @@ margin:18px 0;
 
 
 /* =========================================
+   AI STUDIO TOOLS
+========================================= */
+
+.studio-tools{
+display:grid;
+grid-template-columns:1fr;
+gap:10px;
+margin-bottom:18px;
+}
+
+.studio-tool-link{
+display:flex;
+align-items:center;
+gap:14px;
+padding:16px;
+background:
+linear-gradient(
+135deg,
+rgba(169,77,255,.16),
+rgba(34,18,45,.85)
+);
+border:1px solid rgba(173,77,255,.35);
+border-radius:17px;
+text-decoration:none;
+color:#fff;
+transition:.2s ease;
+}
+
+.studio-tool-link:active{
+transform:scale(.98);
+}
+
+.studio-tool-icon{
+width:48px;
+height:48px;
+border-radius:14px;
+display:flex;
+align-items:center;
+justify-content:center;
+background:
+linear-gradient(
+135deg,
+#a94dff,
+#7021df
+);
+flex-shrink:0;
+}
+
+.studio-tool-icon svg{
+width:25px;
+height:25px;
+fill:none;
+stroke:#fff;
+stroke-width:1.8;
+stroke-linecap:round;
+stroke-linejoin:round;
+}
+
+.studio-tool-text{
+flex:1;
+}
+
+.studio-tool-title{
+font-family:"Cinzel",serif;
+font-size:13px;
+color:#fff;
+margin-bottom:4px;
+}
+
+.studio-tool-sub{
+font-size:12px;
+color:#aaa2b0;
+line-height:1.4;
+}
+
+.studio-tool-arrow{
+color:#bd75ff;
+font-size:24px;
+}
+
+
+/* =========================================
    MASTER NAV
 ========================================= */
 
@@ -617,6 +699,50 @@ episodes and production information connected throughout the series.
 </p>
 
 </div>
+
+
+<!-- =========================================
+     VOICE STUDIO BUTTON
+========================================= -->
+
+<div class="studio-tools">
+
+<a
+href="voice-studio.html"
+class="studio-tool-link"
+>
+
+<div class="studio-tool-icon">
+
+<svg viewBox="0 0 24 24">
+<rect x="9" y="3" width="6" height="12" rx="3"></rect>
+<path d="M5 11a7 7 0 0 0 14 0"></path>
+<path d="M12 18v3"></path>
+<path d="M9 21h6"></path>
+</svg>
+
+</div>
+
+<div class="studio-tool-text">
+
+<div class="studio-tool-title">
+VOICE STUDIO
+</div>
+
+<div class="studio-tool-sub">
+Create, preview and assign permanent voices to your AI characters.
+</div>
+
+</div>
+
+<div class="studio-tool-arrow">
+›
+</div>
+
+</a>
+
+</div>
+
 
 <div class="tabs">
 
@@ -773,7 +899,7 @@ Character Name
 
 <input
 id="characterName"
-placeholder="Example: Mara Vale">
+placeholder="Example: Maya Vale">
 
 
 <label>
@@ -816,7 +942,7 @@ accept="image/jpeg,image/png,image/webp"
 onchange="previewCharacterImage(event)">
 
 <div class="upload-note">
-Choose Mara or Adrian's reference picture from your phone.
+Choose the character's permanent reference picture from your phone.
 Maximum recommended size: 8 MB.
 </div>
 
@@ -849,7 +975,7 @@ Voice ID
 
 <input
 id="characterVoice"
-placeholder="Optional provider voice ID">
+placeholder="Optional permanent voice ID">
 
 
 <label>
@@ -2567,7 +2693,6 @@ return publicUrl;
 
 /* =========================================
    SAVE CHARACTER
-   ADD NEW OR UPDATE EXISTING
 ========================================= */
 
 async function saveCharacter(){
@@ -2703,10 +2828,6 @@ editingCharacterId
 try{
 
 
-/* =========================================
-   UPDATE EXISTING CHARACTER
-========================================= */
-
 if(
 editingCharacterId
 ){
@@ -2806,10 +2927,6 @@ return;
 }
 
 
-/* =========================================
-   CREATE NEW CHARACTER
-========================================= */
-
 const insertResult =
 await client
 .from(
@@ -2874,8 +2991,6 @@ insertResult.error.message
 const newCharacter =
 insertResult.data;
 
-
-/* UPLOAD AFTER CHARACTER EXISTS */
 
 if(
 imageFile
@@ -3472,8 +3587,6 @@ roleTitle
 );
 
 
-/* CHARACTER IMAGE */
-
 if(
 person.reference_image_url
 ){
@@ -3501,8 +3614,6 @@ image
 }
 
 
-/* APPEARANCE */
-
 const appearance =
 document.createElement(
 "div"
@@ -3522,8 +3633,6 @@ appearance
 );
 
 
-/* PERSONALITY */
-
 const personality =
 document.createElement(
 "div"
@@ -3542,8 +3651,6 @@ personality
 );
 
 
-/* IMAGE STATUS */
-
 const imageMeta =
 document.createElement(
 "div"
@@ -3561,7 +3668,23 @@ person.reference_image_url
 "No reference image saved yet";
 
 
-/* PROVIDER STATUS */
+const voiceMeta =
+document.createElement(
+"div"
+);
+
+voiceMeta.className =
+"cast-meta";
+
+voiceMeta.textContent =
+person.voice_id
+?
+"Permanent voice: " +
+person.voice_id +
+" ✓"
+:
+"No permanent voice assigned yet";
+
 
 const providerMeta =
 document.createElement(
@@ -3579,8 +3702,6 @@ person.provider_character_id
 :
 "No provider character linked yet";
 
-
-/* BUTTON AREA */
 
 const buttons =
 document.createElement(
@@ -3664,6 +3785,10 @@ role
 
 card.appendChild(
 imageMeta
+);
+
+card.appendChild(
+voiceMeta
 );
 
 card.appendChild(
