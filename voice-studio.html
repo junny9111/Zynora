@@ -14,7 +14,6 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-
 *{
 box-sizing:border-box;
 margin:0;
@@ -135,7 +134,7 @@ textarea{
 width:100%;
 border:1px solid #3b3144;
 background:#0d0c11;
-color:#fff;
+color:white;
 border-radius:13px;
 padding:12px 13px;
 font-family:"Playfair Display",serif;
@@ -263,32 +262,35 @@ font-size:9px;
 color:#85818b;
 font-style:italic;
 font-size:14px;
-padding:8px 0;
+padding:6px 0;
 }
 
-.install-card{
-background:
-linear-gradient(
-135deg,
-rgba(169,77,255,.12),
-rgba(17,16,22,.96)
-);
+.preview-box{
+border:1px dashed #4d3c5c;
+border-radius:16px;
+padding:15px;
+margin-top:15px;
+background:rgba(169,77,255,.04);
 }
 
-.install-list{
-margin-top:14px;
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:8px;
-}
-
-.install-person{
-padding:10px 12px;
-border-radius:12px;
-background:#0d0c11;
-border:1px solid #322a3a;
+.preview-box p{
+color:#9c96a6;
 font-size:13px;
-color:#b9b4c0;
+line-height:1.5;
+}
+
+.test-text{
+margin-top:10px;
+}
+
+audio{
+width:100%;
+margin-top:12px;
+display:none;
+}
+
+.section-spacer{
+height:14px;
 }
 
 .bottom-nav{
@@ -356,12 +358,7 @@ box-shadow:
 0 0 18px rgba(169,77,255,.24);
 }
 
-.nav-item:active{
-transform:scale(.96);
-}
-
 @media(max-width:780px){
-
 .grid{
 grid-template-columns:1fr;
 }
@@ -369,15 +366,9 @@ grid-template-columns:1fr;
 .row{
 grid-template-columns:1fr;
 }
-
-.install-list{
-grid-template-columns:1fr;
-}
-
 }
 
 @media(max-width:390px){
-
 .nav-item{
 font-size:7px;
 }
@@ -391,9 +382,7 @@ height:35px;
 width:21px;
 height:21px;
 }
-
 }
-
 </style>
 </head>
 
@@ -407,313 +396,145 @@ height:21px;
 <main>
 
 <section class="hero">
-
 <h1>Zynora Voice Studio</h1>
-
 <p>
-Create permanent voices for your AI characters and keep the same
-character voice throughout every episode.
+Create and save permanent character voices for your AI series.
+Each saved voice can be assigned to a recurring character and reused throughout future episodes.
 </p>
 
 <div class="status" id="authStatus">
 Checking account...
 </div>
-
 </section>
-
-
-<section class="panel install-card">
-
-<h2>The Billionaire's Secret</h2>
-
-<p class="meta">
-Install and assign the permanent voice profiles for the complete main cast automatically.
-</p>
-
-<div class="install-list">
-
-<div class="install-person">
-Maya Vale — Warm & Confident
-</div>
-
-<div class="install-person">
-Adrian Cross — Deep & Controlled
-</div>
-
-<div class="install-person">
-Victor Cross — Polished & Authoritative
-</div>
-
-<div class="install-person">
-Celia Cross — Mature & Elegant
-</div>
-
-<div class="install-person">
-Julian Reed — Friendly & Ambitious
-</div>
-
-<div class="install-person">
-Nora Vale — Warm & Motherly
-</div>
-
-<div class="install-person">
-Elias Vale — Warm & Fatherly
-</div>
-
-</div>
-
-<div class="actions">
-
-<button
-class="primary"
-id="installCastBtn"
->
-INSTALL BILLIONAIRE CAST VOICES
-</button>
-
-</div>
-
-<div
-class="message"
-id="installMessage"
-></div>
-
-</section>
-
 
 <div class="grid">
-
 
 <section class="panel">
 
 <h2>Create Voice</h2>
 
 <div class="field">
-
 <label>VOICE NAME</label>
-
 <input
 id="voiceName"
-placeholder="Example: Maya Vale - Warm Confident"
+placeholder="Example: Maya Warm 01"
 >
-
 </div>
 
-
 <div class="field">
-
 <label>BASE VOICE</label>
-
 <select id="providerVoice">
+<option value="">Select a voice</option>
 
-<option value="">
-Select a voice
-</option>
-
-<option value="af_heart">
-American Female — Heart
-</option>
-
-<option value="af_bella">
-American Female — Bella
-</option>
-
-<option value="af_nicole">
-American Female — Nicole
-</option>
-
-<option value="af_sarah">
-American Female — Sarah
-</option>
-
-<option value="af_sky">
-American Female — Sky
-</option>
-
-<option value="am_adam">
-American Male — Adam
-</option>
-
-<option value="am_michael">
-American Male — Michael
-</option>
-
-<option value="bf_emma">
-British Female — Emma
-</option>
-
-<option value="bf_isabella">
-British Female — Isabella
-</option>
-
-<option value="bm_george">
-British Male — George
-</option>
-
-<option value="bm_lewis">
-British Male — Lewis
-</option>
+<option value="af_heart">American Female — Heart</option>
+<option value="af_bella">American Female — Bella</option>
+<option value="af_nicole">American Female — Nicole</option>
+<option value="af_sarah">American Female — Sarah</option>
+<option value="af_sky">American Female — Sky</option>
+<option value="am_adam">American Male — Adam</option>
+<option value="am_michael">American Male — Michael</option>
+<option value="bf_emma">British Female — Emma</option>
+<option value="bf_isabella">British Female — Isabella</option>
+<option value="bm_george">British Male — George</option>
+<option value="bm_lewis">British Male — Lewis</option>
 
 </select>
-
 </div>
-
 
 <div class="row">
 
 <div class="field">
-
 <label>GENDER STYLE</label>
-
 <select id="gender">
-
-<option value="">
-Select
-</option>
-
-<option value="female">
-Female
-</option>
-
-<option value="male">
-Male
-</option>
-
-<option value="neutral">
-Neutral
-</option>
-
+<option value="">Select</option>
+<option value="female">Female</option>
+<option value="male">Male</option>
+<option value="neutral">Neutral</option>
 </select>
-
 </div>
-
 
 <div class="field">
-
 <label>AGE STYLE</label>
-
 <select id="ageStyle">
-
-<option value="">
-Select
-</option>
-
-<option value="young adult">
-Young Adult
-</option>
-
-<option value="adult">
-Adult
-</option>
-
-<option value="mature">
-Mature
-</option>
-
-<option value="older">
-Older
-</option>
-
+<option value="">Select</option>
+<option value="young adult">Young Adult</option>
+<option value="adult">Adult</option>
+<option value="mature">Mature</option>
+<option value="older">Older</option>
 </select>
-
 </div>
 
 </div>
-
 
 <div class="row">
 
 <div class="field">
-
 <label>ACCENT</label>
-
 <select id="accent">
-
-<option value="">
-Select
-</option>
-
-<option value="American">
-American
-</option>
-
-<option value="British">
-British
-</option>
-
-<option value="Neutral English">
-Neutral English
-</option>
-
+<option value="">Select</option>
+<option value="American">American</option>
+<option value="British">British</option>
+<option value="Neutral English">Neutral English</option>
 </select>
-
 </div>
 
-
 <div class="field">
-
 <label>SPEAKING STYLE</label>
-
 <select id="speakingStyle">
-
-<option value="">
-Select
-</option>
-
-<option value="warm">
-Warm
-</option>
-
-<option value="confident">
-Confident
-</option>
-
-<option value="calm">
-Calm
-</option>
-
-<option value="intense">
-Intense
-</option>
-
-<option value="elegant">
-Elegant
-</option>
-
-<option value="friendly">
-Friendly
-</option>
-
-<option value="authoritative">
-Authoritative
-</option>
-
-<option value="fatherly">
-Fatherly
-</option>
-
-<option value="motherly">
-Motherly
-</option>
-
+<option value="">Select</option>
+<option value="warm">Warm</option>
+<option value="confident">Confident</option>
+<option value="calm">Calm</option>
+<option value="intense">Intense</option>
+<option value="elegant">Elegant</option>
+<option value="friendly">Friendly</option>
+<option value="authoritative">Authoritative</option>
+<option value="fatherly">Fatherly</option>
+<option value="motherly">Motherly</option>
 </select>
-
 </div>
 
 </div>
-
 
 <div class="field">
-
 <label>VOICE DESCRIPTION</label>
-
 <textarea
 id="voiceDescription"
-placeholder="Describe how the character should sound."
+placeholder="Example: Warm, intelligent, emotionally controlled and confident."
 ></textarea>
-
 </div>
 
+<div class="preview-box">
+
+<p>
+Generate a real preview using your live Zynora Kokoro voice server.
+</p>
+
+<div class="field test-text">
+<label>TEST DIALOGUE</label>
+<textarea
+id="previewText"
+>Maya, there is something about this project that you need to know.</textarea>
+</div>
+
+<button
+class="secondary"
+id="previewBtn"
+>
+Preview Voice
+</button>
+
+<div
+class="message"
+id="previewMessage"
+></div>
+
+<audio
+id="previewAudio"
+controls
+></audio>
+
+</div>
 
 <div class="actions">
 
@@ -721,7 +542,7 @@ placeholder="Describe how the character should sound."
 class="primary"
 id="saveVoiceBtn"
 >
-SAVE VOICE
+Save Voice
 </button>
 
 <button
@@ -729,7 +550,7 @@ class="secondary"
 id="cancelEditBtn"
 style="display:none"
 >
-CANCEL EDIT
+Cancel Edit
 </button>
 
 </div>
@@ -747,17 +568,16 @@ id="voiceMessage"
 <h2>Voice Library</h2>
 
 <div id="voiceLibrary">
-
 <div class="empty">
 Loading saved voices...
 </div>
-
 </div>
 
 </section>
 
 </div>
 
+<div class="section-spacer"></div>
 
 <section class="panel">
 
@@ -765,53 +585,34 @@ Loading saved voices...
 
 <div class="row">
 
-
 <div class="field">
-
 <label>SERIES</label>
-
 <select id="seriesSelect">
-
 <option value="">
 Select a series
 </option>
-
 </select>
-
 </div>
 
-
 <div class="field">
-
 <label>CHARACTER</label>
-
 <select id="characterSelect">
-
 <option value="">
 Select a character
 </option>
-
 </select>
-
 </div>
 
 </div>
-
 
 <div class="field">
-
 <label>SAVED ZYNORA VOICE</label>
-
 <select id="voiceAssignSelect">
-
 <option value="">
 Select a voice
 </option>
-
 </select>
-
 </div>
-
 
 <div class="actions">
 
@@ -819,27 +620,22 @@ Select a voice
 class="primary"
 id="assignVoiceBtn"
 >
-ASSIGN PERMANENT VOICE
+Assign Permanent Voice
 </button>
 
 </div>
-
 
 <div
 class="message"
 id="assignMessage"
 ></div>
 
+<div class="section-spacer"></div>
 
-<div
-id="characterVoiceList"
-style="margin-top:18px"
->
-
+<div id="characterVoiceList">
 <div class="empty">
 Select a series to view its characters.
 </div>
-
 </div>
 
 </section>
@@ -850,42 +646,28 @@ Select a series to view its characters.
 <nav class="bottom-nav">
 
 <a href="index.html" class="nav-item">
-
 <span class="nav-icon-wrap">
-
 <svg viewBox="0 0 24 24">
 <path d="M3 10.5 12 3l9 7.5"></path>
 <path d="M5 9.5V21h14V9.5"></path>
 <path d="M9 21v-6h6v6"></path>
 </svg>
-
 </span>
-
 Home
-
 </a>
 
-
 <a href="discover.html" class="nav-item">
-
 <span class="nav-icon-wrap">
-
 <svg viewBox="0 0 24 24">
 <circle cx="12" cy="12" r="9"></circle>
 <path d="m15.5 8.5-2.2 4.8-4.8 2.2 2.2-4.8 4.8-2.2z"></path>
 </svg>
-
 </span>
-
 Discover
-
 </a>
 
-
 <a href="rewards.html" class="nav-item">
-
 <span class="nav-icon-wrap">
-
 <svg viewBox="0 0 24 24">
 <path d="M4 9h16v11H4z"></path>
 <path d="M3 9h18V5H3z"></path>
@@ -893,18 +675,12 @@ Discover
 <path d="M12 5H8.5C7.1 5 6 4.1 6 3s1-2 2.3-2C10.4 1 12 5 12 5z"></path>
 <path d="M12 5h3.5C16.9 5 18 4.1 18 3s-1-2-2.3-2C13.6 1 12 5 12 5z"></path>
 </svg>
-
 </span>
-
 Rewards
-
 </a>
 
-
 <a href="ai-series-studio.html" class="nav-item active">
-
 <span class="nav-icon-wrap">
-
 <svg viewBox="0 0 24 24">
 <circle cx="12" cy="12" r="4"></circle>
 <path d="M12 2v3"></path>
@@ -916,43 +692,28 @@ Rewards
 <path d="m19.1 4.9-2.1 2.1"></path>
 <path d="m7 17-2.1 2.1"></path>
 </svg>
-
 </span>
-
 AI Studio
-
 </a>
 
-
 <a href="library.html" class="nav-item">
-
 <span class="nav-icon-wrap">
-
 <svg viewBox="0 0 24 24">
 <rect x="4" y="4" width="16" height="16" rx="2"></rect>
 <path d="m10 8 6 4-6 4z"></path>
 </svg>
-
 </span>
-
 Library
-
 </a>
 
-
 <a href="profile.html" class="nav-item">
-
 <span class="nav-icon-wrap">
-
 <svg viewBox="0 0 24 24">
 <circle cx="12" cy="8" r="4"></circle>
 <path d="M4.5 21c.8-4 3.4-6 7.5-6s6.7 2 7.5 6"></path>
 </svg>
-
 </span>
-
 Profile
-
 </a>
 
 </nav>
@@ -966,216 +727,20 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
 "sb_publishable__GsW9RahFD_XDWJTFzh9eQ_dNBZfa32";
 
+const VOICE_API_URL =
+"https://zynora-v0k6.onrender.com";
+
 const client =
 supabase.createClient(
 SUPABASE_URL,
 SUPABASE_KEY
 );
 
-
 let currentUser = null;
-
 let voices = [];
-
 let seriesList = [];
-
 let currentCharacters = [];
-
 let editingVoiceId = null;
-
-
-const CAST_VOICES = [
-
-{
-characterName:
-"Maya Vale",
-
-voice_name:
-"Maya Vale - Warm Confident",
-
-provider_voice_id:
-"af_heart",
-
-gender:
-"female",
-
-age_style:
-"young adult",
-
-accent:
-"American",
-
-speaking_style:
-"confident",
-
-description:
-"Warm, intelligent, emotionally expressive and confident, with a calm professional tone and softer emotional depth during personal scenes."
-},
-
-
-{
-characterName:
-"Adrian Cross",
-
-voice_name:
-"Adrian Cross - Deep Controlled",
-
-provider_voice_id:
-"am_michael",
-
-gender:
-"male",
-
-age_style:
-"adult",
-
-accent:
-"American",
-
-speaking_style:
-"calm",
-
-description:
-"Deep, controlled and confident, with a polished executive tone. Intimidating under pressure but softer and protective in private emotional scenes."
-},
-
-
-{
-characterName:
-"Victor Cross",
-
-voice_name:
-"Victor Cross - Polished Authority",
-
-provider_voice_id:
-"bm_george",
-
-gender:
-"male",
-
-age_style:
-"mature",
-
-accent:
-"British",
-
-speaking_style:
-"authoritative",
-
-description:
-"Polished, charismatic and commanding with an older sophisticated tone. Calm and paternal in public, colder and calculating in private."
-},
-
-
-{
-characterName:
-"Celia Cross",
-
-voice_name:
-"Celia Cross - Elegant Composed",
-
-provider_voice_id:
-"bf_isabella",
-
-gender:
-"female",
-
-age_style:
-"mature",
-
-accent:
-"British",
-
-speaking_style:
-"elegant",
-
-description:
-"Elegant, mature and composed, with graceful delivery and quiet emotional depth beneath a guarded social presence."
-},
-
-
-{
-characterName:
-"Julian Reed",
-
-voice_name:
-"Julian Reed - Warm Charming",
-
-provider_voice_id:
-"am_adam",
-
-gender:
-"male",
-
-age_style:
-"adult",
-
-accent:
-"American",
-
-speaking_style:
-"friendly",
-
-description:
-"Warm, witty and approachable with a natural professional tone. Charming on the surface with subtle ambition and resentment underneath."
-},
-
-
-{
-characterName:
-"Nora Vale",
-
-voice_name:
-"Nora Vale - Warm Motherly",
-
-provider_voice_id:
-"af_bella",
-
-gender:
-"female",
-
-age_style:
-"mature",
-
-accent:
-"American",
-
-speaking_style:
-"motherly",
-
-description:
-"Warm, caring and practical with a strong motherly presence. Gentle when comforting family but firm and resilient during hardship."
-},
-
-
-{
-characterName:
-"Elias Vale",
-
-voice_name:
-"Elias Vale - Warm Fatherly",
-
-provider_voice_id:
-"bm_lewis",
-
-gender:
-"male",
-
-age_style:
-"older",
-
-accent:
-"British",
-
-speaking_style:
-"fatherly",
-
-description:
-"Warm, thoughtful and fatherly with an intelligent, sincere delivery. Idealistic and kind, with greater urgency as betrayal and danger close in."
-}
-
-];
-
 
 const voiceName =
 document.getElementById("voiceName");
@@ -1198,11 +763,17 @@ document.getElementById("speakingStyle");
 const voiceDescription =
 document.getElementById("voiceDescription");
 
-const voiceLibrary =
-document.getElementById("voiceLibrary");
+const voiceMessage =
+document.getElementById("voiceMessage");
 
-const voiceAssignSelect =
-document.getElementById("voiceAssignSelect");
+const previewMessage =
+document.getElementById("previewMessage");
+
+const assignMessage =
+document.getElementById("assignMessage");
+
+const authStatus =
+document.getElementById("authStatus");
 
 const seriesSelect =
 document.getElementById("seriesSelect");
@@ -1210,44 +781,32 @@ document.getElementById("seriesSelect");
 const characterSelect =
 document.getElementById("characterSelect");
 
+const voiceAssignSelect =
+document.getElementById("voiceAssignSelect");
+
+const voiceLibrary =
+document.getElementById("voiceLibrary");
+
 const characterVoiceList =
 document.getElementById("characterVoiceList");
 
 const cancelEditBtn =
 document.getElementById("cancelEditBtn");
 
+const previewAudio =
+document.getElementById("previewAudio");
+
+const previewBtn =
+document.getElementById("previewBtn");
 
 function setMessage(
-id,
+element,
 text,
 type=""
 ){
-
-const element =
-document.getElementById(id);
-
-element.textContent =
-text;
-
-element.className =
-"message " + type;
-
+element.textContent = text;
+element.className = "message " + type;
 }
-
-
-function escapeHtml(value){
-
-return String(
-value ?? ""
-)
-.replace(/&/g,"&amp;")
-.replace(/</g,"&lt;")
-.replace(/>/g,"&gt;")
-.replace(/"/g,"&quot;")
-.replace(/'/g,"&#039;");
-
-}
-
 
 async function init(){
 
@@ -1259,57 +818,211 @@ error
 } =
 await client.auth.getUser();
 
-
 if(error || !user){
 
-document
-.getElementById(
-"authStatus"
-)
-.textContent =
+authStatus.textContent =
 "Please log in to use Zynora Voice Studio.";
 
 document
-.getElementById(
-"saveVoiceBtn"
-)
+.getElementById("saveVoiceBtn")
 .disabled = true;
 
 document
-.getElementById(
-"assignVoiceBtn"
-)
+.getElementById("assignVoiceBtn")
 .disabled = true;
 
-document
-.getElementById(
-"installCastBtn"
-)
-.disabled = true;
+previewBtn.disabled = true;
 
 return;
-
 }
 
+currentUser = user;
 
-currentUser =
-user;
-
-
-document
-.getElementById(
-"authStatus"
-)
-.textContent =
+authStatus.textContent =
 "Voice Studio connected ✓";
 
-
 await loadVoices();
-
 await loadSeries();
 
 }
 
+async function previewVoice(){
+
+const providerId =
+providerVoice.value;
+
+const text =
+document
+.getElementById("previewText")
+.value
+.trim();
+
+if(!providerId){
+
+setMessage(
+previewMessage,
+"Select a base voice first.",
+"error"
+);
+
+return;
+}
+
+if(!text){
+
+setMessage(
+previewMessage,
+"Enter test dialogue.",
+"error"
+);
+
+return;
+}
+
+previewBtn.disabled = true;
+
+previewBtn.textContent =
+"Generating...";
+
+previewAudio.style.display =
+"none";
+
+setMessage(
+previewMessage,
+"Generating voice...",
+""
+);
+
+try{
+
+const response =
+await fetch(
+VOICE_API_URL + "/speak",
+{
+method:"POST",
+
+headers:{
+"Content-Type":
+"application/json"
+},
+
+body:
+JSON.stringify({
+text:text,
+voice:providerId,
+speed:1.0
+})
+}
+);
+
+if(!response.ok){
+
+let errorMessage =
+"Voice generation failed.";
+
+try{
+
+const errorData =
+await response.json();
+
+if(errorData.error){
+errorMessage =
+errorData.error;
+}
+
+if(errorData.details){
+errorMessage +=
+" " +
+errorData.details;
+}
+
+}
+catch(error){}
+
+throw new Error(
+errorMessage
+);
+
+}
+
+const audioBlob =
+await response.blob();
+
+if(
+!audioBlob ||
+audioBlob.size === 0
+){
+
+throw new Error(
+"No audio was returned."
+);
+
+}
+
+if(previewAudio.dataset.objectUrl){
+
+URL.revokeObjectURL(
+previewAudio.dataset.objectUrl
+);
+
+}
+
+const objectUrl =
+URL.createObjectURL(
+audioBlob
+);
+
+previewAudio.dataset.objectUrl =
+objectUrl;
+
+previewAudio.src =
+objectUrl;
+
+previewAudio.style.display =
+"block";
+
+setMessage(
+previewMessage,
+"Voice preview ready ✓",
+"success"
+);
+
+try{
+await previewAudio.play();
+}
+catch(error){
+console.log(
+"Autoplay blocked:",
+error
+);
+}
+
+}
+catch(error){
+
+console.error(
+error
+);
+
+setMessage(
+previewMessage,
+error.message ||
+"Could not generate voice.",
+"error"
+);
+
+}
+finally{
+
+previewBtn.disabled =
+false;
+
+previewBtn.textContent =
+"Preview Voice";
+
+}
+
+}
 
 async function loadVoices(){
 
@@ -1317,15 +1030,12 @@ if(!currentUser){
 return;
 }
 
-
 const {
 data,
 error
 } =
 await client
-.from(
-"zynora_voices"
-)
+.from("zynora_voices")
 .select("*")
 .eq(
 "user_id",
@@ -1338,31 +1048,22 @@ ascending:false
 }
 );
 
-
 if(error){
 
 voiceLibrary.innerHTML =
-`
-<div class="empty">
+`<div class="empty">
 ${escapeHtml(error.message)}
-</div>
-`;
+</div>`;
 
 return;
-
 }
 
-
-voices =
-data || [];
-
+voices = data || [];
 
 renderVoices();
-
 renderVoiceAssignmentOptions();
 
 }
-
 
 function renderVoices(){
 
@@ -1376,14 +1077,22 @@ No Zynora voices saved yet.
 `;
 
 return;
-
 }
-
 
 voiceLibrary.innerHTML =
 voices
 .map(
 voice => {
+
+const title =
+escapeHtml(
+voice.voice_name || "Unnamed Voice"
+);
+
+const providerId =
+escapeHtml(
+voice.provider_voice_id || ""
+);
 
 const details =
 [
@@ -1393,27 +1102,38 @@ voice.accent,
 voice.speaking_style
 ]
 .filter(Boolean)
+.map(escapeHtml)
 .join(" • ");
-
 
 return `
 <div class="voice-card">
 
 <div class="voice-name">
-${escapeHtml(voice.voice_name)}
+${title}
 </div>
 
 <div class="meta">
-${escapeHtml(details)}
+${details || "No style details"}
 </div>
 
 <div class="badge">
-Voice ID: ${escapeHtml(voice.provider_voice_id)}
+Voice ID: ${providerId}
 </div>
 
-<div class="meta" style="margin-top:9px">
-${escapeHtml(voice.description || "")}
+${
+voice.description
+?
+`
+<div class="meta"
+style="margin-top:9px">
+${escapeHtml(
+voice.description
+)}
 </div>
+`
+:
+""
+}
 
 <div class="card-actions">
 
@@ -1421,14 +1141,14 @@ ${escapeHtml(voice.description || "")}
 class="secondary"
 onclick="editVoice('${voice.id}')"
 >
-EDIT
+Edit
 </button>
 
 <button
 class="danger"
 onclick="deleteVoice('${voice.id}')"
 >
-DELETE
+Delete
 </button>
 
 </div>
@@ -1442,7 +1162,6 @@ DELETE
 
 }
 
-
 function renderVoiceAssignmentOptions(){
 
 voiceAssignSelect.innerHTML =
@@ -1451,7 +1170,6 @@ voiceAssignSelect.innerHTML =
 Select a voice
 </option>
 `;
-
 
 voices.forEach(
 voice => {
@@ -1474,555 +1192,18 @@ option
 
 }
 
-
-async function loadSeries(){
-
-if(!currentUser){
-return;
-}
-
-
-const {
-data,
-error
-} =
-await client
-.from(
-"ai_series"
-)
-.select(
-"id,title"
-)
-.eq(
-"user_id",
-currentUser.id
-)
-.order(
-"created_at",
-{
-ascending:false
-}
-);
-
-
-if(error){
-
-setMessage(
-"assignMessage",
-error.message,
-"error"
-);
-
-return;
-
-}
-
-
-seriesList =
-data || [];
-
-
-seriesSelect.innerHTML =
-`
-<option value="">
-Select a series
-</option>
-`;
-
-
-seriesList.forEach(
-series => {
-
-const option =
-document.createElement("option");
-
-option.value =
-series.id;
-
-option.textContent =
-series.title;
-
-seriesSelect.appendChild(
-option
-);
-
-}
-);
-
-}
-
-
-async function loadCharacters(){
-
-const seriesId =
-seriesSelect.value;
-
-
-characterSelect.innerHTML =
-`
-<option value="">
-Select a character
-</option>
-`;
-
-
-currentCharacters = [];
-
-
-if(!seriesId){
-
-characterVoiceList.innerHTML =
-`
-<div class="empty">
-Select a series to view its characters.
-</div>
-`;
-
-return;
-
-}
-
-
-const {
-data,
-error
-} =
-await client
-.from(
-"ai_series_characters"
-)
-.select(
-"id,name,role,voice_id,reference_image_url"
-)
-.eq(
-"series_id",
-seriesId
-)
-.eq(
-"user_id",
-currentUser.id
-)
-.order(
-"name",
-{
-ascending:true
-}
-);
-
-
-if(error){
-
-setMessage(
-"assignMessage",
-error.message,
-"error"
-);
-
-return;
-
-}
-
-
-currentCharacters =
-data || [];
-
-
-currentCharacters.forEach(
-character => {
-
-const option =
-document.createElement("option");
-
-option.value =
-character.id;
-
-option.textContent =
-character.name;
-
-characterSelect.appendChild(
-option
-);
-
-}
-);
-
-
-renderCharacterVoices();
-
-}
-
-
-function renderCharacterVoices(){
-
-if(!currentCharacters.length){
-
-characterVoiceList.innerHTML =
-`
-<div class="empty">
-No characters found in this series.
-</div>
-`;
-
-return;
-
-}
-
-
-characterVoiceList.innerHTML =
-currentCharacters
-.map(
-character => {
-
-return `
-<div class="character-card">
-
-<div class="character-name">
-${escapeHtml(character.name)}
-</div>
-
-<div class="meta">
-${escapeHtml(character.role || "")}
-</div>
-
-<div class="badge">
-${
-character.voice_id
-?
-"Voice ID: " +
-escapeHtml(character.voice_id)
-:
-"No voice assigned"
-}
-</div>
-
-</div>
-`;
-
-}
-)
-.join("");
-
-}
-
-
-async function installCast(){
-
-if(!currentUser){
-return;
-}
-
-
-const installButton =
-document.getElementById(
-"installCastBtn"
-);
-
-
-installButton.disabled =
-true;
-
-
-setMessage(
-"installMessage",
-"Finding The Billionaire's Secret...",
-""
-);
-
-
-const {
-data:seriesData,
-error:seriesError
-} =
-await client
-.from(
-"ai_series"
-)
-.select(
-"id,title"
-)
-.eq(
-"user_id",
-currentUser.id
-)
-.ilike(
-"title",
-"The Billionaire's Secret"
-)
-.limit(1);
-
-
-if(seriesError){
-
-setMessage(
-"installMessage",
-seriesError.message,
-"error"
-);
-
-installButton.disabled =
-false;
-
-return;
-
-}
-
-
-if(
-!seriesData ||
-!seriesData.length
-){
-
-setMessage(
-"installMessage",
-"The Billionaire's Secret series was not found.",
-"error"
-);
-
-installButton.disabled =
-false;
-
-return;
-
-}
-
-
-const seriesId =
-seriesData[0].id;
-
-
-const {
-data:charactersData,
-error:charactersError
-} =
-await client
-.from(
-"ai_series_characters"
-)
-.select(
-"id,name"
-)
-.eq(
-"series_id",
-seriesId
-)
-.eq(
-"user_id",
-currentUser.id
-);
-
-
-if(charactersError){
-
-setMessage(
-"installMessage",
-charactersError.message,
-"error"
-);
-
-installButton.disabled =
-false;
-
-return;
-
-}
-
-
-for(
-let index = 0;
-index < CAST_VOICES.length;
-index++
-){
-
-const profile =
-CAST_VOICES[index];
-
-
-setMessage(
-"installMessage",
-`Installing ${profile.characterName} voice (${index + 1}/${CAST_VOICES.length})...`,
-""
-);
-
-
-let savedVoice =
-voices.find(
-voice =>
-voice.voice_name ===
-profile.voice_name
-);
-
-
-if(!savedVoice){
-
-const {
-data:newVoice,
-error:voiceError
-} =
-await client
-.from(
-"zynora_voices"
-)
-.insert({
-
-user_id:
-currentUser.id,
-
-voice_name:
-profile.voice_name,
-
-provider:
-"kokoro",
-
-provider_voice_id:
-profile.provider_voice_id,
-
-gender:
-profile.gender,
-
-age_style:
-profile.age_style,
-
-accent:
-profile.accent,
-
-speaking_style:
-profile.speaking_style,
-
-description:
-profile.description
-
-})
-.select()
-.single();
-
-
-if(voiceError){
-
-console.error(
-profile.characterName,
-voiceError
-);
-
-setMessage(
-"installMessage",
-`Could not create ${profile.characterName}'s voice: ${voiceError.message}`,
-"error"
-);
-
-installButton.disabled =
-false;
-
-return;
-
-}
-
-
-savedVoice =
-newVoice;
-
-voices.push(
-newVoice
-);
-
-}
-
-
-const matchingCharacter =
-(charactersData || [])
-.find(
-character =>
-String(character.name)
-.trim()
-.toLowerCase()
-===
-profile.characterName
-.toLowerCase()
-);
-
-
-if(matchingCharacter){
-
-const {
-error:updateError
-} =
-await client
-.from(
-"ai_series_characters"
-)
-.update({
-
-voice_id:
-savedVoice.provider_voice_id
-
-})
-.eq(
-"id",
-matchingCharacter.id
-)
-.eq(
-"user_id",
-currentUser.id
-);
-
-
-if(updateError){
-
-console.error(
-profile.characterName,
-updateError
-);
-
-setMessage(
-"installMessage",
-`Voice created but could not assign ${profile.characterName}: ${updateError.message}`,
-"error"
-);
-
-installButton.disabled =
-false;
-
-return;
-
-}
-
-}
-
-}
-
-
-await loadVoices();
-
-
-seriesSelect.value =
-seriesId;
-
-
-await loadCharacters();
-
-
-setMessage(
-"installMessage",
-"All 7 permanent cast voices are installed and assigned ✓",
-"success"
-);
-
-
-installButton.textContent =
-"CAST VOICES INSTALLED ✓";
-
-
-installButton.disabled =
-true;
-
-}
-
-
 async function saveVoice(){
 
 if(!currentUser){
+
+setMessage(
+voiceMessage,
+"Please log in first.",
+"error"
+);
+
 return;
 }
-
 
 const name =
 voiceName.value.trim();
@@ -2030,32 +1211,27 @@ voiceName.value.trim();
 const providerId =
 providerVoice.value;
 
-
 if(!name){
 
 setMessage(
-"voiceMessage",
+voiceMessage,
 "Enter a voice name.",
 "error"
 );
 
 return;
-
 }
-
 
 if(!providerId){
 
 setMessage(
-"voiceMessage",
+voiceMessage,
 "Select a base voice.",
 "error"
 );
 
 return;
-
 }
-
 
 const payload = {
 
@@ -2091,20 +1267,14 @@ new Date().toISOString()
 
 };
 
-
-let result;
-
+let error;
 
 if(editingVoiceId){
 
-result =
+const result =
 await client
-.from(
-"zynora_voices"
-)
-.update(
-payload
-)
+.from("zynora_voices")
+.update(payload)
 .eq(
 "id",
 editingVoiceId
@@ -2114,36 +1284,38 @@ editingVoiceId
 currentUser.id
 );
 
+error =
+result.error;
+
 }
 else{
 
-result =
+payload.created_at =
+new Date().toISOString();
+
+const result =
 await client
-.from(
-"zynora_voices"
-)
-.insert(
-payload
-);
+.from("zynora_voices")
+.insert(payload);
+
+error =
+result.error;
 
 }
 
-
-if(result.error){
+if(error){
 
 setMessage(
-"voiceMessage",
-result.error.message,
+voiceMessage,
+error.message,
 "error"
 );
 
 return;
-
 }
 
-
 setMessage(
-"voiceMessage",
+voiceMessage,
 editingVoiceId
 ?
 "Voice updated ✓"
@@ -2152,31 +1324,25 @@ editingVoiceId
 "success"
 );
 
-
 clearVoiceForm();
 
 await loadVoices();
 
 }
 
-
 function editVoice(id){
 
 const voice =
 voices.find(
-item =>
-item.id === id
+item => item.id === id
 );
-
 
 if(!voice){
 return;
 }
 
-
 editingVoiceId =
 voice.id;
-
 
 voiceName.value =
 voice.voice_name || "";
@@ -2199,59 +1365,38 @@ voice.speaking_style || "";
 voiceDescription.value =
 voice.description || "";
 
-
 cancelEditBtn.style.display =
 "inline-block";
-
 
 window.scrollTo({
 top:0,
 behavior:"smooth"
 });
 
-
 setMessage(
-"voiceMessage",
+voiceMessage,
 "Editing saved voice.",
 ""
 );
 
 }
 
-
 function clearVoiceForm(){
 
-editingVoiceId =
-null;
+editingVoiceId = null;
 
-
-voiceName.value =
-"";
-
-providerVoice.value =
-"";
-
-gender.value =
-"";
-
-ageStyle.value =
-"";
-
-accent.value =
-"";
-
-speakingStyle.value =
-"";
-
-voiceDescription.value =
-"";
-
+voiceName.value = "";
+providerVoice.value = "";
+gender.value = "";
+ageStyle.value = "";
+accent.value = "";
+speakingStyle.value = "";
+voiceDescription.value = "";
 
 cancelEditBtn.style.display =
 "none";
 
 }
-
 
 async function deleteVoice(id){
 
@@ -2263,14 +1408,11 @@ if(
 return;
 }
 
-
 const {
 error
 } =
 await client
-.from(
-"zynora_voices"
-)
+.from("zynora_voices")
 .delete()
 .eq(
 "id",
@@ -2281,31 +1423,235 @@ id
 currentUser.id
 );
 
-
 if(error){
 
 setMessage(
-"voiceMessage",
+voiceMessage,
 error.message,
 "error"
 );
 
 return;
-
 }
 
-
 setMessage(
-"voiceMessage",
+voiceMessage,
 "Voice deleted.",
 "success"
 );
-
 
 await loadVoices();
 
 }
 
+async function loadSeries(){
+
+if(!currentUser){
+return;
+}
+
+const {
+data,
+error
+} =
+await client
+.from("ai_series")
+.select(
+"id,title"
+)
+.eq(
+"user_id",
+currentUser.id
+)
+.order(
+"created_at",
+{
+ascending:false
+}
+);
+
+if(error){
+
+setMessage(
+assignMessage,
+error.message,
+"error"
+);
+
+return;
+}
+
+seriesList =
+data || [];
+
+seriesSelect.innerHTML =
+`
+<option value="">
+Select a series
+</option>
+`;
+
+seriesList.forEach(
+series => {
+
+const option =
+document.createElement("option");
+
+option.value =
+series.id;
+
+option.textContent =
+series.title;
+
+seriesSelect.appendChild(
+option
+);
+
+}
+);
+
+}
+
+async function loadCharacters(){
+
+const seriesId =
+seriesSelect.value;
+
+characterSelect.innerHTML =
+`
+<option value="">
+Select a character
+</option>
+`;
+
+currentCharacters = [];
+
+if(!seriesId){
+
+characterVoiceList.innerHTML =
+`
+<div class="empty">
+Select a series to view its characters.
+</div>
+`;
+
+return;
+}
+
+const {
+data,
+error
+} =
+await client
+.from("ai_series_characters")
+.select(
+"id,name,role,voice_id,reference_image_url"
+)
+.eq(
+"series_id",
+seriesId
+)
+.eq(
+"user_id",
+currentUser.id
+)
+.order(
+"name",
+{
+ascending:true
+}
+);
+
+if(error){
+
+setMessage(
+assignMessage,
+error.message,
+"error"
+);
+
+return;
+}
+
+currentCharacters =
+data || [];
+
+currentCharacters.forEach(
+character => {
+
+const option =
+document.createElement("option");
+
+option.value =
+character.id;
+
+option.textContent =
+character.name;
+
+characterSelect.appendChild(
+option
+);
+
+}
+);
+
+renderCharacterVoices();
+
+}
+
+function renderCharacterVoices(){
+
+if(!currentCharacters.length){
+
+characterVoiceList.innerHTML =
+`
+<div class="empty">
+No characters found in this series.
+</div>
+`;
+
+return;
+}
+
+characterVoiceList.innerHTML =
+currentCharacters
+.map(
+character => {
+
+const voiceLabel =
+character.voice_id
+?
+escapeHtml(character.voice_id)
+:
+"No voice assigned";
+
+return `
+<div class="character-card">
+
+<div class="character-name">
+${escapeHtml(
+character.name || "Unnamed Character"
+)}
+</div>
+
+<div class="meta">
+${escapeHtml(
+character.role || ""
+)}
+</div>
+
+<div class="badge">
+${voiceLabel}
+</div>
+
+</div>
+`;
+
+}
+)
+.join("");
+
+}
 
 async function assignVoice(){
 
@@ -2315,32 +1661,27 @@ characterSelect.value;
 const selectedVoiceId =
 voiceAssignSelect.value;
 
-
 if(!characterId){
 
 setMessage(
-"assignMessage",
+assignMessage,
 "Select a character.",
 "error"
 );
 
 return;
-
 }
-
 
 if(!selectedVoiceId){
 
 setMessage(
-"assignMessage",
+assignMessage,
 "Select a saved Zynora voice.",
 "error"
 );
 
 return;
-
 }
-
 
 const {
 error
@@ -2350,10 +1691,8 @@ await client
 "ai_series_characters"
 )
 .update({
-
 voice_id:
 selectedVoiceId
-
 })
 .eq(
 "id",
@@ -2364,41 +1703,54 @@ characterId
 currentUser.id
 );
 
-
 if(error){
 
 setMessage(
-"assignMessage",
+assignMessage,
 error.message,
 "error"
 );
 
 return;
-
 }
 
-
 setMessage(
-"assignMessage",
+assignMessage,
 "Permanent voice assigned ✓",
 "success"
 );
-
 
 await loadCharacters();
 
 }
 
+function escapeHtml(value){
 
-document
-.getElementById(
-"installCastBtn"
+return String(
+value ?? ""
 )
-.addEventListener(
-"click",
-installCast
+.replace(
+/&/g,
+"&amp;"
+)
+.replace(
+/</g,
+"&lt;"
+)
+.replace(
+/>/g,
+"&gt;"
+)
+.replace(
+/"/g,
+"&quot;"
+)
+.replace(
+/'/g,
+"&#039;"
 );
 
+}
 
 document
 .getElementById(
@@ -2409,6 +1761,33 @@ document
 saveVoice
 );
 
+previewBtn
+.addEventListener(
+"click",
+previewVoice
+);
+
+cancelEditBtn
+.addEventListener(
+"click",
+() => {
+
+clearVoiceForm();
+
+setMessage(
+voiceMessage,
+"Edit cancelled.",
+""
+);
+
+}
+);
+
+seriesSelect
+.addEventListener(
+"change",
+loadCharacters
+);
 
 document
 .getElementById(
@@ -2418,31 +1797,6 @@ document
 "click",
 assignVoice
 );
-
-
-seriesSelect
-.addEventListener(
-"change",
-loadCharacters
-);
-
-
-cancelEditBtn
-.addEventListener(
-"click",
-function(){
-
-clearVoiceForm();
-
-setMessage(
-"voiceMessage",
-"Edit cancelled.",
-""
-);
-
-}
-);
-
 
 init();
 
