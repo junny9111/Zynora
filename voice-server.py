@@ -1,12 +1,11 @@
 import io
 import os
 
-import numpy as np
 import soundfile as sf
 
 from flask import Flask, jsonify, request, send_file
 from flask_cors import CORS
-from kokoro import KPipeline
+from kokoro_onnx import Kokoro
 
 
 app = Flask(__name__)
@@ -38,13 +37,19 @@ CORS(
 @app.after_request
 def add_cors_headers(response):
 
-    response.headers["Access-Control-Allow-Origin"] = "*"
+    response.headers[
+        "Access-Control-Allow-Origin"
+    ] = "*"
 
-    response.headers["Access-Control-Allow-Headers"] = (
+    response.headers[
+        "Access-Control-Allow-Headers"
+    ] = (
         "Content-Type, Authorization"
     )
 
-    response.headers["Access-Control-Allow-Methods"] = (
+    response.headers[
+        "Access-Control-Allow-Methods"
+    ] = (
         "GET, POST, OPTIONS"
     )
 
@@ -55,7 +60,15 @@ def add_cors_headers(response):
 # SETTINGS
 # ---------------------------------------------------------
 
-SAMPLE_RATE = 24000
+MODEL_PATH = os.environ.get(
+    "KOKORO_MODEL_PATH",
+    "kokoro-v1.0.onnx"
+)
+
+VOICES_PATH = os.environ.get(
+    "KOKORO_VOICES_PATH",
+    "voices-v1.0.bin"
+)
 
 
 ALLOWED_VOICES = {
@@ -73,8 +86,7 @@ ALLOWED_VOICES = {
 }
 
 
-american_pipeline = None
-british_pipeline = None
+kokoro_engine = None
 
 
 # ---------------------------------------------------------
@@ -95,80 +107,81 @@ def log_request():
 
 
 # ---------------------------------------------------------
-# KOKORO PIPELINE
+# LOAD LIGHTWEIGHT ONNX ENGINE
 # ---------------------------------------------------------
 
-def get_pipeline(voice_id):
+def get_kokoro():
 
-    global american_pipeline
-    global british_pipeline
-
-
-    if (
-        voice_id.startswith("bf_")
-        or
-        voice_id.startswith("bm_")
-    ):
-
-        if british_pipeline is None:
-
-            print(
-                "Loading British Kokoro pipeline...",
-                flush=True
-            )
-
-            british_pipeline = KPipeline(
-                lang_code="b"
-            )
-
-        return british_pipeline
+    global kokoro_engine
 
 
-    if american_pipeline is None:
+    if kokoro_engine is None:
 
         print(
-            "Loading American Kokoro pipeline...",
+            "Loading Kokoro ONNX engine...",
             flush=True
         )
 
-        american_pipeline = KPipeline(
-            lang_code="a"
+
+        if not os.path.exists(
+            MODEL_PATH
+        ):
+
+            raise FileNotFoundError(
+                "Kokoro model file was not found: "
+                +
+                MODEL_PATH
+            )
+
+
+        if not os.path.exists(
+            VOICES_PATH
+        ):
+
+            raise FileNotFoundError(
+                "Kokoro voices file was not found: "
+                +
+                VOICES_PATH
+            )
+
+
+        kokoro_engine = Kokoro(
+            MODEL_PATH,
+            VOICES_PATH
         )
 
 
-    return american_pipeline
+        print(
+            "Kokoro ONNX engine loaded.",
+            flush=True
+        )
 
 
-def audio_to_numpy(audio):
+    return kokoro_engine
 
-    if hasattr(
-        audio,
-        "detach"
+
+# ---------------------------------------------------------
+# LANGUAGE FOR VOICE
+# ---------------------------------------------------------
+
+def get_language(
+    voice_id
+):
+
+    if (
+        voice_id.startswith(
+            "bf_"
+        )
+        or
+        voice_id.startswith(
+            "bm_"
+        )
     ):
 
-        audio = audio.detach()
+        return "en-gb"
 
 
-    if hasattr(
-        audio,
-        "cpu"
-    ):
-
-        audio = audio.cpu()
-
-
-    if hasattr(
-        audio,
-        "numpy"
-    ):
-
-        audio = audio.numpy()
-
-
-    return np.asarray(
-        audio,
-        dtype=np.float32
-    )
+    return "en-us"
 
 
 # ---------------------------------------------------------
@@ -189,7 +202,7 @@ def home():
         "Zynora Voice Server",
 
         "provider":
-        "Kokoro",
+        "Kokoro ONNX",
 
         "status":
         "online"
@@ -217,7 +230,17 @@ def health():
         "zynora-voice",
 
         "provider":
-        "kokoro"
+        "kokoro-onnx",
+
+        "model_found":
+        os.path.exists(
+            MODEL_PATH
+        ),
+
+        "voices_found":
+        os.path.exists(
+            VOICES_PATH
+        )
     })
 
 
@@ -301,7 +324,7 @@ def speak():
 
 
         # ---------------------------------------------
-        # Validate text
+        # VALIDATE TEXT
         # ---------------------------------------------
 
         if not text:
@@ -321,7 +344,7 @@ def speak():
 
 
         # ---------------------------------------------
-        # Validate voice
+        # VALIDATE VOICE
         # ---------------------------------------------
 
         if voice_id not in ALLOWED_VOICES:
@@ -333,7 +356,7 @@ def speak():
 
 
         # ---------------------------------------------
-        # Validate speed
+        # VALIDATE SPEED
         # ---------------------------------------------
 
         try:
@@ -359,61 +382,48 @@ def speak():
         )
 
 
+        language = get_language(
+            voice_id
+        )
+
+
         print(
-            "Generating voice:",
+            "Generating:",
             voice_id,
+            "Language:",
+            language,
+            "Speed:",
+            speed,
             flush=True
         )
 
 
         # ---------------------------------------------
-        # Load model
+        # LOAD ONNX ENGINE
         # ---------------------------------------------
 
-        pipeline = get_pipeline(
-            voice_id
+        engine = get_kokoro()
+
+
+        # ---------------------------------------------
+        # GENERATE AUDIO
+        # ---------------------------------------------
+
+        samples, sample_rate = (
+            engine.create(
+                text,
+                voice=voice_id,
+                speed=speed,
+                lang=language
+            )
         )
 
 
-        # ---------------------------------------------
-        # Generate audio
-        # ---------------------------------------------
-
-        generator = pipeline(
-            text,
-            voice=voice_id,
-            speed=speed
-        )
-
-
-        audio_parts = []
-
-
-        for _, _, audio in generator:
-
-            if audio is None:
-
-                continue
-
-
-            audio_array = audio_to_numpy(
-                audio
-            )
-
-
-            if audio_array.size:
-
-                audio_parts.append(
-                    audio_array
-                )
-
-
-        if not audio_parts:
-
-            print(
-                "No audio generated.",
-                flush=True
-            )
+        if (
+            samples is None
+            or
+            len(samples) == 0
+        ):
 
             return jsonify({
                 "error":
@@ -421,13 +431,8 @@ def speak():
             }), 500
 
 
-        final_audio = np.concatenate(
-            audio_parts
-        )
-
-
         # ---------------------------------------------
-        # WAV
+        # CREATE WAV IN MEMORY
         # ---------------------------------------------
 
         buffer = io.BytesIO()
@@ -435,8 +440,8 @@ def speak():
 
         sf.write(
             buffer,
-            final_audio,
-            SAMPLE_RATE,
+            samples,
+            sample_rate,
             format="WAV"
         )
 
@@ -454,7 +459,8 @@ def speak():
             buffer,
             mimetype="audio/wav",
             as_attachment=False,
-            download_name="zynora-voice.wav"
+            download_name=
+            "zynora-voice.wav"
         )
 
 
@@ -491,6 +497,9 @@ if __name__ == "__main__":
 
 
     app.run(
-        host="0.0.0.0",
-        port=port
+        host=
+        "0.0.0.0",
+
+        port=
+        port
     )
