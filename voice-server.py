@@ -11,17 +11,49 @@ from kokoro import KPipeline
 
 app = Flask(__name__)
 
+
+# ---------------------------------------------------------
+# CORS
+# ---------------------------------------------------------
+
 CORS(
     app,
     resources={
         r"/*": {
-            "origins": [
-                "https://junny9111.github.io"
+            "origins": "*",
+            "methods": [
+                "GET",
+                "POST",
+                "OPTIONS"
+            ],
+            "allow_headers": [
+                "Content-Type",
+                "Authorization"
             ]
         }
     }
 )
 
+
+@app.after_request
+def add_cors_headers(response):
+
+    response.headers["Access-Control-Allow-Origin"] = "*"
+
+    response.headers["Access-Control-Allow-Headers"] = (
+        "Content-Type, Authorization"
+    )
+
+    response.headers["Access-Control-Allow-Methods"] = (
+        "GET, POST, OPTIONS"
+    )
+
+    return response
+
+
+# ---------------------------------------------------------
+# SETTINGS
+# ---------------------------------------------------------
 
 SAMPLE_RATE = 24000
 
@@ -45,38 +77,93 @@ american_pipeline = None
 british_pipeline = None
 
 
+# ---------------------------------------------------------
+# REQUEST LOGGING
+# ---------------------------------------------------------
+
+@app.before_request
+def log_request():
+
+    print(
+        "REQUEST:",
+        request.method,
+        request.path,
+        "ORIGIN:",
+        request.headers.get("Origin"),
+        flush=True
+    )
+
+
+# ---------------------------------------------------------
+# KOKORO PIPELINE
+# ---------------------------------------------------------
+
 def get_pipeline(voice_id):
 
     global american_pipeline
     global british_pipeline
 
-    if voice_id.startswith("bf_") or voice_id.startswith("bm_"):
+
+    if (
+        voice_id.startswith("bf_")
+        or
+        voice_id.startswith("bm_")
+    ):
 
         if british_pipeline is None:
+
+            print(
+                "Loading British Kokoro pipeline...",
+                flush=True
+            )
+
             british_pipeline = KPipeline(
                 lang_code="b"
             )
 
         return british_pipeline
 
+
     if american_pipeline is None:
+
+        print(
+            "Loading American Kokoro pipeline...",
+            flush=True
+        )
+
         american_pipeline = KPipeline(
             lang_code="a"
         )
+
 
     return american_pipeline
 
 
 def audio_to_numpy(audio):
 
-    if hasattr(audio, "detach"):
+    if hasattr(
+        audio,
+        "detach"
+    ):
+
         audio = audio.detach()
 
-    if hasattr(audio, "cpu"):
+
+    if hasattr(
+        audio,
+        "cpu"
+    ):
+
         audio = audio.cpu()
 
-    if hasattr(audio, "numpy"):
+
+    if hasattr(
+        audio,
+        "numpy"
+    ):
+
         audio = audio.numpy()
+
 
     return np.asarray(
         audio,
@@ -84,44 +171,112 @@ def audio_to_numpy(audio):
     )
 
 
-@app.route("/", methods=["GET"])
+# ---------------------------------------------------------
+# HOME
+# ---------------------------------------------------------
+
+@app.route(
+    "/",
+    methods=[
+        "GET",
+        "OPTIONS"
+    ]
+)
 def home():
 
     return jsonify({
-        "service": "Zynora Voice Server",
-        "provider": "Kokoro",
-        "status": "online"
+        "service":
+        "Zynora Voice Server",
+
+        "provider":
+        "Kokoro",
+
+        "status":
+        "online"
     })
 
 
-@app.route("/health", methods=["GET"])
+# ---------------------------------------------------------
+# HEALTH
+# ---------------------------------------------------------
+
+@app.route(
+    "/health",
+    methods=[
+        "GET",
+        "OPTIONS"
+    ]
+)
 def health():
 
     return jsonify({
-        "ok": True,
-        "service": "zynora-voice",
-        "provider": "kokoro"
+        "ok":
+        True,
+
+        "service":
+        "zynora-voice",
+
+        "provider":
+        "kokoro"
     })
 
 
-@app.route("/voices", methods=["GET"])
+# ---------------------------------------------------------
+# VOICES
+# ---------------------------------------------------------
+
+@app.route(
+    "/voices",
+    methods=[
+        "GET",
+        "OPTIONS"
+    ]
+)
 def voices():
 
     return jsonify({
-        "voices": sorted(
-            list(ALLOWED_VOICES)
+        "voices":
+        sorted(
+            list(
+                ALLOWED_VOICES
+            )
         )
     })
 
 
-@app.route("/speak", methods=["POST"])
+# ---------------------------------------------------------
+# SPEAK
+# ---------------------------------------------------------
+
+@app.route(
+    "/speak",
+    methods=[
+        "POST",
+        "OPTIONS"
+    ]
+)
 def speak():
 
+    if request.method == "OPTIONS":
+
+        return (
+            "",
+            204
+        )
+
+
     try:
+
+        print(
+            "Speak request received.",
+            flush=True
+        )
+
 
         data = request.get_json(
             silent=True
         ) or {}
+
 
         text = str(
             data.get(
@@ -130,6 +285,7 @@ def speak():
             )
         ).strip()
 
+
         voice_id = str(
             data.get(
                 "voice",
@@ -137,11 +293,16 @@ def speak():
             )
         ).strip()
 
+
         speed_value = data.get(
             "speed",
             1.0
         )
 
+
+        # ---------------------------------------------
+        # Validate text
+        # ---------------------------------------------
 
         if not text:
 
@@ -159,6 +320,10 @@ def speak():
             }), 400
 
 
+        # ---------------------------------------------
+        # Validate voice
+        # ---------------------------------------------
+
         if voice_id not in ALLOWED_VOICES:
 
             return jsonify({
@@ -167,13 +332,20 @@ def speak():
             }), 400
 
 
+        # ---------------------------------------------
+        # Validate speed
+        # ---------------------------------------------
+
         try:
 
             speed = float(
                 speed_value
             )
 
-        except (TypeError, ValueError):
+        except (
+            TypeError,
+            ValueError
+        ):
 
             speed = 1.0
 
@@ -187,10 +359,25 @@ def speak():
         )
 
 
+        print(
+            "Generating voice:",
+            voice_id,
+            flush=True
+        )
+
+
+        # ---------------------------------------------
+        # Load model
+        # ---------------------------------------------
+
         pipeline = get_pipeline(
             voice_id
         )
 
+
+        # ---------------------------------------------
+        # Generate audio
+        # ---------------------------------------------
 
         generator = pipeline(
             text,
@@ -205,19 +392,28 @@ def speak():
         for _, _, audio in generator:
 
             if audio is None:
+
                 continue
+
 
             audio_array = audio_to_numpy(
                 audio
             )
 
+
             if audio_array.size:
+
                 audio_parts.append(
                     audio_array
                 )
 
 
         if not audio_parts:
+
+            print(
+                "No audio generated.",
+                flush=True
+            )
 
             return jsonify({
                 "error":
@@ -229,6 +425,10 @@ def speak():
             audio_parts
         )
 
+
+        # ---------------------------------------------
+        # WAV
+        # ---------------------------------------------
 
         buffer = io.BytesIO()
 
@@ -244,6 +444,12 @@ def speak():
         buffer.seek(0)
 
 
+        print(
+            "Voice generation completed.",
+            flush=True
+        )
+
+
         return send_file(
             buffer,
             mimetype="audio/wav",
@@ -256,16 +462,23 @@ def speak():
 
         print(
             "VOICE ERROR:",
-            repr(error)
+            repr(error),
+            flush=True
         )
+
 
         return jsonify({
             "error":
             "Voice generation failed.",
+
             "details":
             str(error)
         }), 500
 
+
+# ---------------------------------------------------------
+# START
+# ---------------------------------------------------------
 
 if __name__ == "__main__":
 
@@ -275,6 +488,7 @@ if __name__ == "__main__":
             10000
         )
     )
+
 
     app.run(
         host="0.0.0.0",
