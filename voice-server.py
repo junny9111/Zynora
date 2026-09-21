@@ -1,6 +1,7 @@
 import io
 import os
 
+import onnxruntime as ort
 import soundfile as sf
 
 from flask import Flask, jsonify, request, send_file
@@ -20,15 +21,8 @@ CORS(
     resources={
         r"/*": {
             "origins": "*",
-            "methods": [
-                "GET",
-                "POST",
-                "OPTIONS"
-            ],
-            "allow_headers": [
-                "Content-Type",
-                "Authorization"
-            ]
+            "methods": ["GET", "POST", "OPTIONS"],
+            "allow_headers": ["Content-Type", "Authorization"]
         }
     }
 )
@@ -37,19 +31,11 @@ CORS(
 @app.after_request
 def add_cors_headers(response):
 
-    response.headers[
-        "Access-Control-Allow-Origin"
-    ] = "*"
-
-    response.headers[
-        "Access-Control-Allow-Headers"
-    ] = (
+    response.headers["Access-Control-Allow-Origin"] = "*"
+    response.headers["Access-Control-Allow-Headers"] = (
         "Content-Type, Authorization"
     )
-
-    response.headers[
-        "Access-Control-Allow-Methods"
-    ] = (
+    response.headers["Access-Control-Allow-Methods"] = (
         "GET, POST, OPTIONS"
     )
 
@@ -107,54 +93,96 @@ def log_request():
 
 
 # ---------------------------------------------------------
-# LOAD LIGHTWEIGHT ONNX ENGINE
+# LOAD MEMORY-OPTIMIZED ONNX ENGINE
 # ---------------------------------------------------------
 
 def get_kokoro():
 
     global kokoro_engine
 
+    if kokoro_engine is not None:
+        return kokoro_engine
 
-    if kokoro_engine is None:
 
-        print(
-            "Loading Kokoro ONNX engine...",
-            flush=True
+    print(
+        "Loading memory-optimized Kokoro ONNX engine...",
+        flush=True
+    )
+
+
+    if not os.path.exists(MODEL_PATH):
+
+        raise FileNotFoundError(
+            "Kokoro model file was not found: "
+            + MODEL_PATH
         )
 
 
-        if not os.path.exists(
-            MODEL_PATH
-        ):
+    if not os.path.exists(VOICES_PATH):
 
-            raise FileNotFoundError(
-                "Kokoro model file was not found: "
-                +
-                MODEL_PATH
-            )
-
-
-        if not os.path.exists(
-            VOICES_PATH
-        ):
-
-            raise FileNotFoundError(
-                "Kokoro voices file was not found: "
-                +
-                VOICES_PATH
-            )
-
-
-        kokoro_engine = Kokoro(
-            MODEL_PATH,
-            VOICES_PATH
+        raise FileNotFoundError(
+            "Kokoro voices file was not found: "
+            + VOICES_PATH
         )
 
 
-        print(
-            "Kokoro ONNX engine loaded.",
-            flush=True
-        )
+    # -----------------------------------------------------
+    # ONNX RUNTIME MEMORY SETTINGS
+    # -----------------------------------------------------
+
+    session_options = ort.SessionOptions()
+
+    # Reduce memory usage on small Render instances.
+    session_options.enable_cpu_mem_arena = False
+    session_options.enable_mem_pattern = False
+
+    # Keep CPU/thread usage conservative.
+    session_options.intra_op_num_threads = 1
+    session_options.inter_op_num_threads = 1
+
+    # Use sequential execution instead of parallel execution.
+    session_options.execution_mode = (
+        ort.ExecutionMode.ORT_SEQUENTIAL
+    )
+
+    # Enable ONNX graph optimizations.
+    session_options.graph_optimization_level = (
+        ort.GraphOptimizationLevel.ORT_ENABLE_ALL
+    )
+
+
+    print(
+        "Creating ONNX Runtime session...",
+        flush=True
+    )
+
+
+    session = ort.InferenceSession(
+        MODEL_PATH,
+        sess_options=session_options,
+        providers=[
+            "CPUExecutionProvider"
+        ]
+    )
+
+
+    print(
+        "ONNX Runtime session created.",
+        flush=True
+    )
+
+
+    # Kokoro ONNX accepts an existing InferenceSession.
+    kokoro_engine = Kokoro(
+        session,
+        VOICES_PATH
+    )
+
+
+    print(
+        "Kokoro ONNX engine loaded successfully.",
+        flush=True
+    )
 
 
     return kokoro_engine
@@ -164,22 +192,14 @@ def get_kokoro():
 # LANGUAGE FOR VOICE
 # ---------------------------------------------------------
 
-def get_language(
-    voice_id
-):
+def get_language(voice_id):
 
     if (
-        voice_id.startswith(
-            "bf_"
-        )
+        voice_id.startswith("bf_")
         or
-        voice_id.startswith(
-            "bm_"
-        )
+        voice_id.startswith("bm_")
     ):
-
         return "en-gb"
-
 
     return "en-us"
 
@@ -190,22 +210,14 @@ def get_language(
 
 @app.route(
     "/",
-    methods=[
-        "GET",
-        "OPTIONS"
-    ]
+    methods=["GET", "OPTIONS"]
 )
 def home():
 
     return jsonify({
-        "service":
-        "Zynora Voice Server",
-
-        "provider":
-        "Kokoro ONNX",
-
-        "status":
-        "online"
+        "service": "Zynora Voice Server",
+        "provider": "Kokoro ONNX INT8",
+        "status": "online"
     })
 
 
@@ -215,32 +227,17 @@ def home():
 
 @app.route(
     "/health",
-    methods=[
-        "GET",
-        "OPTIONS"
-    ]
+    methods=["GET", "OPTIONS"]
 )
 def health():
 
     return jsonify({
-        "ok":
-        True,
-
-        "service":
-        "zynora-voice",
-
-        "provider":
-        "kokoro-onnx",
-
-        "model_found":
-        os.path.exists(
-            MODEL_PATH
-        ),
-
-        "voices_found":
-        os.path.exists(
-            VOICES_PATH
-        )
+        "ok": True,
+        "service": "zynora-voice",
+        "provider": "kokoro-onnx-int8",
+        "model_found": os.path.exists(MODEL_PATH),
+        "voices_found": os.path.exists(VOICES_PATH),
+        "engine_loaded": kokoro_engine is not None
     })
 
 
@@ -250,19 +247,13 @@ def health():
 
 @app.route(
     "/voices",
-    methods=[
-        "GET",
-        "OPTIONS"
-    ]
+    methods=["GET", "OPTIONS"]
 )
 def voices():
 
     return jsonify({
-        "voices":
-        sorted(
-            list(
-                ALLOWED_VOICES
-            )
+        "voices": sorted(
+            list(ALLOWED_VOICES)
         )
     })
 
@@ -273,19 +264,12 @@ def voices():
 
 @app.route(
     "/speak",
-    methods=[
-        "POST",
-        "OPTIONS"
-    ]
+    methods=["POST", "OPTIONS"]
 )
 def speak():
 
     if request.method == "OPTIONS":
-
-        return (
-            "",
-            204
-        )
+        return "", 204
 
 
     try:
@@ -323,9 +307,9 @@ def speak():
         )
 
 
-        # ---------------------------------------------
+        # -------------------------------------------------
         # VALIDATE TEXT
-        # ---------------------------------------------
+        # -------------------------------------------------
 
         if not text:
 
@@ -335,17 +319,18 @@ def speak():
             }), 400
 
 
-        if len(text) > 1500:
+        # Keep previews short while using Render Free.
+        if len(text) > 500:
 
             return jsonify({
                 "error":
-                "Maximum dialogue length is 1500 characters."
+                "Maximum preview length is 500 characters."
             }), 400
 
 
-        # ---------------------------------------------
+        # -------------------------------------------------
         # VALIDATE VOICE
-        # ---------------------------------------------
+        # -------------------------------------------------
 
         if voice_id not in ALLOWED_VOICES:
 
@@ -355,9 +340,9 @@ def speak():
             }), 400
 
 
-        # ---------------------------------------------
+        # -------------------------------------------------
         # VALIDATE SPEED
-        # ---------------------------------------------
+        # -------------------------------------------------
 
         try:
 
@@ -365,10 +350,7 @@ def speak():
                 speed_value
             )
 
-        except (
-            TypeError,
-            ValueError
-        ):
+        except (TypeError, ValueError):
 
             speed = 1.0
 
@@ -394,28 +376,28 @@ def speak():
             language,
             "Speed:",
             speed,
+            "Characters:",
+            len(text),
             flush=True
         )
 
 
-        # ---------------------------------------------
-        # LOAD ONNX ENGINE
-        # ---------------------------------------------
+        # -------------------------------------------------
+        # LOAD ENGINE
+        # -------------------------------------------------
 
         engine = get_kokoro()
 
 
-        # ---------------------------------------------
+        # -------------------------------------------------
         # GENERATE AUDIO
-        # ---------------------------------------------
+        # -------------------------------------------------
 
-        samples, sample_rate = (
-            engine.create(
-                text,
-                voice=voice_id,
-                speed=speed,
-                lang=language
-            )
+        samples, sample_rate = engine.create(
+            text,
+            voice=voice_id,
+            speed=speed,
+            lang=language
         )
 
 
@@ -431,9 +413,9 @@ def speak():
             }), 500
 
 
-        # ---------------------------------------------
-        # CREATE WAV IN MEMORY
-        # ---------------------------------------------
+        # -------------------------------------------------
+        # CREATE WAV
+        # -------------------------------------------------
 
         buffer = io.BytesIO()
 
@@ -450,7 +432,7 @@ def speak():
 
 
         print(
-            "Voice generation completed.",
+            "Voice generation completed successfully.",
             flush=True
         )
 
@@ -459,8 +441,7 @@ def speak():
             buffer,
             mimetype="audio/wav",
             as_attachment=False,
-            download_name=
-            "zynora-voice.wav"
+            download_name="zynora-voice.wav"
         )
 
 
@@ -475,10 +456,10 @@ def speak():
 
         return jsonify({
             "error":
-            "Voice generation failed.",
+                "Voice generation failed.",
 
             "details":
-            str(error)
+                str(error)
         }), 500
 
 
@@ -497,9 +478,6 @@ if __name__ == "__main__":
 
 
     app.run(
-        host=
-        "0.0.0.0",
-
-        port=
-        port
+        host="0.0.0.0",
+        port=port
     )
