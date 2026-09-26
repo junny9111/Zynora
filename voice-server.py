@@ -93,7 +93,7 @@ def log_request():
 
 
 # ---------------------------------------------------------
-# LOAD MEMORY-OPTIMIZED ONNX ENGINE
+# LOAD MEMORY-OPTIMIZED KOKORO
 # ---------------------------------------------------------
 
 def get_kokoro():
@@ -127,25 +127,21 @@ def get_kokoro():
 
 
     # -----------------------------------------------------
-    # ONNX RUNTIME MEMORY SETTINGS
+    # MEMORY-CONSCIOUS ONNX SETTINGS
     # -----------------------------------------------------
 
     session_options = ort.SessionOptions()
 
-    # Reduce memory usage on small Render instances.
     session_options.enable_cpu_mem_arena = False
     session_options.enable_mem_pattern = False
 
-    # Keep CPU/thread usage conservative.
     session_options.intra_op_num_threads = 1
     session_options.inter_op_num_threads = 1
 
-    # Use sequential execution instead of parallel execution.
     session_options.execution_mode = (
         ort.ExecutionMode.ORT_SEQUENTIAL
     )
 
-    # Enable ONNX graph optimizations.
     session_options.graph_optimization_level = (
         ort.GraphOptimizationLevel.ORT_ENABLE_ALL
     )
@@ -172,8 +168,11 @@ def get_kokoro():
     )
 
 
-    # Kokoro ONNX accepts an existing InferenceSession.
-    kokoro_engine = Kokoro(
+    # IMPORTANT:
+    # kokoro-onnx requires from_session() when
+    # providing an existing ONNX Runtime session.
+
+    kokoro_engine = Kokoro.from_session(
         session,
         VOICES_PATH
     )
@@ -319,7 +318,7 @@ def speak():
             }), 400
 
 
-        # Keep previews short while using Render Free.
+        # Keep preview requests short for Render Free.
         if len(text) > 500:
 
             return jsonify({
@@ -350,7 +349,10 @@ def speak():
                 speed_value
             )
 
-        except (TypeError, ValueError):
+        except (
+            TypeError,
+            ValueError
+        ):
 
             speed = 1.0
 
@@ -383,7 +385,7 @@ def speak():
 
 
         # -------------------------------------------------
-        # LOAD ENGINE
+        # LOAD KOKORO
         # -------------------------------------------------
 
         engine = get_kokoro()
@@ -456,10 +458,10 @@ def speak():
 
         return jsonify({
             "error":
-                "Voice generation failed.",
+            "Voice generation failed.",
 
             "details":
-                str(error)
+            str(error)
         }), 500
 
 
