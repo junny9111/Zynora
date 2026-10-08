@@ -510,6 +510,8 @@ placeholder="Example: Warm, intelligent, emotionally controlled and confident."
 Generate a real preview using your live Zynora Kokoro voice server.
 </p>
 
+<div class="field"><label for="previewSpeed">SPEECH SPEED</label>
+<select id="previewSpeed"><option value="0.9">Relaxed — 0.9×</option><option value="1" selected>Natural — 1.0×</option><option value="1.1">Brisk — 1.1×</option></select></div>
 <div class="field test-text">
 <label>TEST DIALOGUE</label>
 <textarea
@@ -868,6 +870,11 @@ previewMessage,
 return;
 }
 
+if(text.length > 500){
+setMessage(previewMessage, "Keep test dialogue within 500 characters.", "error");
+return;
+}
+
 if(!text){
 
 setMessage(
@@ -893,6 +900,9 @@ previewMessage,
 ""
 );
 
+const controller = new AbortController();
+const timeoutId = setTimeout(() => controller.abort(), 600000);
+const progressId = setTimeout(() => setMessage(previewMessage, "The voice server is still processing. On the current server, a preview can take several minutes.", ""), 15000);
 try{
 
 const response =
@@ -900,6 +910,7 @@ await fetch(
 VOICE_API_URL + "/speak",
 {
 method:"POST",
+signal:controller.signal,
 
 headers:{
 "Content-Type":
@@ -910,7 +921,7 @@ body:
 JSON.stringify({
 text:text,
 voice:providerId,
-speed:1.0
+speed:Number(document.getElementById("previewSpeed").value)
 })
 }
 );
@@ -1006,13 +1017,15 @@ error
 
 setMessage(
 previewMessage,
-error.message ||
+error.name === "AbortError" ? "The voice server did not respond within ten minutes. Please try again later." : error.message ||
 "Could not generate voice.",
 "error"
 );
 
 }
 finally{
+clearTimeout(timeoutId);
+clearTimeout(progressId);
 
 previewBtn.disabled =
 false;
