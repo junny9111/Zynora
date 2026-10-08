@@ -915,11 +915,11 @@ async function loadPublishedCatalog(){
 const area=document.querySelector(CATALOG_DISCOVER ? ".grid" : ".drama-row");
 area.textContent="Loading published dramas...";
 try{
-const result=await CATALOG_CLIENT.from("episodes").select("*").eq("is_published",true).order("episode_number",{ascending:true});
+const result=await CATALOG_CLIENT.rpc("get_episode_catalog");
 if(result.error) throw result.error;
 const groups=new Map();
 for(const episode of result.data || []){
-if(!episode.drama_id || !episode.video_url) continue;
+if(!episode.drama_id || !episode.has_video) continue;
 let group=groups.get(episode.drama_id);
 if(!group){group={id:episode.drama_id,title:episode.drama_title || episode.series_title || "Zynora Drama",genre:episode.genre || "Drama",poster:episode.thumbnail_url,count:0};groups.set(group.id,group);}
 group.count++;

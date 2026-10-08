@@ -767,21 +767,7 @@ error.message,
 
 async function loadEpisodes(){
 
-const result =
-await client
-.from("episodes")
-.select("*")
-.eq(
-"drama_id",
-dramaId
-)
-.order(
-"episode_number",
-{
-ascending:true
-}
-);
-
+const result=await client.rpc("get_episode_catalog",{p_drama_id:dramaId});
 
 if(result.error){
 
@@ -1002,6 +988,10 @@ remaining
 function episodeIsUnlocked(ep){
 
 return (
+
+ep.creator_id === user?.id
+
+||
 
 ep.is_free === true
 
@@ -1772,17 +1762,21 @@ return;
 }
 
 
-if(!ep.video_url){
-
-showMessage(
-"This episode does not have a video uploaded yet.",
-"error"
-);
-
-return;
-
+const videoResult=await client.from("episodes").select("video_url").eq("id",ep.id).maybeSingle();
+if(videoResult.error || !videoResult.data?.video_url){
+showMessage("This episode is unavailable or requires an unlock.","error");return;
 }
-
+let playbackUrl=videoResult.data.video_url;
+try{
+const parsed=new URL(playbackUrl);
+const prefix="/storage/v1/object/public/zynora-videos/";
+if(parsed.origin==="https://ozshekxpuvganemaajms.supabase.co" && parsed.pathname.startsWith(prefix)){
+const path=decodeURIComponent(parsed.pathname.slice(prefix.length));
+const signed=await client.storage.from("zynora-videos").createSignedUrl(path,3600);
+if(signed.error || !signed.data?.signedUrl)throw signed.error || new Error("Unable to open this episode.");
+playbackUrl=signed.data.signedUrl;
+}
+}catch(error){showMessage(error.message || "Unable to load this video.","error");return;}
 
 const source =
 document.getElementById(
@@ -1803,7 +1797,7 @@ document.getElementById(
 
 
 source.src =
-ep.video_url;
+playbackUrl;
 
 
 player.style.display =
@@ -2252,3 +2246,4 @@ start();
 
 </body>
 </html>
+
