@@ -549,7 +549,7 @@ Ads remaining today:
 </div>
 
 <div class="test-note">
-Rewarded-ad test mode. A live advertising provider will be connected before production launch.
+Rewarded ads are not available yet. Coins are awarded only after a live ad provider is connected.
 </div>
 
 </section>
@@ -935,24 +935,8 @@ Math.max(
 adsRemaining.textContent =
 remaining;
 
-if(remaining <= 0){
-
-watchAdButton.disabled =
-true;
-
-watchAdButton.textContent =
-"DAILY AD LIMIT REACHED";
-
-}else{
-
-watchAdButton.disabled =
-false;
-
-watchAdButton.textContent =
-"WATCH AD — EARN 10 COINS";
-
-}
-
+watchAdButton.disabled=true;
+watchAdButton.textContent="REWARDED ADS COMING SOON";
 }
 
 /* ============================
@@ -1070,213 +1054,18 @@ await loadWallet();
    WATCH AD
 ============================ */
 
-watchAdButton.addEventListener(
-"click",
-async()=>{
-
-if(adRunning){
-return;
-}
-
-if(!user){
-
-showStatus(
-"Please log in first."
-);
-
-return;
-
-}
-
-if(
-Number(
-adsRemaining.textContent
-) <= 0
-){
-
-showStatus(
-"You have reached today's ad reward limit."
-);
-
-return;
-
-}
-
-adRunning =
-true;
-
-hideStatus();
-
-watchAdButton.disabled =
-true;
-
-adOverlay.style.display =
-"flex";
-
-let seconds =
-15;
-
-adTimer.textContent =
-seconds;
-
-const countdown =
-setInterval(
-async()=>{
-
-seconds--;
-
-adTimer.textContent =
-seconds;
-
-if(seconds <= 0){
-
-clearInterval(
-countdown
-);
-
-adOverlay.style.display =
-"none";
-
-await claimAdReward();
-
-adRunning =
-false;
-
-}
-
-},
-1000
-);
-
-}
-);
+watchAdButton.addEventListener("click",()=>{
+showStatus("Rewarded ads are not available yet. You can claim your daily reward or buy coins.");
+});
+watchAdButton.disabled=true;
+watchAdButton.textContent="REWARDED ADS COMING SOON";
 
 /* ============================
    CLAIM AD REWARD
 ============================ */
 
 async function claimAdReward(){
-
-showStatus(
-"Processing your ad reward..."
-);
-
-const {
-data,
-error
-} =
-await client.rpc(
-"claim_ad_reward"
-);
-
-if(error){
-
-showStatus(
-error.message
-);
-
-watchAdButton.disabled =
-false;
-
-return;
-
-}
-
-const result =
-Array.isArray(data)
-? data[0]
-: data;
-
-if(!result){
-
-showStatus(
-"Unable to process the reward."
-);
-
-watchAdButton.disabled =
-false;
-
-return;
-
-}
-
-if(result.success){
-
-showStatus(
-result.message ||
-"10 Zynora Coins earned."
-);
-
-walletBalance.textContent =
-Number(
-result.new_balance || 0
-).toLocaleString();
-
-topCoins.textContent =
-Number(
-result.new_balance || 0
-).toLocaleString();
-
-adsRemaining.textContent =
-result.ads_remaining;
-
-if(
-Number(
-result.ads_remaining
-) <= 0
-){
-
-watchAdButton.disabled =
-true;
-
-watchAdButton.textContent =
-"DAILY AD LIMIT REACHED";
-
-}else{
-
-watchAdButton.disabled =
-false;
-
-watchAdButton.textContent =
-"WATCH AD — EARN 10 COINS";
-
-}
-
-}else{
-
-showStatus(
-result.message ||
-"Reward unavailable."
-);
-
-adsRemaining.textContent =
-result.ads_remaining;
-
-if(
-Number(
-result.ads_remaining
-) <= 0
-){
-
-watchAdButton.disabled =
-true;
-
-watchAdButton.textContent =
-"DAILY AD LIMIT REACHED";
-
-}else{
-
-watchAdButton.disabled =
-false;
-
-}
-
-}
-
-await loadWallet();
-
-await loadAdCount();
-
+showStatus("A verified ad provider is required before an ad reward can be claimed.");
 }
 
 /* ============================
@@ -1375,3 +1164,4 @@ start();
 
 </body>
 </html>
+
