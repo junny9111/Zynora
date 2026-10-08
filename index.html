@@ -872,6 +872,18 @@ actions.append(watch,save);body.appendChild(actions);
 }else{card.tabIndex=0;card.setAttribute("role","link");card.onclick=()=>watchDrama(drama.id,drama.title);card.onkeydown=event=>{if(event.key==="Enter")watchDrama(drama.id,drama.title);};}
 card.appendChild(body);area.appendChild(card);
 }
+if(!CATALOG_DISCOVER){
+const featured=groups.values().next().value;
+const hero=document.querySelector(".hero");
+if(featured){
+hero.querySelector("h1").textContent=featured.title;
+hero.querySelector("p").textContent=featured.genre+" • "+featured.count+" published episodes";
+hero.querySelector(".badge").textContent="FEATURED DRAMA";
+const watch=hero.querySelector(".watch");watch.removeAttribute("onclick");watch.onclick=()=>watchDrama(featured.id,featured.title);
+hero.style.display="block";
+}
+await loadHomeHistory();
+}
 if(!groups.size) area.textContent="No published dramas yet. Finished episodes will appear here after publishing.";
 if(CATALOG_DISCOVER && user) await loadSavedState();
 filterCatalog();
@@ -892,6 +904,26 @@ const select=()=>{document.querySelectorAll(CATALOG_DISCOVER?".genre":".category
 button.onclick=select;button.onkeydown=event=>{if(event.key==="Enter" || event.key===" "){event.preventDefault();select();}};
 });
 document.getElementById("searchBox").addEventListener("input",filterCatalog);
+
+async function loadHomeHistory(){
+const card=document.querySelector(".continue-card");
+card.style.display="none";
+try{
+const auth=await CATALOG_CLIENT.auth.getUser();
+if(!auth.data?.user)return;
+const result=await CATALOG_CLIENT.from("watch_history").select("*").eq("user_id",auth.data.user.id).order("watched_at",{ascending:false}).limit(1);
+if(result.error || !result.data?.length)return;
+const item=result.data[0];
+card.querySelector("h3").textContent=item.drama_title || "Continue watching";
+card.querySelector("small").textContent="Resume Episode "+item.episode_number;
+card.querySelector(".progress").style.display="none";
+const go=()=>{const query=new URLSearchParams({drama_id:item.drama_id,drama:item.drama_title || "",episode:String(item.episode_number)});window.location.href="player.html?"+query.toString();};
+card.onclick=go;card.tabIndex=0;card.setAttribute("role","link");card.onkeydown=event=>{if(event.key==="Enter")go();};card.style.display="flex";
+}catch(error){console.warn("Unable to load watch history",error);}
+}
+document.querySelector(".continue-card").style.display="none";
+document.querySelector(".hero").style.display="none";
+
 loadPublishedCatalog();
 
 </script>
