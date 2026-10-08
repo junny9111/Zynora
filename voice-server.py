@@ -1,5 +1,9 @@
 import io
 import os
+import math
+import threading
+import time
+from collections import OrderedDict
 
 import numpy as np
 import onnxruntime as ort
@@ -63,6 +67,11 @@ ALLOWED_VOICES = {
 
 
 kokoro_engine = None
+inference_lock = threading.Lock()
+audio_cache = OrderedDict()
+cache_bytes = 0
+MAX_CACHE_BYTES = 8 * 1024 * 1024
+MAX_CACHE_ENTRIES = 16
 
 
 @app.before_request
@@ -101,7 +110,10 @@ def get_kokoro():
     # Optimized for the Render CPU environment.
     session_options = ort.SessionOptions()
 
-    session_options.intra_op_num_threads = 2
+    # One compute thread avoids contention on the shared free-tier CPU.
+    session_options.intra_op_num_threads = 1
+    session_options.add_session_config_entry("session.intra_op.allow_spinning", "0")
+    session_options.add_session_config_entry("session.inter_op.allow_spinning", "0")
     session_options.inter_op_num_threads = 1
 
     session_options.execution_mode = (
@@ -190,6 +202,8 @@ def voices():
 
 @app.route("/speak", methods=["POST", "OPTIONS"])
 def speak():
+    global cache_bytes
+    request_started = time.perf_counter()
     if request.method == "OPTIONS":
         return "", 204
 
@@ -246,6 +260,9 @@ def speak():
         ):
             speed = 1.0
 
+        if not math.isfinite(speed):
+            speed = 1.0
+
         speed = max(
             0.7,
             min(
@@ -270,72 +287,55 @@ def speak():
             flush=True
         )
 
-        engine = get_kokoro()
+        # Serialize inference to avoid competing model loads and CPU-heavy jobs.
+        # Repeated dialogue/voice/speed combinations reuse the encoded WAV.
+        cache_key = (text, voice_id, speed, language)
+        with inference_lock:
+            wav_bytes = audio_cache.get(cache_key)
+            cache_hit = wav_bytes is not None
+            if cache_hit:
+                audio_cache.move_to_end(cache_key)
+            else:
+                engine = get_kokoro()
+                inference_started = time.perf_counter()
+                samples, sample_rate = engine.create(
+                    text, voice=voice_id, speed=speed, lang=language
+                )
+                if samples is None:
+                    raise ValueError("No audio was generated.")
+                samples = np.asarray(samples, dtype=np.float32)
+                if samples.size == 0:
+                    raise ValueError("No audio was generated.")
+                samples = np.clip(
+                    np.nan_to_num(samples, nan=0.0, posinf=0.0, neginf=0.0),
+                    -1.0, 1.0
+                )
+                buffer = io.BytesIO()
+                sf.write(buffer, samples, sample_rate, format="WAV", subtype="PCM_16")
+                wav_bytes = buffer.getvalue()
+                inference_seconds = time.perf_counter() - inference_started
+                print("VOICE TIMING: inference_seconds=",
+                      round(inference_seconds, 3), "audio_seconds=",
+                      round(samples.size / sample_rate, 3), flush=True)
+                if len(wav_bytes) <= MAX_CACHE_BYTES:
+                    audio_cache[cache_key] = wav_bytes
+                    cache_bytes += len(wav_bytes)
+                    while (cache_bytes > MAX_CACHE_BYTES or
+                           len(audio_cache) > MAX_CACHE_ENTRIES):
+                        _, removed = audio_cache.popitem(last=False)
+                        cache_bytes -= len(removed)
 
-        samples, sample_rate = engine.create(
-            text,
-            voice=voice_id,
-            speed=speed,
-            lang=language
+        elapsed = time.perf_counter() - request_started
+        print("Voice generation completed successfully.",
+              "Total seconds:", round(elapsed, 3),
+              "Cache hit:", cache_hit, flush=True)
+        response = send_file(
+            io.BytesIO(wav_bytes), mimetype="audio/wav",
+            as_attachment=False, download_name="zynora-voice.wav"
         )
-
-        if samples is None:
-            return jsonify({
-                "error": "No audio was generated."
-            }), 500
-
-        samples = np.asarray(
-            samples,
-            dtype=np.float32
-        )
-
-        if samples.size == 0:
-            return jsonify({
-                "error": "No audio was generated."
-            }), 500
-
-        # Prevent accidental clipping or invalid values
-        # from reaching the WAV encoder.
-        samples = np.nan_to_num(
-            samples,
-            nan=0.0,
-            posinf=0.0,
-            neginf=0.0
-        )
-
-        samples = np.clip(
-            samples,
-            -1.0,
-            1.0
-        )
-
-        buffer = io.BytesIO()
-
-        sf.write(
-            buffer,
-            samples,
-            sample_rate,
-            format="WAV",
-            subtype="PCM_16"
-        )
-
-        buffer.seek(0)
-
-        print(
-            "Voice generation completed successfully.",
-            "Sample rate:",
-            sample_rate,
-            "Samples:",
-            samples.size,
-            flush=True
-        )
-
-        return send_file(
-            buffer,
-            mimetype="audio/wav",
-            as_attachment=False,
-            download_name="zynora-voice.wav"
-        )
+        response.headers["X-Zynora-Cache"] = "HIT" if cache_hit else "MISS"
+        response.headers["Server-Timing"] = "voice;dur=" + str(round(elapsed * 1000, 1))
+        return response
 
     except Exception as error:
         print(
