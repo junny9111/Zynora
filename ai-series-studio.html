@@ -4485,6 +4485,29 @@ ${escapeHtml(scene.prompt)}
 
 </div>
 
+
+<div class="planBlock">
+<h3>Character dialogue preview</h3>
+<label for="speaker${index}">Speaking character</label>
+<select id="speaker${index}">
+<option value="">Choose a character</option>
+${currentSeriesCharacters.map(character => `<option value="${escapeHtml(character.id)}">${escapeHtml(character.name)}${character.voice_id ? "" : " (no voice assigned)"}</option>`).join("")}
+</select>
+<label for="dialogue${index}">Dialogue (maximum 500 characters)</label>
+<textarea id="dialogue${index}" maxlength="500" placeholder="Enter the line this character should say"></textarea>
+<label for="speechSpeed${index}">Speech speed</label>
+<select id="speechSpeed${index}">
+<option value="0.9">Relaxed</option>
+<option value="1" selected>Natural</option>
+<option value="1.1">Brisk</option>
+</select>
+<button id="voiceBtn${index}" onclick="previewSceneDialogue(${index})">PREVIEW CHARACTER DIALOGUE</button>
+<div id="voiceStatus${index}" role="status" aria-live="polite"></div>
+<audio id="sceneAudio${index}" controls style="display:none;width:100%"></audio>
+<a id="sceneDownload${index}" style="display:none">Download dialogue WAV</a>
+<p class="mini">Dialogue is a separate audio preview. Download it before leaving this page. New lines may take several minutes on the current voice server.</p>
+</div>
+
 <div class="priceBox">
 
 <div class="priceRow">
@@ -4544,6 +4567,40 @@ div
 /* =========================================
    GENERATE REAL VIDEO
 ========================================= */
+
+
+async function previewSceneDialogue(index){
+const text=document.getElementById("dialogue"+index).value.trim();
+const character=currentSeriesCharacters.find(c=>c.id===document.getElementById("speaker"+index).value);
+const status=document.getElementById("voiceStatus"+index);
+const button=document.getElementById("voiceBtn"+index);
+if(!character){status.textContent="Choose a speaking character first.";return;}
+if(!character.voice_id){status.textContent="Assign this character a voice in Voice Studio first.";return;}
+if(!text || text.length>500){status.textContent="Enter a dialogue line of 1–500 characters.";return;}
+const audio=document.getElementById("sceneAudio"+index);
+const download=document.getElementById("sceneDownload"+index);
+const controller=new AbortController();
+button.disabled=true;
+status.textContent="Generating dialogue with "+character.name+"'s saved voice...";
+const slow=setTimeout(()=>{status.textContent="The voice server is still processing. A new line can take several minutes.";},15000);
+const timeout=setTimeout(()=>controller.abort(),600000);
+try{
+const response=await fetch("https://zynora-v0k6.onrender.com/speak",{
+method:"POST",headers:{"Content-Type":"application/json"},
+body:JSON.stringify({text,voice:character.voice_id,speed:Number(document.getElementById("speechSpeed"+index).value)}),signal:controller.signal});
+if(!response.ok) throw new Error("Voice generation failed ("+response.status+"). Please try again.");
+const blob=await response.blob();
+if(!blob.size) throw new Error("The voice server returned empty audio.");
+const previous=audio.getAttribute("src");
+const url=URL.createObjectURL(blob);
+audio.src=url;audio.style.display="block";audio.load();
+download.href=url;download.download="scene-"+(index+1)+"-dialogue.wav";download.style.display="inline-block";
+if(previous && previous.startsWith("blob:")) URL.revokeObjectURL(previous);
+status.textContent="Dialogue ready — "+character.name+" ("+character.voice_id+").";
+}catch(error){
+status.textContent=error.name==="AbortError"?"The voice request timed out. Please try again.":error.message;
+}finally{clearTimeout(slow);clearTimeout(timeout);button.disabled=false;}
+}
 
 async function generateVideo(
 index
@@ -5134,3 +5191,4 @@ value ||
 
 </body>
 </html>
+
