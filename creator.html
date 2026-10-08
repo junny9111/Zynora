@@ -531,6 +531,7 @@ type="number"
 value="1"
 min="1">
 
+<label for="coinCost">Unlock cost in coins (0 = free)</label><input id="coinCost" type="number" value="0" min="0" step="1">
 <label>
 Description
 </label><textarea
@@ -905,6 +906,9 @@ return;
 }
 
 
+if(!Number.isInteger(episodeNumber) || episodeNumber < 1){showStatus("Enter a whole episode number of 1 or higher.");return;}
+const coinCost=Number(document.getElementById("coinCost").value);
+if(!Number.isSafeInteger(coinCost) || coinCost<0){showStatus("Enter a whole coin cost of 0 or higher.");return;}
 const publishBtn =
 document.getElementById("publishBtn");
 
@@ -917,6 +921,12 @@ publishBtn.textContent =
 
 try{
 
+const existing=await client.from("episodes").select("drama_id,episode_number").eq("creator_id",currentUser.id).eq("series_title",seriesTitle);
+if(existing.error) throw existing.error;
+if((existing.data || []).some(ep=>Number(ep.episode_number)===episodeNumber)){
+throw new Error("This series already has that episode number. Choose another number.");
+}
+const dramaId=(existing.data || []).find(ep=>ep.drama_id)?.drama_id || ("creator-"+crypto.randomUUID());
 setProgress(10);
 
 showStatus(
@@ -1055,11 +1065,16 @@ currentUser.id,
 series_title:
 seriesTitle,
 
+drama_id:dramaId,
+drama_title:seriesTitle,
+is_free:coinCost===0,
+coin_cost:coinCost,
+
 episode_title:
 episodeTitle,
 
 episode_number:
-episodeNumber || 1,
+episodeNumber,
 
 description:
 description,
@@ -1163,7 +1178,7 @@ const result =
 await client
 .from("episodes")
 .select(
-"id,series_title,episode_title,episode_number,genre,video_url,created_at"
+"id,drama_id,series_title,episode_title,episode_number,genre,video_url,created_at"
 )
 .eq(
 "creator_id",
@@ -1265,8 +1280,8 @@ document.createElement(
 link.className =
 "episode-link";
 
-link.href =
-episode.video_url;
+const watchParams=new URLSearchParams({drama_id:episode.drama_id || "",drama:episode.series_title,episode:String(episode.episode_number)});
+link.href=episode.drama_id ? "player.html?"+watchParams.toString() : episode.video_url;
 
 link.target =
 "_blank";
@@ -1274,8 +1289,7 @@ link.target =
 link.rel =
 "noopener";
 
-link.textContent =
-"▶ View Uploaded Video";
+link.textContent=episode.drama_id ? "▶ Watch in Zynora" : "▶ View Uploaded Video";
 
 
 card.appendChild(
@@ -1333,3 +1347,4 @@ behavior:"smooth"
 startCreator();
 
 </script></body></html>
+
