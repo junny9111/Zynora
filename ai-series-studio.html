@@ -1083,6 +1083,8 @@ placeholder="Episode script can be stored here."></textarea>
 SAVE EPISODE
 </button>
 
+<label for="leadOne">First lead character</label><select id="leadOne"><option value="">Choose first lead</option></select>
+<label for="leadTwo">Second lead character</label><select id="leadTwo"><option value="">Choose second lead</option></select>
 <button
 class="secondary"
 onclick="buildEpisodeOne()">
@@ -4250,37 +4252,15 @@ person.name
 );
 
 
-const heroOne =
-currentSeriesCharacters[0]
-?
-currentSeriesCharacters[0].name
-:
-"Lead Character";
-
-
-const heroTwo =
-currentSeriesCharacters[1]
-?
-currentSeriesCharacters[1].name
-:
-"Second Lead";
-
-
-const heroOneImage =
-currentSeriesCharacters[0]
-?
-currentSeriesCharacters[0].reference_image_url
-:
-null;
-
-
-const heroTwoImage =
-currentSeriesCharacters[1]
-?
-currentSeriesCharacters[1].reference_image_url
-:
-null;
-
+const firstLead=currentSeriesCharacters.find(c=>c.id===document.getElementById("leadOne").value);
+const secondLead=currentSeriesCharacters.find(c=>c.id===document.getElementById("leadTwo").value);
+if(!firstLead || !secondLead || firstLead.id===secondLead.id){
+show("Choose two different lead characters before building sample scenes.");return;
+}
+const heroOne=firstLead.name;
+const heroTwo=secondLead.name;
+const heroOneImage=firstLead.reference_image_url;
+const heroTwoImage=secondLead.reference_image_url;
 
 scenes.push(
 
