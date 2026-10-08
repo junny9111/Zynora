@@ -674,9 +674,7 @@ async function createOrder() {
 
 async function captureOrder(orderId) {
 
-  await loadSession();
-
-
+  if(!await loadSession()) throw new Error("Please log in before confirming this payment.");
   showStatus(
     "Payment approved. Adding your Zynora Coins..."
   );
@@ -731,6 +729,7 @@ async function captureOrder(orderId) {
   }
 
 
+  if(data.status !== "COMPLETED")throw new Error("Payment is not completed. Coins will be shown only after confirmation.");
   if (
     data.newBalance !== null &&
     data.newBalance !== undefined
@@ -977,3 +976,4 @@ start();
 
 </body>
 </html>
+

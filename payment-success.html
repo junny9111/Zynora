@@ -260,8 +260,9 @@
   </div>
 
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-
+const paymentClient=supabase.createClient("https://ozshekxpuvganemaajms.supabase.co","sb_publishable__GsW9RahFD_XDWJTFzh9eQ_dNBZfa32");
 const FUNCTION_URL =
   "https://ozshekxpuvganemaajms.supabase.co/functions/v1/zynora-paypal";
 
@@ -316,7 +317,9 @@ async function completePayment() {
 
 
   try {
-
+    const auth=await paymentClient.auth.getSession();
+    if(auth.error || !auth.data?.session)throw new Error("Log in to Zynora before confirming this payment.");
+    const session=auth.data.session;
     const response =
       await fetch(
         FUNCTION_URL,
@@ -326,7 +329,8 @@ async function completePayment() {
 
           headers: {
             "Content-Type":
-              "application/json"
+              "application/json",
+            "Authorization": "Bearer "+session.access_token
           },
 
           body:
@@ -357,7 +361,6 @@ async function completePayment() {
 
 
     if (
-      !data.success ||
       data.status !== "COMPLETED"
     ) {
 
@@ -367,38 +370,9 @@ async function completePayment() {
     }
 
 
-    /*
-      TEMPORARY LOCAL COIN BALANCE
-
-      Later we will replace this with
-      the authenticated Supabase
-      user coin balance.
-    */
-
-    const oldBalance =
-      Number(
-        localStorage.getItem(
-          "zynora_coin_balance"
-        ) || "0"
-      );
-
-
-    const coinsReceived =
-      Number(
-        data.coins || 0
-      );
-
-
-    const newBalance =
-      oldBalance +
-      coinsReceived;
-
-
-    localStorage.setItem(
-      "zynora_coin_balance",
-      String(newBalance)
-    );
-
+    const wallet=await paymentClient.from("wallets").select("balance").eq("user_id",session.user.id).maybeSingle();
+    const coinsReceived=Number(data.coins || 0);
+    const newBalance=wallet.error ? null : Number(wallet.data?.balance || 0);
 
     localStorage.removeItem(
       "zynora_pending_order"
@@ -475,10 +449,7 @@ async function completePayment() {
       "success";
 
 
-    statusBox.innerHTML =
-      "<strong>COINS RECEIVED ✅</strong><br><br>" +
-      "New Zynora balance: 🪙 " +
-      newBalance.toLocaleString();
+    statusBox.textContent=newBalance===null ? "Payment confirmed. Your wallet balance could not be refreshed; check your profile." : "Payment confirmed. Zynora balance: "+newBalance.toLocaleString()+" coins.";
 
 
     document.getElementById(
@@ -532,9 +503,7 @@ function showError(message) {
     "error";
 
 
-  statusBox.innerHTML =
-    "<strong>PAYMENT ERROR</strong><br><br>" +
-    message;
+  statusBox.textContent="PAYMENT ERROR: "+message;
 
 
   document.getElementById(
@@ -557,3 +526,4 @@ completePayment();
 
 </body>
 </html>
+
