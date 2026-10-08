@@ -908,7 +908,66 @@ box.style.display =
 
 start();
 
+const CATALOG_DISCOVER=true;
+const CATALOG_CLIENT=client;
+
+async function loadPublishedCatalog(){
+const area=document.querySelector(CATALOG_DISCOVER ? ".grid" : ".drama-row");
+area.textContent="Loading published dramas...";
+try{
+const result=await CATALOG_CLIENT.from("episodes").select("*").eq("is_published",true).order("episode_number",{ascending:true});
+if(result.error) throw result.error;
+const groups=new Map();
+for(const episode of result.data || []){
+if(!episode.drama_id || !episode.video_url) continue;
+let group=groups.get(episode.drama_id);
+if(!group){group={id:episode.drama_id,title:episode.drama_title || episode.series_title || "Zynora Drama",genre:episode.genre || "Drama",poster:episode.thumbnail_url,count:0};groups.set(group.id,group);}
+group.count++;
+if(!group.poster && episode.thumbnail_url) group.poster=episode.thumbnail_url;
+}
+area.replaceChildren();
+for(const drama of groups.values()){
+const card=document.createElement("div");
+card.className="drama";card.dataset.title=drama.title;card.dataset.genre=drama.genre;
+const poster=document.createElement("div");poster.className="poster p1";
+if(drama.poster){try{const url=new URL(drama.poster);if(url.protocol==="https:"){poster.style.backgroundImage="url("+JSON.stringify(url.href)+")";poster.style.backgroundSize="cover";}}catch(_){}}
+const posterTitle=document.createElement("div");posterTitle.className="poster-title";posterTitle.textContent=drama.title;poster.appendChild(posterTitle);card.appendChild(poster);
+const body=document.createElement("div");body.className=CATALOG_DISCOVER?"card-body":"continue-info";
+const title=document.createElement("div");title.className=CATALOG_DISCOVER?"name":"drama-name";title.textContent=drama.title;
+const info=document.createElement("div");info.className=CATALOG_DISCOVER?"info":"drama-info";info.textContent=drama.genre+" • "+drama.count+" Episode"+(drama.count===1?"":"s");
+body.append(title,info);
+if(CATALOG_DISCOVER){
+const actions=document.createElement("div");actions.className="actions";
+const watch=document.createElement("button");watch.className="action watch";watch.textContent="▶ Watch";watch.onclick=()=>watchDrama(drama.id,drama.title);
+const save=document.createElement("button");save.className="action save";save.dataset.dramaId=drama.id;save.textContent="♡ Save";save.onclick=()=>saveDrama(drama.id,drama.title,save);
+actions.append(watch,save);body.appendChild(actions);
+}else{card.tabIndex=0;card.setAttribute("role","link");card.onclick=()=>watchDrama(drama.id,drama.title);card.onkeydown=event=>{if(event.key==="Enter")watchDrama(drama.id,drama.title);};}
+card.appendChild(body);area.appendChild(card);
+}
+if(!groups.size) area.textContent="No published dramas yet. Finished episodes will appear here after publishing.";
+if(CATALOG_DISCOVER && user) await loadSavedState();
+filterCatalog();
+}catch(error){area.textContent="Unable to load published dramas. Please refresh to try again.";console.error(error);}
+}
+let selectedCatalogGenre="For You";
+function filterCatalog(){
+const query=document.getElementById("searchBox").value.trim().toLowerCase();
+document.querySelectorAll(".drama").forEach(card=>{
+const genre=card.dataset.genre || "";
+const matchesGenre=selectedCatalogGenre==="For You" || genre.toLowerCase()===selectedCatalogGenre.toLowerCase() || (selectedCatalogGenre==="Suspense" && genre==="Thriller");
+card.style.display=matchesGenre && card.dataset.title.toLowerCase().includes(query)?"":"none";
+});
+}
+document.querySelectorAll(CATALOG_DISCOVER?".genre":".category").forEach(button=>{
+button.tabIndex=0;button.setAttribute("role","button");
+const select=()=>{document.querySelectorAll(CATALOG_DISCOVER?".genre":".category").forEach(item=>item.classList.remove("active"));button.classList.add("active");selectedCatalogGenre=button.textContent.trim();filterCatalog();};
+button.onclick=select;button.onkeydown=event=>{if(event.key==="Enter" || event.key===" "){event.preventDefault();select();}};
+});
+document.getElementById("searchBox").addEventListener("input",filterCatalog);
+loadPublishedCatalog();
+
 </script>
 
 </body>
 </html>
+
