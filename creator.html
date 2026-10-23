@@ -449,15 +449,13 @@ class="back-btn">
 </a></header><main><h1 class="page-title">
 Creator Studio
 </h1><p class="subtitle">
-Create, upload and publish Zynora dramas.
-</p><div id="status"></div><div class="hero"><div class="hero-badge">
+Upload your own dramas. Build your audience on Zynora.
+</p><div id="status" role="status" aria-live="polite"></div><p id="authLinks"><a href="login.html" style="color:#d7a8ff">Sign in or create your own account</a></p><div class="hero"><div class="hero-badge">
 ✦ ZYNORA CREATOR
 </div><h2>
-Create Your Next Drama
+Your stories. Your creator account.
 </h2><p>
-Upload your own finished episodes or enter Zynora AI Series Studio to
-create an entire AI drama universe with permanent characters, episodes,
-scenes and real AI video generation.
+Free publishing for one new series per calendar month (UTC). Add episodes to your existing series anytime. Earn 80% of eligible net viewer revenue; Zynora keeps 20%. Uploads are reviewed before publishing. AI generation is billed separately.
 </p><button
 class="hero-ai-btn"
 onclick="goToAIStudio()">
@@ -476,7 +474,7 @@ onclick="showUpload()"><div class="action-icon-wrap"><svg viewBox="0 0 24 24"><p
 </svg></div><div class="action-title">
 Upload Episode
 </div><div class="action-sub">
-Publish a finished video.
+Submit a finished video for review.
 </div></div><!-- AI STUDIO --><div
 class="action-card ai-action"
 onclick="goToAIStudio()"><div class="action-icon-wrap"><svg viewBox="0 0 24 24"><path d="M12 3l1.4 4.1L17.5 8.5l-4.1 1.4L12 14l-1.4-4.1-4.1-1.4 4.1-1.4L12 3z"></path>
@@ -496,7 +494,7 @@ onclick="scrollToEpisodes()"><div class="action-icon-wrap"><svg viewBox="0 0 24 
 </svg></div><div class="action-title">
 My Episodes
 </div><div class="action-sub">
-View your published content.
+Manage your episodes and review status.
 </div></div><!-- OPEN ZYNORA --><div
 class="action-card"
 onclick="window.location.href='index.html'"><div class="action-icon-wrap"><svg viewBox="0 0 24 24"><path d="M4 12 20 4l-5 16-3-7-8-1z"></path>
@@ -508,18 +506,18 @@ Open Zynora
 </div><div class="action-sub">
 Return to the streaming app.
 </div></div></div><!-- UPLOAD --><div id="uploadSection" class="form-card"><div class="section-title">
-Publish Episode
-</div><label>
+Submit for Review
+</div><label for="seriesSelect">Your series</label><select id="seriesSelect"><option value="">Start a new series</option></select><p id="quotaInfo" class="subtitle"></p><label>
 Drama / Series Title
 </label><input
-id="seriesTitle"
+maxlength="150" id="seriesTitle"
 type="text"
 placeholder="Love Behind The Contract">
 
 <label>
 Episode Title
 </label><input
-id="episodeTitle"
+maxlength="150" id="episodeTitle"
 type="text"
 placeholder="The Secret Meeting">
 
@@ -559,12 +557,12 @@ class="upload-box">
 Choose Episode Video
 </div><div
 id="videoFileName"
-class="upload-sub">MP4, WebM or compatible video
+class="upload-sub">MP4 or WebM · maximum 50 MB
 
 </div></label><input
 id="videoInput"
 type="file"
-accept="video/*">
+accept="video/mp4,video/webm">
 
 <div id="previewBox"><video
 id="videoPreview"
@@ -585,18 +583,18 @@ class="upload-box">
 Choose Cover Image
 </div><div
 id="thumbnailFileName"
-class="upload-sub">JPG, PNG or WebP
+class="upload-sub">JPG, PNG or WebP · maximum 5 MB
 
 </div></label><input
 id="thumbnailInput"
 type="file"
-accept="image/*">
+accept="image/jpeg,image/png,image/webp">
 
 <img
 id="thumbnailPreview"
 alt="Episode thumbnail">
 
-<div id="progress" class="progress"><div
+<label style="display:flex;gap:10px;align-items:start"><input id="rightsConfirmed" type="checkbox" style="width:auto">I own this video or have permission to publish and monetize it.</label><div id="progress" class="progress"><div
 id="progressBar"
 class="progress-bar">
 </div></div><button
@@ -604,747 +602,10 @@ id="publishBtn"
 class="primary-btn"
 onclick="publishEpisode()">
 
-Publish Episode
+Submit for Review
 
-</button></div><!-- PUBLISHED EPISODES --><div id="episodeSection"><div class="section-title">
-My Published Episodes
+</button></div><section class="form-card"><h2 class="section-title">Creator earnings</h2><p id="earningsSummary">Sign in to view your earnings.</p><p class="subtitle" style="margin-top:12px">Earnings reflect paid coins purchased after creator accounting launched, after payment processing fees. Free, rewarded, sandbox and historical coins have no assigned cash value. Amounts are provisional until refunds and payment status are reviewed. Automatic payouts are not enabled.</p></section><!-- PUBLISHED EPISODES --><div id="episodeSection"><div class="section-title">
+My Episodes
 </div><div id="episodeList">
 Loading...
-</div></div></main><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script>
-
-const SUPABASE_URL =
-"https://ozshekxpuvganemaajms.supabase.co";
-
-const SUPABASE_KEY =
-"sb_publishable__GsW9RahFD_XDWJTFzh9eQ_dNBZfa32";
-
-const client =
-supabase.createClient(
-SUPABASE_URL,
-SUPABASE_KEY
-);
-
-
-let currentUser = null;
-let selectedVideo = null;
-let selectedThumbnail = null;
-
-
-/* ===============================
-   START
-================================ */
-
-async function startCreator(){
-
-try{
-
-const result =
-await client.auth.getUser();
-
-if(
-result.error ||
-!result.data.user
-){
-
-showStatus(
-"Please log in before using Creator Studio."
-);
-
-document
-.getElementById("episodeList")
-.textContent =
-"Log in to view your episodes.";
-
-return;
-
-}
-
-currentUser =
-result.data.user;
-
-showStatus(
-"Zynora Creator Studio connected."
-);
-
-await loadEpisodes();
-
-}
-catch(error){
-
-console.error(error);
-
-showStatus(
-"Creator Studio could not connect to your account."
-);
-
-}
-
-}
-
-
-/* ===============================
-   STATUS
-================================ */
-
-function showStatus(text){
-
-const box =
-document.getElementById("status");
-
-box.textContent =
-text;
-
-box.style.display =
-"block";
-
-}
-
-
-/* ===============================
-   OPEN FULL AI SERIES STUDIO
-================================ */
-
-function goToAIStudio(){
-
-window.location.href =
-"ai-series-studio.html";
-
-}
-
-
-/* ===============================
-   VIDEO SELECT
-================================ */
-
-document
-.getElementById("videoInput")
-.addEventListener(
-"change",
-function(){
-
-const file =
-this.files[0];
-
-if(!file){
-return;
-}
-
-selectedVideo =
-file;
-
-document
-.getElementById("videoFileName")
-.textContent =
-file.name;
-
-const preview =
-document.getElementById("videoPreview");
-
-preview.src =
-URL.createObjectURL(file);
-
-document
-.getElementById("previewBox")
-.style.display =
-"block";
-
-}
-);
-
-
-/* ===============================
-   THUMBNAIL SELECT
-================================ */
-
-document
-.getElementById("thumbnailInput")
-.addEventListener(
-"change",
-function(){
-
-const file =
-this.files[0];
-
-if(!file){
-return;
-}
-
-selectedThumbnail =
-file;
-
-document
-.getElementById("thumbnailFileName")
-.textContent =
-file.name;
-
-const image =
-document.getElementById("thumbnailPreview");
-
-image.src =
-URL.createObjectURL(file);
-
-image.style.display =
-"block";
-
-}
-);
-
-
-/* ===============================
-   SAFE FILE NAME
-================================ */
-
-function safeName(name){
-
-return name
-.toLowerCase()
-.replace(/[^a-z0-9.\-_]/g,"-")
-.replace(/-+/g,"-");
-
-}
-
-
-/* ===============================
-   PROGRESS
-================================ */
-
-function setProgress(percent){
-
-const progress =
-document.getElementById("progress");
-
-const bar =
-document.getElementById("progressBar");
-
-progress.style.display =
-"block";
-
-bar.style.width =
-percent + "%";
-
-}
-
-
-/* ===============================
-   PUBLISH
-================================ */
-
-async function publishEpisode(){
-
-if(!currentUser){
-
-showStatus(
-"Please log in first."
-);
-
-return;
-
-}
-
-
-const seriesTitle =
-document
-.getElementById("seriesTitle")
-.value
-.trim();
-
-const episodeTitle =
-document
-.getElementById("episodeTitle")
-.value
-.trim();
-
-const episodeNumber =
-Number(
-document
-.getElementById("episodeNumber")
-.value
-);
-
-const description =
-document
-.getElementById("description")
-.value
-.trim();
-
-const genre =
-document
-.getElementById("genre")
-.value;
-
-
-if(!seriesTitle){
-
-showStatus(
-"Enter the drama title."
-);
-
-return;
-
-}
-
-
-if(!episodeTitle){
-
-showStatus(
-"Enter the episode title."
-);
-
-return;
-
-}
-
-
-if(!selectedVideo){
-
-showStatus(
-"Choose an episode video."
-);
-
-return;
-
-}
-
-
-if(!Number.isInteger(episodeNumber) || episodeNumber < 1){showStatus("Enter a whole episode number of 1 or higher.");return;}
-const coinCost=Number(document.getElementById("coinCost").value);
-if(!Number.isSafeInteger(coinCost) || coinCost<0){showStatus("Enter a whole coin cost of 0 or higher.");return;}
-const publishBtn =
-document.getElementById("publishBtn");
-
-publishBtn.disabled =
-true;
-
-publishBtn.textContent =
-"Publishing...";
-
-
-try{
-
-const existing=await client.from("episodes").select("drama_id,episode_number").eq("creator_id",currentUser.id).eq("series_title",seriesTitle);
-if(existing.error) throw existing.error;
-if((existing.data || []).some(ep=>Number(ep.episode_number)===episodeNumber)){
-throw new Error("This series already has that episode number. Choose another number.");
-}
-const dramaId=(existing.data || []).find(ep=>ep.drama_id)?.drama_id || ("creator-"+crypto.randomUUID());
-setProgress(10);
-
-showStatus(
-"Uploading episode video..."
-);
-
-
-const timestamp =
-Date.now();
-
-
-const videoPath =
-currentUser.id
-+
-"/"
-+
-timestamp
-+
-"-"
-+
-safeName(
-selectedVideo.name
-);
-
-
-const videoUpload =
-await client.storage
-.from("zynora-videos")
-.upload(
-videoPath,
-selectedVideo,
-{
-cacheControl:"3600",
-upsert:false
-}
-);
-
-
-if(videoUpload.error){
-
-throw videoUpload.error;
-
-}
-
-
-setProgress(55);
-
-
-const videoPublic =
-client.storage
-.from("zynora-videos")
-.getPublicUrl(
-videoPath
-);
-
-
-const videoUrl =
-videoPublic.data.publicUrl;
-
-
-let thumbnailUrl =
-null;
-
-
-if(selectedThumbnail){
-
-showStatus(
-"Uploading thumbnail..."
-);
-
-
-const thumbnailPath =
-currentUser.id
-+
-"/"
-+
-timestamp
-+
-"-"
-+
-safeName(
-selectedThumbnail.name
-);
-
-
-const thumbnailUpload =
-await client.storage
-.from("zynora-thumbnails")
-.upload(
-thumbnailPath,
-selectedThumbnail,
-{
-cacheControl:"3600",
-upsert:false
-}
-);
-
-
-if(thumbnailUpload.error){
-
-throw thumbnailUpload.error;
-
-}
-
-
-const thumbnailPublic =
-client.storage
-.from("zynora-thumbnails")
-.getPublicUrl(
-thumbnailPath
-);
-
-
-thumbnailUrl =
-thumbnailPublic.data.publicUrl;
-
-}
-
-
-setProgress(80);
-
-
-showStatus(
-"Saving episode..."
-);
-
-
-const insertResult =
-await client
-.from("episodes")
-.insert({
-
-creator_id:
-currentUser.id,
-
-series_title:
-seriesTitle,
-
-drama_id:dramaId,
-drama_title:seriesTitle,
-is_free:coinCost===0,
-coin_cost:coinCost,
-
-episode_title:
-episodeTitle,
-
-episode_number:
-episodeNumber,
-
-description:
-description,
-
-genre:
-genre,
-
-video_url:
-videoUrl,
-
-thumbnail_url:
-thumbnailUrl,
-
-is_published:
-true
-
-})
-.select()
-.single();
-
-
-if(insertResult.error){
-
-throw insertResult.error;
-
-}
-
-
-setProgress(100);
-
-
-showStatus(
-"Episode published successfully! 🎬"
-);
-
-
-publishBtn.textContent =
-"Published ✓";
-
-
-await loadEpisodes();
-
-
-setTimeout(
-function(){
-
-publishBtn.disabled =
-false;
-
-publishBtn.textContent =
-"Publish Episode";
-
-setProgress(0);
-
-document
-.getElementById("progress")
-.style.display =
-"none";
-
-},
-1800
-);
-
-
-}
-catch(error){
-
-console.error(error);
-
-showStatus(
-"Publish error: " +
-(
-error.message ||
-"Unable to publish episode."
-)
-);
-
-publishBtn.disabled =
-false;
-
-publishBtn.textContent =
-"Publish Episode";
-
-}
-
-}
-
-
-/* ===============================
-   LOAD PUBLISHED EPISODES
-================================ */
-
-async function loadEpisodes(){
-
-if(!currentUser){
-return;
-}
-
-
-const result =
-await client
-.from("episodes")
-.select(
-"id,drama_id,series_title,episode_title,episode_number,genre,video_url,created_at"
-)
-.eq(
-"creator_id",
-currentUser.id
-)
-.order(
-"created_at",
-{
-ascending:false
-}
-);
-
-
-const list =
-document.getElementById(
-"episodeList"
-);
-
-
-if(result.error){
-
-list.textContent =
-result.error.message;
-
-return;
-
-}
-
-
-if(
-!result.data ||
-result.data.length === 0
-){
-
-list.innerHTML =
-'<div class="empty">No published episodes yet.</div>';
-
-return;
-
-}
-
-
-list.innerHTML =
-"";
-
-
-result.data.forEach(
-function(episode){
-
-const card =
-document.createElement(
-"div"
-);
-
-card.className =
-"episode-card";
-
-
-const title =
-document.createElement(
-"div"
-);
-
-title.className =
-"episode-title";
-
-title.textContent =
-episode.series_title
-+
-" • Episode "
-+
-episode.episode_number;
-
-
-const info =
-document.createElement(
-"div"
-);
-
-info.className =
-"episode-info";
-
-info.textContent =
-episode.episode_title
-+
-" • "
-+
-(
-episode.genre ||
-"Drama"
-);
-
-
-const link =
-document.createElement(
-"a"
-);
-
-link.className =
-"episode-link";
-
-const watchParams=new URLSearchParams({drama_id:episode.drama_id || "",drama:episode.series_title,episode:String(episode.episode_number)});
-link.href=episode.drama_id ? "player.html?"+watchParams.toString() : episode.video_url;
-
-link.target =
-"_blank";
-
-link.rel =
-"noopener";
-
-link.textContent=episode.drama_id ? "▶ Watch in Zynora" : "▶ View Uploaded Video";
-
-
-card.appendChild(
-title
-);
-
-card.appendChild(
-info
-);
-
-card.appendChild(
-link
-);
-
-list.appendChild(
-card
-);
-
-}
-);
-
-}
-
-
-/* ===============================
-   NAVIGATION
-================================ */
-
-function showUpload(){
-
-document
-.getElementById("uploadSection")
-.scrollIntoView({
-behavior:"smooth"
-});
-
-}
-
-
-function scrollToEpisodes(){
-
-document
-.getElementById("episodeSection")
-.scrollIntoView({
-behavior:"smooth"
-});
-
-}
-
-
-/* ===============================
-   START
-================================ */
-
-startCreator();
-
-</script></body></html>
-
+</div></div></main><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="creator.js"></script></body></html>
